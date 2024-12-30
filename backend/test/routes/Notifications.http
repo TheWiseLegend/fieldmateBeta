@@ -1,0 +1,26 @@
+### Create a notification
+POST http://localhost:5000/api/notifications
+Content-Type: application/json
+
+{
+  "user_id": 1,
+  "message": "Your booking has been confirmed."
+}
+
+###
+
+### Update a notification
+PUT http://localhost:5000/api/notifications/1
+Content-Type: application/json
+
+{
+  "user_id": 1,
+  "message": "Your booking has been updated."
+}
+
+###
+
+### Delete a notification
+DELETE http://localhost:5000/api/notifications/1
+
+###

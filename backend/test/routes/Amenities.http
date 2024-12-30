@@ -1,0 +1,24 @@
+### Create an amenity
+POST http://localhost:3000/api/amenities
+Content-Type: application/json
+
+{
+  "amenity_name": "WiFi"
+}
+
+###
+
+### Update an amenity
+PUT http://localhost:3000/api/amenities/203
+Content-Type: application/json
+
+{
+  "amenity_name": "High-Speed WiFi"
+}
+
+###
+
+### Delete an amenity
+DELETE http://localhost:3000/api/amenities/203
+
+###

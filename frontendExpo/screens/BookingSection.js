@@ -1,0 +1,165 @@
+import * as React from "react";
+import { Text, StyleSheet, View } from "react-native";
+import { Image } from "expo-image";
+import IPhoneXSBarsStatusDe from "../components/IPhoneXSBarsStatusDe";
+import Frame6 from "../components/Frame6";
+import Frame from "../components/Frame";
+import Frame1 from "../components/Frame1";
+import Frame5 from "../components/Frame5";
+import ButtomFrame from "../components/ButtomFrame";
+import { FontSize, Color, FontFamily, Border } from "../GlobalStyles";
+
+const BookingSection = () => {
+  return (
+    <View style={styles.bookingSection}>
+      <View style={[styles.bookASlotWrapper, styles.primaryButtonFlexBox]}>
+        <View style={styles.bookASlot}>
+          <Text
+            style={[styles.bookingTime, styles.doYouWantTypo]}
+          >{`Booking Time `}</Text>
+          <Text style={[styles.doYouWant, styles.doYouWantTypo]}>
+            Do you want to create a match post? (Look for more players)
+          </Text>
+          <View style={styles.sync}>
+            <Text
+              style={[styles.createAMatch, styles.doYouWantTypo]}
+            >{`Create a Match `}</Text>
+            <Image
+              style={styles.toggleIcon}
+              contentFit="cover"
+              source={require("../assets/toggle.png")}
+            />
+          </View>
+          <View style={[styles.primaryButton, styles.primaryButtonFlexBox]}>
+            <Text style={styles.proceedToPayment}>Proceed to payment</Text>
+          </View>
+          <IPhoneXSBarsStatusDe
+            iPhoneXSBarsStatusDeRight="0.23%"
+            iPhoneXSBarsStatusDeLeft="-0.23%"
+            iPhoneXSBarsStatusDeBorderTopLeftRadius={15}
+            iPhoneXSBarsStatusDeBorderTopRightRadius={15}
+            iPhoneXSBarsStatusDePosition="absolute"
+            iPhoneXSBarsStatusDeHeight="5.42%"
+            iPhoneXSBarsStatusDeTop="0%"
+            iPhoneXSBarsStatusDeBottom="94.58%"
+            iPhoneXSBarsStatusDeAlignSelf="unset"
+            wiFi={require("../assets/wifi1.png")}
+            notchIconMarginLeft={-110}
+          />
+          <Frame6 />
+          <Frame pM="12:00 PM" pM1="1:00 PM" pM2="2:00 PM" />
+          <Frame1 pM="3:00 PM" pM1="4:00 PM" pM2="5:00 PM" />
+          <Frame1
+            frameTop={542}
+            frameLeft={52}
+            pM="6:00 PM"
+            pM1="7:00 PM"
+            pM2="8:00 PM"
+          />
+          <Frame
+            frameTop={609}
+            backgroundBorderColor="#d7d7d7"
+            pM="9:00 PM"
+            pMColor="#bababa"
+            pM1="10:00 PM"
+            pM2="11:00 PM"
+          />
+          <Frame5 />
+        </View>
+      </View>
+      <ButtomFrame />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  primaryButtonFlexBox: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  doYouWantTypo: {
+    textAlign: "left",
+    fontSize: FontSize.buttonText_size,
+    position: "absolute",
+  },
+  bookingTime: {
+    top: 367,
+    width: 169,
+    height: 25,
+    color: Color.darkGray,
+    fontFamily: FontFamily.poppinsMedium,
+    fontWeight: "500",
+    lineHeight: 22,
+    left: 20,
+    textAlign: "left",
+  },
+  doYouWant: {
+    top: 687,
+    width: 329,
+    height: 31,
+    color: Color.darkGray,
+    fontFamily: FontFamily.poppinsMedium,
+    fontWeight: "500",
+    lineHeight: 22,
+    left: 20,
+    textAlign: "left",
+  },
+  createAMatch: {
+    top: 0,
+    left: 0,
+    fontFamily: FontFamily.poppinsRegular,
+    color: Color.colorLightslategray,
+  },
+  toggleIcon: {
+    height: "87.5%",
+    width: "10.92%",
+    top: "8.33%",
+    right: "0%",
+    bottom: "4.17%",
+    left: "89.08%",
+    maxWidth: "100%",
+    maxHeight: "100%",
+    position: "absolute",
+    overflow: "hidden",
+  },
+  sync: {
+    top: 755,
+    left: 17,
+    width: 293,
+    height: 24,
+    position: "absolute",
+  },
+  proceedToPayment: {
+    textTransform: "uppercase",
+    fontWeight: "600",
+    fontFamily: FontFamily.title1,
+    color: Color.surface,
+    textAlign: "center",
+    fontSize: FontSize.buttonText_size,
+  },
+  primaryButton: {
+    top: 832,
+    right: 65,
+    left: 47,
+    borderRadius: Border.br_33xl,
+    backgroundColor: Color.colorDarkslategray,
+    height: 60,
+    position: "absolute",
+  },
+  bookASlot: {
+    backgroundColor: Color.surface,
+    height: 932,
+    overflow: "hidden",
+    alignSelf: "stretch",
+  },
+  bookASlotWrapper: {
+    alignSelf: "stretch",
+  },
+  bookingSection: {
+    flex: 1,
+    width: "100%",
+    alignItems: "center",
+  },
+});
+
+export default BookingSection;

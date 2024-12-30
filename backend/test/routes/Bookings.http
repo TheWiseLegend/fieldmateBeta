@@ -1,0 +1,34 @@
+### Create a booking
+POST http://localhost:3000/api/bookings
+Content-Type: application/json
+
+{
+  "user_id": 101,
+  "field_id": 105,
+  "start_datetime": "2024-11-01T10:00:00Z",
+  "duration": 60,
+  "current_players": 1,
+  "status": "pending"
+}
+
+###
+
+### Update a booking
+PUT http://localhost:3000/api/bookings/1
+Content-Type: application/json
+
+{
+  "user_id": 101,
+  "field_id": 101,
+  "start_datetime": "2024-11-01T11:00:00Z",
+  "duration": 120,
+  "current_players": 5,
+  "status": "confirmed"
+}
+
+###
+
+### Delete a booking
+DELETE http://localhost:3000/api/bookings/101
+
+###

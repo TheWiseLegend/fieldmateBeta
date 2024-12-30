@@ -1,0 +1,26 @@
+### Create a booking schedule
+POST http://localhost:5000/api/booking_schedule
+Content-Type: application/json
+
+{
+  "booking_id": 2,
+  "status": "available"
+}
+
+###
+
+### Update a booking schedule
+PUT http://localhost:5000/api/booking_schedule/1
+Content-Type: application/json
+
+{
+  "booking_id": 1,
+  "status": "booked"
+}
+
+###
+
+### Delete a booking schedule
+DELETE http://localhost:5000/api/booking_schedule/1
+
+###

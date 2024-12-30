@@ -1,0 +1,21 @@
+### Create a field amenity
+POST http://localhost:5000/api/field_amenities
+Content-Type: application/json
+
+{
+  "field_id": 5,
+  "amenity_id": 3
+}
+
+###
+
+### Delete a field amenity
+DELETE http://localhost:5000/api/field_amenities
+Content-Type: application/json
+
+{
+  "field_id": 5,
+  "amenity_id": 3
+}
+
+###

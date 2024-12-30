@@ -1,0 +1,72 @@
+### Get all LFGs without filter or limit
+GET http://localhost:3000/api/lfgs
+Content-Type: application/json
+
+{
+  "filter": {},
+  "limit": null
+}
+
+###
+
+### Get all LFGs filtered but not limited
+GET http://localhost:3000/api/lfgs
+Content-Type: application/json
+
+{
+  "filter": { "address": "Address 1" },
+  "limit": null
+}
+
+###
+
+### Get all LFGs limited but not filtered
+GET http://localhost:3000/api/lfgs
+Content-Type: application/json
+
+{
+  "filter": {},
+  "limit": 5
+}
+
+###
+
+### Get all LFGs filtered and limited
+GET http://localhost:3000/api/lfgs
+Content-Type: application/json
+
+{
+  "filter": { "address": "Address 1" },
+  "limit": 1
+}
+
+###
+
+### Create an LFG
+POST http://localhost:3000/api/lfgs
+Content-Type: application/json
+
+{
+  "booking_id": 2,
+  "required_players": 5,
+  "status": "open"
+}
+
+###
+
+### Update an LFG
+PUT http://localhost:3000/api/lfgs/1
+Content-Type: application/json
+
+{
+  "booking_id": 2,
+  "required_players": 3,
+  "status": "closed"
+}
+
+###
+
+### Delete an LFG
+DELETE http://localhost:3000/api/lfgs/1
+
+###

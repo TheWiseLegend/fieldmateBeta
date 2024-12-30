@@ -1,0 +1,34 @@
+### Create a field
+POST http://localhost:3000/api/fields
+Content-Type: application/json
+
+{
+  "field_name": "Field A",
+  "vendor_id": 102,
+  "address": "123 Field St.",
+  "capacity": 100,
+  "price": 100.00,
+  "status": "available"
+}
+
+###
+
+### Update a field
+PUT http://localhost:3000/api/fields/4
+Content-Type: application/json
+
+{
+  "field_name": "Field B",
+  "vendor_id": 102,
+  "address": "456 Field St.",
+  "capacity": 150,
+  "price": 150.00,
+  "status": "booked"
+}
+
+###
+
+### Delete a field
+DELETE http://localhost:3000/api/fields/236
+
+###
