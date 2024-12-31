@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Text, StyleSheet, View } from "react-native";
 import { Image } from "expo-image";
-import IPhoneXSBarsStatusDe from "../components/IPhoneXSBarsStatusDe";
 import Frame6 from "../components/Frame6";
 import Frame from "../components/Frame";
 import Frame1 from "../components/Frame1";
@@ -33,19 +32,6 @@ const BookingSection = () => {
           <View style={[styles.primaryButton, styles.primaryButtonFlexBox]}>
             <Text style={styles.proceedToPayment}>Proceed to payment</Text>
           </View>
-          <IPhoneXSBarsStatusDe
-            iPhoneXSBarsStatusDeRight="0.23%"
-            iPhoneXSBarsStatusDeLeft="-0.23%"
-            iPhoneXSBarsStatusDeBorderTopLeftRadius={15}
-            iPhoneXSBarsStatusDeBorderTopRightRadius={15}
-            iPhoneXSBarsStatusDePosition="absolute"
-            iPhoneXSBarsStatusDeHeight="5.42%"
-            iPhoneXSBarsStatusDeTop="0%"
-            iPhoneXSBarsStatusDeBottom="94.58%"
-            iPhoneXSBarsStatusDeAlignSelf="unset"
-            wiFi={require("../assets/wifi1.png")}
-            notchIconMarginLeft={-110}
-          />
           <Frame6 />
           <Frame pM="12:00 PM" pM1="1:00 PM" pM2="2:00 PM" />
           <Frame1 pM="3:00 PM" pM1="4:00 PM" pM2="5:00 PM" />

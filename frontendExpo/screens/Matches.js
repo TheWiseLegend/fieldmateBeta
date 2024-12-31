@@ -4,7 +4,6 @@ import { StyleSheet, View, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import GroupComponent from "../components/GroupComponent";
 import WeekdaysDatePicker from "../components/WeekdaysDatePicker";
-import IPhoneXSBarsStatusDe from "../components/IPhoneXSBarsStatusDe";
 import {
   Color,
   Border,
@@ -142,17 +141,7 @@ const Matches = () => {
         <Text style={[styles.m, styles.mTypo]}>All Dates</Text>
         <Text style={[styles.m1, styles.mTypo]}>Clear All</Text>
       </View>
-      <IPhoneXSBarsStatusDe
-        iPhoneXSBarsStatusDeRight="0%"
-        iPhoneXSBarsStatusDeLeft="0%"
-        iPhoneXSBarsStatusDePosition="absolute"
-        iPhoneXSBarsStatusDeHeight="5.42%"
-        iPhoneXSBarsStatusDeTop="0%"
-        iPhoneXSBarsStatusDeBottom="94.58%"
-        iPhoneXSBarsStatusDeAlignSelf="unset"
-        wiFi={require("../assets/wifi1.png")}
-        notchIconMarginLeft={-110}
-      />
+
     </View>
   );
 };

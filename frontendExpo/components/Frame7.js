@@ -1,24 +1,12 @@
 import * as React from "react";
 import { Image } from "expo-image";
 import { StyleSheet, View } from "react-native";
-import IPhoneXSBarsStatusDe from "./IPhoneXSBarsStatusDe";
 import { Border } from "../GlobalStyles";
 
 const Frame7 = () => {
   return (
     <View style={styles.frame}>
       <View style={[styles.frame1, styles.frame1FlexBox]}>
-        <IPhoneXSBarsStatusDe
-          iPhoneXSBarsStatusDeRight="unset"
-          iPhoneXSBarsStatusDeLeft="unset"
-          iPhoneXSBarsStatusDePosition="relative"
-          iPhoneXSBarsStatusDeHeight={51}
-          iPhoneXSBarsStatusDeTop="unset"
-          iPhoneXSBarsStatusDeBottom="unset"
-          iPhoneXSBarsStatusDeAlignSelf="stretch"
-          wiFi={require("../assets/wifi1.png")}
-          notchIconMarginLeft={-109.5}
-        />
         <Image
           style={[styles.image5Icon, styles.frame1FlexBox]}
           contentFit="cover"
