@@ -8,6 +8,7 @@ import Matches from "./screens/Matches";
 import PaymentSection from "./screens/PaymentSection";
 import BookingSection from "./screens/BookingSection";
 import StadiumView from "./screens/StadiumView";
+import Footer from "./components2/Footer"
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
@@ -34,7 +35,7 @@ const App = () => {
 
   return (
     <>
-      <NavigationContainer>
+      {/* <NavigationContainer>
         {hideSplashScreen ? (
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen
@@ -69,7 +70,8 @@ const App = () => {
             />
           </Stack.Navigator>
         ) : null}
-      </NavigationContainer>
+      </NavigationContainer> */}
+      <Footer />
     </>
   );
 };
