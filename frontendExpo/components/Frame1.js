@@ -1,16 +1,16 @@
-import React, { useMemo } from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { Border, Color, FontSize, FontFamily } from "../GlobalStyles";
+import React, { useMemo } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
+import { Border, Color, FontSize, FontFamily } from '../GlobalStyles.js';
 
 const getStyleValue = (key, value) => {
   if (value === undefined) return;
-  return { [key]: value === "unset" ? undefined : value };
+  return { [key]: value === 'unset' ? undefined : value };
 };
 const Frame1 = ({ frameTop, frameLeft, pM, pM1, pM2 }) => {
   const frame1Style = useMemo(() => {
     return {
-      ...getStyleValue("top", frameTop),
-      ...getStyleValue("left", frameLeft),
+      ...getStyleValue('top', frameTop),
+      ...getStyleValue('left', frameLeft)
     };
   }, [frameTop, frameLeft]);
 
@@ -40,53 +40,53 @@ const styles = StyleSheet.create({
     top: 0,
     height: 47,
     width: 93,
-    position: "absolute",
+    position: 'absolute'
   },
   background: {
     borderRadius: Border.br_7xs,
-    borderStyle: "solid",
+    borderStyle: 'solid',
     borderColor: Color.colorLightgray,
-    borderWidth: 1,
+    borderWidth: 1
   },
   pm: {
     marginLeft: -20,
     top: 14,
-    left: "50%",
+    left: '50%',
     fontSize: FontSize.size_3xs,
     lineHeight: 22,
-    fontWeight: "500",
+    fontWeight: '500',
     fontFamily: FontFamily.poppinsMedium,
     color: Color.colorSilver_200,
-    textAlign: "center",
+    textAlign: 'center',
     width: 44,
     height: 21,
-    position: "absolute",
+    position: 'absolute'
   },
   date: {
     height: 47,
-    width: 93,
+    width: 93
   },
   date3: {
     left: 117,
     top: 0,
     height: 47,
     width: 93,
-    position: "absolute",
+    position: 'absolute'
   },
   date1: {
     width: 210,
-    height: 47,
+    height: 47
   },
   frame: {
     top: 475,
     left: 53,
     width: 326,
-    overflow: "hidden",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    position: "absolute",
-  },
+    overflow: 'hidden',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    position: 'absolute'
+  }
 });
 
 export default Frame1;

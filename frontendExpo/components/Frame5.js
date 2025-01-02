@@ -1,7 +1,7 @@
-import * as React from "react";
-import { Image } from "expo-image";
-import { StyleSheet, Text, View } from "react-native";
-import { FontFamily, FontSize, Color, Border } from "../GlobalStyles";
+import * as React from 'react';
+import { Image } from 'expo-image';
+import { StyleSheet, Text, View } from 'react-native';
+import { FontFamily, FontSize, Color, Border } from '../GlobalStyles';
 
 const Frame5 = () => {
   return (
@@ -9,12 +9,12 @@ const Frame5 = () => {
       <Image
         style={[styles.frameChild, styles.frameChildPosition]}
         contentFit="cover"
-        source={require("../assets/ellipse-10.png")}
+        source={require('../assets/ellipse-10.png')}
       />
       <Image
         style={[styles.frameIcon, styles.framePosition]}
         contentFit="cover"
-        source={require("../assets/frame4.png")}
+        source={require('../assets/frame4.png')}
       />
       <View style={[styles.frame1, styles.frameFlexBox]}>
         <Text style={styles.bookASlot}>Book A Slot</Text>
@@ -36,99 +36,99 @@ const Frame5 = () => {
 
 const styles = StyleSheet.create({
   framePosition: {
-    overflow: "hidden",
-    position: "absolute",
+    overflow: 'hidden',
+    position: 'absolute'
   },
   frameChildPosition: {
     left: 0,
-    top: 0,
+    top: 0
   },
   frameFlexBox: {
-    justifyContent: "flex-end",
-    alignItems: "center",
+    justifyContent: 'flex-end',
+    alignItems: 'center',
     top: 0,
-    overflow: "hidden",
-    position: "absolute",
+    overflow: 'hidden',
+    position: 'absolute'
   },
   date1Typo: {
     height: 23,
-    textAlign: "left",
+    textAlign: 'left',
     fontFamily: FontFamily.poppinsMedium,
-    fontWeight: "500",
+    fontWeight: '500',
     lineHeight: 22,
-    position: "absolute",
+    position: 'absolute'
   },
   date2Layout: {
     height: 58,
     width: 361,
-    position: "absolute",
+    position: 'absolute'
   },
   frameChild: {
     width: 35,
     height: 35,
-    position: "absolute",
-    left: 0,
+    position: 'absolute',
+    left: 0
   },
   frameIcon: {
     left: 6,
     width: 24,
     height: 25,
-    top: 0,
+    top: 0
   },
   bookASlot: {
-    alignSelf: "stretch",
+    alignSelf: 'stretch',
     fontSize: FontSize.size_13xl,
     color: Color.colorBlack,
-    textAlign: "center",
+    textAlign: 'center',
     fontFamily: FontFamily.poppinsMedium,
-    fontWeight: "500",
-    lineHeight: 22,
+    fontWeight: '500',
+    lineHeight: 22
   },
   frame1: {
     left: 110,
-    width: 198,
+    width: 198
   },
   date1: {
     left: 26,
     fontSize: FontSize.buttonText_size,
     color: Color.darkGray,
     width: 58,
-    top: 0,
+    top: 0
   },
   background: {
     borderRadius: Border.br_7xs,
-    borderStyle: "solid",
+    borderStyle: 'solid',
     borderColor: Color.colorLightgray,
     borderWidth: 1,
     left: 0,
-    top: 0,
+    top: 0
   },
   monday09December: {
     top: 17,
     left: 15,
     fontSize: FontSize.size_sm,
     color: Color.colorSilver_200,
-    width: 219,
+    width: 219
   },
   date2: {
     top: 35,
-    left: 8,
+    left: 8
   },
   date: {
     height: 93,
-    width: 369,
+    width: 369
   },
   frame2: {
     width: 369,
     height: 145,
-    left: 13,
+    left: 13
   },
   frame: {
     top: 61,
     width: 382,
     height: 145,
-    left: 13,
-  },
+    left: 13
+  }
 });
 
 export default Frame5;

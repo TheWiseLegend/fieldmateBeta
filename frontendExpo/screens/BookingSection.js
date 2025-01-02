@@ -1,16 +1,19 @@
-import * as React from "react";
-import { Text, StyleSheet, View } from "react-native";
-import { Image } from "expo-image";
-import Frame6 from "../components/Frame6";
-import Frame from "../components/Frame";
-import Frame1 from "../components/Frame1";
-import Frame5 from "../components/Frame5";
-import ButtomFrame from "../components/ButtomFrame";
-import { FontSize, Color, FontFamily, Border } from "../GlobalStyles";
+import * as React from 'react';
+import { Text, StyleSheet, View } from 'react-native';
+import { Image } from 'expo-image';
+import Frame6 from '../components/Frame6.js';
+import Frame5 from '../components/Frame5.js';
+import Frame from '../components/Frame.js';
+import Frame1 from '../components/Frame1.js';
+import ButtomFrame from '../components/ButtomFrame.js';
+import Header from '../components2/Header.jsx';
+import Footer from '../components2/Footer.jsx';
+import { FontSize, Color, FontFamily, Border } from '../GlobalStyles.js';
 
-const BookingSection = () => {
+export default function BookingSection() {
   return (
     <View style={styles.bookingSection}>
+      <Header />
       <View style={[styles.bookASlotWrapper, styles.primaryButtonFlexBox]}>
         <View style={styles.bookASlot}>
           <Text
@@ -26,7 +29,7 @@ const BookingSection = () => {
             <Image
               style={styles.toggleIcon}
               contentFit="cover"
-              source={require("../assets/toggle.png")}
+              source={require('../assets/toggle.png')}
             />
           </View>
           <View style={[styles.primaryButton, styles.primaryButtonFlexBox]}>
@@ -54,19 +57,20 @@ const BookingSection = () => {
         </View>
       </View>
       <ButtomFrame />
+      <Footer />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   primaryButtonFlexBox: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   doYouWantTypo: {
-    textAlign: "left",
+    textAlign: 'left',
     fontSize: FontSize.buttonText_size,
-    position: "absolute",
+    position: 'absolute'
   },
   bookingTime: {
     top: 367,
@@ -74,10 +78,10 @@ const styles = StyleSheet.create({
     height: 25,
     color: Color.darkGray,
     fontFamily: FontFamily.poppinsMedium,
-    fontWeight: "500",
+    fontWeight: '500',
     lineHeight: 22,
     left: 20,
-    textAlign: "left",
+    textAlign: 'left'
   },
   doYouWant: {
     top: 687,
@@ -85,43 +89,43 @@ const styles = StyleSheet.create({
     height: 31,
     color: Color.darkGray,
     fontFamily: FontFamily.poppinsMedium,
-    fontWeight: "500",
+    fontWeight: '500',
     lineHeight: 22,
     left: 20,
-    textAlign: "left",
+    textAlign: 'left'
   },
   createAMatch: {
     top: 0,
     left: 0,
     fontFamily: FontFamily.poppinsRegular,
-    color: Color.colorLightslategray,
+    color: Color.colorLightslategray
   },
   toggleIcon: {
-    height: "87.5%",
-    width: "10.92%",
-    top: "8.33%",
-    right: "0%",
-    bottom: "4.17%",
-    left: "89.08%",
-    maxWidth: "100%",
-    maxHeight: "100%",
-    position: "absolute",
-    overflow: "hidden",
+    height: '87.5%',
+    width: '10.92%',
+    top: '8.33%',
+    right: '0%',
+    bottom: '4.17%',
+    left: '89.08%',
+    maxWidth: '100%',
+    maxHeight: '100%',
+    position: 'absolute',
+    overflow: 'hidden'
   },
   sync: {
     top: 755,
     left: 17,
     width: 293,
     height: 24,
-    position: "absolute",
+    position: 'absolute'
   },
   proceedToPayment: {
-    textTransform: "uppercase",
-    fontWeight: "600",
+    textTransform: 'uppercase',
+    fontWeight: '600',
     fontFamily: FontFamily.title1,
     color: Color.surface,
-    textAlign: "center",
-    fontSize: FontSize.buttonText_size,
+    textAlign: 'center',
+    fontSize: FontSize.buttonText_size
   },
   primaryButton: {
     top: 832,
@@ -130,22 +134,20 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_33xl,
     backgroundColor: Color.colorDarkslategray,
     height: 60,
-    position: "absolute",
+    position: 'absolute'
   },
   bookASlot: {
     backgroundColor: Color.surface,
     height: 932,
-    overflow: "hidden",
-    alignSelf: "stretch",
+    overflow: 'hidden',
+    alignSelf: 'stretch'
   },
   bookASlotWrapper: {
-    alignSelf: "stretch",
+    alignSelf: 'stretch'
   },
   bookingSection: {
     flex: 1,
-    width: "100%",
-    alignItems: "center",
-  },
+    width: '100%',
+    alignItems: 'center'
+  }
 });
-
-export default BookingSection;

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
-import { FontSize, FontFamily, Color, Border } from '../GlobalStyles';
+import { FontSize, FontFamily, Color, Border } from '../GlobalStyles.js';
 
-const WeekdaysDatePicker = () => {
+export default function WeekdaysDatePicker() {
   return (
     <View style={styles.weekdaysDatePicker}>
       <View style={styles.calendarDate}>
@@ -28,7 +28,7 @@ const WeekdaysDatePicker = () => {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   m: {
@@ -64,5 +64,3 @@ const styles = StyleSheet.create({
     position: 'absolute'
   }
 });
-
-export default WeekdaysDatePicker;

@@ -1,16 +1,16 @@
-import React, { useMemo } from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { Image } from "expo-image";
-import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
+import React, { useMemo } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
+import { Image } from 'expo-image';
+import { Color, FontFamily, FontSize, Border } from '../GlobalStyles.js';
 
 const getStyleValue = (key, value) => {
   if (value === undefined) return;
-  return { [key]: value === "unset" ? undefined : value };
+  return { [key]: value === 'unset' ? undefined : value };
 };
 const ButtomFrame = ({ buttomFrameMarginTop }) => {
   const buttomFrameStyle = useMemo(() => {
     return {
-      ...getStyleValue("marginTop", buttomFrameMarginTop),
+      ...getStyleValue('marginTop', buttomFrameMarginTop)
     };
   }, [buttomFrameMarginTop]);
 
@@ -20,22 +20,22 @@ const ButtomFrame = ({ buttomFrameMarginTop }) => {
       <Image
         style={[styles.stadiumIcon, styles.iconLayout]}
         contentFit="cover"
-        source={require("../assets/stadium.png")}
+        source={require('../assets/stadium.png')}
       />
       <Image
         style={[styles.soccerIcon, styles.iconPosition]}
         contentFit="cover"
-        source={require("../assets/soccer.png")}
+        source={require('../assets/soccer.png')}
       />
       <Image
         style={styles.vectorIcon}
         contentFit="cover"
-        source={require("../assets/vector9.png")}
+        source={require('../assets/vector9.png')}
       />
       <Image
         style={[styles.scheduleIcon, styles.iconPosition]}
         contentFit="cover"
-        source={require("../assets/schedule.png")}
+        source={require('../assets/schedule.png')}
       />
       <Text style={[styles.stadiums, styles.homeTypo]}>Stadiums</Text>
       <Text style={[styles.matches, styles.homeTypo]}>Matches</Text>
@@ -48,36 +48,36 @@ const ButtomFrame = ({ buttomFrameMarginTop }) => {
 const styles = StyleSheet.create({
   iconLayout: {
     height: 32,
-    width: 37,
+    width: 37
   },
   iconPosition: {
     top: 17,
-    position: "absolute",
+    position: 'absolute'
   },
   homeTypo: {
     textShadowRadius: 4,
     textShadowOffset: {
       width: 0,
-      height: 4,
+      height: 4
     },
-    textShadowColor: "rgba(0, 0, 0, 0.25)",
-    textAlign: "left",
+    textShadowColor: 'rgba(0, 0, 0, 0.25)',
+    textAlign: 'left',
     color: Color.colorBlack,
     fontFamily: FontFamily.interRegular,
     fontSize: FontSize.caption_size,
-    position: "absolute",
+    position: 'absolute'
   },
   navigation: {
-    height: "100%",
-    width: "100%",
-    top: "0%",
-    right: "0%",
-    bottom: "0%",
-    left: "0%",
-    shadowColor: "rgba(84, 87, 92, 0.05)",
+    height: '100%',
+    width: '100%',
+    top: '0%',
+    right: '0%',
+    bottom: '0%',
+    left: '0%',
+    shadowColor: 'rgba(84, 87, 92, 0.05)',
     shadowOffset: {
       width: 2,
-      height: -2,
+      height: -2
     },
     shadowRadius: 3,
     elevation: 3,
@@ -85,34 +85,34 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: Border.br_3xs,
     borderTopRightRadius: Border.br_3xs,
     backgroundColor: Color.surface,
-    position: "absolute",
+    position: 'absolute'
   },
   stadiumIcon: {
     top: 19,
     left: 56,
-    position: "absolute",
+    position: 'absolute'
   },
   soccerIcon: {
     left: 155,
     width: 39,
-    height: 34,
+    height: 34
   },
   vectorIcon: {
-    height: "45.71%",
-    width: "8.53%",
-    top: "24.29%",
-    right: "32.53%",
-    bottom: "30%",
-    left: "58.93%",
-    maxWidth: "100%",
-    overflow: "hidden",
-    maxHeight: "100%",
-    position: "absolute",
+    height: '45.71%',
+    width: '8.53%',
+    top: '24.29%',
+    right: '32.53%',
+    bottom: '30%',
+    left: '58.93%',
+    maxWidth: '100%',
+    overflow: 'hidden',
+    maxHeight: '100%',
+    position: 'absolute'
   },
   scheduleIcon: {
     left: 352,
     height: 32,
-    width: 37,
+    width: 37
   },
   stadiums: {
     left: 46,
@@ -121,13 +121,13 @@ const styles = StyleSheet.create({
     top: 51,
     textShadowOffset: {
       width: 0,
-      height: 4,
+      height: 4
     },
-    textShadowColor: "rgba(0, 0, 0, 0.25)",
-    textAlign: "left",
+    textShadowColor: 'rgba(0, 0, 0, 0.25)',
+    textAlign: 'left',
     color: Color.colorBlack,
     fontFamily: FontFamily.interRegular,
-    fontSize: FontSize.caption_size,
+    fontSize: FontSize.caption_size
   },
   matches: {
     left: 142,
@@ -136,13 +136,13 @@ const styles = StyleSheet.create({
     top: 51,
     textShadowOffset: {
       width: 0,
-      height: 4,
+      height: 4
     },
-    textShadowColor: "rgba(0, 0, 0, 0.25)",
-    textAlign: "left",
+    textShadowColor: 'rgba(0, 0, 0, 0.25)',
+    textAlign: 'left',
     color: Color.colorBlack,
     fontFamily: FontFamily.interRegular,
-    fontSize: FontSize.caption_size,
+    fontSize: FontSize.caption_size
   },
   home: {
     top: 52,
@@ -150,13 +150,13 @@ const styles = StyleSheet.create({
     width: 46,
     textShadowOffset: {
       width: 0,
-      height: 4,
+      height: 4
     },
-    textShadowColor: "rgba(0, 0, 0, 0.25)",
-    textAlign: "left",
+    textShadowColor: 'rgba(0, 0, 0, 0.25)',
+    textAlign: 'left',
     color: Color.colorBlack,
     fontFamily: FontFamily.interRegular,
-    fontSize: FontSize.caption_size,
+    fontSize: FontSize.caption_size
   },
   myActivity: {
     left: 339,
@@ -165,19 +165,19 @@ const styles = StyleSheet.create({
     top: 51,
     textShadowOffset: {
       width: 0,
-      height: 4,
+      height: 4
     },
-    textShadowColor: "rgba(0, 0, 0, 0.25)",
-    textAlign: "left",
+    textShadowColor: 'rgba(0, 0, 0, 0.25)',
+    textAlign: 'left',
     color: Color.colorBlack,
     fontFamily: FontFamily.interRegular,
-    fontSize: FontSize.caption_size,
+    fontSize: FontSize.caption_size
   },
   buttomFrame: {
-    alignSelf: "stretch",
+    alignSelf: 'stretch',
     height: 70,
-    marginTop: -17,
-  },
+    marginTop: -17
+  }
 });
 
 export default ButtomFrame;
