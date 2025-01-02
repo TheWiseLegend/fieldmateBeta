@@ -20,6 +20,7 @@ const GroupComponent = ({ groupViewTop, groupViewLeft }) => {
       <Image
         style={[styles.instanceChild, styles.instanceLayout]}
         contentFit="cover"
+        // @ts-expect-error
         source={require('../assets/rectangle-51.png')}
       />
       <Text style={styles.rm}>30.00 RM</Text>
@@ -29,11 +30,13 @@ const GroupComponent = ({ groupViewTop, groupViewLeft }) => {
       <Image
         style={[styles.vectorIcon, styles.instanceLayout]}
         contentFit="cover"
+        // @ts-expect-error
         source={require('../assets/vector3.png')}
       />
       <Image
         style={[styles.instanceItem, styles.instanceLayout]}
         contentFit="cover"
+        // @ts-expect-error
         source={require('../assets/group-686.png')}
       />
       <Text style={styles.title}>{`Name `}</Text>

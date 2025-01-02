@@ -1,5 +1,5 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React from 'react';
+import { View, Text } from 'react-native';
 
 function MyActivity() {
   return (
@@ -8,7 +8,7 @@ function MyActivity() {
         <Text>Hello</Text>
       </View>
     </>
-  )
+  );
 }
 
-export default MyActivity
+export default MyActivity;

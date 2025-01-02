@@ -1,11 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 function Stadiums() {
-  return (
-    <>
-      
-    </>
-  )
+  return <></>;
 }
 
-export default Stadiums
+export default Stadiums;

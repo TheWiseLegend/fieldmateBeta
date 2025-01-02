@@ -3,9 +3,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
-import HomeScreenComponent from '../screens2/Home';
-import StadiumsScreenComponent from '../screens2/Stadiums';
-import MatchesScreenComponent from '../screens2/Matches';
+import HomeScreenComponent from '../screens/Home';
+import StadiumsScreenComponent from '../screens/Stadiums';
+import MatchesScreenComponent from '../screens/Matches';
 import MyActivityScreenComponent from '../screens2/MyActivity';
 
 const StadiumsScreen = 'Stadiums';
@@ -19,7 +19,7 @@ function Footer() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName='Home'
+        initialRouteName="Home"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ color, size }) => {
             let iconName;
@@ -36,13 +36,19 @@ function Footer() {
             }
 
             // @ts-ignore
-            return <MaterialCommunityIcons name={iconName} size={size + 4} color={color} />;
+            return (
+              <MaterialCommunityIcons
+                // @ts-expect-error
+                name={iconName}
+                size={size + 4}
+                color={color}
+              />
+            );
           },
           tabBarLabelStyle: { fontSize: 14 }, // Increase label size
           tabBarStyle: { height: 60, paddingBottom: 5 }, // Increase tab bar height
           headerShown: false
         })}
-
       >
         <Tab.Screen name="Stadiums" component={StadiumsScreenComponent} />
         <Tab.Screen name="Matches" component={MatchesScreenComponent} />

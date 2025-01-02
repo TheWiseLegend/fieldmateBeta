@@ -1,11 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 function Matches() {
-  return (
-    <>
-      
-    </>
-  )
+  return <></>;
 }
 
-export default Matches
+export default Matches;

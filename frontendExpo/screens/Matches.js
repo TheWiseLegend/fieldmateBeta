@@ -5,7 +5,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 import WeekdaysDatePicker from '../components2/WeekdaysDatePicker.jsx';
 import LFGCard from '../components2/LFGCard.jsx';
 import Header from '../components2/Header.jsx';
-import Footer from '../components2/Footer.jsx';
 import {
   Color,
   Border,
@@ -19,12 +18,6 @@ export default function Matches() {
   return (
     <View style={styles.matches}>
       <Header />
-      <Image
-        style={[styles.matchesChild, styles.image2IconLayout]}
-        contentFit="cover"
-        // @ts-expect-error
-        source={require('../assets/rectangle-13.png')}
-      />
       <LFGCard />
       <Image
         style={[styles.matchesItem, styles.matchesLayout]}
@@ -93,25 +86,6 @@ export default function Matches() {
         // @ts-expect-error
         source={require('../assets/stadium-2.png')}
       />
-      <Text style={styles.title}>Matches</Text>
-      <Image
-        style={styles.doorbellIcon}
-        contentFit="cover"
-        // @ts-expect-error
-        source={require('../assets/doorbell.png')}
-      />
-      <Image
-        style={[styles.matchesChild3, styles.iconChildLayout]}
-        contentFit="cover"
-        // @ts-expect-error
-        source={require('../assets/dot.png')}
-      />
-      <Image
-        style={[styles.matchesChild4, styles.iconChildLayout]}
-        contentFit="cover"
-        // @ts-expect-error
-        source={require('../assets/vector-2.png')}
-      />
       <Image
         style={[styles.chartIcon, styles.iconChildLayout]}
         contentFit="cover"
@@ -150,16 +124,10 @@ export default function Matches() {
         // @ts-expect-error
         source={require('../assets/-glyphs--tab-bar--search.png')}
       />
-      <View style={styles.menuButton}>
-        <View style={styles.rectangle} />
-        <View style={styles.rectangle} />
-        <View style={styles.rectangle} />
-      </View>
       {/* <View style={styles.calendarDate}>
         <Text style={[styles.m, styles.mTypo]}>All Dates</Text>
         <Text style={[styles.m1, styles.mTypo]}>Clear All</Text>
       </View> */}
-      <Footer />
     </View>
   );
 }
@@ -361,13 +329,6 @@ const styles = StyleSheet.create({
     left: '50%',
     position: 'absolute'
   },
-  doorbellIcon: {
-    top: 53,
-    left: 362,
-    width: 40,
-    height: 45,
-    position: 'absolute'
-  },
   matchesChild3: {
     height: '1.29%',
     width: '2.79%',
@@ -378,11 +339,6 @@ const styles = StyleSheet.create({
     maxWidth: '100%',
     maxHeight: '100%',
     overflow: 'hidden'
-  },
-  matchesChild4: {
-    top: 383,
-    left: 53,
-    width: 311
   },
   chartIcon: {
     height: '3.22%',
@@ -442,26 +398,6 @@ const styles = StyleSheet.create({
   glyphsTabBarSearch1: {
     right: '85.58%',
     left: '7.44%'
-  },
-  rectangle: {
-    width: 28,
-    height: 3,
-    borderRadius: Border.br_9xs,
-    backgroundColor: Color.colorMediumslateblue
-  },
-  menuButton: {
-    top: 51,
-    left: 10,
-    width: 48,
-    height: 48,
-    justifyContent: 'flex-end',
-    paddingHorizontal: Padding.p_3xs,
-    paddingTop: Padding.p_xs,
-    paddingBottom: Padding.p_smi_4,
-    gap: Gap.gap_md,
-    borderRadius: Border.br_9xs,
-    position: 'absolute',
-    overflow: 'hidden'
   },
   m: {
     width: 63

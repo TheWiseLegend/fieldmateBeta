@@ -3,7 +3,6 @@ import { StyleSheet, View, Text } from 'react-native';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import Header from '../components2/Header.jsx';
-import Footer from '../components2/Footer.jsx';
 import { Color, Border, FontSize, FontFamily } from '../GlobalStyles.js';
 
 export default function PaymentSection() {
@@ -92,7 +91,6 @@ export default function PaymentSection() {
         CANCELLATION POLICY
       </Text>
       <Text style={[styles.upTo24, styles.upTo24Layout]}>Up to 24 Hours</Text>
-      <Footer />
     </View>
   );
 }

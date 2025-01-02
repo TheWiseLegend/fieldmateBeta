@@ -17,11 +17,13 @@ export default function Header({}) {
       <Image
         style={styles.doorbellIcon}
         contentFit="cover"
+        // @ts-expect-error
         source={require('../assets/doorbell.png')}
       />
       <Image
         style={[styles.dotIcon, styles.iconLayout1]}
         contentFit="cover"
+        // @ts-expect-error
         source={require('../assets/dot.png')}
       />
     </>

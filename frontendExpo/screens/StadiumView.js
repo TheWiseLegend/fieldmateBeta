@@ -6,7 +6,6 @@ import FrameComponent from '../components/FrameComponent.js';
 import FrameComponent1 from '../components/FrameComponent1.js';
 import ButtomFrame from '../components/ButtomFrame.js';
 import Header from '../components2/Header.jsx';
-import Footer from '../components2/Footer.jsx';
 import { FontFamily, Border, FontSize, Color } from '../GlobalStyles.js';
 
 export default function StadiumView() {
@@ -59,16 +58,8 @@ export default function StadiumView() {
         </View>
         <FrameComponent />
         <FrameComponent1 />
-        <Image
-          style={[styles.bookingStadiumsChild, styles.groupIconLayout]}
-          contentFit="cover"
-          // @ts-expect-error
-          source={require('../assets/vector-2.png')}
-        />
       </View>
       <ButtomFrame buttomFrameMarginTop={-18} />
-
-      <Footer />
     </View>
   );
 }

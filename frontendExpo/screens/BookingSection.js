@@ -7,7 +7,6 @@ import Frame from '../components/Frame.js';
 import Frame1 from '../components/Frame1.js';
 import ButtomFrame from '../components/ButtomFrame.js';
 import Header from '../components2/Header.jsx';
-import Footer from '../components2/Footer.jsx';
 import { FontSize, Color, FontFamily, Border } from '../GlobalStyles.js';
 
 export default function BookingSection() {
@@ -57,7 +56,6 @@ export default function BookingSection() {
         </View>
       </View>
       <ButtomFrame />
-      <Footer />
     </View>
   );
 }

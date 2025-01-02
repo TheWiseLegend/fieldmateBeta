@@ -11,6 +11,7 @@ export default function StadiumCard() {
           <Image
             style={[styles.image5Icon, styles.image5IconPosition]}
             contentFit="cover"
+            // @ts-expect-error
             source={require('../assets/image-5.png')}
           />
           <View style={[styles.titleParent, styles.image5IconPosition]}>
@@ -18,6 +19,7 @@ export default function StadiumCard() {
             <Image
               style={styles.frameChild}
               contentFit="cover"
+              // @ts-expect-error
               source={require('../assets/rectangle-5.png')}
             />
             <View style={styles.frame1}>
@@ -26,6 +28,7 @@ export default function StadiumCard() {
             <Image
               style={[styles.frameIcon, styles.frameIconPosition]}
               contentFit="cover"
+              // @ts-expect-error
               source={require('../assets/frame.png')}
             />
             <View style={[styles.frame2, styles.framePosition]}>
@@ -47,6 +50,7 @@ export default function StadiumCard() {
             <Image
               style={[styles.frameIcon1, styles.frameIconPosition]}
               contentFit="cover"
+              // @ts-expect-error
               source={require('../assets/frame1.png')}
             />
           </View>

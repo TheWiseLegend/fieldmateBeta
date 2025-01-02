@@ -9,6 +9,7 @@ export default function Recommendation() {
       <Image
         style={styles.homeChild}
         contentFit="cover"
+        // @ts-expect-error
         source={require('../assets/bg0.png')}
       />
 
@@ -21,6 +22,7 @@ export default function Recommendation() {
       <Image
         style={[styles.image3Icon, styles.iconLayout]}
         contentFit="cover"
+        // @ts-expect-error
         source={require('../assets/stadium-2.png')}
       />
       <View style={[styles.rectangleView, styles.homeInnerPosition]} />
@@ -29,6 +31,7 @@ export default function Recommendation() {
       <Image
         style={[styles.image4Icon, styles.iconLayout]}
         contentFit="cover"
+        // @ts-expect-error
         source={require('../assets/stadium-2.png')}
       />
       <View style={[styles.homeInner, styles.homeInnerPosition]} />

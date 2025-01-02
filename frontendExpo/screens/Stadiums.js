@@ -5,7 +5,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Frame3 from '../components/Frame3.js';
 import StadiumCard from '../components2/StadiumCard.jsx';
 import Header from '../components2/Header.jsx';
-import Footer from '../components2/Footer.jsx';
 import {
   FontSize,
   Color,
@@ -27,30 +26,6 @@ export default function Stadiums() {
       />
       <View style={[styles.frameParent, styles.menuButtonFlexBox]}>
         <StadiumCard />
-      </View>
-      <View style={[styles.frame, styles.framePosition]}>
-        <View style={[styles.frame1, styles.frame1Layout]}>
-          <View style={[styles.menuButton, styles.menuButtonPosition]}>
-            <View style={styles.rectangle} />
-            <View style={styles.rectangle} />
-            <View style={styles.rectangle} />
-          </View>
-          <Image
-            style={styles.frameIcon}
-            contentFit="cover"
-            // @ts-expect-error
-            source={require('../assets/frame2.png')}
-          />
-          <View style={[styles.frame2, styles.frameLayout]}>
-            <Image
-              style={[styles.frameChild, styles.frameLayout]}
-              contentFit="cover"
-              // @ts-expect-error
-              source={require('../assets/rectangle-13.png')}
-            />
-            <Text style={styles.title}>{`Stadiums `}</Text>
-          </View>
-        </View>
       </View>
       <Image
         style={styles.frameIcon1}
@@ -81,16 +56,9 @@ export default function Stadiums() {
           <Text style={[styles.sort, styles.sortTypo]}>Sort</Text>
         </LinearGradient>
       </View>
-      <Image
-        style={styles.stadiumsChild}
-        contentFit="cover"
-        // @ts-expect-error
-        source={require('../assets/vector-2.png')}
-      />
-      <Footer />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   menuButtonFlexBox: {
@@ -102,14 +70,6 @@ const styles = StyleSheet.create({
     left: 0,
     position: 'absolute',
     overflow: 'hidden'
-  },
-  frame1Layout: {
-    height: 48,
-    overflow: 'hidden'
-  },
-  menuButtonPosition: {
-    top: 0,
-    left: 0
   },
   frameLayout: {
     height: 39,
@@ -143,37 +103,6 @@ const styles = StyleSheet.create({
     gap: 14,
     left: 0
   },
-  rectangle: {
-    backgroundColor: Color.colorMediumslateblue,
-    width: 28,
-    height: 3,
-    borderRadius: Border.br_9xs
-  },
-  menuButton: {
-    width: 48,
-    paddingHorizontal: Padding.p_3xs,
-    paddingTop: Padding.p_xs,
-    paddingBottom: Padding.p_smi_4,
-    gap: Gap.gap_md,
-    height: 48,
-    overflow: 'hidden',
-    justifyContent: 'flex-end',
-    position: 'absolute',
-    borderRadius: Border.br_9xs
-  },
-  frameIcon: {
-    top: 2,
-    left: 352,
-    width: 40,
-    height: 45,
-    position: 'absolute',
-    overflow: 'hidden'
-  },
-  frameChild: {
-    borderRadius: Border.br_8xs,
-    top: 0,
-    left: 0
-  },
   title: {
     height: '71.79%',
     width: '57.44%',
@@ -191,14 +120,6 @@ const styles = StyleSheet.create({
     top: 5,
     left: 113,
     overflow: 'hidden'
-  },
-  frame1: {
-    alignSelf: 'stretch'
-  },
-  frame: {
-    top: 51,
-    width: 402,
-    justifyContent: 'center'
   },
   frameIcon1: {
     top: 106,

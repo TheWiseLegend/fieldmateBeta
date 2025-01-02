@@ -3,7 +3,6 @@ import { StyleSheet, View, Text } from 'react-native';
 import Recommendation from '../components2/Recommendation.jsx';
 import LFGCard from '../components2/LFGCard.jsx';
 import Header from '../components2/Header.jsx';
-import Footer from '../components2/Footer.jsx';
 import { Border, Color, FontSize, FontFamily } from '../GlobalStyles.js';
 
 export default function Home() {
@@ -15,7 +14,7 @@ export default function Home() {
         Matches near you
       </Text>
       <LFGCard groupViewTop={466} groupViewLeft={10} />
-      <Footer />
+      {/* <Footer /> */}
     </View>
   );
 }
