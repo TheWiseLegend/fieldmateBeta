@@ -15,14 +15,12 @@ export default function PaymentSection() {
       <Text style={styles.paymentMethod}>Payment Method</Text>
       <Image
         style={styles.ellipseIcon}
-        contentFit="cover"
-        // @ts-expect-error
+        contentFit="cover" // @ts-expect-error
         source={require('../assets/ellipse-10.png')}
       />
       <Image
         style={[styles.vectorIcon, styles.iconLayout]}
-        contentFit="cover"
-        // @ts-expect-error
+        contentFit="cover" // @ts-expect-error
         source={require('../assets/vector7.png')}
       />
       <Text style={styles.confirmBook}>{`Confirm & Book`}</Text>
@@ -32,16 +30,14 @@ export default function PaymentSection() {
 
       <Image
         style={[styles.bgIcon, styles.iconLayout]}
-        contentFit="cover"
-        // @ts-expect-error
+        contentFit="cover" // @ts-expect-error
         source={require('../assets/bg.png')}
       />
       <Text style={[styles.pm900, styles.pm900Typo]}>8:00 pm - 9:00 pm</Text>
       <Text style={[styles.bookingDate, styles.bookingTypo]}>Booking Date</Text>
       <Image
         style={[styles.vectorIcon1, styles.iconLayout]}
-        contentFit="cover"
-        // @ts-expect-error
+        contentFit="cover" // @ts-expect-error
         source={require('../assets/vector8.png')}
       />
       <LinearGradient
@@ -59,27 +55,23 @@ export default function PaymentSection() {
       <Text style={[styles.cashOnSite, styles.qrTypo]}>Cash (On site)</Text>
       <Image
         style={[styles.paymentSectionChild1, styles.paymentChildLayout]}
-        contentFit="cover"
-        // @ts-expect-error
+        contentFit="cover" // @ts-expect-error
         source={require('../assets/ellipse-11.png')}
       />
       <Image
         style={[styles.cashIcon, styles.cashPosition]}
-        contentFit="cover"
-        // @ts-expect-error
+        contentFit="cover" // @ts-expect-error
         source={require('../assets/cash.png')}
       />
       <Text style={[styles.qr, styles.qrPosition]}>QR</Text>
       <Image
         style={[styles.paymentSectionChild2, styles.paymentChildLayout]}
-        contentFit="cover"
-        // @ts-expect-error
+        contentFit="cover" // @ts-expect-error
         source={require('../assets/ellipse-11.png')}
       />
       <Image
         style={[styles.frameIcon, styles.qrPosition]}
-        contentFit="cover"
-        // @ts-expect-error
+        contentFit="cover" // @ts-expect-error
         source={require('../assets/frame-3.png')}
       />
       <Text style={[styles.orderDetails, styles.textPosition]}>

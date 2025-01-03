@@ -6,34 +6,30 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import HomeScreenComponent from '../screens/Home';
 import StadiumsScreenComponent from '../screens/Stadiums';
 import MatchesScreenComponent from '../screens/Matches';
-import MyActivityScreenComponent from '../screens2/MyActivity';
+// import MyActivityScreenComponent from '../screens2/MyActivity';
 
+const HomeScreen = 'Home';
 const StadiumsScreen = 'Stadiums';
 const MatchesScreen = 'Matches';
-const HomeScreen = 'Home';
-const MyActivityScreen = 'My Activity';
+// const MyActivityScreen = 'My Activity';
 
 const Tab = createBottomTabNavigator();
 
-function Footer() {
+export default function Footer() {
   return (
+    // @ts-expect-error
     <NavigationContainer>
+      {/* @ts-expect-error */}
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ color, size }) => {
-            let iconName;
-            let rn = route.name;
+            const rn = route.name;
+            let iconName = 'home';
 
-            if (rn === HomeScreen) {
-              iconName = 'home';
-            } else if (rn === StadiumsScreen) {
-              iconName = 'soccer-field';
-            } else if (rn === MatchesScreen) {
-              iconName = 'soccer';
-            } else if (rn === MyActivityScreen) {
-              iconName = 'calendar-clock';
-            }
+            if (rn === StadiumsScreen) iconName = 'soccer-field';
+            else if (rn === MatchesScreen) iconName = 'soccer';
+            // else if (rn === MyActivityScreen) iconName = 'calendar-clock';
 
             // @ts-ignore
             return (
@@ -50,13 +46,11 @@ function Footer() {
           headerShown: false
         })}
       >
-        <Tab.Screen name="Stadiums" component={StadiumsScreenComponent} />
-        <Tab.Screen name="Matches" component={MatchesScreenComponent} />
-        <Tab.Screen name="Home" component={HomeScreenComponent} />
-        <Tab.Screen name="My Activity" component={MyActivityScreenComponent} />
+        <Tab.Screen name={HomeScreen} component={HomeScreenComponent} />
+        <Tab.Screen name={StadiumsScreen} component={StadiumsScreenComponent} />
+        <Tab.Screen name={MatchesScreen} component={MatchesScreenComponent} />
+        {/* <Tab.Screen name={MyActivityScreen} component={MyActivityScreenComponent} /> */}
       </Tab.Navigator>
     </NavigationContainer>
   );
 }
-
-export default Footer;

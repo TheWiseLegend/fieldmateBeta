@@ -23,6 +23,7 @@ export default function DateSelector() {
           <Image
             style={styles.icon}
             contentFit="cover"
+            // @ts-expect-error
             source={require('../assets/icon.png')}
           />
         </View>

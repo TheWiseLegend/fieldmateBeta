@@ -2,11 +2,12 @@ import React, { useMemo } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Border, Color, FontSize, FontFamily } from '../GlobalStyles.js';
 
-const getStyleValue = (key, value) => {
+function getStyleValue(key, value) {
   if (value === undefined) return;
   return { [key]: value === 'unset' ? undefined : value };
-};
-const Frame1 = ({ frameTop, frameLeft, pM, pM1, pM2 }) => {
+}
+
+export default function Frame1({ frameTop, frameLeft, pM, pM1, pM2 }) {
   const frame1Style = useMemo(() => {
     return {
       ...getStyleValue('top', frameTop),
@@ -32,7 +33,7 @@ const Frame1 = ({ frameTop, frameLeft, pM, pM1, pM2 }) => {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   date2Position: {
@@ -88,5 +89,3 @@ const styles = StyleSheet.create({
     position: 'absolute'
   }
 });
-
-export default Frame1;

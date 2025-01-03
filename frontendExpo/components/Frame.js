@@ -6,7 +6,14 @@ const getStyleValue = (key, value) => {
   if (value === undefined) return;
   return { [key]: value === 'unset' ? undefined : value };
 };
-const Frame = ({ frameTop, backgroundBorderColor, pM, pMColor, pM1, pM2 }) => {
+export default function Frame({
+  frameTop,
+  backgroundBorderColor,
+  pM,
+  pMColor,
+  pM1,
+  pM2
+}) {
   const frameStyle = useMemo(() => {
     return { ...getStyleValue('top', frameTop) };
   }, [frameTop]);
@@ -39,7 +46,7 @@ const Frame = ({ frameTop, backgroundBorderColor, pM, pMColor, pM1, pM2 }) => {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   frameFlexBox: {
@@ -100,5 +107,3 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   }
 });
-
-export default Frame;

@@ -3,21 +3,19 @@ import { StyleSheet, View, Text } from 'react-native';
 import Recommendation from '../components2/Recommendation.jsx';
 import LFGCard from '../components2/LFGCard.jsx';
 import Header from '../components2/Header.jsx';
-import Payment from '../components2/Payment.jsx';
 import { Border, Color, FontSize, FontFamily } from '../GlobalStyles.js';
 
 export default function Home() {
   return (
     <>
-    {/* // <View style={styles.home}>
-    //   <Header />
-    //   <Recommendation />
-    //   <Text style={[styles.headline, styles.headlineFlexBox]}>
-    //     Matches near you
-    //   </Text>
-    //   <LFGCard groupViewTop={466} groupViewLeft={10} />
-    // </View> */}
-    <Payment/>
+      <View style={styles.home}>
+        <Header />
+        <Recommendation />
+        <Text style={[styles.headline, styles.headlineFlexBox]}>
+          Matches near you
+        </Text>
+        <LFGCard groupViewTop={466} groupViewLeft={10} />
+      </View>
     </>
   );
 }
@@ -38,19 +36,6 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     letterSpacing: 0,
     position: 'absolute'
-  },
-  title2: {
-    height: '3%',
-    marginLeft: -32,
-    top: '6.33%',
-    width: 63,
-    fontFamily: FontFamily.secondaryNotActive,
-    lineHeight: 22,
-    left: '50%',
-    textAlign: 'left',
-    color: Color.colorBlack,
-    letterSpacing: 0,
-    fontSize: FontSize.title2_size
   },
   home: {
     backgroundColor: Color.surface,
