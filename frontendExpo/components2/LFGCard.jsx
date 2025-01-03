@@ -3,17 +3,19 @@ import { Image } from 'expo-image';
 import { StyleSheet, Text, View } from 'react-native';
 import { Color, FontFamily, FontSize, Border, Padding } from '../GlobalStyles';
 
+/**
+ * @param {string} key
+ * @param {string | number | undefined} value
+ */
 function getStyleValue(key, value) {
   if (value === undefined) return;
   return { [key]: value === 'unset' ? undefined : value };
 }
 
 /**
- *
  * @param {object} props
  * @param {number} [props.groupViewTop]
  * @param {number} [props.groupViewLeft]
- * @returns
  */
 export default function LFGCard({ groupViewTop, groupViewLeft }) {
   const groupViewStyle = useMemo(() => {

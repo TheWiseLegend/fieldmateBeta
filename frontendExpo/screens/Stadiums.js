@@ -8,10 +8,13 @@ import { Color, Border } from '../GlobalStyles.js';
 
 export default function Stadiums() {
   return (
-    <View className="stadiums screen" style={styles.stadiums}>
+    <View id="stadiums-screen" className="screen" style={styles.stadiums}>
       <Header />
+
       <Filters />
+
       <Filters2 />
+
       <View style={styles.frameParent}>
         <StadiumCard />
       </View>

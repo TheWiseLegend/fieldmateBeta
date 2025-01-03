@@ -3,6 +3,9 @@ import { Image } from 'expo-image';
 import { StyleSheet, View, Text } from 'react-native';
 import { Color, Border, FontFamily, FontSize } from '../GlobalStyles.js';
 
+/**
+ * @param {object} props
+ */
 export default function Filters({}) {
   return (
     <View
@@ -14,12 +17,15 @@ export default function Filters({}) {
         contentFit="cover" // @ts-expect-error
         source={require('../assets/commit.png')}
       />
+
       <Text style={[styles.filter, styles.sortTypo]}>Filter</Text>
+
       <Image
         style={[styles.descendingSortingIcon, styles.iconLayout]}
         contentFit="cover" // @ts-expect-error
         source={require('../assets/descending-sorting.png')}
       />
+
       <Text style={[styles.sort, styles.sortTypo]}>Sort</Text>
     </View>
   );

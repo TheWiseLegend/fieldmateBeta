@@ -10,24 +10,30 @@ import {
   Padding
 } from '../GlobalStyles.js';
 
-export default function DateSelector() {
+/**
+ * @param {object} props
+ */
+export default function DateSelector({}) {
   return (
     <>
       <View style={styles.calendarDates}>
         <Text style={[styles.x, styles.mTypo]}>All Dates</Text>
+
         <Text style={[styles.m1, styles.mTypo]}>Clear All</Text>
       </View>
+
       <View style={styles.month}>
         <View style={[styles.month1, styles.month1FlexBox]}>
           <Text style={styles.subtitle3}>November 2021</Text>
+
           <Image
             style={styles.icon}
-            contentFit="cover"
-            // @ts-expect-error
+            contentFit="cover" // @ts-expect-error
             source={require('../assets/icon.png')}
           />
         </View>
       </View>
+
       <WeekdaysDatePicker />
     </>
   );

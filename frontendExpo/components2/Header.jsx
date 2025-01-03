@@ -4,6 +4,9 @@ import { Image } from 'expo-image';
 import { StyleSheet } from 'react-native';
 import { Padding, Border } from '../GlobalStyles';
 
+/**
+ * @param {object} props
+ */
 export default function Header({}) {
   return (
     <>
@@ -14,12 +17,14 @@ export default function Header({}) {
         style={[styles.burgerButton, styles.menuLayout]}
         onPress={() => alert('This is a button!')}
       />
+
       <Image
         style={styles.doorbellIcon}
         contentFit="cover"
         // @ts-expect-error
         source={require('../assets/doorbell.png')}
       />
+
       <Image
         style={[styles.dotIcon, styles.iconLayout1]}
         contentFit="cover"

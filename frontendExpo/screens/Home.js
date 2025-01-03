@@ -8,12 +8,15 @@ import { Border, Color, FontSize, FontFamily } from '../GlobalStyles.js';
 export default function Home() {
   return (
     <>
-      <View style={styles.home}>
+      <View id="home-screen" className="screen" style={styles.home}>
         <Header />
+
         <Recommendation />
+
         <Text style={[styles.headline, styles.headlineFlexBox]}>
           Matches near you
         </Text>
+
         <LFGCard groupViewTop={466} groupViewLeft={10} />
       </View>
     </>

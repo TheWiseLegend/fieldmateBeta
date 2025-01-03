@@ -3,11 +3,21 @@
 // import { StyleSheet, Text, View } from 'react-native';
 // import { Color, FontFamily, FontSize, Border, Padding } from '../GlobalStyles';
 
-// const getStyleValue = (key, value) => {
+// /**
+//  * @param {string} key
+//  * @param {string | number | undefined} value
+//  */
+// function getStyleValue(key, value) {
 //   if (value === undefined) return;
 //   return { [key]: value === 'unset' ? undefined : value };
-// };
-// const GroupComponent = ({ groupViewTop, groupViewLeft }) => {
+// }
+
+// /**
+//  * @param {object} props
+//  * @param {string} props.groupViewTop
+//  * @param {string} props.groupViewLeft
+//  */
+// export default function GroupComponent({ groupViewTop, groupViewLeft }) {
 //   const groupViewStyle = useMemo(() => {
 //     return {
 //       ...getStyleValue('top', groupViewTop),
@@ -19,34 +29,38 @@
 //     <View style={[styles.vectorParent, groupViewStyle]}>
 //       <Image
 //         style={[styles.instanceChild, styles.instanceLayout]}
-//         contentFit="cover"
-//         // @ts-expect-error
+//         contentFit="cover" // @ts-expect-error
 //         source={require('../assets/rectangle-51.png')}
 //       />
+
 //       <Text style={styles.rm}>30.00 RM</Text>
-//       <Text style={[styles.aug4, styles.aug4Typo]}>{`20 Aug - 4 Sep
-// `}</Text>
+
+//       <Text style={[styles.aug4, styles.aug4Typo]}>20 Aug - 4 Sep</Text>
+
 //       <Text style={[styles.playersPx, styles.aug4Typo]}>Players px</Text>
+
 //       <Image
 //         style={[styles.vectorIcon, styles.instanceLayout]}
-//         contentFit="cover"
-//         // @ts-expect-error
+//         contentFit="cover" // @ts-expect-error
 //         source={require('../assets/vector3.png')}
 //       />
+
 //       <Image
 //         style={[styles.instanceItem, styles.instanceLayout]}
-//         contentFit="cover"
-//         // @ts-expect-error
+//         contentFit="cover" // @ts-expect-error
 //         source={require('../assets/group-686.png')}
 //       />
-//       <Text style={styles.title}>{`Name `}</Text>
+
+//       <Text style={styles.title}>Name</Text>
+
 //       <View style={styles.joinUsWrapper}>
 //         <Text style={styles.joinUs}>Join us</Text>
 //       </View>
+
 //       <Text style={[styles.location, styles.aug4Typo]}>Location</Text>
 //     </View>
 //   );
-// };
+// }
 
 // const styles = StyleSheet.create({
 //   instanceLayout: {
@@ -166,5 +180,3 @@
 //     position: 'absolute'
 //   }
 // });
-
-// export default GroupComponent;

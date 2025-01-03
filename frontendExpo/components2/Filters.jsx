@@ -3,10 +3,14 @@ import { Image } from 'expo-image';
 import { StyleSheet, View, Text } from 'react-native';
 import { Color, Border, FontFamily, FontSize } from '../GlobalStyles.js';
 
+/**
+ * @param {object} props
+ */
 export default function Filters({}) {
   return (
     <>
       <View style={[styles.matchesChild5, styles.rectangleViewLayout]} />
+
       <Image
         style={[styles.glyphsTabBarSearch1, styles.glyphsLayout]}
         contentFit="cover" // @ts-expect-error
@@ -17,21 +21,25 @@ export default function Filters({}) {
         contentFit="cover" // @ts-expect-error
         source={require('../assets/arrow.png')}
       />
+
       <Text style={[styles.selectState, styles.allCitesTypo]}>
         Select State
       </Text>
 
       <View style={[styles.rectangleView, styles.rectangleViewLayout]} />
+
       <Image
         style={[styles.glyphsTabBarSearch, styles.glyphsLayout]}
         contentFit="cover" // @ts-expect-error
         source={require('../assets/search-crosshairs.png')}
       />
+
       <Image
         style={[styles.vectorIcon3, styles.vectorIconLayout]}
         contentFit="cover" // @ts-expect-error
         source={require('../assets/arrow.png')}
       />
+
       <Text style={[styles.allCites, styles.allCitesTypo]}>Select City</Text>
     </>
   );

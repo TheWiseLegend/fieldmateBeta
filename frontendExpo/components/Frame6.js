@@ -1,29 +1,35 @@
-import * as React from 'react';
+import React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { Image } from 'expo-image';
 import { Color, FontSize, FontFamily, Border } from '../GlobalStyles';
 
-const Frame6 = () => {
+/**
+ * @param {object} props
+ */
+export default function Frame6({}) {
   return (
     <View style={styles.frame}>
       <View style={styles.date}>
         <Text style={styles.duration}>Duration</Text>
+
         <View style={[styles.date1, styles.dateLayout]}>
           <Image
             style={styles.backgroundLayout}
-            contentFit="cover"
+            contentFit="cover" // @ts-expect-error
             source={require('../assets/background.png')}
           />
+
           <Text style={[styles.min, styles.minTypo]}>60 min</Text>
         </View>
       </View>
+
       <View style={[styles.date2, styles.dateLayout]}>
         <View style={[styles.background, styles.backgroundLayout]} />
         <Text style={[styles.min1, styles.minTypo]}>120 min</Text>
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   dateLayout: {
@@ -97,5 +103,3 @@ const styles = StyleSheet.create({
     position: 'absolute'
   }
 });
-
-export default Frame6;

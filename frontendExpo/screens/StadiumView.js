@@ -14,7 +14,11 @@ import { FontFamily, Color, Border } from '../GlobalStyles.js';
  */
 export default function StadiumView({ name = 'Stadium Name' }) {
   return (
-    <View style={styles.stadiumView}>
+    <View
+      id="stadium-view-screen"
+      className="screen"
+      style={styles.stadiumView}
+    >
       <Header />
 
       <Image

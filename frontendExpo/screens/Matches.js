@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import WeekdaysDatePicker from '../components2/WeekdaysDatePicker.jsx';
 import LFGCard from '../components2/LFGCard.jsx';
 import Header from '../components2/Header.jsx';
@@ -9,7 +9,7 @@ import { Color, Border } from '../GlobalStyles.js';
 
 export default function Matches() {
   return (
-    <View className="matches screen" style={styles.matches}>
+    <View id="matches-screen" className="screen" style={styles.matches}>
       <Header />
 
       <Filters />

@@ -9,12 +9,16 @@ import {
   Gap
 } from '../GlobalStyles.js';
 
-export default function FrameComponent() {
+/**
+ * @param {object} props
+ */
+export default function FrameComponent({}) {
   return (
     <View style={styles.frameParent}>
       <View style={styles.frame}>
         <View style={styles.frame1}>
           <Text style={styles.openingTimes}>Opening Times:</Text>
+
           <Text style={[styles.pm1100Pm, styles.pm1100PmTypo]}>
             04:00 PM -11:00 PM
           </Text>

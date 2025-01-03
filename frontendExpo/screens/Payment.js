@@ -1,27 +1,29 @@
-import * as React from 'react';
+import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Image } from 'expo-image';
-import { LinearGradient } from 'expo-linear-gradient';
 import Header from '../components2/Header.jsx';
 import { Color, Border, FontSize, FontFamily } from '../GlobalStyles.js';
 
 export default function PaymentSection() {
   return (
-    <View style={styles.paymentSection}>
+    <View id="payment-screen" className="screen" style={styles.paymentSection}>
       <Header />
-      <View style={styles.paymentSectionChild} />
+
+      {/* <View style={styles.paymentSectionChild} />
       <View style={[styles.paymentSectionItem, styles.paymentShadowBox]} />
-      <View style={[styles.paymentSectionInner, styles.paymentShadowBox]} />
+      <View style={[styles.paymentSectionInner, styles.paymentShadowBox]} /> */}
+
       <Text style={styles.paymentMethod}>Payment Method</Text>
       <Image
         style={styles.ellipseIcon}
         contentFit="cover" // @ts-expect-error
-        source={require('../assets/ellipse-10.png')}
+        source={require('../assets/circle.png')}
       />
+
       <Image
         style={[styles.vectorIcon, styles.iconLayout]}
         contentFit="cover" // @ts-expect-error
-        source={require('../assets/vector7.png')}
+        source={require('../assets/arrow-left2.png')}
       />
       <Text style={styles.confirmBook}>{`Confirm & Book`}</Text>
       <View style={styles.primaryButton}>
@@ -34,41 +36,41 @@ export default function PaymentSection() {
         source={require('../assets/bg.png')}
       />
       <Text style={[styles.pm900, styles.pm900Typo]}>8:00 pm - 9:00 pm</Text>
+
       <Text style={[styles.bookingDate, styles.bookingTypo]}>Booking Date</Text>
       <Image
         style={[styles.vectorIcon1, styles.iconLayout]}
         contentFit="cover" // @ts-expect-error
         source={require('../assets/vector8.png')}
       />
-      <LinearGradient
-        style={styles.rectangleLineargradient}
-        locations={[1]}
-        colors={['rgba(119, 119, 119, 0.18)']}
-      />
+
       <Text style={styles.stadiumName}>{`Stadium Name `}</Text>
-      <Text
-        style={[styles.bookingTime, styles.bookingTypo]}
-      >{`Booking Time `}</Text>
+      <Text style={[styles.bookingTime, styles.bookingTypo]}>Booking Time</Text>
+
       <Text style={[styles.december2024, styles.pm900Typo]}>
         09 December 2024
       </Text>
+
       <Text style={[styles.cashOnSite, styles.qrTypo]}>Cash (On site)</Text>
       <Image
         style={[styles.paymentSectionChild1, styles.paymentChildLayout]}
         contentFit="cover" // @ts-expect-error
-        source={require('../assets/ellipse-11.png')}
+        source={require('../assets/circle-outline.png')}
       />
+
       <Image
         style={[styles.cashIcon, styles.cashPosition]}
         contentFit="cover" // @ts-expect-error
         source={require('../assets/cash.png')}
       />
       <Text style={[styles.qr, styles.qrPosition]}>QR</Text>
+
       <Image
         style={[styles.paymentSectionChild2, styles.paymentChildLayout]}
         contentFit="cover" // @ts-expect-error
-        source={require('../assets/ellipse-11.png')}
+        source={require('../assets/circle-outline.png')}
       />
+
       <Image
         style={[styles.frameIcon, styles.qrPosition]}
         contentFit="cover" // @ts-expect-error
@@ -77,35 +79,37 @@ export default function PaymentSection() {
       <Text style={[styles.orderDetails, styles.textPosition]}>
         Order Details
       </Text>
+
       <Text style={[styles.totalCart, styles.totalCartPosition]}>Subtotal</Text>
       <Text style={[styles.text, styles.textPosition]}>$ 80 RM</Text>
       <Text style={[styles.cancellationPolicy, styles.upTo24Layout]}>
         CANCELLATION POLICY
       </Text>
+
       <Text style={[styles.upTo24, styles.upTo24Layout]}>Up to 24 Hours</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  paymentShadowBox: {
-    height: 59,
-    width: 393,
-    borderWidth: 1,
-    borderColor: Color.colorSilver_200,
-    borderStyle: 'solid',
-    borderRadius: Border.br_lgi,
-    shadowOpacity: 1,
-    elevation: 4,
-    shadowRadius: 4,
-    shadowOffset: {
-      width: 0,
-      height: 4
-    },
-    shadowColor: 'rgba(0, 0, 0, 0.25)',
-    position: 'absolute',
-    backgroundColor: Color.surface
-  },
+  // paymentShadowBox: {
+  //   height: 59,
+  //   width: 393,
+  //   borderWidth: 1,
+  //   borderColor: Color.colorSilver_200,
+  //   borderStyle: 'solid',
+  //   borderRadius: Border.br_lgi,
+  //   shadowOpacity: 1,
+  //   elevation: 4,
+  //   shadowRadius: 4,
+  //   shadowOffset: {
+  //     width: 0,
+  //     height: 4
+  //   },
+  //   shadowColor: 'rgba(0, 0, 0, 0.25)',
+  //   position: 'absolute',
+  //   backgroundColor: Color.surface
+  // },
   iconLayout: {
     maxHeight: '100%',
     position: 'absolute'
@@ -177,14 +181,14 @@ const styles = StyleSheet.create({
     borderColor: Color.colorSilver_200,
     borderStyle: 'solid',
     borderRadius: Border.br_lgi,
-    shadowOpacity: 1,
-    elevation: 4,
-    shadowRadius: 4,
-    shadowOffset: {
-      width: 0,
-      height: 4
-    },
-    shadowColor: 'rgba(0, 0, 0, 0.25)',
+    // shadowOpacity: 1,
+    // elevation: 4,
+    // shadowRadius: 4,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 4
+    // },
+    // shadowColor: 'rgba(0, 0, 0, 0.25)',
     left: 17,
     position: 'absolute',
     backgroundColor: Color.surface
@@ -293,15 +297,6 @@ const styles = StyleSheet.create({
     maxHeight: '100%',
     overflow: 'hidden'
   },
-  rectangleLineargradient: {
-    top: 141,
-    left: 22,
-    borderRadius: Border.br_3xs,
-    width: 62,
-    height: 65,
-    backgroundColor: 'transparent',
-    position: 'absolute'
-  },
   stadiumName: {
     height: '5.58%',
     width: '50.7%',
@@ -391,7 +386,7 @@ const styles = StyleSheet.create({
   },
   cancellationPolicy: {
     top: 702,
-    textDecoration: 'underline',
+    // textDecoration: 'underline',
     color: Color.blue,
     width: 187,
     height: 17,

@@ -8,16 +8,22 @@ import {
   Padding
 } from '../GlobalStyles.js';
 
-export default function FrameComponent1() {
+/**
+ * @param {object} props
+ */
+export default function FrameComponent1({}) {
   return (
     <View style={styles.frameWrapper}>
       <View style={[styles.frame, styles.frameFlexBox]}>
         <View style={[styles.frame1, styles.frameFlexBox]}>
           <View style={styles.frameChild} />
+
           <View style={styles.createMatchButton}>
             <Text style={[styles.book, styles.bookLayout]}>Book</Text>
           </View>
+
           <Text style={[styles.rm, styles.rmFlexBox]}>30.00 RM</Text>
+
           <Text style={[styles.startingFrom, styles.rmFlexBox]}>
             Starting from
           </Text>

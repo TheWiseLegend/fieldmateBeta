@@ -2,11 +2,23 @@ import React, { useMemo } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Border, Color, FontSize, FontFamily } from '../GlobalStyles.js';
 
+/**
+ * @param {string} key
+ * @param {string | number | undefined} value
+ */
 function getStyleValue(key, value) {
   if (value === undefined) return;
   return { [key]: value === 'unset' ? undefined : value };
 }
 
+/**
+ * @param {object} props
+ * @param {string} props.pM
+ * @param {string} props.pM1
+ * @param {string} props.pM2
+ * @param {number} [props.frameTop]
+ * @param {number} [props.frameLeft]
+ */
 export default function Frame1({ frameTop, frameLeft, pM, pM1, pM2 }) {
   const frame1Style = useMemo(() => {
     return {
@@ -21,11 +33,13 @@ export default function Frame1({ frameTop, frameLeft, pM, pM1, pM2 }) {
         <View style={[styles.background, styles.date2Position]} />
         <Text style={styles.pm}>{pM}</Text>
       </View>
+
       <View style={styles.date1}>
         <View style={styles.date2Position}>
           <View style={[styles.background, styles.date2Position]} />
           <Text style={styles.pm}>{pM1}</Text>
         </View>
+
         <View style={styles.date3}>
           <View style={[styles.background, styles.date2Position]} />
           <Text style={styles.pm}>{pM2}</Text>
