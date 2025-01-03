@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import {
   Border,
@@ -43,14 +43,7 @@ const styles = StyleSheet.create({
   frameChild: {
     top: 0,
     left: 0,
-    shadowColor: 'rgba(0, 0, 0, 0.25)',
-    shadowOffset: {
-      width: 0,
-      height: 4
-    },
-    shadowRadius: 4,
     elevation: 4,
-    shadowOpacity: 1,
     borderRadius: Border.br_3xs,
     backgroundColor: Color.surface,
     borderStyle: 'solid',
