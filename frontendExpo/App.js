@@ -1,4 +1,6 @@
 import React from 'react';
+import "@/global.css";
+import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import { useFonts } from 'expo-font';
 import Footer from './components2/Footer';
 
@@ -18,6 +20,6 @@ const App = () => {
 
   if (!fontsLoaded && !error) return null;
 
-  return <Footer />;
+  return <GluestackUIProvider mode="light"><Footer /></GluestackUIProvider>;
 };
 export default App;
