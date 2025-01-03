@@ -1,20 +1,23 @@
-import * as React from "react";
-import { Image } from "expo-image";
-import { StyleSheet, Text, View } from "react-native";
-import Frame7 from "../components/Frame7";
-import FrameComponent from "../components/FrameComponent";
-import FrameComponent1 from "../components/FrameComponent1";
-import ButtomFrame from "../components/ButtomFrame";
-import { FontFamily, Border, FontSize, Color } from "../GlobalStyles";
+import * as React from 'react';
+import { Image } from 'expo-image';
+import { StyleSheet, Text, View } from 'react-native';
+import Frame7 from '../components/Frame7.js';
+import FrameComponent from '../components/FrameComponent.js';
+import FrameComponent1 from '../components/FrameComponent1.js';
+import ButtomFrame from '../components/ButtomFrame.js';
+import Header from '../components2/Header.jsx';
+import { FontFamily, Border, FontSize, Color } from '../GlobalStyles.js';
 
-const StadiumView = () => {
+export default function StadiumView() {
   return (
     <View style={styles.stadiumView}>
+      <Header />
       <View style={[styles.bookingStadiums, styles.frame3FlexBox]}>
         <Image
           style={styles.image2Icon}
           contentFit="cover"
-          source={require("../assets/image-2.png")}
+          // @ts-expect-error
+          source={require('../assets/stadium-2.png')}
         />
         <View style={styles.frame}>
           <Text style={styles.facilities}>Facilities</Text>
@@ -31,7 +34,8 @@ const StadiumView = () => {
               <Image
                 style={[styles.groupIcon, styles.groupIconLayout]}
                 contentFit="cover"
-                source={require("../assets/group.png")}
+                // @ts-expect-error
+                source={require('../assets/group.png')}
               />
               <Text style={[styles.seeAllReviews, styles.textLayout]}>
                 See all reviews
@@ -54,41 +58,36 @@ const StadiumView = () => {
         </View>
         <FrameComponent />
         <FrameComponent1 />
-        <Image
-          style={[styles.bookingStadiumsChild, styles.groupIconLayout]}
-          contentFit="cover"
-          source={require("../assets/vector-2.png")}
-        />
       </View>
       <ButtomFrame buttomFrameMarginTop={-18} />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   frame3FlexBox: {
-    alignSelf: "stretch",
-    overflow: "hidden",
+    alignSelf: 'stretch',
+    overflow: 'hidden'
   },
   stadiumNameTypo: {
     fontFamily: FontFamily.openSansBold,
-    fontWeight: "700",
+    fontWeight: '700'
   },
   groupIconLayout: {
-    maxHeight: "100%",
-    position: "absolute",
+    maxHeight: '100%',
+    position: 'absolute'
   },
   textLayout: {
-    height: "88.89%",
+    height: '88.89%',
     letterSpacing: 0,
-    textAlign: "left",
+    textAlign: 'left',
     lineHeight: 22,
-    position: "absolute",
+    position: 'absolute'
   },
   dateFlexBox: {
-    justifyContent: "space-between",
-    flexDirection: "row",
-    alignItems: "center",
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   image2Icon: {
     top: 231,
@@ -96,26 +95,26 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_9xs,
     width: 195,
     height: 120,
-    display: "none",
-    position: "absolute",
+    display: 'none',
+    position: 'absolute'
   },
   facilities: {
     fontSize: FontSize.buttonText_size,
-    fontWeight: "500",
+    fontWeight: '500',
     fontFamily: FontFamily.poppinsMedium,
     color: Color.darkGray,
     width: 169,
     height: 25,
-    textAlign: "left",
-    lineHeight: 22,
+    textAlign: 'left',
+    lineHeight: 22
   },
   frame: {
     top: 406,
     left: 33,
     width: 398,
-    justifyContent: "center",
-    position: "absolute",
-    overflow: "hidden",
+    justifyContent: 'center',
+    position: 'absolute',
+    overflow: 'hidden'
   },
   stadiumName: {
     fontSize: 30,
@@ -124,108 +123,106 @@ const styles = StyleSheet.create({
     color: Color.colorBlack,
     letterSpacing: 0,
     fontFamily: FontFamily.openSansBold,
-    fontWeight: "700",
-    textAlign: "left",
-    lineHeight: 22,
+    fontWeight: '700',
+    textAlign: 'left',
+    lineHeight: 22
   },
   frame1: {
     top: 299,
     left: 21,
     width: 410,
-    justifyContent: "center",
-    position: "absolute",
-    overflow: "hidden",
+    justifyContent: 'center',
+    position: 'absolute',
+    overflow: 'hidden'
   },
   groupIcon: {
-    height: "92.59%",
-    width: "7.16%",
-    top: "0%",
-    right: "92.84%",
-    bottom: "7.41%",
-    left: "0%",
-    maxWidth: "100%",
-    overflow: "hidden",
+    height: '92.59%',
+    width: '7.16%',
+    top: '0%',
+    right: '92.84%',
+    bottom: '7.41%',
+    left: '0%',
+    maxWidth: '100%',
+    overflow: 'hidden'
   },
   seeAllReviews: {
-    width: "49.35%",
-    top: "11.11%",
-    left: "50.65%",
+    width: '49.35%',
+    top: '11.11%',
+    left: '50.65%',
     fontSize: FontSize.secondaryNotActive_size,
     color: Color.colorRoyalblue_100,
     fontFamily: FontFamily.openSansBold,
-    fontWeight: "700",
+    fontWeight: '700'
   },
   text: {
-    width: "34.84%",
-    top: "3.7%",
-    left: "7.74%",
+    width: '34.84%',
+    top: '3.7%',
+    left: '7.74%',
     fontSize: FontSize.size_xl,
     fontFamily: FontFamily.secondaryNotActive,
-    color: Color.colorBlack,
+    color: Color.colorBlack
   },
   frame3: {
     height: 27,
-    overflow: "hidden",
+    overflow: 'hidden'
   },
   frameWrapper: {
     width: 310,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   frame2: {
     top: 341,
     left: 20,
     width: 411,
-    justifyContent: "center",
-    position: "absolute",
-    overflow: "hidden",
+    justifyContent: 'center',
+    position: 'absolute',
+    overflow: 'hidden'
   },
   background: {
     borderRadius: Border.br_7xs,
-    borderStyle: "solid",
+    borderStyle: 'solid',
     borderColor: Color.colorLightgray,
     borderWidth: 1,
     width: 62,
-    height: 54,
+    height: 54
   },
   date1: {
-    width: 167,
+    width: 167
   },
   date: {
-    width: 260,
+    width: 260
   },
   frame5: {
     gap: 30,
-    flexDirection: "row",
+    flexDirection: 'row',
     height: 54,
-    overflow: "hidden",
-    alignSelf: "stretch",
-    alignItems: "center",
+    overflow: 'hidden',
+    alignSelf: 'stretch',
+    alignItems: 'center'
   },
   frame4: {
     top: 432,
     left: 31,
     width: 400,
-    justifyContent: "center",
-    position: "absolute",
-    overflow: "hidden",
+    justifyContent: 'center',
+    position: 'absolute',
+    overflow: 'hidden'
   },
   bookingStadiumsChild: {
     top: 295,
     left: 61,
-    width: 311,
+    width: 311
   },
   bookingStadiums: {
     borderRadius: Border.br_mini,
     backgroundColor: Color.surface,
     height: 932,
-    overflow: "hidden",
+    overflow: 'hidden'
   },
   stadiumView: {
     flex: 1,
-    width: "100%",
-    alignItems: "center",
-  },
+    width: '100%',
+    alignItems: 'center'
+  }
 });
-
-export default StadiumView;

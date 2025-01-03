@@ -1,159 +1,103 @@
 import React from 'react';
 import { Image } from 'expo-image';
 import { StyleSheet, View, Text } from 'react-native';
-
+import WeekdaysDatePicker from '../components2/WeekdaysDatePicker.jsx';
 import {
-    Color,
-    Border,
-    FontFamily,
-    FontSize,
-    Padding,
-    Gap
-} from '../GlobalStyles';
+  Color,
+  Border,
+  FontFamily,
+  FontSize,
+  Padding
+} from '../GlobalStyles.js';
 
 export default function DateSelector() {
-    return (
-        <>
-            <View style={styles.calendarDate}>
-                <Text style={[styles.x, styles.mTypo]}>All Dates</Text>
-                <Text style={[styles.m1, styles.mTypo]}>Clear All</Text>
-            </View>
-            <View style={styles.month}>
-                <View style={[styles.month1, styles.month1FlexBox]}>
-                    <Text style={styles.subtitle3}>November 2021</Text>
-                    <Image
-                        style={styles.icon}
-                        contentFit="cover"
-                        source={require('../assets/icon.png')}
-                    />
-                </View>
-            </View>
-            <View style={styles.weekdaysDatePicker}>
-                <View style={styles.calendarDates}>
-                    <Text style={styles.x}>M</Text>
-                </View>
-                <View style={styles.calendarDates}>
-                    <Text style={styles.x}>T</Text>
-                </View>
-                <View style={styles.calendarDates}>
-                    <Text style={styles.x}>W</Text>
-                </View>
-                <View style={styles.calendarDates}>
-                    <Text style={styles.x}>T</Text>
-                </View>
-                <View style={styles.calendarDates}>
-                    <Text style={styles.x}>F</Text>
-                </View>
-                <View style={styles.calendarDates}>
-                    <Text style={styles.x}>S</Text>
-                </View>
-                <View style={styles.calendarDates}>
-                    <Text style={styles.x}>S</Text>
-                </View>
-            </View>
-            
-        </>
-    );
+  return (
+    <>
+      <View style={styles.calendarDates}>
+        <Text style={[styles.x, styles.mTypo]}>All Dates</Text>
+        <Text style={[styles.m1, styles.mTypo]}>Clear All</Text>
+      </View>
+      <View style={styles.month}>
+        <View style={[styles.month1, styles.month1FlexBox]}>
+          <Text style={styles.subtitle3}>November 2021</Text>
+          <Image
+            style={styles.icon}
+            contentFit="cover"
+            source={require('../assets/icon.png')}
+          />
+        </View>
+      </View>
+      <WeekdaysDatePicker />
+    </>
+  );
 }
 
 const styles = StyleSheet.create({
-    x: {
-        width: 63
-    },
-    icon: {
-        width: 32,
-        height: 32
-    },
-    subtitle3: {
-        fontSize: FontSize.size_lg_6,
-        lineHeight: 32,
-        fontWeight: '500',
-        fontFamily: FontFamily.robotoMedium,
-        color: Color.onSurfaceMediumEmphasis,
-        textAlign: 'left',
-        letterSpacing: 0
-    },
-    mTypo: {
-        height: 53,
-        display: 'flex',
-        color: Color.colorRoyalblue_100,
-        fontFamily: FontFamily.caption,
-        lineHeight: 21,
-        letterSpacing: 1,
-        fontSize: FontSize.size_base_9,
-        justifyContent: 'center',
-        textAlign: 'center',
-        alignItems: 'center'
-    },
-    month1FlexBox: {
-        justifyContent: 'space-between',
-        flexDirection: 'row'
-    },
-    month1: {
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        flex: 1
-    },
-    month: {
-        top: 234,
-        left: -4,
-        width: 436,
-        paddingLeft: 32,
-        paddingTop: 21,
-        paddingRight: 48,
-        paddingBottom: 16,
-        justifyContent: 'center',
-        borderRadius: Border.br_5xs,
-        alignItems: 'center',
-        flexDirection: 'row',
-        position: 'absolute',
-        backgroundColor: Color.surface
-    },
-    m1: {
-        width: 96
-    },
-    calendarDates: {
-        top: 184,
-        left: -8,
-        width: 440,
-        paddingHorizontal: 26,
-        paddingVertical: Padding.p_5xs,
-        borderRadius: Border.br_5xs,
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        position: 'absolute',
-        backgroundColor: Color.surface
-    },
-    m: {
-        height: '100%',
-        width: '100%',
-        top: '0%',
-        left: '0%',
-        fontSize: FontSize.caption_size,
-        letterSpacing: 0,
-        lineHeight: 16,
-        fontFamily: FontFamily.caption,
-        color: Color.onSurfaceMediumEmphasis,
-        textAlign: 'center',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'absolute'
-    },
-    calendarDate: {
-        width: 53,
-        height: 53
-    },
-    weekdaysDatePicker: {
-        top: 297,
-        left: -2,
-        borderRadius: Border.br_5xs,
-        backgroundColor: Color.surface,
-        width: 434,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingHorizontal: 16,
-        paddingVertical: 0,
-        position: 'absolute'
-    }
+  x: {
+    width: 63
+  },
+  icon: {
+    width: 32,
+    height: 32
+  },
+  subtitle3: {
+    fontSize: FontSize.size_lg_6,
+    lineHeight: 32,
+    fontWeight: '500',
+    fontFamily: FontFamily.robotoMedium,
+    color: Color.onSurfaceMediumEmphasis,
+    textAlign: 'left',
+    letterSpacing: 0
+  },
+  mTypo: {
+    height: 53,
+    display: 'flex',
+    color: Color.colorRoyalblue_100,
+    fontFamily: FontFamily.caption,
+    lineHeight: 21,
+    letterSpacing: 1,
+    fontSize: FontSize.size_base_9,
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: 'center'
+  },
+  month1FlexBox: {
+    justifyContent: 'space-between',
+    flexDirection: 'row'
+  },
+  month1: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    flex: 1
+  },
+  month: {
+    top: 234,
+    left: -4,
+    width: 436,
+    paddingLeft: 32,
+    paddingTop: 21,
+    paddingRight: 48,
+    paddingBottom: 16,
+    justifyContent: 'center',
+    borderRadius: Border.br_5xs,
+    alignItems: 'center',
+    flexDirection: 'row',
+    position: 'absolute',
+    backgroundColor: Color.surface
+  },
+  m1: {
+    width: 96
+  },
+  calendarDates: {
+    top: 184,
+    left: -8,
+    width: 440,
+    paddingHorizontal: 26,
+    paddingVertical: Padding.p_5xs,
+    borderRadius: Border.br_5xs,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    position: 'absolute',
+    backgroundColor: Color.surface
+  }
 });

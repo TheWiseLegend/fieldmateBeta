@@ -1,14 +1,14 @@
 {
-    "recommendations": [
-        "idered.npm",
-        "redhat.vscode-yaml",
-        "usernamehw.errorlens",
-        "gruntfuggly.todo-tree",
-        "esbenp.prettier-vscode",
-        "yoavbls.pretty-ts-errors",
-        "yzhang.markdown-all-in-one",
-        "hbenl.vscode-mocha-test-adapter",
-        "christian-kohler.npm-intellisense",
-        "christian-kohler.path-intellisense"
-    ]
+  "recommendations": [
+    "idered.npm",
+    "redhat.vscode-yaml",
+    "usernamehw.errorlens",
+    "gruntfuggly.todo-tree",
+    "esbenp.prettier-vscode",
+    "yoavbls.pretty-ts-errors",
+    "yzhang.markdown-all-in-one",
+    "hbenl.vscode-mocha-test-adapter",
+    "christian-kohler.npm-intellisense",
+    "christian-kohler.path-intellisense"
+  ]
 }

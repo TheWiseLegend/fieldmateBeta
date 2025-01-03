@@ -1,47 +1,45 @@
-import * as React from "react";
-import { Image } from "expo-image";
-import { StyleSheet, View } from "react-native";
-import { Border } from "../GlobalStyles";
+import * as React from 'react';
+import { Image } from 'expo-image';
+import { StyleSheet, View } from 'react-native';
+import { Border } from '../GlobalStyles.js';
 
-const Frame7 = () => {
+export default function Frame7() {
   return (
     <View style={styles.frame}>
       <View style={[styles.frame1, styles.frame1FlexBox]}>
         <Image
           style={[styles.image5Icon, styles.frame1FlexBox]}
           contentFit="cover"
-          source={require("../assets/image-51.png")}
+          source={require('../assets/image-51.png')}
         />
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   frame1FlexBox: {
-    alignSelf: "stretch",
-    overflow: "hidden",
+    alignSelf: 'stretch',
+    overflow: 'hidden'
   },
   image5Icon: {
     borderBottomRightRadius: Border.br_10xs,
     borderBottomLeftRadius: Border.br_10xs,
-    maxWidth: "100%",
+    maxWidth: '100%',
     height: 244,
-    width: "100%",
-    marginTop: -3,
+    width: '100%',
+    marginTop: -3
   },
   frame1: {
-    alignItems: "center",
+    alignItems: 'center'
   },
   frame: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
     width: 431,
-    justifyContent: "center",
-    alignItems: "center",
-    overflow: "hidden",
-  },
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden'
+  }
 });
-
-export default Frame7;
