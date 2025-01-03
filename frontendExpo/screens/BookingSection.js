@@ -6,6 +6,7 @@ import Frame from "../components/Frame";
 import Frame1 from "../components/Frame1";
 import Frame5 from "../components/Frame5";
 import ButtomFrame from "../components/ButtomFrame";
+import BookCard from "../components2/BookCard";
 import { FontSize, Color, FontFamily, Border } from "../GlobalStyles";
 
 const BookingSection = () => {
@@ -32,7 +33,9 @@ const BookingSection = () => {
           <View style={[styles.primaryButton, styles.primaryButtonFlexBox]}>
             <Text style={styles.proceedToPayment}>Proceed to payment</Text>
           </View>
-          <Frame6 />
+          <BookCard />
+          {/* <Frame6 /> */}
+          <BookCard />
           <Frame pM="12:00 PM" pM1="1:00 PM" pM2="2:00 PM" />
           <Frame1 pM="3:00 PM" pM1="4:00 PM" pM2="5:00 PM" />
           <Frame1
@@ -50,7 +53,8 @@ const BookingSection = () => {
             pM1="10:00 PM"
             pM2="11:00 PM"
           />
-          <Frame5 />
+          <BookCard />
+          {/* <Frame5 /> */}
         </View>
       </View>
       <ButtomFrame />
@@ -59,26 +63,26 @@ const BookingSection = () => {
 };
 
 const styles = StyleSheet.create({
-  primaryButtonFlexBox: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  doYouWantTypo: {
-    textAlign: "left",
-    fontSize: FontSize.buttonText_size,
-    position: "absolute",
-  },
-  bookingTime: {
-    top: 367,
-    width: 169,
-    height: 25,
-    color: Color.darkGray,
-    fontFamily: FontFamily.poppinsMedium,
-    fontWeight: "500",
-    lineHeight: 22,
-    left: 20,
-    textAlign: "left",
-  },
+  // primaryButtonFlexBox: {
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  // },
+  // doYouWantTypo: {
+  //   textAlign: "left",
+  //   fontSize: FontSize.buttonText_size,
+  //   position: "absolute",
+  // },
+  // bookingTime: {
+  //   top: 367,
+  //   width: 169,
+  //   height: 25,
+  //   color: Color.darkGray,
+  //   fontFamily: FontFamily.poppinsMedium,
+  //   fontWeight: "500",
+  //   lineHeight: 22,
+  //   left: 20,
+  //   textAlign: "left",
+  // },
   doYouWant: {
     top: 687,
     width: 329,
@@ -138,14 +142,14 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     alignSelf: "stretch",
   },
-  bookASlotWrapper: {
-    alignSelf: "stretch",
-  },
-  bookingSection: {
-    flex: 1,
-    width: "100%",
-    alignItems: "center",
-  },
+  // bookASlotWrapper: {
+  //   alignSelf: "stretch",
+  // },
+  // bookingSection: {
+  //   flex: 1,
+  //   width: "100%",
+  //   alignItems: "center",
+  // },
 });
 
 export default BookingSection;

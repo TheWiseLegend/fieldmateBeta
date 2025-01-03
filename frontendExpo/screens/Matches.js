@@ -4,6 +4,7 @@ import { StyleSheet, View, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import GroupComponent from "../components/GroupComponent";
 import WeekdaysDatePicker from "../components/WeekdaysDatePicker";
+import LFGCard from "../components2/LFGCard";
 import {
   Color,
   Border,
@@ -38,16 +39,16 @@ const Matches = () => {
         contentFit="cover"
         source={require("../assets/vector4.png")}
       />
-      <Image
+      {/* <Image
         style={[styles.ellipseIcon, styles.matchesLayout]}
         contentFit="cover"
         source={require("../assets/ellipse-9.png")}
-      />
-      <Image
+      /> */}
+      {/* <Image
         style={[styles.vectorIcon1, styles.iconChildLayout]}
         contentFit="cover"
         source={require("../assets/vector5.png")}
-      />
+      /> */}
       <GroupComponent groupViewTop={587} groupViewLeft={15} />
       <View style={[styles.createMatchButton, styles.month1FlexBox]}>
         <Text style={styles.createMatch}>Create Match</Text>
@@ -67,7 +68,7 @@ const Matches = () => {
         contentFit="cover"
         source={require("../assets/vector5.png")}
       />
-      <View style={styles.month}>
+      {/* <View style={styles.month}>
         <View style={[styles.month1, styles.month1FlexBox]}>
           <Text style={styles.subtitle3}>November 2021</Text>
           <Image
@@ -76,7 +77,7 @@ const Matches = () => {
             source={require("../assets/icon.png")}
           />
         </View>
-      </View>
+      </View> */}
       <WeekdaysDatePicker />
       <Image
         style={[styles.image2Icon, styles.image2IconLayout]}
@@ -137,10 +138,10 @@ const Matches = () => {
         <View style={styles.rectangle} />
         <View style={styles.rectangle} />
       </View>
-      <View style={styles.calendarDate}>
+      {/* <View style={styles.calendarDate}>
         <Text style={[styles.m, styles.mTypo]}>All Dates</Text>
         <Text style={[styles.m1, styles.mTypo]}>Clear All</Text>
-      </View>
+      </View> */}
 
     </View>
   );
@@ -151,19 +152,19 @@ const styles = StyleSheet.create({
     width: 195,
     position: "absolute",
   },
-  matchesLayout: {
-    height: 43,
-    width: 41,
-    position: "absolute",
-  },
-  iconChildLayout: {
-    maxHeight: "100%",
-    position: "absolute",
-  },
-  month1FlexBox: {
-    justifyContent: "space-between",
-    flexDirection: "row",
-  },
+  // matchesLayout: {
+  //   height: 43,
+  //   width: 41,
+  //   position: "absolute",
+  // },
+  // iconChildLayout: {
+  //   maxHeight: "100%",
+  //   position: "absolute",
+  // },
+  // month1FlexBox: {
+  //   justifyContent: "space-between",
+  //   flexDirection: "row",
+  // },
   rectangleViewLayout: {
     borderWidth: 1,
     borderColor: Color.colorSilver_100,
@@ -201,18 +202,18 @@ const styles = StyleSheet.create({
     position: "absolute",
     overflow: "hidden",
   },
-  mTypo: {
-    height: 53,
-    display: "flex",
-    color: Color.colorRoyalblue_100,
-    fontFamily: FontFamily.caption,
-    lineHeight: 21,
-    letterSpacing: 1,
-    fontSize: FontSize.size_base_9,
-    justifyContent: "center",
-    textAlign: "center",
-    alignItems: "center",
-  },
+  // mTypo: {
+  //   height: 53,
+  //   display: "flex",
+  //   color: Color.colorRoyalblue_100,
+  //   fontFamily: FontFamily.caption,
+  //   lineHeight: 21,
+  //   letterSpacing: 1,
+  //   fontSize: FontSize.size_base_9,
+  //   justifyContent: "center",
+  //   textAlign: "center",
+  //   alignItems: "center",
+  // },
   matchesChild: {
     marginLeft: -98,
     top: 56,
@@ -246,21 +247,21 @@ const styles = StyleSheet.create({
     maxHeight: "100%",
     overflow: "hidden",
   },
-  ellipseIcon: {
-    top: 446,
-    left: 21,
-  },
-  vectorIcon1: {
-    height: "2.15%",
-    width: "4.19%",
-    top: "47.85%",
-    right: "75.81%",
-    bottom: "50%",
-    left: "20%",
-    maxWidth: "100%",
-    maxHeight: "100%",
-    overflow: "hidden",
-  },
+  // ellipseIcon: {
+  //   top: 446,
+  //   left: 21,
+  // },
+  // vectorIcon1: {
+  //   height: "2.15%",
+  //   width: "4.19%",
+  //   top: "47.85%",
+  //   right: "75.81%",
+  //   bottom: "50%",
+  //   left: "20%",
+  //   maxWidth: "100%",
+  //   maxHeight: "100%",
+  //   overflow: "hidden",
+  // },
   createMatch: {
     fontSize: FontSize.buttonText_size,
     fontWeight: "700",
@@ -289,39 +290,39 @@ const styles = StyleSheet.create({
     top: 628,
     left: 26,
   },
-  subtitle3: {
-    fontSize: FontSize.size_lg_6,
-    lineHeight: 32,
-    fontWeight: "500",
-    fontFamily: FontFamily.robotoMedium,
-    color: Color.onSurfaceMediumEmphasis,
-    textAlign: "left",
-    letterSpacing: 0,
-  },
-  icon: {
-    width: 32,
-    height: 32,
-  },
-  month1: {
-    justifyContent: "space-between",
-    flexDirection: "row",
-    flex: 1,
-  },
-  month: {
-    top: 234,
-    left: -4,
-    width: 436,
-    paddingLeft: 32,
-    paddingTop: 21,
-    paddingRight: 48,
-    paddingBottom: 16,
-    justifyContent: "center",
-    borderRadius: Border.br_5xs,
-    alignItems: "center",
-    flexDirection: "row",
-    position: "absolute",
-    backgroundColor: Color.surface,
-  },
+  // subtitle3: {
+  //   fontSize: FontSize.size_lg_6,
+  //   lineHeight: 32,
+  //   fontWeight: "500",
+  //   fontFamily: FontFamily.robotoMedium,
+  //   color: Color.onSurfaceMediumEmphasis,
+  //   textAlign: "left",
+  //   letterSpacing: 0,
+  // },
+  // icon: {
+  //   width: 32,
+  //   height: 32,
+  // },
+  // month1: {
+  //   justifyContent: "space-between",
+  //   flexDirection: "row",
+  //   flex: 1,
+  // },
+  // month: {
+  //   top: 234,
+  //   left: -4,
+  //   width: 436,
+  //   paddingLeft: 32,
+  //   paddingTop: 21,
+  //   paddingRight: 48,
+  //   paddingBottom: 16,
+  //   justifyContent: "center",
+  //   borderRadius: Border.br_5xs,
+  //   alignItems: "center",
+  //   flexDirection: "row",
+  //   position: "absolute",
+  //   backgroundColor: Color.surface,
+  // },
   image2Icon: {
     top: 231,
     left: 16,

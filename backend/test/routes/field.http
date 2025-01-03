@@ -1,10 +1,12 @@
+@baseurl = http://13.229.202.42:5000/api/fields
+
 ### Create a field
-POST http://localhost:3000/api/fields
+POST {{baseurl}}
 Content-Type: application/json
 
 {
   "field_name": "Field A",
-  "vendor_id": 102,
+  "vendor_id": 1,
   "address": "123 Field St.",
   "capacity": 100,
   "price": 100.00,
