@@ -56,11 +56,7 @@ export default function Footer({}) {
         <Tab.Screen name={HomeScreen} component={HomeScreenComponent} />
         <Tab.Screen name={StadiumsScreen} component={StadiumsScreenComponent} />
         <Tab.Screen name={MatchesScreen} component={MatchesScreenComponent} />
-        <Tab.Screen
-          name={StadiumViewScreen}
-          component={StadiumViewScreenComponent}
-        />
-        {/* <Tab.Screen name={MyActivityScreen} component={MyActivityScreenComponent} /> */}
+        <Tab.Screen name={MyActivityScreen} component={MyActivityScreenComponent} />
       </Tab.Navigator>
     </NavigationContainer>
   );

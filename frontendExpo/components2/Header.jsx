@@ -3,13 +3,11 @@ import Octicons from '@expo/vector-icons/Octicons';
 import { Image } from 'expo-image';
 import { StyleSheet } from 'react-native';
 import { Padding, Border } from '../GlobalStyles';
-import { Drawer, DrawerBackdrop, DrawerContent, DrawerHeader, DrawerCloseButton, DrawerBody, DrawerFooter } from '@/components/ui/drawer';
 
 /**
  * @param {object} props
  */
 export default function Header({ }) {
-  const [showDrawer, setShowDrawer] = React.useState(false)
   return (
     <>
       <Octicons
@@ -17,7 +15,7 @@ export default function Header({ }) {
         size={24}
         color="black"
         style={[styles.burgerButton, styles.menuLayout]}
-        onPress={setShowDrawer(true)}
+        onPress={() => alert('This is a button!')}
       />
 
       <Octicons
