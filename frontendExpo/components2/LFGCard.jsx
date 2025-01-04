@@ -1,201 +1,114 @@
-import React, { useMemo } from 'react';
-import { Image } from 'expo-image';
-import { StyleSheet, Text, View } from 'react-native';
-import { Color, FontFamily, FontSize, Border, Padding } from '../GlobalStyles';
+import React from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { CalendarMinus2, MapPin, Users } from 'lucide-react-native';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
 
-/**
- * @param {string} key
- * @param {string | number | undefined} value
- */
-function getStyleValue(key, value) {
-  if (value === undefined) return;
-  return { [key]: value === 'unset' ? undefined : value };
-}
-
-/**
- * @param {object} props
- * @param {number} [props.groupViewTop]
- * @param {number} [props.groupViewLeft]
- */
-export default function LFGCard({ groupViewTop, groupViewLeft }) {
-  const groupViewStyle = useMemo(() => {
-    return {
-      ...getStyleValue('top', groupViewTop),
-      ...getStyleValue('left', groupViewLeft)
-    };
-  }, [groupViewTop, groupViewLeft]);
-
+export default function LFGCard() {
   return (
-    <View style={[styles.vectorParent, groupViewStyle]}>
-      <Image
-        style={[styles.instanceChild, styles.instanceLayout]}
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/rectangle-51.png')}
-      />
-
-      <Image
-        style={[styles.profileLayout]}
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/profile.png')}
-      />
-      <Text style={styles.title}>Name </Text>
-
-      <Image
-        style={[styles.vectorIcon, styles.iconLayout1]}
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/calender.png')}
-      />
-      <Text style={[styles.aug4, styles.aug4Typo]}>20 Aug - 4 Sep</Text>
-
-      <Image
-        style={[styles.vectorIcon, styles.instanceLayout]}
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/location.png')}
-      />
-      <Text style={[styles.location, styles.aug4Typo]}>Location</Text>
-
-      <Image
-        style={[styles.instanceItem, styles.instanceLayout]}
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/person.png')}
-      />
-      <Text style={[styles.playersPx, styles.aug4Typo]}>Players px</Text>
-
-      <Text style={styles.rm}>30.00 RM</Text>
-
-      <View style={styles.joinUsWrapper}>
-        <Text style={styles.joinUs}>Join us</Text>
+    <View className='p-3'>
+    <View style={styles.cardContainer}>
+      <Text style={styles.priceText}>30.00 RM</Text>
+      <View style={styles.contentContainer}>
+        <View style={styles.leftSection}>
+          <View style={styles.row}>
+            <Avatar size="md" style={styles.avatar}>
+              <AvatarImage
+                source={{
+                  uri: 'https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_2x3.jpg',
+                }}
+              />
+            </Avatar>
+            <Text style={styles.nameText}>Name</Text>
+          </View>
+          <View style={styles.row}>
+            <CalendarMinus2 style={styles.icon} size={20} />
+            <Text style={styles.infoText}>20 Aug - 4 Sep</Text>
+          </View>
+          <View style={styles.row}>
+            <MapPin style={styles.icon} size={20} />
+            <Text style={styles.infoText}>Location</Text>
+          </View>
+          <View style={styles.row}>
+            <Users style={styles.icon} size={20} />
+            <Text style={styles.infoText}>Players px</Text>
+          </View>
+        </View>
+        <TouchableOpacity style={styles.button} onPress={() => alert('Join us clicked')}>
+          <Text style={styles.buttonText}>Join us</Text>
+        </TouchableOpacity>
       </View>
+    </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  profileLayout: {
-    top: 446,
-    left: 21,
-    height: 43,
-    width: 41,
-    position: 'absolute'
+  cardContainer: {
+    width: '100%',
+    backgroundColor: '#F5F5F5',
+    borderRadius: 8,
+    padding: 16,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 8,
+    elevation: 4,
+    marginBottom: 16,
+    position: 'relative', // Ensure the priceText and button can be positioned absolutely
   },
-  iconLayout1: {
-    maxHeight: '100%',
-    position: 'absolute'
+  priceText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#007BFF',
+    position: 'absolute', // Position the priceText absolutely
+    top: 16, // Adjust the top position as needed
+    left: 260, // Adjust the right position as needed
   },
-  instanceLayout: {
-    maxHeight: '100%',
-    overflow: 'hidden',
-    maxWidth: '100%',
-    position: 'absolute'
+  contentContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 40, // Adjust to make space for the "30.00 RM"
   },
-  aug4Typo: {
-    color: Color.grayIcon,
-    fontFamily: FontFamily.secondaryNotActive,
-    lineHeight: 22,
-    letterSpacing: 0,
-    fontSize: FontSize.secondaryNotActive_size,
-    textAlign: 'left',
-    position: 'absolute'
+  leftSection: {
+    flex: 1,
   },
-  instanceChild: {
-    height: '100%',
-    width: '114.49%',
-    top: '0%',
-    right: '-14.49%',
-    left: '0%',
-    borderRadius: Border.br_8xs,
-    bottom: '0%'
-  },
-  rm: {
-    height: '16.75%',
-    width: '33.33%',
-    top: '8.99%',
-    left: '71.89%',
-    fontSize: FontSize.title1_size,
-    lineHeight: 28,
-    fontWeight: '600',
-    fontFamily: FontFamily.title1,
-    color: Color.blue,
-    textAlign: 'left',
-    position: 'absolute'
-  },
-  aug4: {
-    height: '29.59%',
-    width: '35.59%',
-    top: '30.77%',
-    left: '27.4%',
-    color: Color.grayIcon
-  },
-  playersPx: {
-    height: '14.79%',
-    width: '25.99%',
-    top: '51.48%',
-    left: '74.01%'
-  },
-  vectorIcon: {
-    height: '11.83%',
-    width: '3.95%',
-    top: '54.44%',
-    right: '74.01%',
-    bottom: '33.73%',
-    left: '22.03%',
-    borderRadius: Border.br_10xs
-  },
-  instanceItem: {
-    height: '12.43%',
-    width: '5.48%',
-    top: '50.89%',
-    right: '28.98%',
-    bottom: '36.69%',
-    left: '65.54%'
-  },
-  title: {
-    top: '55.62%',
-    left: '2.26%',
-    color: Color.colorBlack,
-    fontFamily: FontFamily.secondaryNotActive,
-    fontSize: FontSize.secondaryNotActive_size,
-    lineHeight: 22,
-    letterSpacing: 0,
-    textAlign: 'left',
-    position: 'absolute'
-  },
-  joinUs: {
-    fontSize: FontSize.buttonText_size,
-    fontWeight: '700',
-    fontFamily: FontFamily.openSansBold,
-    color: Color.surface,
-    textAlign: 'center',
-    lineHeight: 22,
-    letterSpacing: 0
-  },
-  joinUsWrapper: {
-    height: '31.36%',
-    width: '31.36%',
-    top: '68.64%',
-    right: '-15.82%',
-    left: '84.46%',
-    borderRadius: Border.br_20xl,
-    backgroundColor: Color.colorMediumslateblue,
+  row: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 8,
+  },
+  avatar: {
+    marginRight: 8,
+  },
+  nameText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#000',
+  },
+  icon: {
+    marginRight: 8,
+    color: '#666',
+  },
+  infoText: {
+    fontSize: 14,
+    color: '#666',
+  },
+  button: {
+    backgroundColor: '#6c63ff',
+    borderRadius: 20,
+    alignItems: 'center',
     justifyContent: 'center',
-    padding: Padding.p_8xs,
-    bottom: '0%',
-    position: 'absolute'
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    position: 'absolute', // Position the button absolutely
+    bottom: 16, // Adjust the bottom position as needed
+    right: 16, // Adjust the right position as needed
   },
-  location: {
-    height: '15.38%',
-    width: '21.19%',
-    top: '52.66%',
-    left: '27.4%',
-    color: Color.grayIcon
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
-  vectorParent: {
-    top: 782,
-    left: 11,
-    width: 354,
-    height: 169,
-    position: 'absolute'
-  }
 });
+

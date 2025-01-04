@@ -13,7 +13,6 @@ export default function Stadiums() {
 
       <Filters />
 
-      <Filters2 />
 
       <View style={styles.frameParent}>
         <StadiumCard />

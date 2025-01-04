@@ -24,12 +24,12 @@ export default function Filters() {
             variant="rounded"
             size="sm"
             style={styles.selectTrigger}
+            className='px-3'
           >
-            <SelectIcon size={25} className="mr-3" as={MapPin} />
+            <SelectIcon size={25} as={MapPin} />
             <SelectInput placeholder="Select State" />
             <SelectIcon
               size={25}
-              className="mr-3"
               as={ChevronDown}
               style={styles.chevronIcon}
             />
@@ -54,12 +54,12 @@ export default function Filters() {
             variant="rounded"
             size="sm"
             style={styles.selectTrigger}
+            className='px-3'
           >
-            <SelectIcon size={25} className="mr-3" as={Filter} />
+            <SelectIcon size={25} as={Filter} />
             <SelectInput placeholder="Select Filter" />
             <SelectIcon
               size={25}
-              className="mr-3"
               as={ChevronDown}
               style={styles.chevronIcon}
             />
@@ -112,12 +112,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row', // Arrange children in a row
     justifyContent: 'space-around', // Distribute space evenly around the components
     marginLeft: 10, // Adjust the value to move the component to the right
-    marginTop: 100 // Adjust the value to move the component down
+    marginTop: 110, // Adjust the value to move the component down
   },
   selectTrigger: {
-    width: 150 // Adjust the width as needed
+    width: 160, // Adjust the width as needed
+    height: 40 // Adjust the height as needed
   },
-  chevronIcon: {
-    marginLeft: -10 // Adjust the value to move the icon to the left
-  }
 });

@@ -3,11 +3,13 @@ import Octicons from '@expo/vector-icons/Octicons';
 import { Image } from 'expo-image';
 import { StyleSheet } from 'react-native';
 import { Padding, Border } from '../GlobalStyles';
+import { Drawer, DrawerBackdrop, DrawerContent, DrawerHeader, DrawerCloseButton, DrawerBody, DrawerFooter } from '@/components/ui/drawer';
 
 /**
  * @param {object} props
  */
-export default function Header({}) {
+export default function Header({ }) {
+  const [showDrawer, setShowDrawer] = React.useState(false)
   return (
     <>
       <Octicons
@@ -15,22 +17,20 @@ export default function Header({}) {
         size={24}
         color="black"
         style={[styles.burgerButton, styles.menuLayout]}
-        onPress={() => alert('This is a button!')}
+        onPress={setShowDrawer(true)}
       />
 
-      <Image
+      <Octicons
+        name="bell"
+        size={24}
+        color="black"
         style={styles.doorbellIcon}
         contentFit="cover"
         // @ts-expect-error
         source={require('../assets/doorbell.png')}
+        onPress={() => alert('This is a button!')}
       />
 
-      <Image
-        style={[styles.dotIcon, styles.iconLayout1]}
-        contentFit="cover"
-        // @ts-expect-error
-        source={require('../assets/dot.png')}
-      />
     </>
   );
 }
@@ -45,10 +45,10 @@ const styles = StyleSheet.create({
     overflow: 'hidden'
   },
   doorbellIcon: {
-    left: 362,
+    left: 332,
     width: 40,
     height: 45,
-    top: 56,
+    top: 71,
     position: 'absolute'
   },
   burgerButton: {

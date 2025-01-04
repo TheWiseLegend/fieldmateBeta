@@ -36,9 +36,9 @@ export default function Footer({}) {
             const rn = route.name;
             let iconName = 'home';
 
-            // if (rn === StadiumsScreen) iconName = 'soccer-field';
-            // else if (rn === MatchesScreen) iconName = 'soccer';
-            // else if (rn === MyActivityScreen) iconName = 'calendar-clock';
+            if (rn === StadiumsScreen) iconName = 'soccer-field';
+            else if (rn === MatchesScreen) iconName = 'soccer';
+            else if (rn === MyActivityScreen) iconName = 'calendar-clock';
 
             return (
               <MaterialCommunityIcons
