@@ -1,125 +1,123 @@
 import React from 'react';
-import { Image } from 'expo-image';
-import { StyleSheet, View, Text } from 'react-native';
-import { Color, Border, FontFamily, FontSize } from '../GlobalStyles.js';
+import { MapPin, ChevronDown, Filter } from 'lucide-react-native';
+import { StyleSheet, View } from 'react-native';
+import {
+  Select,
+  SelectTrigger,
+  SelectInput,
+  SelectIcon,
+  SelectPortal,
+  SelectBackdrop,
+  SelectContent,
+  SelectDragIndicatorWrapper,
+  SelectDragIndicator,
+  SelectItem,
+  Box
+} from '@/components/ui/select';
 
-/**
- * @param {object} props
- */
-export default function Filters({}) {
+export default function Filters() {
   return (
     <>
-      <View style={[styles.matchesChild5, styles.rectangleViewLayout]} />
+      <View style={styles.container}>
+        <Select>
+          <SelectTrigger
+            variant="rounded"
+            size="sm"
+            style={styles.selectTrigger}
+          >
+            <SelectIcon size={25} className="mr-3" as={MapPin} />
+            <SelectInput placeholder="Select State" />
+            <SelectIcon
+              size={25}
+              className="mr-3"
+              as={ChevronDown}
+              style={styles.chevronIcon}
+            />
+          </SelectTrigger>
+          <SelectPortal>
+            <SelectBackdrop />
+            <SelectContent>
+              <SelectDragIndicatorWrapper>
+                <SelectDragIndicator />
+              </SelectDragIndicatorWrapper>
+              <SelectItem label="Selangor" value="Selangor" />
+              <SelectItem label="KL" value="Kuala Lumpur" />
+              <SelectItem label="Sabah" value="Sabah" />
+              <SelectItem label="Serawak" value="Serawak" isDisabled={true} />
+              <SelectItem label="Terengannu" value="Terengannu" />
+            </SelectContent>
+          </SelectPortal>
+        </Select>
 
-      <Image
-        style={[styles.glyphsTabBarSearch1, styles.glyphsLayout]}
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/search-location.png')}
-      />
-      <Image
-        style={[styles.vectorIcon4, styles.vectorIconLayout]}
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/arrow.png')}
-      />
-
-      <Text style={[styles.selectState, styles.allCitesTypo]}>
-        Select State
-      </Text>
-
-      <View style={[styles.rectangleView, styles.rectangleViewLayout]} />
-
-      <Image
-        style={[styles.glyphsTabBarSearch, styles.glyphsLayout]}
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/search-crosshairs.png')}
-      />
-
-      <Image
-        style={[styles.vectorIcon3, styles.vectorIconLayout]}
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/arrow.png')}
-      />
-
-      <Text style={[styles.allCites, styles.allCitesTypo]}>Select City</Text>
+        <Select>
+          <SelectTrigger
+            variant="rounded"
+            size="sm"
+            style={styles.selectTrigger}
+          >
+            <SelectIcon size={25} className="mr-3" as={Filter} />
+            <SelectInput placeholder="Select Filter" />
+            <SelectIcon
+              size={25}
+              className="mr-3"
+              as={ChevronDown}
+              style={styles.chevronIcon}
+            />
+          </SelectTrigger>
+          <SelectPortal>
+            <SelectBackdrop />
+            <SelectContent>
+              <SelectDragIndicatorWrapper>
+                <SelectDragIndicator />
+              </SelectDragIndicatorWrapper>
+              <SelectItem label="UX Research" value="ux" />
+              <SelectItem label="Web Development" value="web" />
+              <SelectItem
+                label="Cross Platform Development Process"
+                value="Cross Platform Development Process"
+              />
+              <SelectItem label="UI Designing" value="ui" isDisabled={true} />
+              <SelectItem label="Backend Development" value="backend" />
+            </SelectContent>
+          </SelectPortal>
+        </Select>
+      </View>
     </>
   );
 }
 
+// const styles = StyleSheet.create({
+//   container: {
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     marginLeft: 25, // Adjust the value to move the component to the right
+//     marginTop: 100 // Adjust the value to move the component down
+//   },
+//   filterComp: {
+//     marginLeft: -100 // Adjust the value to move the component to the left
+//   },
+//   locationLogo: {
+//     marginLeft: 15 // Adjust the value to move the component to the right
+//   },
+//   selectTrigger: {
+//     width: 175 // Adjust the width as needed
+//   },
+//   chevronIcon: {
+//     marginLeft: -65
+//   }
+// });
+
 const styles = StyleSheet.create({
-  rectangleViewLayout: {
-    borderWidth: 1,
-    borderColor: Color.colorSilver_100,
-    borderStyle: 'solid',
-    bottom: '82.19%',
-    top: '13.09%',
-    width: '39.53%',
-    height: '4.72%',
-    borderRadius: Border.br_8xs,
-    position: 'absolute'
+  container: {
+    flexDirection: 'row', // Arrange children in a row
+    justifyContent: 'space-around', // Distribute space evenly around the components
+    marginLeft: 10, // Adjust the value to move the component to the right
+    marginTop: 100 // Adjust the value to move the component down
   },
-  allCitesTypo: {
-    width: '20.47%',
-    color: Color.colorBlack,
-    fontFamily: FontFamily.secondaryNotActive,
-    textAlign: 'left',
-    letterSpacing: 0,
-    position: 'absolute'
+  selectTrigger: {
+    width: 150 // Adjust the width as needed
   },
-  vectorIconLayout: {
-    width: '4.14%',
-    height: '0.93%',
-    maxHeight: '100%',
-    maxWidth: '100%',
-    position: 'absolute',
-    overflow: 'hidden'
-  },
-  glyphsLayout: {
-    bottom: '83.05%',
-    top: '13.95%',
-    width: '6.98%',
-    height: '3%',
-    maxHeight: '100%',
-    maxWidth: '100%',
-    position: 'absolute',
-    overflow: 'hidden'
-  },
-  rectangleView: {
-    right: '3.49%',
-    left: '56.98%'
-  },
-  matchesChild5: {
-    right: '54.42%',
-    left: '6.05%'
-  },
-  allCites: {
-    height: '2.04%',
-    top: '14.16%',
-    left: '65.35%',
-    fontSize: FontSize.size_lg
-  },
-  selectState: {
-    height: '6.22%',
-    top: '12.66%',
-    left: '15.12%'
-  },
-  vectorIcon3: {
-    top: '14.96%',
-    right: '6.3%',
-    bottom: '84.11%',
-    left: '89.56%'
-  },
-  vectorIcon4: {
-    top: '14.91%',
-    right: '56.79%',
-    bottom: '84.15%',
-    left: '39.07%'
-  },
-  glyphsTabBarSearch: {
-    right: '34.42%',
-    left: '58.6%'
-  },
-  glyphsTabBarSearch1: {
-    right: '85.58%',
-    left: '7.44%'
+  chevronIcon: {
+    marginLeft: -10 // Adjust the value to move the icon to the left
   }
 });
