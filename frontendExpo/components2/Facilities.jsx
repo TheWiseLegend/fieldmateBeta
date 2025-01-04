@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Color, Border, FontFamily, FontSize } from '../GlobalStyles.js';
+import { Icon } from '../components/ui/icon';
+import { Home } from 'lucide-react-native';
 
 /**
  * @param {object} props
@@ -13,10 +15,18 @@ export default function Facilities({}) {
       <View style={styles.frame4}>
         <View style={styles.frame5}>
           <View style={[styles.date, styles.dateFlexBox]}>
-            <View style={styles.background} />
-            <View style={styles.background} />
-            <View style={styles.background} />
-            <View style={styles.background} />
+            <View style={styles.background} >
+              <Icon size={35} as={Home}></Icon>
+            </View>
+            <View style={styles.background} >
+              <Icon size={35} as={Home}></Icon>
+            </View>
+            <View style={styles.background} >
+              <Icon size={35} as={Home}></Icon>
+            </View>
+            <View style={styles.background} >
+              <Icon size={35} as={Home}></Icon>
+            </View>
           </View>
         </View>
       </View>
@@ -26,7 +36,7 @@ export default function Facilities({}) {
 
 const styles = StyleSheet.create({
   frame: {
-    top: 406,
+    top: 350,
     left: 33,
     width: 398,
     justifyContent: 'center',
@@ -45,7 +55,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   frame4: {
-    top: 432,
+    top: 380,
     left: 31,
     width: 400,
     justifyContent: 'center',
@@ -58,7 +68,9 @@ const styles = StyleSheet.create({
     borderColor: Color.colorLightgray,
     borderWidth: 1,
     width: 62,
-    height: 54
+    height: 54,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   facilities: {
     fontSize: FontSize.buttonText_size,
@@ -73,6 +85,7 @@ const styles = StyleSheet.create({
   dateFlexBox: {
     justifyContent: 'space-between',
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    width: 340
   }
 });

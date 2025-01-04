@@ -3,21 +3,21 @@ import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
-// import HomeScreenComponent from '../screens/Home.js';
-// import StadiumsScreenComponent from '../screens/Stadiums.js';
-// import MatchesScreenComponent from '../screens/Matches.js';
+import HomeScreenComponent from '../screens/Home.js';
+import StadiumsScreenComponent from '../screens/Stadiums.js';
+import MatchesScreenComponent from '../screens/Matches.js';
 import StadiumViewScreenComponent from '../screens/StadiumView.js';
 import BookingScreenComponent from '../screens/Booking.js';
 import PaymentScreenComponent from '../screens/Payment.js';
-// import MyActivityScreenComponent from '../screens2/MyActivity.js';
+import MyActivityScreenComponent from '../screens2/MyActivity.jsx';
 
-// const HomeScreen = 'Home';
-// const StadiumsScreen = 'Stadiums';
-// const MatchesScreen = 'Matches';
+const HomeScreen = 'Home';
+const StadiumsScreen = 'Stadiums';
+const MatchesScreen = 'Matches';
 const StadiumViewScreen = 'StadiumView';
 const BookingScreen = 'Booking';
 const PaymentScreen = 'Payment';
-// const MyActivityScreen = 'My Activity';
+const MyActivityScreen = 'My Activity';
 
 const Tab = createBottomTabNavigator();
 
@@ -53,15 +53,13 @@ export default function Footer({}) {
           headerShown: false
         })}
       >
-        {/* <Tab.Screen name={HomeScreen} component={HomeScreenComponent} />
+        <Tab.Screen name={HomeScreen} component={HomeScreenComponent} />
         <Tab.Screen name={StadiumsScreen} component={StadiumsScreenComponent} />
-        <Tab.Screen name={MatchesScreen} component={MatchesScreenComponent} /> */}
+        <Tab.Screen name={MatchesScreen} component={MatchesScreenComponent} />
         <Tab.Screen
           name={StadiumViewScreen}
           component={StadiumViewScreenComponent}
         />
-        <Tab.Screen name={BookingScreen} component={BookingScreenComponent} />
-        <Tab.Screen name={PaymentScreen} component={PaymentScreenComponent} />
         {/* <Tab.Screen name={MyActivityScreen} component={MyActivityScreenComponent} /> */}
       </Tab.Navigator>
     </NavigationContainer>

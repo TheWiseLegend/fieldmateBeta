@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, View } from 'react-native';
+import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import {
   Padding,
   Color,
@@ -17,6 +17,7 @@ export default function FrameComponent({}) {
     <View style={styles.frameParent}>
       <View style={styles.frame}>
         <View style={styles.frame1}>
+          <View style={styles.marginTop}></View>
           <Text style={styles.openingTimes}>Opening Times:</Text>
 
           <Text style={[styles.pm1100Pm, styles.pm1100PmTypo]}>
@@ -24,9 +25,9 @@ export default function FrameComponent({}) {
           </Text>
         </View>
 
-        <View style={[styles.contactUsWrapper, styles.wrapperFlexBox]}>
+        <TouchableOpacity style={[styles.contactUsWrapper, styles.wrapperFlexBox, styles.contactUsBtn]} onPress={() => alert("Contact Us")}>
           <Text style={styles.contactUs}>Contact Us</Text>
-        </View>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.frame2}>
@@ -34,9 +35,9 @@ export default function FrameComponent({}) {
           Staduim location: Cyberjaya
         </Text>
 
-        <View style={[styles.directionsWrapper, styles.wrapperFlexBox]}>
-          <Text style={styles.contactUs}>Directions</Text>
-        </View>
+        <TouchableOpacity style={[styles.directionsWrapper, styles.wrapperFlexBox, styles.directionBtn]} onPress={() => alert("Directions")}>
+          <Text style={styles.buttonText}>Directions</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -49,7 +50,15 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_36xl,
     justifyContent: 'space-between',
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+  },
+  directionBtn: {
+    borderRadius: 30,
+  },
+  contactUsBtn: {
+    borderRadius: 30,
+    paddingVertical: 10, // Add vertical padding for better appearance
+    paddingHorizontal: 20, // Add horizontal padding for better appearance
   },
   pm1100PmTypo: {
     color: Color.grayIcon,
@@ -66,19 +75,22 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 22,
     letterSpacing: 0,
-    fontSize: FontSize.buttonText_size
+    fontSize: FontSize.buttonText_size,
+    marginLeft: 20,
   },
   contactUsWrapper: {
-    height: '37.21%',
-    width: '30.47%',
+    height: '50.21%',
     top: '29.07%',
-    right: '3.72%',
     bottom: '33.72%',
-    left: '65.81%',
+    left: '57.81%',
     position: 'absolute',
     padding: Padding.p_8xs,
     backgroundColor: Color.colorMediumslateblue,
-    borderRadius: Border.br_36xl
+    borderRadius: Border.br_36xl,
+    width: 150,
+    borderRadius: 30, // Make the button rounded
+    paddingVertical: 10, // Add vertical padding for better appearance
+    paddingHorizontal: 20, // Add horizontal padding for better appearance
   },
   openingTimes: {
     fontWeight: '500',
@@ -102,21 +114,30 @@ const styles = StyleSheet.create({
     gap: Gap.gap_sm,
     width: 172,
     overflow: 'hidden',
-    position: 'absolute'
+    position: 'absolute',
+  },
+  marginTop: {
+    marginTop: 8,
   },
   frame: {
     backgroundColor: 'transparent',
     height: 86,
     borderRadius: Border.br_xl,
     overflow: 'hidden',
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
+    backgroundColor: '#7777772E',
+    marginLeft: 10,
+    width: '100%'
   },
   staduimLocationCyberjaya: {
     height: 50,
-    width: 172
+    width: 172,
   },
   directionsWrapper: {
-    width: 127
+    width: 150,
+    borderRadius: 30, // Make the button rounded
+    paddingVertical: 10, // Add vertical padding for better appearance
+    paddingHorizontal: 20, // Add horizontal padding for better appearance
   },
   frame2: {
     paddingHorizontal: Padding.p_lgi,
@@ -127,14 +148,26 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     height: 86,
     borderRadius: Border.br_xl,
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
+    backgroundColor: '#7777772E',
+    marginLeft: 10,
+    paddingRight: 10,
+    width: '100%'
   },
   frameParent: {
-    top: 546,
+    top: 466,
     left: 1,
-    width: 430,
+    width: '95%',
     gap: Gap.gap_lg,
     alignItems: 'center',
     position: 'absolute'
-  }
+  },
+  buttonText: {
+    color: Color.surface,
+    fontWeight: '700',
+    fontFamily: FontFamily.openSansBold,
+    textAlign: 'center',
+    marginLeft: 20,
+    fontSize: FontSize.buttonText_size,
+  },
 });

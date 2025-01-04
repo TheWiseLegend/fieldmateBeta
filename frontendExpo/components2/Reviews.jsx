@@ -30,7 +30,7 @@ export default function Reviews({}) {
 const styles = StyleSheet.create({
   frame3FlexBox: {
     alignSelf: 'stretch',
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   text: {
     width: '34.84%',
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   frame2: {
-    top: 341,
+    top: 300,
     left: 20,
     width: 411,
     justifyContent: 'center',
@@ -68,23 +68,24 @@ const styles = StyleSheet.create({
     overflow: 'hidden'
   },
   groupIconLayout: {
-    maxHeight: '100%',
-    position: 'absolute'
-  },
-  textLayout: {
-    height: '88.89%',
-    letterSpacing: 0,
-    textAlign: 'left',
-    lineHeight: 22,
-    position: 'absolute'
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   seeAllReviews: {
     width: '49.35%',
     top: '11.11%',
-    left: '50.65%',
+    left: '60.65%',
     fontSize: FontSize.secondaryNotActive_size,
     color: Color.colorRoyalblue_100,
     fontFamily: FontFamily.openSansBold,
     fontWeight: '700'
+  },
+  textLayout: {
+    position: 'absolute',
+    textAlign: 'left',
+    lineHeight: 27,
+    letterSpacing: 0,
+    marginLeft: 5
   }
 });

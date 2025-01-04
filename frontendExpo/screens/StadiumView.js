@@ -16,65 +16,91 @@ export default function StadiumView({ name = 'Stadium Name' }) {
   return (
     <View
       id="stadium-view-screen"
-      className="screen"
-      style={styles.stadiumView}
+      style={styles.container}
     >
-      <Header />
 
+    <View style={styles.imageContainer}>
       <Image
-        style={styles.StadiumBanner}
         contentFit="cover" // @ts-expect-error
         source={require('../assets/image-5.png')}
+        style={styles.StadiumView}
       />
-      <Text style={[styles.nameFrame, styles.stadiumName]}>{name}</Text>
+      </View>
+      <Text style={styles.stadiumName}>{name}</Text>
 
       <Reviews />
 
       <Facilities />
 
       <FrameComponent />
-      <FrameComponent1 />
     </View>
   );
 }
 
+
 const styles = StyleSheet.create({
-  StadiumBanner: {
-    borderBottomRightRadius: Border.br_10xs,
-    borderBottomLeftRadius: Border.br_10xs,
-    top: 0,
-    left: 0,
+  StadiumView: {
+    width: '100%',
+    height: '100%',
+  },
+  imageContainer: {
     height: 244,
     width: '100%',
-    maxWidth: '100%',
-    alignSelf: 'stretch',
-    overflow: 'hidden',
-    position: 'absolute',
-    justifyContent: 'center',
-    alignItems: 'center'
+
   },
-  stadiumName: {
+  container:{
+    marginTop: 30,
+  },
+  stadiumName:{
     fontSize: 30,
-    width: 220,
-    height: 37,
     color: Color.colorBlack,
-    letterSpacing: 0,
     fontFamily: FontFamily.openSansBold,
     fontWeight: '700',
     textAlign: 'left',
-    lineHeight: 22
-  },
-  nameFrame: {
-    top: 299,
-    left: 21,
-    width: 410,
-    justifyContent: 'center',
-    position: 'absolute',
-    overflow: 'hidden'
-  },
-  stadiumView: {
-    flex: 1,
-    width: '100%',
-    alignItems: 'center'
+    lineHeight: 30,
+    height: '100%',
+    marginTop: 10,
+    marginLeft: 15,
   }
 });
+
+// const styles = StyleSheet.create({
+//   StadiumBanner: {
+//     borderBottomRightRadius: Border.br_10xs,
+//     borderBottomLeftRadius: Border.br_10xs,
+//     top: 0,
+//     left: 0,
+//     height: 244,
+//     width: '100%',
+//     maxWidth: '100%',
+//     alignSelf: 'stretch',
+//     overflow: 'hidden',
+//     position: 'absolute',
+//     justifyContent: 'center',
+//     alignItems: 'center'
+//   },
+//   stadiumName: {
+//     fontSize: 30,
+//     width: 220,
+//     height: 37,
+//     color: Color.colorBlack,
+//     letterSpacing: 0,
+//     fontFamily: FontFamily.openSansBold,
+//     fontWeight: '700',
+//     textAlign: 'left',
+//     lineHeight: 22
+//   },
+//   nameFrame: {
+//     top: 280,
+//     left: 21,
+//     width: 410,
+//     justifyContent: 'center',
+//     position: 'absolute',
+//     overflow: 'hidden'
+//   },
+//   stadiumView: {
+//     flex: 1,
+//     width: '100%',
+//     alignItems: 'center'
+//   }
+// });
