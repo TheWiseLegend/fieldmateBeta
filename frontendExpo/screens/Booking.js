@@ -69,6 +69,28 @@ export default function BookingSection() {
 }
 
 const styles = StyleSheet.create({
+<<<<<<< HEAD
+  // primaryButtonFlexBox: {
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  // },
+  // doYouWantTypo: {
+  //   textAlign: "left",
+  //   fontSize: FontSize.buttonText_size,
+  //   position: "absolute",
+  // },
+  // bookingTime: {
+  //   top: 367,
+  //   width: 169,
+  //   height: 25,
+  //   color: Color.darkGray,
+  //   fontFamily: FontFamily.poppinsMedium,
+  //   fontWeight: "500",
+  //   lineHeight: 22,
+  //   left: 20,
+  //   textAlign: "left",
+  // },
+=======
   primaryButtonFlexBox: {
     justifyContent: 'center',
     alignItems: 'center'
@@ -89,6 +111,7 @@ const styles = StyleSheet.create({
     left: 20,
     textAlign: 'left'
   },
+>>>>>>> 4c5850d05b8cd68052094742a93a69057a7cc264
   doYouWant: {
     top: 687,
     width: 329,
@@ -148,6 +171,16 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     alignSelf: 'stretch'
   },
+<<<<<<< HEAD
+  // bookASlotWrapper: {
+  //   alignSelf: "stretch",
+  // },
+  // bookingSection: {
+  //   flex: 1,
+  //   width: "100%",
+  //   alignItems: "center",
+  // },
+=======
   bookASlotWrapper: {
     alignSelf: 'stretch'
   },
@@ -156,4 +189,5 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center'
   }
+>>>>>>> 4c5850d05b8cd68052094742a93a69057a7cc264
 });

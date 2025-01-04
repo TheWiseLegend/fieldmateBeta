@@ -1,5 +1,5 @@
 ### Create an amenity
-POST http://localhost:3000/api/amenities
+POST http://localhost:5000/api/amenities
 Content-Type: application/json
 
 {

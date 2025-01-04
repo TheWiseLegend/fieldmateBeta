@@ -208,6 +208,78 @@ const styles = StyleSheet.create({
 
 // Frame 6
 const styless = StyleSheet.create({
+<<<<<<< HEAD
+    dateLayout: {
+        height: 55,
+        width: 132,
+        top: 33,
+        position: 'absolute'
+    },
+    minTypo: {
+        width: 62,
+        color: Color.colorSilver_200,
+        fontSize: FontSize.size_sm,
+        left: '50%',
+        top: 16,
+        textAlign: 'left',
+        fontFamily: FontFamily.poppinsMedium,
+        fontWeight: '500',
+        lineHeight: 22,
+        position: 'absolute'
+    },
+    backgroundLayout: {
+        borderRadius: Border.br_7xs,
+        height: 55,
+        width: 132,
+        left: 0,
+        top: 0,
+        position: 'absolute'
+    },
+    duration: {
+        fontSize: FontSize.buttonText_size,
+        color: Color.darkGray,
+        width: 96,
+        textAlign: 'left',
+        fontFamily: FontFamily.poppinsMedium,
+        fontWeight: '500',
+        lineHeight: 22,
+        top: 0,
+        left: 20,
+        position: 'absolute'
+    },
+    min: {
+        marginLeft: -32.4
+    },
+    date1: {
+        left: 33
+    },
+    date: {
+        width: 165,
+        left: 0,
+        top: 0,
+        height: 88,
+        position: 'absolute'
+    },
+    background: {
+        borderStyle: 'solid',
+        borderColor: Color.colorLightgray,
+        borderWidth: 1
+    },
+    min1: {
+        marginLeft: -31.4
+    },
+    date2: {
+        left: 226
+    },
+    frame: {
+        top: 226,
+        width: 358,
+        overflow: 'hidden',
+        height: 88,
+        left: 20,
+        position: 'absolute'
+    }
+=======
   dateLayout: {
     height: 55,
     width: 132,
@@ -278,4 +350,5 @@ const styless = StyleSheet.create({
     left: 20,
     position: 'absolute'
   }
+>>>>>>> 4c5850d05b8cd68052094742a93a69057a7cc264
 });
