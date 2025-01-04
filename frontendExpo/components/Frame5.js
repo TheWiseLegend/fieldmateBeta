@@ -1,30 +1,36 @@
-import * as React from 'react';
+import React from 'react';
 import { Image } from 'expo-image';
 import { StyleSheet, Text, View } from 'react-native';
 import { FontFamily, FontSize, Color, Border } from '../GlobalStyles';
 
-//BookCard
-const Frame5 = () => {
+/**
+ * @param {object} props
+ */
+export default function Frame5({}) {
   return (
     <View style={[styles.frame, styles.framePosition]}>
       <Image
         style={[styles.frameChild, styles.frameChildPosition]}
-        contentFit="cover"
-        source={require('../assets/ellipse-10.png')}
+        contentFit="cover" // @ts-expect-error
+        source={require('../assets/circle.png')}
       />
       <Image
         style={[styles.frameIcon, styles.framePosition]}
-        contentFit="cover"
-        source={require('../assets/frame4.png')}
+        contentFit="cover" // @ts-expect-error
+        source={require('../assets/arrow-left.png')}
       />
+
       <View style={[styles.frame1, styles.frameFlexBox]}>
         <Text style={styles.bookASlot}>Book A Slot</Text>
       </View>
+
       <View style={[styles.frame2, styles.frameFlexBox]}>
         <View style={styles.date}>
           <Text style={[styles.date1, styles.date1Typo]}>Date</Text>
+
           <View style={[styles.date2, styles.date2Layout]}>
             <View style={[styles.background, styles.date2Layout]} />
+
             <Text style={[styles.monday09December, styles.date1Typo]}>
               Monday, 09 December 2024
             </Text>
@@ -33,7 +39,7 @@ const Frame5 = () => {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   framePosition: {
@@ -131,5 +137,3 @@ const styles = StyleSheet.create({
     left: 13
   }
 });
-
-export default Frame5;

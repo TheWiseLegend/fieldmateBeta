@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import {
   Border,
@@ -8,16 +8,22 @@ import {
   Padding
 } from '../GlobalStyles.js';
 
-export default function FrameComponent1() {
+/**
+ * @param {object} props
+ */
+export default function FrameComponent1({}) {
   return (
     <View style={styles.frameWrapper}>
       <View style={[styles.frame, styles.frameFlexBox]}>
         <View style={[styles.frame1, styles.frameFlexBox]}>
           <View style={styles.frameChild} />
+
           <View style={styles.createMatchButton}>
             <Text style={[styles.book, styles.bookLayout]}>Book</Text>
           </View>
+
           <Text style={[styles.rm, styles.rmFlexBox]}>30.00 RM</Text>
+
           <Text style={[styles.startingFrom, styles.rmFlexBox]}>
             Starting from
           </Text>
@@ -43,14 +49,7 @@ const styles = StyleSheet.create({
   frameChild: {
     top: 0,
     left: 0,
-    shadowColor: 'rgba(0, 0, 0, 0.25)',
-    shadowOffset: {
-      width: 0,
-      height: 4
-    },
-    shadowRadius: 4,
     elevation: 4,
-    shadowOpacity: 1,
     borderRadius: Border.br_3xs,
     backgroundColor: Color.surface,
     borderStyle: 'solid',

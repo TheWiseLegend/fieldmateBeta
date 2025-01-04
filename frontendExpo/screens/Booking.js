@@ -1,44 +1,49 @@
-import * as React from 'react';
+import React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { Image } from 'expo-image';
 import Frame6 from '../components/Frame6.js';
 import Frame5 from '../components/Frame5.js';
 import Frame from '../components/Frame.js';
 import Frame1 from '../components/Frame1.js';
-import ButtomFrame from '../components/ButtomFrame.js';
 import Header from '../components2/Header.jsx';
 import { FontSize, Color, FontFamily, Border } from '../GlobalStyles.js';
 
 export default function BookingSection() {
   return (
-    <View style={styles.bookingSection}>
+    <View id="booking-screen" className="screen" style={styles.bookingSection}>
       <Header />
       <View style={[styles.bookASlotWrapper, styles.primaryButtonFlexBox]}>
         <View style={styles.bookASlot}>
-          <Text
-            style={[styles.bookingTime, styles.doYouWantTypo]}
-          >{`Booking Time `}</Text>
+          <Text style={[styles.bookingTime, styles.doYouWantTypo]}>
+            Booking Time
+          </Text>
+
           <Text style={[styles.doYouWant, styles.doYouWantTypo]}>
             Do you want to create a match post? (Look for more players)
           </Text>
+
           <View style={styles.sync}>
-            <Text
-              style={[styles.createAMatch, styles.doYouWantTypo]}
-            >{`Create a Match `}</Text>
+            <Text style={[styles.createAMatch, styles.doYouWantTypo]}>
+              Create a Match
+            </Text>
+
             <Image
               style={styles.toggleIcon}
-              contentFit="cover"
+              contentFit="cover" // @ts-expect-error
               source={require('../assets/toggle.png')}
             />
           </View>
+
           <View style={[styles.primaryButton, styles.primaryButtonFlexBox]}>
             <Text style={styles.proceedToPayment}>Proceed to payment</Text>
           </View>
-          <BookCard />
-          {/* <Frame6 /> */}
-          <BookCard />
+
+          <Frame6 />
+
           <Frame pM="12:00 PM" pM1="1:00 PM" pM2="2:00 PM" />
+
           <Frame1 pM="3:00 PM" pM1="4:00 PM" pM2="5:00 PM" />
+
           <Frame1
             frameTop={542}
             frameLeft={52}
@@ -46,19 +51,19 @@ export default function BookingSection() {
             pM1="7:00 PM"
             pM2="8:00 PM"
           />
+
           <Frame
-            frameTop={609}
-            backgroundBorderColor="#d7d7d7"
             pM="9:00 PM"
-            pMColor="#bababa"
             pM1="10:00 PM"
             pM2="11:00 PM"
+            frameTop={609}
+            pMColor="#bababa"
+            backgroundBorderColor="#d7d7d7"
           />
-          <BookCard />
-          {/* <Frame5 /> */}
+
+          <Frame5 />
         </View>
       </View>
-      <ButtomFrame />
     </View>
   );
 }

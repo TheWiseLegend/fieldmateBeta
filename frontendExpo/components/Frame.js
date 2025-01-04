@@ -2,11 +2,32 @@ import React, { useMemo } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Border, FontFamily, FontSize, Color } from '../GlobalStyles.js';
 
-const getStyleValue = (key, value) => {
+/**
+ * @param {string} key
+ * @param {string | number | undefined} value
+ */
+function getStyleValue(key, value) {
   if (value === undefined) return;
   return { [key]: value === 'unset' ? undefined : value };
-};
-const Frame = ({ frameTop, backgroundBorderColor, pM, pMColor, pM1, pM2 }) => {
+}
+
+/**
+ * @param {object} props
+ * @param {string} props.pM
+ * @param {string} props.pM1
+ * @param {string} props.pM2
+ * @param {number} [props.frameTop]
+ * @param {string} [props.backgroundBorderColor]
+ * @param {string} [props.pMColor]
+ */
+export default function Frame({
+  frameTop,
+  backgroundBorderColor,
+  pM,
+  pMColor,
+  pM1,
+  pM2
+}) {
   const frameStyle = useMemo(() => {
     return { ...getStyleValue('top', frameTop) };
   }, [frameTop]);
@@ -27,11 +48,13 @@ const Frame = ({ frameTop, backgroundBorderColor, pM, pMColor, pM1, pM2 }) => {
         />
         <Text style={[styles.pm, styles.pmTypo, pMStyle]}>{pM}</Text>
       </View>
+
       <View style={[styles.date1, styles.frameFlexBox]}>
         <View style={styles.date}>
           <View style={[styles.background1, styles.backgroundLayout]} />
           <Text style={[styles.pm1, styles.pmTypo]}>{pM1}</Text>
         </View>
+
         <View style={styles.date}>
           <View style={[styles.background1, styles.backgroundLayout]} />
           <Text style={[styles.pm1, styles.pmTypo]}>{pM2}</Text>
@@ -39,7 +62,7 @@ const Frame = ({ frameTop, backgroundBorderColor, pM, pMColor, pM1, pM2 }) => {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   frameFlexBox: {
@@ -100,5 +123,3 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   }
 });
-
-export default Frame;

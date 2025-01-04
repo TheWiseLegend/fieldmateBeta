@@ -1,28 +1,37 @@
-import * as React from 'react';
+import React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { FontSize, FontFamily, Color, Border } from '../GlobalStyles.js';
 
-export default function WeekdaysDatePicker() {
+/**
+ * @param {object} props
+ */
+export default function WeekdaysDatePicker({}) {
   return (
     <View style={styles.weekdaysDatePicker}>
       <View style={styles.calendarDate}>
         <Text style={styles.m}>M</Text>
       </View>
+
       <View style={styles.calendarDate}>
         <Text style={styles.m}>T</Text>
       </View>
+
       <View style={styles.calendarDate}>
         <Text style={styles.m}>W</Text>
       </View>
+
       <View style={styles.calendarDate}>
         <Text style={styles.m}>T</Text>
       </View>
+
       <View style={styles.calendarDate}>
         <Text style={styles.m}>F</Text>
       </View>
+
       <View style={styles.calendarDate}>
         <Text style={styles.m}>S</Text>
       </View>
+
       <View style={styles.calendarDate}>
         <Text style={styles.m}>S</Text>
       </View>

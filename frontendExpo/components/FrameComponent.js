@@ -1,6 +1,5 @@
-import * as React from 'react';
+import React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import {
   Padding,
   Color,
@@ -10,39 +9,35 @@ import {
   Gap
 } from '../GlobalStyles.js';
 
-export default function FrameComponent() {
+/**
+ * @param {object} props
+ */
+export default function FrameComponent({}) {
   return (
     <View style={styles.frameParent}>
-      <LinearGradient
-        style={styles.frame}
-        locations={[1]}
-        colors={['rgba(119, 119, 119, 0.18)']}
-      >
+      <View style={styles.frame}>
+        <View style={styles.frame1}>
+          <Text style={styles.openingTimes}>Opening Times:</Text>
+
+          <Text style={[styles.pm1100Pm, styles.pm1100PmTypo]}>
+            04:00 PM -11:00 PM
+          </Text>
+        </View>
+
         <View style={[styles.contactUsWrapper, styles.wrapperFlexBox]}>
           <Text style={styles.contactUs}>Contact Us</Text>
         </View>
-        <View style={styles.frame1}>
-          <Text style={styles.openingTimes}>{`Opening Times:
-`}</Text>
-          <Text
-            style={[styles.pm1100Pm, styles.pm1100PmTypo]}
-          >{`04:00 PM -11:00 PM
-`}</Text>
-        </View>
-      </LinearGradient>
-      <LinearGradient
-        style={styles.frame2}
-        locations={[1]}
-        colors={['rgba(119, 119, 119, 0.18)']}
-      >
-        <Text
-          style={[styles.staduimLocationCyberjaya, styles.pm1100PmTypo]}
-        >{`Staduim location:
-Cyberjaya`}</Text>
+      </View>
+
+      <View style={styles.frame2}>
+        <Text style={[styles.staduimLocationCyberjaya, styles.pm1100PmTypo]}>
+          Staduim location: Cyberjaya
+        </Text>
+
         <View style={[styles.directionsWrapper, styles.wrapperFlexBox]}>
           <Text style={styles.contactUs}>Directions</Text>
         </View>
-      </LinearGradient>
+      </View>
     </View>
   );
 }

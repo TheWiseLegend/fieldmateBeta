@@ -3,17 +3,19 @@ import { Image } from 'expo-image';
 import { StyleSheet, Text, View } from 'react-native';
 import { Color, FontFamily, FontSize, Border, Padding } from '../GlobalStyles';
 
+/**
+ * @param {string} key
+ * @param {string | number | undefined} value
+ */
 function getStyleValue(key, value) {
   if (value === undefined) return;
   return { [key]: value === 'unset' ? undefined : value };
 }
 
 /**
- *
  * @param {object} props
  * @param {number} [props.groupViewTop]
  * @param {number} [props.groupViewLeft]
- * @returns
  */
 export default function LFGCard({ groupViewTop, groupViewLeft }) {
   const groupViewStyle = useMemo(() => {
@@ -27,39 +29,34 @@ export default function LFGCard({ groupViewTop, groupViewLeft }) {
     <View style={[styles.vectorParent, groupViewStyle]}>
       <Image
         style={[styles.instanceChild, styles.instanceLayout]}
-        contentFit="cover"
-        // @ts-expect-error
+        contentFit="cover" // @ts-expect-error
         source={require('../assets/rectangle-51.png')}
       />
 
       <Image
-        style={styles.homeItem}
-        contentFit="cover"
-        // @ts-expect-error
-        source={require('../assets/ellipse-9.png')}
+        style={[styles.profileLayout]}
+        contentFit="cover" // @ts-expect-error
+        source={require('../assets/profile.png')}
       />
       <Text style={styles.title}>Name </Text>
 
       <Image
         style={[styles.vectorIcon, styles.iconLayout1]}
-        contentFit="cover"
-        // @ts-expect-error
+        contentFit="cover" // @ts-expect-error
         source={require('../assets/calender.png')}
       />
       <Text style={[styles.aug4, styles.aug4Typo]}>20 Aug - 4 Sep</Text>
 
       <Image
         style={[styles.vectorIcon, styles.instanceLayout]}
-        contentFit="cover"
-        // @ts-expect-error
+        contentFit="cover" // @ts-expect-error
         source={require('../assets/location.png')}
       />
       <Text style={[styles.location, styles.aug4Typo]}>Location</Text>
 
       <Image
         style={[styles.instanceItem, styles.instanceLayout]}
-        contentFit="cover"
-        // @ts-expect-error
+        contentFit="cover" // @ts-expect-error
         source={require('../assets/person.png')}
       />
       <Text style={[styles.playersPx, styles.aug4Typo]}>Players px</Text>
@@ -74,15 +71,15 @@ export default function LFGCard({ groupViewTop, groupViewLeft }) {
 }
 
 const styles = StyleSheet.create({
-  iconLayout1: {
-    maxHeight: '100%',
+  profileLayout: {
+    top: 446,
+    left: 21,
+    height: 43,
+    width: 41,
     position: 'absolute'
   },
-  homeItem: {
-    top: 518,
-    width: 41,
-    height: 43,
-    left: 21,
+  iconLayout1: {
+    maxHeight: '100%',
     position: 'absolute'
   },
   instanceLayout: {

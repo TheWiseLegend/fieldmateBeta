@@ -2,11 +2,24 @@ import React, { useMemo } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Border, Color, FontSize, FontFamily } from '../GlobalStyles.js';
 
-const getStyleValue = (key, value) => {
+/**
+ * @param {string} key
+ * @param {string | number | undefined} value
+ */
+function getStyleValue(key, value) {
   if (value === undefined) return;
   return { [key]: value === 'unset' ? undefined : value };
-};
-const Frame1 = ({ frameTop, frameLeft, pM, pM1, pM2 }) => {
+}
+
+/**
+ * @param {object} props
+ * @param {string} props.pM
+ * @param {string} props.pM1
+ * @param {string} props.pM2
+ * @param {number} [props.frameTop]
+ * @param {number} [props.frameLeft]
+ */
+export default function Frame1({ frameTop, frameLeft, pM, pM1, pM2 }) {
   const frame1Style = useMemo(() => {
     return {
       ...getStyleValue('top', frameTop),
@@ -20,11 +33,13 @@ const Frame1 = ({ frameTop, frameLeft, pM, pM1, pM2 }) => {
         <View style={[styles.background, styles.date2Position]} />
         <Text style={styles.pm}>{pM}</Text>
       </View>
+
       <View style={styles.date1}>
         <View style={styles.date2Position}>
           <View style={[styles.background, styles.date2Position]} />
           <Text style={styles.pm}>{pM1}</Text>
         </View>
+
         <View style={styles.date3}>
           <View style={[styles.background, styles.date2Position]} />
           <Text style={styles.pm}>{pM2}</Text>
@@ -32,7 +47,7 @@ const Frame1 = ({ frameTop, frameLeft, pM, pM1, pM2 }) => {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   date2Position: {
@@ -88,5 +103,3 @@ const styles = StyleSheet.create({
     position: 'absolute'
   }
 });
-
-export default Frame1;

@@ -3,28 +3,36 @@ import { Image } from 'expo-image';
 import { StyleSheet, View, Text } from 'react-native';
 import { FontFamily, FontSize, Color, Border } from '../GlobalStyles.js';
 
-export default function BookCard() {
+/**
+ * @param {object} props
+ */
+export default function BookCard({}) {
   return (
     <>
       <View style={[styles.frame, styles.framePosition]}>
         <Image
           style={[styles.frameChild, styles.frameChildPosition]}
-          contentFit="cover"
-          source={require('../assets/ellipse-10.png')}
+          contentFit="cover" // @ts-expect-error
+          source={require('../assets/circle.png')}
         />
+
         <Image
           style={[styles.frameIcon, styles.framePosition]}
-          contentFit="cover"
-          source={require('../assets/frame4.png')}
+          contentFit="cover" // @ts-expect-error
+          source={require('../assets/arrow-left.png')}
         />
+
         <View style={[styles.frame1, styles.frameFlexBox]}>
           <Text style={styles.bookASlot}>Book A Slot</Text>
         </View>
+
         <View style={[styles.frame2, styles.frameFlexBox]}>
           <View style={styles.date}>
             <Text style={[styles.date1, styles.date1Typo]}>Date</Text>
+
             <View style={[styles.date2, styles.date2Layout]}>
               <View style={[styles.background, styles.date2Layout]} />
+
               <Text style={[styles.monday09December, styles.date1Typo]}>
                 Monday, 09 December 2024
               </Text>
@@ -32,30 +40,38 @@ export default function BookCard() {
           </View>
         </View>
       </View>
-      //Frame 6
+
+      {/* Frame 6 */}
+
       <View style={styless.frame}>
         <View style={styless.date}>
           <Text style={styless.duration}>Duration</Text>
+
           <View style={[styless.date1, styless.dateLayout]}>
             <Image
               style={styless.backgroundLayout}
-              contentFit="cover"
+              contentFit="cover" // @ts-expect-error
               source={require('../assets/background.png')}
             />
+
             <Text style={[styless.min, styless.minTypo]}>60 min</Text>
           </View>
         </View>
+
         <View style={[styless.date2, styless.dateLayout]}>
           <View style={[styless.background, styless.backgroundLayout]} />
+
           <Text style={[styless.min1, styless.minTypo]}>120 min</Text>
         </View>
       </View>
-      // Bookingsection Booking time
+
+      {/* Bookingsection Booking time */}
+
       <View style={styles.bookingSection}>
         <View style={[styles.bookASlotWrapper, styles.primaryButtonFlexBox]}>
           <View style={styles.bookASlot}>
             <Text style={[styles.bookingTime, styles.doYouWantTypo]}>
-              {'Booking Time '}
+              Booking Time
             </Text>
           </View>
         </View>
@@ -191,7 +207,6 @@ const styles = StyleSheet.create({
 });
 
 // Frame 6
-
 const styless = StyleSheet.create({
 <<<<<<< HEAD
     dateLayout: {
