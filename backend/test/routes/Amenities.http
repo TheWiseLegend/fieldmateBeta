@@ -1,24 +1,41 @@
+@baseUrl = http://13.229.202.42:5000/api/amenities
+
+### Get all amenities
+GET {{baseUrl}}/
+Content-Type: application/json
+
+{
+  
+}
+
+### Get an amenity
+GET {{baseUrl}}/1
+Content-Type: application/json
+
+{
+  
+}
+
 ### Create an amenity
-POST http://localhost:5000/api/amenities
+POST {{baseUrl}}/
 Content-Type: application/json
 
 {
   "amenity_name": "WiFi"
 }
 
-###
-
 ### Update an amenity
-PUT http://localhost:3000/api/amenities/203
+PUT {{baseUrl}}/1
 Content-Type: application/json
 
 {
   "amenity_name": "High-Speed WiFi"
 }
 
-###
-
 ### Delete an amenity
-DELETE http://localhost:3000/api/amenities/203
+DELETE {{baseUrl}}/1
+Content-Type: application/json
 
-###
+{
+
+}

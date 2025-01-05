@@ -1,27 +1,21 @@
 /**
- * @file src/controllers/fieldController.js
+ * @file src/controllers/fieldAmenityController.js
  */
 
 /** @import { Request, Response } from 'express' */
 import db from '../db.js';
 
-const TABLE_NAME = 'amenities';
+const TABLE_NAME = 'field_amenities';
 
 /**
  * @param {Request} req
  * @param {Response} res
  */
 export async function GET(req, res) {
-  const { id } = req.params;
   const { limit } = req.query;
 
   let query = `SELECT * FROM ${TABLE_NAME}`;
   const values = [];
-
-  if (id) {
-    query += ` WHERE amenity_id = $${values.length + 1}`;
-    values.push(id);
-  }
 
   if (limit) {
     query += ` LIMIT $${values.length + 1}`;
@@ -41,10 +35,10 @@ export async function GET(req, res) {
  * @param {Response} res
  */
 export async function CREATE(req, res) {
-  const { amenity_name } = req.body;
+  const { field_id, amenity_id } = req.body;
 
-  const query = `INSERT INTO ${TABLE_NAME} (amenity_name) VALUES ($1) RETURNING *`;
-  const values = [amenity_name];
+  const query = `INSERT INTO ${TABLE_NAME} (field_id, amenity_id) VALUES ($1, $2) RETURNING *`;
+  const values = [field_id, amenity_id];
 
   try {
     const { rows } = await db.query(query, values);
@@ -59,14 +53,13 @@ export async function CREATE(req, res) {
  * @param {Response} res
  */
 export async function UPDATE(req, res) {
-  const { id } = req.params;
+  const { old_data, new_data } = req.body;
 
-  const pairs = Object.entries(req.body).filter(([_, val]) => val !== undefined);
-  const toUpdate = pairs.map(([key], i) => `${key} = $${i + 1}`).join(', ');
-  const values = pairs.map(([_, val]) => val);
+  const { field_id: old_field_id, amenity_id: old_amenity_id } = old_data;
+  const { field_id: new_field_id, amenity_id: new_amenity_id } = new_data;
 
-  const query = `UPDATE ${TABLE_NAME} SET ${toUpdate} WHERE amenity_id = $${toUpdate.length + 1} RETURNING *`;
-  values.push(id);
+  const query = `UPDATE ${TABLE_NAME} SET field_id = $1, amenity_id = $2 WHERE field_id = $3 AND amenity_id = $4 RETURNING *`;
+  const values = [old_field_id, old_amenity_id, new_field_id, new_amenity_id];
 
   try {
     const { rows } = await db.query(query, values);
@@ -81,10 +74,10 @@ export async function UPDATE(req, res) {
  * @param {Response} res
  */
 export async function DELETE(req, res) {
-  const { id } = req.params;
+  const { field_id, amenity_id } = req.body;
 
-  const query = `DELETE FROM ${TABLE_NAME} WHERE amenity_id = $1 RETURNING *`;
-  const values = [id];
+  const query = `DELETE FROM ${TABLE_NAME} WHERE field_id = $1 AND amenity_id = $2 RETURNING *`;
+  const values = [field_id, amenity_id];
 
   try {
     const { rows } = await db.query(query, values);

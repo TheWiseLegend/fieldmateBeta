@@ -1,21 +1,50 @@
-### Create a field amenity
-POST http://localhost:5000/api/field_amenities
+@baseUrl = http://13.229.202.42:5000/api/field_amenities
+
+### Get all field amenities
+GET {{baseUrl}}/
 Content-Type: application/json
 
 {
-  "field_id": 5,
-  "amenity_id": 3
+
 }
 
-###
+### Get a field amenity
+GET {{baseUrl}}/
+Content-Type: application/json
+
+{
+
+}
+
+### Create a field amenity
+POST {{baseUrl}}/
+Content-Type: application/json
+
+{
+  "field_id": 1,
+  "amenity_id": 1
+}
+
+### Update a field amenity
+PUT {{baseUrl}}/
+Content-Type: application/json
+
+{
+  "old_data": {
+    "field_id": 1,
+    "amenity_id": 1
+  },
+  "new_data": {
+    "field_id": 2,
+    "amenity_id": 2
+  }
+}
 
 ### Delete a field amenity
-DELETE http://localhost:5000/api/field_amenities
+DELETE {{baseUrl}}/
 Content-Type: application/json
 
 {
-  "field_id": 5,
-  "amenity_id": 3
+  "field_id": 1,
+  "amenity_id": 1
 }
-
-###

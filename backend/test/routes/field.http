@@ -1,36 +1,48 @@
-@baseurl = http://13.229.202.42:5000/api/fields
-p
+@baseUrl = http://13.229.202.42:5000/api/fields
+
+### Get all fields
+GET {{baseUrl}}/
+Content-Type: application/json
+
+{
+  
+}
+
+### Get a field
+GET {{baseUrl}}/
+Content-Type: application/json
+
+{
+  
+}
+
 ### Create a field
-POST {{baseurl}}
+POST {{baseUrl}}/
 Content-Type: application/json
 
 {
   "field_name": "Field A",
-  "vendor_id": 1,
   "address": "123 Field St.",
-  "capacity": 100,
-  "price": 100.00,
-  "status": "available"
 }
 
-###
-
 ### Update a field
-PUT http://localhost:3000/api/fields/4
+PUT {{baseUrl}}/1
 Content-Type: application/json
 
 {
-  "field_name": "Field B",
   "vendor_id": 102,
+  "field_name": "Field B",
   "address": "456 Field St.",
   "capacity": 150,
   "price": 150.00,
-  "status": "booked"
+  "status": "booked",
+  "maps_id": "iYnLfyzWU7vBTcyF9",
 }
 
-###
-
 ### Delete a field
-DELETE http://localhost:3000/api/fields/236
+DELETE {{baseUrl}}/1
+Content-Type: application/json
 
-###
+{
+
+}

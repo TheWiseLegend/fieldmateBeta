@@ -1,11 +1,17 @@
-import express from 'express';
-import { getLFG, createLFG, updateLFG, deleteLFG } from '../controllers/lfgController.js';
+/**
+ * https://localhost/api/lfgs
+ * @file src/routes/lfgRoutes.js
+ */
 
-const router = express.Router();
+import { Router } from 'express';
+import { GET, CREATE, UPDATE, DELETE } from '../controllers/lfgController.js';
 
-router.get('/', getLFG);
-router.post('/', createLFG);
-router.put('/:id', updateLFG);
-router.delete('/:id', deleteLFG);
+const router = Router();
+
+router.get('/', GET);
+router.get('/:id', GET);
+router.post('/', CREATE);
+router.put('/:id', UPDATE);
+router.delete('/:id', DELETE);
 
 export default router;

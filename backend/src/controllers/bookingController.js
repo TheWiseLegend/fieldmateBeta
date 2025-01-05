@@ -1,40 +1,101 @@
-import pool from '../db.js'; // Import pool for database access
+/**
+ * @file src/controllers/bookingController.js
+ */
 
-// Create a booking
-export async function createBooking(req, res) {
-  const { user_id, field_id, start_datetime, duration, current_players, status } = req.body;
+/** @import { Request, Response } from 'express' */
+import db from '../db.js';
+
+const TABLE_NAME = 'bookings';
+
+/**
+ * @param {Request} req
+ * @param {Response} res
+ */
+export async function GET(req, res) {
+  const { id } = req.params;
+  const { limit } = req.query;
+
+  let query = `SELECT * FROM ${TABLE_NAME}`;
+  const values = [];
+
+  if (id) {
+    query += ` WHERE booking_id = $${values.length + 1}`;
+    values.push(id);
+  }
+
+  if (limit) {
+    query += ` LIMIT $${values.length + 1}`;
+    values.push(limit);
+  }
+
   try {
-    const result = await pool.query(
-      'INSERT INTO bookings (user_id, field_id, start_datetime, duration, current_players, status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-      [user_id, field_id, start_datetime, duration, current_players, status]
-    );
-    res.status(201).json(result.rows[0]);
+    const { rows } = await db.query(query, values);
+    res.status(200).json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 }
 
-// Update a booking
-export async function updateBooking(req, res) {
-  const { id } = req.params;
-  const { user_id, field_id, start_datetime, duration, current_players, status } = req.body;
+/**
+ * @param {Request} req
+ * @param {Response} res
+ */
+export async function CREATE(req, res) {
+  const { user_id, field_id, start_datetime, duration, lfg_id, current_players } = req.body;
+
+  /** @type {string[] | string} */
+  let pNames = ['user_id', 'field_id', 'start_datetime', 'duration', 'lfg_id'];
+  if (current_players !== undefined) pNames.push('current_players');
+
+  const values = pNames.map((pName) => req.body[pName]);
+  pNames = pNames.join(', ');
+  const pNums = Array.from({ length: values.length }, (_, i) => `$${i + 1}`).join(', ');
+
+  const query = `INSERT INTO ${TABLE_NAME} (${pNames}) VALUES (${pNums}) RETURNING *`;
+
   try {
-    const result = await pool.query(
-      'UPDATE bookings SET user_id = $1, field_id = $2, start_datetime = $3, duration = $4, current_players = $5, status = $6 WHERE booking_id = $7 RETURNING *',
-      [user_id, field_id, start_datetime, duration, current_players, status, id]
-    );
-    res.status(200).json(result.rows[0]);
+    const { rows } = await db.query(query, values);
+    res.status(201).json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 }
 
-// Delete a booking
-export async function deleteBooking(req, res) {
+/**
+ * @param {Request} req
+ * @param {Response} res
+ */
+export async function UPDATE(req, res) {
   const { id } = req.params;
+
+  const pairs = Object.entries(req.body).filter(([_, val]) => val !== undefined);
+  const toUpdate = pairs.map(([key], i) => `${key} = $${i + 1}`).join(', ');
+  const values = pairs.map(([_, val]) => val);
+
+  const query = `UPDATE ${TABLE_NAME} SET ${toUpdate} WHERE booking_id = $${toUpdate.length + 1} RETURNING *`;
+  values.push(id);
+
   try {
-    await pool.query('DELETE FROM bookings WHERE booking_id = $1', [id]);
-    res.status(204).send();
+    const { rows } = await db.query(query, values);
+    res.status(200).json(rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
+/**
+ * @param {Request} req
+ * @param {Response} res
+ */
+export async function DELETE(req, res) {
+  const { id } = req.params;
+
+  const query = `DELETE FROM ${TABLE_NAME} WHERE booking_id = $1 RETURNING *`;
+  const values = [id];
+
+  try {
+    const { rows } = await db.query(query, values);
+    res.status(204).send(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

@@ -1,12 +1,17 @@
-import express from 'express';
-import { createReview, updateReview, deleteReview, getReviews, getReview } from '../controllers/reviewController.js';
+/**
+ * https://localhost/api/reviews
+ * @file src/routes/reviewRoutes.js
+ */
 
-const router = express.Router();
+import { Router } from 'express';
+import { GET, CREATE, UPDATE, DELETE } from '../controllers/reviewController.js';
 
-router.post('/', createReview); // Create a review
-router.put('/:id', updateReview); // Update a review
-router.delete('/:id', deleteReview); // Delete a review
-router.get('/', getReviews); // Get all reviews
-router.get('/:id', getReview); // Get a specific review
+const router = Router();
+
+router.get('/', GET);
+router.get('/:id', GET);
+router.post('/', CREATE);
+router.put('/:id', UPDATE);
+router.delete('/:id', DELETE);
 
 export default router;

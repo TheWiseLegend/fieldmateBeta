@@ -1,35 +1,33 @@
 @baseUrl = http://13.229.202.42:5000/api/users
 
 ### Get all users
-GET {{baseUrl}}
+GET {{baseUrl}}/
 Content-Type: application/json
 
 {
 
 }
 
-### Create a user
-GET http://13.229.202.42:5000/api/users
+### Get a user
+GET {{baseUrl}}/1
 Content-Type: application/json
 
 {
-  "email": "john.doe@example.com",
-  "password": "password123"
+  
 }
 
 ### Create a user
-POST {{baseUrl}}
+POST {{baseUrl}}/
 Content-Type: application/json
 
 {
   "name": "John Doe",
   "email": "john.doe@example.com",
-  "password": "password123",
-  "phone": "1234567890"
+  "password": "password123"
 }
 
 ### Create a vendor user
-POST {{baseUrl}}
+POST {{baseUrl}}/
 Content-Type: application/json
 
 {
@@ -39,9 +37,6 @@ Content-Type: application/json
   "phone": "1234567890",
   "user_role": "vendor"
 }
-
-###
-###
 
 ### Update a user
 PUT {{baseUrl}}/1
@@ -54,9 +49,10 @@ Content-Type: application/json
   "phone": "0987654321"
 }
 
-###
-
 ### Delete a user
 DELETE {{baseUrl}}/1
+Content-Type: application/json
 
-###
+{
+
+}

@@ -1,10 +1,17 @@
-import express from 'express';
-import { createBooking, updateBooking, deleteBooking } from '../controllers/bookingController.js';
+/**
+ * https://localhost/api/bookings
+ * @file src/routes/bookingRoutes.js
+ */
 
-const router = express.Router();
+import { Router } from 'express';
+import { GET, CREATE, UPDATE, DELETE } from '../controllers/bookingController.js';
 
-router.post('/', createBooking);
-router.put('/:id', updateBooking);
-router.delete('/:id', deleteBooking);
+const router = Router();
+
+router.get('/', GET);
+router.get('/:id', GET);
+router.post('/', CREATE);
+router.put('/:id', UPDATE);
+router.delete('/:id', DELETE);
 
 export default router;

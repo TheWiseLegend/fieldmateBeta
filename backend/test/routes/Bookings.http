@@ -1,5 +1,23 @@
+@baseUrl = http://13.229.202.42:5000/api/bookings
+
+### Get all bookings
+GET {{baseUrl}}/
+Content-Type: application/json
+
+{
+
+}
+
+### Get a booking
+GET {{baseUrl}}/1
+Content-Type: application/json
+
+{
+
+}
+
 ### Create a booking
-POST http://localhost:3000/api/bookings
+POST {{baseUrl}}/
 Content-Type: application/json
 
 {
@@ -7,28 +25,28 @@ Content-Type: application/json
   "field_id": 105,
   "start_datetime": "2024-11-01T10:00:00Z",
   "duration": 60,
+  "lfg_id": 1,
   "current_players": 1,
-  "status": "pending"
 }
 
-###
-
 ### Update a booking
-PUT http://localhost:3000/api/bookings/1
+PUT {{baseUrl}}/1
 Content-Type: application/json
 
 {
   "user_id": 101,
-  "field_id": 101,
-  "start_datetime": "2024-11-01T11:00:00Z",
-  "duration": 120,
+  "field_id": 105,
+  "start_datetime": "2024-11-01T10:00:00Z",
+  "duration": 60,
+  "lfg_id": 1,
   "current_players": 5,
-  "status": "confirmed"
+  "status": "confirmed",
 }
 
-###
-
 ### Delete a booking
-DELETE http://localhost:3000/api/bookings/101
+DELETE {{baseUrl}}/1
+Content-Type: application/json
 
-###
+{
+
+}

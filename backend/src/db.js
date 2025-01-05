@@ -1,19 +1,17 @@
 import pg from 'pg';
 
-// Database connection
-export const pool = new pg.Pool({
+export const db = new pg.Pool({
   user: 'postgres',
   host: 'localhost',
-  database: 'fieldmate',
+  database: 'postgres',
   password: '25717204',
   port: 5432
 });
 
 export function dbConnect() {
-  pool
-    .connect()
+  db.connect()
     .then(() => console.log('Database connected'))
     .catch((err) => console.log('Database connection error', err));
 }
 
-export default pool;
+export default db;

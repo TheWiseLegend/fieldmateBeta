@@ -1,59 +1,101 @@
-// /src/controllers/userController.js
-import db from '../db.js'; // Import pool for database access
+/**
+ * @file src/controllers/userController.js
+ */
 
-export async function getUser(req, res) {
-  const { email, password } = req.body;
+/** @import { Request, Response } from 'express' */
+import db from '../db.js';
+
+const TABLE_NAME = 'users';
+
+/**
+ * @param {Request} req
+ * @param {Response} res
+ */
+export async function GET(req, res) {
+  const { id } = req.params;
+  const { limit } = req.query;
+
+  let query = `SELECT * FROM ${TABLE_NAME}`;
+  const values = [];
+
+  if (id) {
+    query += ` WHERE user_id = $${values.length + 1}`;
+    values.push(id);
+  }
+
+  if (limit) {
+    query += ` LIMIT $${values.length + 1}`;
+    values.push(limit);
+  }
 
   try {
-    let result;
-    if (email && password) {
-      // Query for a specific user
-      result = await db.query('SELECT * FROM users WHERE email = $1 AND password = $2', [email, password]);
-    } else {
-      // Query for all users
-      result = await db.query('SELECT * FROM users');
-    }
-    res.status(200).json(result.rows); // Return the users
+    const { rows } = await db.query(query, values);
+    res.status(200).json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 }
 
-export async function createUser(req, res) {
+/**
+ * @param {Request} req
+ * @param {Response} res
+ */
+export async function CREATE(req, res) {
   const { name, email, password, phone, user_role } = req.body;
 
+  /** @type {string[] | string} */
+  let pNames = ['name', 'email', 'password', 'user_role'];
+  if (phone !== undefined) pNames.push('phone');
+
+  const values = pNames.map((pName) => req.body[pName]);
+  pNames = pNames.join(', ');
+  const pNums = Array.from({ length: values.length }, (_, i) => `$${i + 1}`).join(', ');
+
+  const query = `INSERT INTO ${TABLE_NAME} (${pNames}) VALUES (${pNums}) RETURNING *`;
+
   try {
-    const result = await db.query(
-      'INSERT INTO users (name, email, password, phone, user_role) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [name, email, password, phone, user_role]
-    );
-    res.status(201).json(result.rows[0]); // Return the created user
+    const { rows } = await db.query(query, values);
+    res.status(201).json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 }
 
-export async function updateUser(req, res) {
+/**
+ * @param {Request} req
+ * @param {Response} res
+ */
+export async function UPDATE(req, res) {
   const { id } = req.params;
-  const { name, email, password, phone, user_role } = req.body;
+
+  const pairs = Object.entries(req.body).filter(([_, val]) => val !== undefined);
+  const toUpdate = pairs.map(([key], i) => `${key} = $${i + 1}`).join(', ');
+  const values = pairs.map(([_, val]) => val);
+
+  const query = `UPDATE ${TABLE_NAME} SET ${toUpdate} WHERE user_id = $${toUpdate.length + 1} RETURNING *`;
+  values.push(id);
 
   try {
-    const result = await db.query(
-      'UPDATE users SET name = $1, email = $2, password = $3, phone = $4, user_role = $5 WHERE user_id = $6 RETURNING *',
-      [name, email, password, phone, user_role, id]
-    );
-    res.status(200).json(result.rows[0]);
+    const { rows } = await db.query(query, values);
+    res.status(200).json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 }
 
-export async function deleteUser(req, res) {
+/**
+ * @param {Request} req
+ * @param {Response} res
+ */
+export async function DELETE(req, res) {
   const { id } = req.params;
 
+  const query = `DELETE FROM ${TABLE_NAME} WHERE user_id = $1 RETURNING *`;
+  const values = [id];
+
   try {
-    await db.query('DELETE FROM users WHERE user_id = $1', [id]);
-    res.status(204).send(); // Send a 204 status for successful deletion
+    const { rows } = await db.query(query, values);
+    res.status(204).send(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

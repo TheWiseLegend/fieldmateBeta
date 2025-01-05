@@ -1,5 +1,7 @@
+@baseUrl = http://13.229.202.42:5000/api/booking_schedule
+
 ### Create a booking schedule
-POST http://localhost:5000/api/booking_schedule
+POST {{baseUrl}}/
 Content-Type: application/json
 
 {
@@ -7,10 +9,8 @@ Content-Type: application/json
   "status": "available"
 }
 
-###
-
 ### Update a booking schedule
-PUT http://localhost:5000/api/booking_schedule/1
+PUT {{baseUrl}}/1
 Content-Type: application/json
 
 {
@@ -18,9 +18,10 @@ Content-Type: application/json
   "status": "booked"
 }
 
-###
-
 ### Delete a booking schedule
-DELETE http://localhost:5000/api/booking_schedule/1
+DELETE {{baseUrl}}/1
+Content-Type: application/json
 
-###
+{
+
+}

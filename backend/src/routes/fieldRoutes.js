@@ -1,10 +1,17 @@
-import express from 'express';
-import { createField, updateField, deleteField } from '../controllers/fieldController.js';
+/**
+ * https://localhost/api/fields
+ * @file src/routes/fieldRoutes.js
+ */
 
-const router = express.Router();
+import { Router } from 'express';
+import { GET, CREATE, UPDATE, DELETE } from '../controllers/fieldController.js';
 
-router.post('/', createField);
-router.post('/', updateField);
-router.delete('/:id', deleteField);
+const router = Router();
+
+router.get('/', GET);
+router.get('/:id', GET);
+router.post('/', CREATE);
+router.put('/:id', UPDATE);
+router.delete('/:id', DELETE);
 
 export default router;

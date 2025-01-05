@@ -1,86 +1,101 @@
-import db from '../db.js'; // Import pool for database access
+/**
+ * @file src/controllers/lfgController.js
+ */
 
-// Get matches
-export async function getLFG(req, res) {
-  /** @type {{ filter: { address: string }, limit: number | undefined }}  */
-  const { filter = {}, limit } = req.query;
+/** @import { Request, Response } from 'express' */
+import db from '../db.js';
 
-  const queryParams = [];
-  let query = `
-SELECT 
-l.lfg_id,
-l.required_players,
-l.status,
-f.price,
-b.start_datetime,
-b.duration,
-u.name
-FROM 
-Bookings b
-JOIN 
-Fields f ON b.field_id = f.field_id
-JOIN 
-LFG l ON b.lfg_id = l.lfg_id
-JOIN 
-Users u ON b.user_id = u.user_id
-WHERE 
-l.status = 'open'
-AND l.required_players > 0
-`;
+const TABLE_NAME = 'lfg';
 
-  if (filter.address) {
-    query += ` AND f.address = $1`;
-    queryParams.push(filter.address);
+/**
+ * @param {Request} req
+ * @param {Response} res
+ */
+export async function GET(req, res) {
+  const { id } = req.params;
+  const { limit } = req.query;
+
+  let query = `SELECT * FROM ${TABLE_NAME}`;
+  const values = [];
+
+  if (id) {
+    query += ` WHERE user_id = $${values.length + 1}`;
+    values.push(id);
   }
 
   if (limit) {
-    query += ` LIMIT $${limit}`;
-    queryParams.push(limit);
+    query += ` LIMIT $${values.length + 1}`;
+    values.push(limit);
   }
 
   try {
-    const result = await db.query(query, queryParams);
-    res.status(200).json(result.rows);
+    const { rows } = await db.query(query, values);
+    res.status(200).json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 }
 
-// Create an LFG
-export async function createLFG(req, res) {
-  const { booking_id, required_players, status } = req.body;
+/**
+ * @param {Request} req
+ * @param {Response} res
+ */
+export async function CREATE(req, res) {
+  const { required_players, status } = req.body;
+
+  /** @type {string[] | string} */
+  let pNames = ['required_players'];
+  if (status !== undefined) pNames.push('status');
+
+  const values = pNames.map((pName) => req.body[pName]);
+  pNames = pNames.join(', ');
+  const pNums = Array.from({ length: values.length }, (_, i) => `$${i + 1}`).join(', ');
+
+  const query = `INSERT INTO ${TABLE_NAME} (${pNames}) VALUES (${pNums}) RETURNING *`;
+
   try {
-    const result = await db.query(
-      'INSERT INTO lfg (booking_id, required_players, status) VALUES ($1, $2, $3) RETURNING *',
-      [booking_id, required_players, status]
-    );
-    res.status(201).json(result.rows[0]);
+    const { rows } = await db.query(query, values);
+    res.status(201).json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 }
 
-// Update an LFG
-export async function updateLFG(req, res) {
+/**
+ * @param {Request} req
+ * @param {Response} res
+ */
+export async function UPDATE(req, res) {
   const { id } = req.params;
-  const { booking_id, required_players, status } = req.body;
+
+  const pairs = Object.entries(req.body).filter(([_, val]) => val !== undefined);
+  const toUpdate = pairs.map(([key], i) => `${key} = $${i + 1}`).join(', ');
+  const values = pairs.map(([_, val]) => val);
+
+  const query = `UPDATE ${TABLE_NAME} SET ${toUpdate} WHERE lfg_id = $${toUpdate.length + 1} RETURNING *`;
+  values.push(id);
+
   try {
-    const result = await db.query(
-      'UPDATE lfg SET booking_id = $1, required_players = $2, status = $3 WHERE lfg_id = $4 RETURNING *',
-      [booking_id, required_players, status, id]
-    );
-    res.status(200).json(result.rows[0]);
+    const { rows } = await db.query(query, values);
+    res.status(200).json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 }
 
-// Delete an LFG
-export async function deleteLFG(req, res) {
+/**
+ * @param {Request} req
+ * @param {Response} res
+ */
+export async function DELETE(req, res) {
   const { id } = req.params;
+
+  const query = `DELETE FROM ${TABLE_NAME} WHERE lfg_id = $1 RETURNING *`;
+  const values = [id];
+
   try {
-    await db.query('DELETE FROM lfg WHERE lfg_id = $1', [id]);
-    res.status(204).send();
+    const { rows } = await db.query(query, values);
+    res.status(204).send(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

@@ -1,14 +1,17 @@
-// /src/routes/userRoutes.js
-import express from 'express';
-import { createUser, updateUser, deleteUser, getUser } from '../controllers/userController.js';
+/**
+ * https://localhost/api/users
+ * @file src/routes/userRoutes.js
+ */
 
-const router = express.Router();
+import { Router } from 'express';
+import { GET, CREATE, UPDATE, DELETE } from '../controllers/userController.js';
 
-router.get('/', getUser); // get user info
-router.post('/', createUser); // Create user
-router.put('/:id', updateUser); // Update user
-router.delete('/:id', deleteUser); // Delete user
+const router = Router();
+
+router.get('/', GET);
+router.get('/:id', GET);
+router.post('/', CREATE);
+router.put('/:id', UPDATE);
+router.delete('/:id', DELETE);
 
 export default router;
-
-// https://localhost/api/users

@@ -1,40 +1,105 @@
-import pool from '../db.js'; // Import pool for database access
+/**
+ * @file src/controllers/fieldController.js
+ */
 
-// Create a field
-export async function createField(req, res) {
-  const { field_name, vendor_id, address, capacity, price, status } = req.body;
+/** @import { Request, Response } from 'express' */
+import db from '../db.js';
+
+const TABLE_NAME = 'fields';
+
+/**
+ * @param {Request} req
+ * @param {Response} res
+ */
+export async function GET(req, res) {
+  const { id } = req.params;
+  const { limit } = req.query;
+
+  let query = `SELECT * FROM ${TABLE_NAME}`;
+  const values = [];
+
+  if (id) {
+    query += ` WHERE field_id = $${values.length + 1}`;
+    values.push(id);
+  }
+
+  if (limit) {
+    query += ` LIMIT $${values.length + 1}`;
+    values.push(limit);
+  }
+
   try {
-    const result = await pool.query(
-      'INSERT INTO fields (field_name, vendor_id, address, capacity, price, status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-      [field_name, vendor_id, address, capacity, price, status]
-    );
-    res.status(201).json(result.rows[0]);
+    const { rows } = await db.query(query, values);
+    res.status(200).json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 }
 
-// Update a field
-export async function updateField(req, res) {
-  const { id } = req.params;
-  const { field_name, vendor_id, address, capacity, price, status } = req.body;
+/**
+ * @param {Request} req
+ * @param {Response} res
+ */
+export async function CREATE(req, res) {
+  const { vendor_id, field_name, address, capacity, price, status, maps_id } = req.body;
+
+  /** @type {string[] | string} */
+  let pNames = ['field_name', 'address'];
+  if (vendor_id !== undefined) pNames.push('vendor_id');
+  if (capacity !== undefined) pNames.push('capacity');
+  if (price !== undefined) pNames.push('price');
+  if (status !== undefined) pNames.push('status');
+  if (maps_id !== undefined) pNames.push('maps_id');
+
+  const values = pNames.map((pName) => req.body[pName]);
+  pNames = pNames.join(', ');
+  const pNums = Array.from({ length: values.length }, (_, i) => `$${i + 1}`).join(', ');
+
+  const query = `INSERT INTO ${TABLE_NAME} (${pNames}) VALUES (${pNums}) RETURNING *`;
+
   try {
-    const result = await pool.query(
-      'UPDATE fields SET field_name = $1, vendor_id = $2, address = $3, capacity = $4, price = $5, status = $6 WHERE field_id = $7 RETURNING *',
-      [field_name, vendor_id, address, capacity, price, status, id]
-    );
-    res.status(200).json(result.rows[0]);
+    const { rows } = await db.query(query, values);
+    res.status(201).json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 }
 
-// Delete a field
-export async function deleteField(req, res) {
+/**
+ * @param {Request} req
+ * @param {Response} res
+ */
+export async function UPDATE(req, res) {
   const { id } = req.params;
+
+  const pairs = Object.entries(req.body).filter(([_, val]) => val !== undefined);
+  const toUpdate = pairs.map(([key], i) => `${key} = $${i + 1}`).join(', ');
+  const values = pairs.map(([_, val]) => val);
+
+  const query = `UPDATE ${TABLE_NAME} SET ${toUpdate} WHERE field_id = $${toUpdate.length + 1} RETURNING *`;
+  values.push(id);
+
   try {
-    await pool.query('DELETE FROM fields WHERE field_id = $1', [id]);
-    res.status(204).send();
+    const { rows } = await db.query(query, values);
+    res.status(200).json(rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
+/**
+ * @param {Request} req
+ * @param {Response} res
+ */
+export async function DELETE(req, res) {
+  const { id } = req.params;
+
+  const query = `DELETE FROM ${TABLE_NAME} WHERE field_id = $1 RETURNING *`;
+  const values = [id];
+
+  try {
+    const { rows } = await db.query(query, values);
+    res.status(204).send(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

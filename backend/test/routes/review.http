@@ -1,32 +1,33 @@
-@baseUrl = http://localhost:3000/api/reviews
+@baseUrl = http://13.229.202.42:5000/api/reviews
 
 ### Get all reviews
-GET {{baseUrl}}
+GET {{baseUrl}}/
 Content-Type: application/json
 
-###
+{
 
-### Get a specific review
+}
+
+### Get a reviews
 GET {{baseUrl}}/1
 Content-Type: application/json
 
-###
+{
+
+}
 
 ### Create a review
-POST {{baseUrl}}
+POST {{baseUrl}}/
 Content-Type: application/json
 
 {
   "rating": 5,
   "user_id": 101,
-  "field_id": 101,
-  "review_text": "Great field!"
+  "field_id": 101
 }
 
-###
-
 ### Update a review
-PUT {{baseUrl}}/101
+PUT {{baseUrl}}/1
 Content-Type: application/json
 
 {
@@ -34,9 +35,10 @@ Content-Type: application/json
   "review_text": "Good field, but could be better."
 }
 
-###
-
 ### Delete a review
 DELETE {{baseUrl}}/1
+Content-Type: application/json
 
-###
+{
+
+}

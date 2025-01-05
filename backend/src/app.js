@@ -1,28 +1,31 @@
-// /src/app.js (or /src/server.js)
+/**
+ * This file exports the express app with all the routes and middlewares.
+ * @file src/app.js
+ */
+
 import express from 'express';
 import cors from 'cors';
 import { dbConnect } from './db.js';
 import userRoutes from './routes/userRoutes.js';
-import lfgRoutes from './routes/lfgRoutes.js';
 import fieldRoutes from './routes/fieldRoutes.js';
-import bookingRoutes from './routes/bookingRoutes.js';
 import amenityRoutes from './routes/amenityRoutes.js';
-import reviewRoutes from './routes/reviewRoutes.js'; // Import review routes
-// import paymentRoutes from './routes/paymentRoutes.js';  // If you need payment related routes
+import fieldAmenityRoutes from './routes/fieldAmenityRoutes.js';
+import lfgRoutes from './routes/lfgRoutes.js';
+import bookingRoutes from './routes/bookingRoutes.js';
+import reviewRoutes from './routes/reviewRoutes.js';
 
 export const app = express();
 app.use(cors());
 app.use(express.json());
 
-dbConnect(); // Connect to the database
+dbConnect();
 
-// Define your routes here
-app.use('/api/users', userRoutes); // Routes for users
-app.use('/api/lfgs', lfgRoutes); // Routes for LFGs
-app.use('/api/fields', fieldRoutes); // Routes for fields
-app.use('/api/bookings', bookingRoutes); // Routes for bookings
-app.use('/api/amenities', amenityRoutes); // Routes for amenities
-app.use('/api/reviews', reviewRoutes); // Routes for reviews
-// app.use('/api/payments', paymentRoutes);   // Routes for payments (if applicable)
+app.use('/api/users', userRoutes);
+app.use('/api/fields', fieldRoutes);
+app.use('/api/amenities', amenityRoutes);
+app.use('/api/field_amenities', fieldAmenityRoutes);
+app.use('/api/lfgs', lfgRoutes);
+app.use('/api/bookings', bookingRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 export default app;
