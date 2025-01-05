@@ -3,9 +3,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
-import HomeScreenComponent from '../screens/Home.js';
-import StadiumsScreenComponent from '../screens/Stadiums.js';
-import MatchesScreenComponent from '../screens/Matches.js';
+
+// import HomeScreenComponent from '../screens/Home.js';
+// import StadiumsScreenComponent from '../screens/Stadiums.js';
+// import MatchesScreenComponent from '../screens/Matches.js';
 import StadiumViewScreenComponent from '../screens/StadiumView.js';
 import BookingScreenComponent from '../screens/Booking.js';
 import PaymentScreenComponent from '../screens/Payment.js';
