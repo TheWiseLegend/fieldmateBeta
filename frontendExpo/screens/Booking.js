@@ -138,6 +138,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     alignSelf: 'stretch'
   },
+
   bookASlotWrapper: {
     alignSelf: 'stretch'
   },

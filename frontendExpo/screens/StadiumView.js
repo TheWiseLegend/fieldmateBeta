@@ -1,18 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Image } from 'expo-image';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import FrameComponent from '../components/FrameComponent.js';
 import FrameComponent1 from '../components/FrameComponent1.js';
 import Header from '../components2/Header.jsx';
 import Facilities from '../components2/Facilities.jsx';
 import Reviews from '../components2/Reviews.jsx';
 import { FontFamily, Color, Border } from '../GlobalStyles.js';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Login from '../components2/Login'; // Import the Login screen
+import Registration from '../components2/Registration'; // Import the Registration screen
+
+const Stack = createNativeStackNavigator();
 
 /**
  * @param {object} props
  * @param {string} [props.name='Stadium Name']
  */
 export default function StadiumView({ name = 'Stadium Name' }) {
+  const [showLogin, setShowLogin] = useState(true);
+
   return (
     <View id="stadium-view-screen" style={styles.container}>
       <View style={styles.imageContainer}>
@@ -26,7 +34,12 @@ export default function StadiumView({ name = 'Stadium Name' }) {
 
       <Reviews />
 
-      <Facilities />
+  //   //   <Image
+  //   //     style={styles.StadiumBanner}
+  //   //     contentFit="cover" // @ts-expect-error
+  //   //     source={require('../assets/image-5.png')}
+  //   //   />
+  //   //   <Text style={[styles.nameFrame, styles.stadiumName]}>{name}</Text>
 
       <FrameComponent />
     </View>
