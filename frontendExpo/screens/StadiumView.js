@@ -22,6 +22,7 @@ export default function StadiumView({ name = 'Stadium Name' }) {
   const [showLogin, setShowLogin] = useState(true);
 
   return (
+<<<<<<< Updated upstream
     <View id="stadium-view-screen" style={styles.container}>
       <View style={styles.imageContainer}>
         <Image
@@ -42,8 +43,42 @@ export default function StadiumView({ name = 'Stadium Name' }) {
   //   //   <Text style={[styles.nameFrame, styles.stadiumName]}>{name}</Text>
 
       <FrameComponent />
+=======
+    <View style={styles.container}>
+      {showLogin ? <Login /> : <Registration />}
+      <TouchableOpacity onPress={() => setShowLogin(!showLogin)}>
+        <Text style={styles.linkText}>
+          {showLogin ? "Don't have an account? Sign up" : 'Already have an account? Log in'}
+        </Text>
+      </TouchableOpacity>
+>>>>>>> Stashed changes
     </View>
   );
+  // return (
+
+  //   // <View
+  //   //   id="stadium-view-screen"
+  //   //   className="screen"
+  //   //   style={styles.stadiumView}
+  //   // >
+
+  //   //   {/* <Header />
+
+  //   //   <Image
+  //   //     style={styles.StadiumBanner}
+  //   //     contentFit="cover" // @ts-expect-error
+  //   //     source={require('../assets/image-5.png')}
+  //   //   />
+  //   //   <Text style={[styles.nameFrame, styles.stadiumName]}>{name}</Text>
+
+  //   //   <Reviews />
+
+  //   //   <Facilities />
+
+  //   //   <FrameComponent />
+  //   //   <FrameComponent1 /> */}
+  //   // </View>
+  // );
 }
 
 const styles = StyleSheet.create({
