@@ -1,9 +1,5 @@
 import express from 'express';
-import {
-    createField,
-    updateField,
-    deleteField
-} from '../controllers/fieldController.js';
+import { createField, updateField, deleteField } from '../controllers/fieldController.js';
 
 const router = express.Router();
 

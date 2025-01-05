@@ -8,10 +8,7 @@ import { Color, Border, FontFamily, FontSize } from '../GlobalStyles.js';
  */
 export default function Filters({}) {
   return (
-    <View
-      className="filters2"
-      style={[styles.frame3, styles.frame4, styles.framePosition]}
-    >
+    <View className="filters2" style={[styles.frame3, styles.frame4, styles.framePosition]}>
       <Image
         style={[styles.commitIcon, styles.iconLayout]}
         contentFit="cover" // @ts-expect-error

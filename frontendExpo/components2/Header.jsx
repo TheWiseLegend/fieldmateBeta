@@ -7,7 +7,7 @@ import { Padding, Border } from '../GlobalStyles';
 /**
  * @param {object} props
  */
-export default function Header({ }) {
+export default function Header({}) {
   return (
     <>
       <Octicons
@@ -28,7 +28,6 @@ export default function Header({ }) {
         source={require('../assets/doorbell.png')}
         onPress={() => alert('This is a button!')}
       />
-
     </>
   );
 }

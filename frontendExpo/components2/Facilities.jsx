@@ -15,16 +15,16 @@ export default function Facilities({}) {
       <View style={styles.frame4}>
         <View style={styles.frame5}>
           <View style={[styles.date, styles.dateFlexBox]}>
-            <View style={styles.background} >
+            <View style={styles.background}>
               <Icon size={35} as={Home}></Icon>
             </View>
-            <View style={styles.background} >
+            <View style={styles.background}>
               <Icon size={35} as={Home}></Icon>
             </View>
-            <View style={styles.background} >
+            <View style={styles.background}>
               <Icon size={35} as={Home}></Icon>
             </View>
-            <View style={styles.background} >
+            <View style={styles.background}>
               <Icon size={35} as={Home}></Icon>
             </View>
           </View>

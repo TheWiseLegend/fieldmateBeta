@@ -1,12 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import {
-  Color,
-  Border,
-  FontFamily,
-  FontSize,
-  Padding
-} from '../GlobalStyles.js';
+import { Color, Border, FontFamily, FontSize, Padding } from '../GlobalStyles.js';
 
 /**
  * @param {object} props

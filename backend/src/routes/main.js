@@ -1,12 +1,11 @@
-
 // Create a field amenity
-app.post("/api/field_amenities", async (req, res) => {
+app.post('/api/field_amenities', async (req, res) => {
   const { field_id, amenity_id } = req.body;
   try {
-    const result = await pool.query(
-      "INSERT INTO field_amenities (field_id, amenity_id) VALUES ($1, $2) RETURNING *",
-      [field_id, amenity_id]
-    );
+    const result = await pool.query('INSERT INTO field_amenities (field_id, amenity_id) VALUES ($1, $2) RETURNING *', [
+      field_id,
+      amenity_id
+    ]);
     res.status(201).json(result.rows[0]);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -14,13 +13,10 @@ app.post("/api/field_amenities", async (req, res) => {
 });
 
 // Delete a field amenity
-app.delete("/api/field_amenities", async (req, res) => {
+app.delete('/api/field_amenities', async (req, res) => {
   const { field_id, amenity_id } = req.body;
   try {
-    await pool.query(
-      "DELETE FROM field_amenities WHERE field_id = $1 AND amenity_id = $2",
-      [field_id, amenity_id]
-    );
+    await pool.query('DELETE FROM field_amenities WHERE field_id = $1 AND amenity_id = $2', [field_id, amenity_id]);
     res.status(204).send();
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -30,7 +26,7 @@ app.delete("/api/field_amenities", async (req, res) => {
 //
 
 // Create a booking
-app.post("/api/bookings", async (req, res) => {
+app.post('/api/bookings', async (req, res) => {
   const {
     user_id,
     field_id,
@@ -41,11 +37,11 @@ app.post("/api/bookings", async (req, res) => {
     lfg_enabled,
     max_players,
     current_players,
-    status,
+    status
   } = req.body;
   try {
     const result = await pool.query(
-      "INSERT INTO bookings (user_id, field_id, vendor_id, booking_date, start_time, duration, lfg_enabled, max_players, current_players, status) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *",
+      'INSERT INTO bookings (user_id, field_id, vendor_id, booking_date, start_time, duration, lfg_enabled, max_players, current_players, status) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
       [
         user_id,
         field_id,
@@ -56,7 +52,7 @@ app.post("/api/bookings", async (req, res) => {
         lfg_enabled,
         max_players,
         current_players,
-        status,
+        status
       ]
     );
     res.status(201).json(result.rows[0]);
@@ -66,7 +62,7 @@ app.post("/api/bookings", async (req, res) => {
 });
 
 // Update a booking
-app.put("/api/bookings/:id", async (req, res) => {
+app.put('/api/bookings/:id', async (req, res) => {
   const { id } = req.params;
   const {
     user_id,
@@ -78,11 +74,11 @@ app.put("/api/bookings/:id", async (req, res) => {
     lfg_enabled,
     max_players,
     current_players,
-    status,
+    status
   } = req.body;
   try {
     const result = await pool.query(
-      "UPDATE bookings SET user_id = $1, field_id = $2, vendor_id = $3, booking_date = $4, start_time = $5, duration = $6, lfg_enabled = $7, max_players = $8, current_players = $9, status = $10 WHERE booking_id = $11 RETURNING *",
+      'UPDATE bookings SET user_id = $1, field_id = $2, vendor_id = $3, booking_date = $4, start_time = $5, duration = $6, lfg_enabled = $7, max_players = $8, current_players = $9, status = $10 WHERE booking_id = $11 RETURNING *',
       [
         user_id,
         field_id,
@@ -94,7 +90,7 @@ app.put("/api/bookings/:id", async (req, res) => {
         max_players,
         current_players,
         status,
-        id,
+        id
       ]
     );
     res.status(200).json(result.rows[0]);
@@ -104,10 +100,10 @@ app.put("/api/bookings/:id", async (req, res) => {
 });
 
 // Delete a booking
-app.delete("/api/bookings/:id", async (req, res) => {
+app.delete('/api/bookings/:id', async (req, res) => {
   const { id } = req.params;
   try {
-    await pool.query("DELETE FROM bookings WHERE booking_id = $1", [id]);
+    await pool.query('DELETE FROM bookings WHERE booking_id = $1', [id]);
     res.status(204).send();
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -116,11 +112,7 @@ app.delete("/api/bookings/:id", async (req, res) => {
 
 //
 
-
-
 //
-
-
 
 /*
 // Create a notification

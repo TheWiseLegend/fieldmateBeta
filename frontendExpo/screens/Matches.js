@@ -28,21 +28,21 @@ export default function Matches() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Color.surface,
+    backgroundColor: Color.surface
   },
   header: {
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
-    zIndex: 1,
+    zIndex: 1
   },
   filters: {
     position: 'absolute',
     top: 60, // Adjust based on the height of the Header
     left: 0,
     right: 0,
-    zIndex: 1,
+    zIndex: 1
   },
 
   content: {
@@ -50,6 +50,6 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_mini,
     width: '100%',
     overflow: 'hidden',
-    backgroundColor: Color.surface,
-  },
+    backgroundColor: Color.surface
+  }
 });

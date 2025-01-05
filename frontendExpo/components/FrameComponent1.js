@@ -1,12 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import {
-  Border,
-  Color,
-  FontSize,
-  FontFamily,
-  Padding
-} from '../GlobalStyles.js';
+import { Border, Color, FontSize, FontFamily, Padding } from '../GlobalStyles.js';
 
 /**
  * @param {object} props
@@ -24,9 +18,7 @@ export default function FrameComponent1({}) {
 
           <Text style={[styles.rm, styles.rmFlexBox]}>30.00 RM</Text>
 
-          <Text style={[styles.startingFrom, styles.rmFlexBox]}>
-            Starting from
-          </Text>
+          <Text style={[styles.startingFrom, styles.rmFlexBox]}>Starting from</Text>
         </View>
       </View>
     </View>

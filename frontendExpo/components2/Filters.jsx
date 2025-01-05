@@ -20,19 +20,10 @@ export default function Filters() {
     <>
       <View style={styles.container}>
         <Select>
-          <SelectTrigger
-            variant="rounded"
-            size="sm"
-            style={styles.selectTrigger}
-            className='px-3'
-          >
+          <SelectTrigger variant="rounded" size="sm" style={styles.selectTrigger} className="px-3">
             <SelectIcon size={25} as={MapPin} />
             <SelectInput placeholder="Select State" />
-            <SelectIcon
-              size={25}
-              as={ChevronDown}
-              style={styles.chevronIcon}
-            />
+            <SelectIcon size={25} as={ChevronDown} style={styles.chevronIcon} />
           </SelectTrigger>
           <SelectPortal>
             <SelectBackdrop />
@@ -50,19 +41,10 @@ export default function Filters() {
         </Select>
 
         <Select>
-          <SelectTrigger
-            variant="rounded"
-            size="sm"
-            style={styles.selectTrigger}
-            className='px-3'
-          >
+          <SelectTrigger variant="rounded" size="sm" style={styles.selectTrigger} className="px-3">
             <SelectIcon size={25} as={Filter} />
             <SelectInput placeholder="Select Filter" />
-            <SelectIcon
-              size={25}
-              as={ChevronDown}
-              style={styles.chevronIcon}
-            />
+            <SelectIcon size={25} as={ChevronDown} style={styles.chevronIcon} />
           </SelectTrigger>
           <SelectPortal>
             <SelectBackdrop />
@@ -72,10 +54,7 @@ export default function Filters() {
               </SelectDragIndicatorWrapper>
               <SelectItem label="UX Research" value="ux" />
               <SelectItem label="Web Development" value="web" />
-              <SelectItem
-                label="Cross Platform Development Process"
-                value="Cross Platform Development Process"
-              />
+              <SelectItem label="Cross Platform Development Process" value="Cross Platform Development Process" />
               <SelectItem label="UI Designing" value="ui" isDisabled={true} />
               <SelectItem label="Backend Development" value="backend" />
             </SelectContent>
@@ -112,10 +91,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row', // Arrange children in a row
     justifyContent: 'space-around', // Distribute space evenly around the components
     marginLeft: 10, // Adjust the value to move the component to the right
-    marginTop: 110, // Adjust the value to move the component down
+    marginTop: 110 // Adjust the value to move the component down
   },
   selectTrigger: {
     width: 160, // Adjust the width as needed
     height: 40 // Adjust the height as needed
-  },
+  }
 });

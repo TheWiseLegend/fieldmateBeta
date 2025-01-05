@@ -14,18 +14,14 @@ export default function BookingSection() {
       <Header />
       <View style={[styles.bookASlotWrapper, styles.primaryButtonFlexBox]}>
         <View style={styles.bookASlot}>
-          <Text style={[styles.bookingTime, styles.doYouWantTypo]}>
-            Booking Time
-          </Text>
+          <Text style={[styles.bookingTime, styles.doYouWantTypo]}>Booking Time</Text>
 
           <Text style={[styles.doYouWant, styles.doYouWantTypo]}>
             Do you want to create a match post? (Look for more players)
           </Text>
 
           <View style={styles.sync}>
-            <Text style={[styles.createAMatch, styles.doYouWantTypo]}>
-              Create a Match
-            </Text>
+            <Text style={[styles.createAMatch, styles.doYouWantTypo]}>Create a Match</Text>
 
             <Image
               style={styles.toggleIcon}
@@ -44,13 +40,7 @@ export default function BookingSection() {
 
           <Frame1 pM="3:00 PM" pM1="4:00 PM" pM2="5:00 PM" />
 
-          <Frame1
-            frameTop={542}
-            frameLeft={52}
-            pM="6:00 PM"
-            pM1="7:00 PM"
-            pM2="8:00 PM"
-          />
+          <Frame1 frameTop={542} frameLeft={52} pM="6:00 PM" pM1="7:00 PM" pM2="8:00 PM" />
 
           <Frame
             pM="9:00 PM"

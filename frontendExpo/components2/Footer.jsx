@@ -40,13 +40,7 @@ export default function Footer({}) {
             else if (rn === MatchesScreen) iconName = 'soccer';
             else if (rn === MyActivityScreen) iconName = 'calendar-clock';
 
-            return (
-              <MaterialCommunityIcons
-                name={iconName}
-                size={size + 4}
-                color={color}
-              />
-            );
+            return <MaterialCommunityIcons name={iconName} size={size + 4} color={color} />;
           },
           tabBarLabelStyle: { fontSize: 14 }, // Increase label size
           tabBarStyle: { height: 60, paddingBottom: 5 }, // Increase tab bar height

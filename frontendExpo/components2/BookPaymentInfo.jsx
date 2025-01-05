@@ -16,21 +16,13 @@ export default function BookPaymentInfo({}) {
 
         <View style={styles.textGrid}>
           <View style={styles.gridItem}>
-            <Text
-              style={[styles.centerText, styles.marginBottom, styles.grayText]}
-            >
-              Booking Date
-            </Text>
+            <Text style={[styles.centerText, styles.marginBottom, styles.grayText]}>Booking Date</Text>
 
             <Text style={[styles.centerText, styles.boldText]}>{date}</Text>
           </View>
 
           <View style={styles.gridItem}>
-            <Text
-              style={[styles.centerText, styles.marginBottom, styles.grayText]}
-            >
-              Booking Time
-            </Text>
+            <Text style={[styles.centerText, styles.marginBottom, styles.grayText]}>Booking Time</Text>
 
             <Text style={[styles.centerText, styles.boldText]}>{time}</Text>
           </View>

@@ -31,9 +31,7 @@ export default function Frame5({}) {
           <View style={[styles.date2, styles.date2Layout]}>
             <View style={[styles.background, styles.date2Layout]} />
 
-            <Text style={[styles.monday09December, styles.date1Typo]}>
-              Monday, 09 December 2024
-            </Text>
+            <Text style={[styles.monday09December, styles.date1Typo]}>Monday, 09 December 2024</Text>
           </View>
         </View>
       </View>

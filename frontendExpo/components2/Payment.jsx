@@ -1,12 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import {
-  Radio,
-  RadioGroup,
-  RadioIcon,
-  RadioIndicator,
-  RadioLabel
-} from '../components/ui/radio';
+import { Radio, RadioGroup, RadioIcon, RadioIndicator, RadioLabel } from '../components/ui/radio';
 import { CircleIcon, Icon } from '../components/ui/icon';
 import { VStack } from '../components/ui/vstack';
 import { QrCode, Banknote } from 'lucide-react-native';
@@ -22,11 +16,7 @@ export default function Payment({}) {
       <View style={style.container}>
         <Text style={style.title}>Payment Method</Text>
 
-        <RadioGroup
-          value={values}
-          onChange={setValues}
-          style={{ paddingTop: 20 }}
-        >
+        <RadioGroup value={values} onChange={setValues} style={{ paddingTop: 20 }}>
           <VStack space="sm">
             <Radio value="Cash" style={style.card}>
               <View style={[style.flexRow, { width: '100%' }]}>

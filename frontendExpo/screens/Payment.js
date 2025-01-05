@@ -47,9 +47,7 @@ export default function PaymentSection() {
       <Text style={styles.stadiumName}>{`Stadium Name `}</Text>
       <Text style={[styles.bookingTime, styles.bookingTypo]}>Booking Time</Text>
 
-      <Text style={[styles.december2024, styles.pm900Typo]}>
-        09 December 2024
-      </Text>
+      <Text style={[styles.december2024, styles.pm900Typo]}>09 December 2024</Text>
 
       <Text style={[styles.cashOnSite, styles.qrTypo]}>Cash (On site)</Text>
       <Image
@@ -76,15 +74,11 @@ export default function PaymentSection() {
         contentFit="cover" // @ts-expect-error
         source={require('../assets/frame-3.png')}
       />
-      <Text style={[styles.orderDetails, styles.textPosition]}>
-        Order Details
-      </Text>
+      <Text style={[styles.orderDetails, styles.textPosition]}>Order Details</Text>
 
       <Text style={[styles.totalCart, styles.totalCartPosition]}>Subtotal</Text>
       <Text style={[styles.text, styles.textPosition]}>$ 80 RM</Text>
-      <Text style={[styles.cancellationPolicy, styles.upTo24Layout]}>
-        CANCELLATION POLICY
-      </Text>
+      <Text style={[styles.cancellationPolicy, styles.upTo24Layout]}>CANCELLATION POLICY</Text>
 
       <Text style={[styles.upTo24, styles.upTo24Layout]}>Up to 24 Hours</Text>
     </View>

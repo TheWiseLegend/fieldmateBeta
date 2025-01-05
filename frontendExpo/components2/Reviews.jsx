@@ -18,9 +18,7 @@ export default function Reviews({}) {
           />
           <Text style={[styles.text, styles.textLayout]}>4.2/5 (33)</Text>
 
-          <Text style={[styles.seeAllReviews, styles.textLayout]}>
-            See all reviews
-          </Text>
+          <Text style={[styles.seeAllReviews, styles.textLayout]}>See all reviews</Text>
         </View>
       </View>
     </View>
@@ -30,7 +28,7 @@ export default function Reviews({}) {
 const styles = StyleSheet.create({
   frame3FlexBox: {
     alignSelf: 'stretch',
-    overflow: 'hidden',
+    overflow: 'hidden'
   },
   text: {
     width: '34.84%',

@@ -1,9 +1,5 @@
 import express from 'express';
-import {
-    createAmentity,
-    updateAmenity,
-    deleteAmenity
-} from '../controllers/amenityController.js';
+import { createAmentity, updateAmenity, deleteAmenity } from '../controllers/amenityController.js';
 
 const router = express.Router();
 

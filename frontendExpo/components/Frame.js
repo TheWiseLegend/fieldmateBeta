@@ -20,14 +20,7 @@ function getStyleValue(key, value) {
  * @param {string} [props.backgroundBorderColor]
  * @param {string} [props.pMColor]
  */
-export default function Frame({
-  frameTop,
-  backgroundBorderColor,
-  pM,
-  pMColor,
-  pM1,
-  pM2
-}) {
+export default function Frame({ frameTop, backgroundBorderColor, pM, pMColor, pM1, pM2 }) {
   const frameStyle = useMemo(() => {
     return { ...getStyleValue('top', frameTop) };
   }, [frameTop]);
@@ -43,9 +36,7 @@ export default function Frame({
   return (
     <View style={[styles.frame, styles.frameFlexBox, frameStyle]}>
       <View style={styles.date}>
-        <View
-          style={[styles.background, styles.backgroundLayout, backgroundStyle]}
-        />
+        <View style={[styles.background, styles.backgroundLayout, backgroundStyle]} />
         <Text style={[styles.pm, styles.pmTypo, pMStyle]}>{pM}</Text>
       </View>
 

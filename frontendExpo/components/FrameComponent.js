@@ -1,13 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
-import {
-  Padding,
-  Color,
-  Border,
-  FontFamily,
-  FontSize,
-  Gap
-} from '../GlobalStyles.js';
+import { Padding, Color, Border, FontFamily, FontSize, Gap } from '../GlobalStyles.js';
 
 /**
  * @param {object} props
@@ -20,22 +13,24 @@ export default function FrameComponent({}) {
           <View style={styles.marginTop}></View>
           <Text style={styles.openingTimes}>Opening Times:</Text>
 
-          <Text style={[styles.pm1100Pm, styles.pm1100PmTypo]}>
-            04:00 PM -11:00 PM
-          </Text>
+          <Text style={[styles.pm1100Pm, styles.pm1100PmTypo]}>04:00 PM -11:00 PM</Text>
         </View>
 
-        <TouchableOpacity style={[styles.contactUsWrapper, styles.wrapperFlexBox, styles.contactUsBtn]} onPress={() => alert("Contact Us")}>
+        <TouchableOpacity
+          style={[styles.contactUsWrapper, styles.wrapperFlexBox, styles.contactUsBtn]}
+          onPress={() => alert('Contact Us')}
+        >
           <Text style={styles.contactUs}>Contact Us</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.frame2}>
-        <Text style={[styles.staduimLocationCyberjaya, styles.pm1100PmTypo]}>
-          Staduim location: Cyberjaya
-        </Text>
+        <Text style={[styles.staduimLocationCyberjaya, styles.pm1100PmTypo]}>Staduim location: Cyberjaya</Text>
 
-        <TouchableOpacity style={[styles.directionsWrapper, styles.wrapperFlexBox, styles.directionBtn]} onPress={() => alert("Directions")}>
+        <TouchableOpacity
+          style={[styles.directionsWrapper, styles.wrapperFlexBox, styles.directionBtn]}
+          onPress={() => alert('Directions')}
+        >
           <Text style={styles.buttonText}>Directions</Text>
         </TouchableOpacity>
       </View>
@@ -50,15 +45,15 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_36xl,
     justifyContent: 'space-between',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   directionBtn: {
-    borderRadius: 30,
+    borderRadius: 30
   },
   contactUsBtn: {
     borderRadius: 30,
     paddingVertical: 10, // Add vertical padding for better appearance
-    paddingHorizontal: 20, // Add horizontal padding for better appearance
+    paddingHorizontal: 20 // Add horizontal padding for better appearance
   },
   pm1100PmTypo: {
     color: Color.grayIcon,
@@ -76,7 +71,7 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     letterSpacing: 0,
     fontSize: FontSize.buttonText_size,
-    marginLeft: 20,
+    marginLeft: 20
   },
   contactUsWrapper: {
     height: '50.21%',
@@ -90,7 +85,7 @@ const styles = StyleSheet.create({
     width: 150,
     borderRadius: 30, // Make the button rounded
     paddingVertical: 10, // Add vertical padding for better appearance
-    paddingHorizontal: 20, // Add horizontal padding for better appearance
+    paddingHorizontal: 20 // Add horizontal padding for better appearance
   },
   openingTimes: {
     fontWeight: '500',
@@ -114,10 +109,10 @@ const styles = StyleSheet.create({
     gap: Gap.gap_sm,
     width: 172,
     overflow: 'hidden',
-    position: 'absolute',
+    position: 'absolute'
   },
   marginTop: {
-    marginTop: 8,
+    marginTop: 8
   },
   frame: {
     backgroundColor: 'transparent',
@@ -131,13 +126,13 @@ const styles = StyleSheet.create({
   },
   staduimLocationCyberjaya: {
     height: 50,
-    width: 172,
+    width: 172
   },
   directionsWrapper: {
     width: 150,
     borderRadius: 30, // Make the button rounded
     paddingVertical: 10, // Add vertical padding for better appearance
-    paddingHorizontal: 20, // Add horizontal padding for better appearance
+    paddingHorizontal: 20 // Add horizontal padding for better appearance
   },
   frame2: {
     paddingHorizontal: Padding.p_lgi,
@@ -168,6 +163,6 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.openSansBold,
     textAlign: 'center',
     marginLeft: 20,
-    fontSize: FontSize.buttonText_size,
-  },
+    fontSize: FontSize.buttonText_size
+  }
 });

@@ -2,13 +2,7 @@ import React from 'react';
 import { Image } from 'expo-image';
 import { StyleSheet, View, Text } from 'react-native';
 import WeekdaysDatePicker from '../components2/WeekdaysDatePicker.jsx';
-import {
-  Color,
-  Border,
-  FontFamily,
-  FontSize,
-  Padding
-} from '../GlobalStyles.js';
+import { Color, Border, FontFamily, FontSize, Padding } from '../GlobalStyles.js';
 
 /**
  * @param {object} props

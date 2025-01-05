@@ -1,5 +1,11 @@
 {
-  "dependencies": {
-    "pg": "^8.13.1"
+  "name": "fieldmate",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write . --ignore-path .gitignore"
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2"
   }
 }

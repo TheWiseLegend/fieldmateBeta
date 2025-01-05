@@ -14,17 +14,13 @@ import { FontFamily, Color, Border } from '../GlobalStyles.js';
  */
 export default function StadiumView({ name = 'Stadium Name' }) {
   return (
-    <View
-      id="stadium-view-screen"
-      style={styles.container}
-    >
-
-    <View style={styles.imageContainer}>
-      <Image
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/image-5.png')}
-        style={styles.StadiumView}
-      />
+    <View id="stadium-view-screen" style={styles.container}>
+      <View style={styles.imageContainer}>
+        <Image
+          contentFit="cover" // @ts-expect-error
+          source={require('../assets/image-5.png')}
+          style={styles.StadiumView}
+        />
       </View>
       <Text style={styles.stadiumName}>{name}</Text>
 
@@ -37,21 +33,19 @@ export default function StadiumView({ name = 'Stadium Name' }) {
   );
 }
 
-
 const styles = StyleSheet.create({
   StadiumView: {
     width: '100%',
-    height: '100%',
+    height: '100%'
   },
   imageContainer: {
     height: 244,
-    width: '100%',
-
+    width: '100%'
   },
-  container:{
-    marginTop: 30,
+  container: {
+    marginTop: 30
   },
-  stadiumName:{
+  stadiumName: {
     fontSize: 30,
     color: Color.colorBlack,
     fontFamily: FontFamily.openSansBold,
@@ -60,7 +54,7 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     height: '100%',
     marginTop: 10,
-    marginLeft: 15,
+    marginLeft: 15
   }
 });
 

@@ -38,9 +38,7 @@ export default function StadiumCard({ name = 'Stadium Name' }) {
           </View>
 
           <View style={[styles.frame3, styles.frameFlexBox]}>
-            <Text style={[styles.startingFrom, styles.textTypo]}>
-              Starting from
-            </Text>
+            <Text style={[styles.startingFrom, styles.textTypo]}>Starting from</Text>
           </View>
           <View style={[styles.frame4, styles.framePosition]}>
             <Text style={[styles.text, styles.textTypo]}>4.2/5</Text>

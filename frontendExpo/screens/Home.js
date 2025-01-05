@@ -11,9 +11,7 @@ export default function Home() {
       <View id="home-screen" className="screen" style={styles.home}>
         <Header />
         <Recommendation />
-        <Text style={[styles.headline, styles.headlineFlexBox]}>
-          Matches near you
-        </Text>
+        <Text style={[styles.headline, styles.headlineFlexBox]}>Matches near you</Text>
         <View style={styles.marginBottom} />
         <LFGCard />
         <LFGCard />
@@ -24,13 +22,12 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
-
   headlineFlexBox: {
     textAlign: 'left',
-    letterSpacing: 0,
+    letterSpacing: 0
   },
   marginBottom: {
-    height: 10,
+    height: 10
   },
   headline: {
     lineHeight: 28,
@@ -40,12 +37,12 @@ const styles = StyleSheet.create({
     fontSize: FontSize.title2_size,
     textAlign: 'left',
     letterSpacing: 0,
-    marginTop: 20,
+    marginTop: 20
   },
   home: {
     backgroundColor: Color.surface,
     flex: 1,
     width: '100%',
-    borderRadius: Border.br_mini,
-  },
+    borderRadius: Border.br_mini
+  }
 });
