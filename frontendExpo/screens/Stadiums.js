@@ -27,6 +27,7 @@ export default function Stadiums() {
       console.error('Error fetching matches:', err);
     }
 
+    // @ts-expect-error
     setFields(data);
   }
 
@@ -46,20 +47,13 @@ export default function Stadiums() {
 }
 
 const styles = StyleSheet.create({
-  frameParent: {
-    justifyContent: 'flex-end',
-    position: 'absolute',
-    top: 307,
-    width: 417,
-    gap: 14,
-    left: 0
-  },
   stadiums: {
     borderRadius: Border.br_mini,
     backgroundColor: Color.surface,
-    width: '100%',
-    height: 932,
-    overflow: 'hidden',
+    height: 1200,
     flex: 1
+  },
+  frameParent: {
+    top: '5%'
   }
 });

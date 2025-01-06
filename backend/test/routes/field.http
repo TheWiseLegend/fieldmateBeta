@@ -21,8 +21,13 @@ POST {{baseUrl}}/
 Content-Type: application/json
 
 {
-  "field_name": "Field A",
-  "address": "123 Field St.",
+  "vendor_id": 5,
+  "field_name": "Gelanggang Futsal MPSepang",
+  "address": "Unnamed Road, 63000 Cyberjaya, Selangor, ماليزيا",
+  "capacity": 30,
+  "price": 150.00,
+  "status": "available",
+  "maps_id": "iYnLfyzWU7vBTcyF9"
 }
 
 ### Update a field
@@ -35,8 +40,8 @@ Content-Type: application/json
   "address": "456 Field St.",
   "capacity": 150,
   "price": 150.00,
-  "status": "booked",
-  "maps_id": "iYnLfyzWU7vBTcyF9",
+  "status": "maintenance",
+  "maps_id": "iYnLfyzWU7vBTcyF9"
 }
 
 ### Delete a field

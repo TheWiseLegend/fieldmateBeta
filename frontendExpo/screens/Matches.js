@@ -4,7 +4,7 @@ import WeekdaysDatePicker from '../components2/WeekdaysDatePicker.jsx';
 import LFGCard from '../components2/LFGCard.jsx';
 import Header from '../components2/Header.jsx';
 import Filters from '../components2/Filters.jsx';
-import FinalButton from '../components2/FinalButton.jsx';
+// import FinalButton from '../components2/FinalButton.jsx';
 import { Color, Border } from '../GlobalStyles.js';
 import axios from 'axios';
 
@@ -45,7 +45,7 @@ export default function Matches() {
             <LFGCard key={m.lfg_id} data={m} />
           ))}
 
-          <FinalButton text="Create Match" />
+          {/* <FinalButton text="Create Match" /> */}
         </View>
       </ScrollView>
     </View>

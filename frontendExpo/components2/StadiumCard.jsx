@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image } from 'expo-image';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, Button, View, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Border, Color, FontFamily, FontSize } from '../GlobalStyles.js';
 
 /**
@@ -8,6 +9,14 @@ import { Border, Color, FontFamily, FontSize } from '../GlobalStyles.js';
  * @param {object} props.data
  */
 export default function StadiumCard({ data }) {
+  const navigation = useNavigation();
+
+  function handleNavigation() {
+    localStorage.setItem('field_view', JSON.stringify(data));
+    // @ts-expect-error
+    navigation.navigate('Stadium View');
+  }
+
   return (
     <View style={styles.frame}>
       <View style={styles.image5Parent}>
@@ -48,6 +57,8 @@ export default function StadiumCard({ data }) {
             source={require('../assets/frame1.png')}
           />
         </View>
+
+        <Button title="View" onPress={() => handleNavigation()} />
       </View>
     </View>
   );

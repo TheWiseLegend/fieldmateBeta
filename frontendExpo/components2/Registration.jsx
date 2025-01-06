@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Alert, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { FormControl } from '../components/ui/form-control';
 import { VStack } from '../components/ui/vstack';
 import { Heading } from '../components/ui/heading';
@@ -7,7 +8,6 @@ import { Button } from '../components/ui/button';
 import { ButtonText } from '../components/ui/button';
 import { EyeIcon, EyeOffIcon } from '../components/ui/icon';
 import { Input, InputField, InputSlot, InputIcon } from '../components/ui/input';
-import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
 const IP_ADDRESS = 'http://13.229.202.42:5000/api';
@@ -55,6 +55,7 @@ export default function Registration() {
         }
       );
 
+      // @ts-expect-error
       navigation.navigate('Login');
     } catch (err) {
       Alert.alert('Error', err.message);
@@ -69,30 +70,25 @@ export default function Registration() {
           <VStack space="xs">
             <Text className="text-typography-500">Name</Text>
             <Input style={styles.input} variant="rounded">
-              <InputField type="text" value={name} onChangeText={setName} required />
+              <InputField type="text" value={name} onChangeText={setName} />
             </Input>
           </VStack>
           <VStack space="xs">
             <Text className="text-typography-500">Email</Text>
             <Input style={styles.input} variant="rounded">
-              <InputField type="text" value={email} onChangeText={setEmail} required />
+              <InputField type="text" value={email} onChangeText={setEmail} />
             </Input>
           </VStack>
           <VStack space="xs">
             <Text className="text-typography-500">Phone Number</Text>
             <Input style={styles.input} variant="rounded">
-              <InputField type="text" value={phone} onChangeText={setPhone} required />
+              <InputField type="text" value={phone} onChangeText={setPhone} />
             </Input>
           </VStack>
           <VStack space="xs">
             <Text className="text-typography-500">Password</Text>
             <Input style={styles.input} variant="rounded">
-              <InputField
-                type={showPassword ? 'text' : 'password'}
-                value={password}
-                onChangeText={setPassword}
-                required
-              />
+              <InputField type={showPassword ? 'text' : 'password'} value={password} onChangeText={setPassword} />
               <InputSlot className="pr-3" onPress={handleState}>
                 <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} />
               </InputSlot>
@@ -105,7 +101,6 @@ export default function Registration() {
                 type={showPassword ? 'text' : 'password'}
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
-                required
               />
               <InputSlot className="pr-3" onPress={handleState}>
                 <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} />
@@ -115,6 +110,7 @@ export default function Registration() {
           <Button style={styles.button} onPress={handleRegister}>
             <ButtonText style={styles.buttonText}>Sign Up</ButtonText>
           </Button>
+          {/* @ts-expect-error */}
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
             <Text style={styles.linkText}>Already have an account? Log in</Text>
           </TouchableOpacity>

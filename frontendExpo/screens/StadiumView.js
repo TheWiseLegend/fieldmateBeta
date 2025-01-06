@@ -2,7 +2,7 @@ import React from 'react';
 import { Image } from 'expo-image';
 import { StyleSheet, Text, View } from 'react-native';
 import FrameComponent from '../components/FrameComponent.js';
-import FrameComponent1 from '../components/FrameComponent1.js';
+import BookCard from '../components/BookCard.js';
 import Header from '../components2/Header.jsx';
 import Facilities from '../components2/Facilities.jsx';
 import Reviews from '../components2/Reviews.jsx';
@@ -10,61 +10,45 @@ import { FontFamily, Color, Border } from '../GlobalStyles.js';
 
 /**
  * @param {object} props
- * @param {string} [props.name='Stadium Name']
  */
-export default function StadiumView({ name = 'Stadium Name' }) {
-  // const [showLogin, setShowLogin] = useState(true);
+export default function StadiumView({}) {
+  const json = localStorage.getItem('field_view');
+  /** @type {object} */
+  const data = json
+    ? JSON.parse(json)
+    : {
+        field_name: 'NAME',
+        address: 'ADDRESS',
+        price: 'PRICE'
+      };
 
-    return (
-      <>
-        <View id="stadium-view-screen" style={styles.container}>
-          <View style={styles.imageContainer}>
-            <Image
-              contentFit="cover" // @ts-expect-error
-              source={require('../assets/image-5.png')}
-              style={styles.StadiumView}
-            />
-          </View>
-          <Text style={styles.stadiumName}>{name}</Text>
-          <Reviews />
+  return (
+    <View id="stadium-view-screen" className="screen" style={styles.stadiumView}>
+      <Header />
 
-          <Image
-            style={styles.StadiumBanner}
-            contentFit="cover" // @ts-expect-error
-            source={require('../assets/image-5.png')}
-          />
-          <Text style={[styles.nameFrame, styles.stadiumName]}>{name}</Text>
+      <Image
+        style={styles.StadiumBanner}
+        contentFit="cover" // @ts-expect-error
+        source={require('../assets/image-5.png')}
+      />
+      <Text style={styles.stadiumName}>{data.field_name}</Text>
 
-          <FrameComponent />
+      <Reviews />
 
-          <View
-            id="stadium-view-screen"
-            className="screen"
-            style={styles.stadiumView}>
+      <Facilities />
 
-            <Header />
-
-            <Image
-              style={styles.StadiumBanner}
-              contentFit="cover" // @ts-expect-error
-              source={require('../assets/image-5.png')}
-            />
-            <Text style={[styles.nameFrame, styles.stadiumName]}>{name}</Text>
-
-            <Reviews />
-
-            <Facilities />
-
-            <FrameComponent />
-            <FrameComponent1 />
-          </View>
-        </View>
-      </>
-    );
-  }
-
+      <FrameComponent />
+      <BookCard data={data} />
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
+  stadiumView: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'center'
+  },
   StadiumBanner: {
     borderBottomRightRadius: Border.br_10xs,
     borderBottomLeftRadius: Border.br_10xs,
@@ -80,27 +64,18 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   stadiumName: {
-    fontSize: 30,
-    width: 220,
-    height: 37,
-    color: Color.colorBlack,
+    height: 34,
+    fontSize: 26,
+    lineHeight: 24,
     letterSpacing: 0,
-    fontFamily: FontFamily.openSansBold,
-    fontWeight: '700',
-    textAlign: 'left',
-    lineHeight: 22
-  },
-  nameFrame: {
-    top: 280,
-    left: 21,
-    width: 410,
+    top: 260,
+    left: '5%',
+    width: '80%',
     justifyContent: 'center',
     position: 'absolute',
-    overflow: 'hidden'
-  },
-  stadiumView: {
-    flex: 1,
-    width: '100%',
-    alignItems: 'center'
+    color: Color.colorBlack,
+    fontFamily: FontFamily.openSansBold,
+    fontWeight: '700',
+    textAlign: 'left'
   }
 });

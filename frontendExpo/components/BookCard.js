@@ -1,24 +1,35 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, Button, View, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Border, Color, FontSize, FontFamily, Padding } from '../GlobalStyles.js';
 
 /**
  * @param {object} props
+ * @param {object} props.data
  */
-export default function FrameComponent1({}) {
+export default function BookCard({ data }) {
+  const navigation = useNavigation();
+
+  function handlePress() {
+    // @ts-expect-error
+    navigation.navigate('Booking');
+  }
+
   return (
     <View style={styles.frameWrapper}>
       <View style={[styles.frame, styles.frameFlexBox]}>
         <View style={[styles.frame1, styles.frameFlexBox]}>
           <View style={styles.frameChild} />
 
+          <Text style={[styles.startingFrom, styles.rmFlexBox]}>Price</Text>
+          <Text style={[styles.rm, styles.rmFlexBox]}>{data.price} RM</Text>
+
           <View style={styles.createMatchButton}>
-            <Text style={[styles.book, styles.bookLayout]}>Book</Text>
+            {/* <Button title="Book" onPress={() => handlePress()} style={[styles.book, styles.bookLayout]} /> */}
+            <Text onPress={() => handlePress()} style={[styles.book, styles.bookLayout]}>
+              Book
+            </Text>
           </View>
-
-          <Text style={[styles.rm, styles.rmFlexBox]}>30.00 RM</Text>
-
-          <Text style={[styles.startingFrom, styles.rmFlexBox]}>Starting from</Text>
         </View>
       </View>
     </View>
@@ -106,9 +117,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   frameWrapper: {
-    top: 781,
-    left: 4,
-    width: 427,
+    top: '80%',
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute'
