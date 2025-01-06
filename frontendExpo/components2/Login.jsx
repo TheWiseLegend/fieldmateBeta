@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Alert, Text } from 'react-native';
-import { FormControl } from '@/components/ui/form-control';
-import { VStack } from '@/components/ui/vstack';
-import { Heading } from '@/components/ui/heading';
-import { Button } from '@/components/ui/button';
-import { ButtonText } from '@/components/ui/button';
-import { EyeIcon, EyeOffIcon } from '@/components/ui/icon';
-import { Input, InputField, InputSlot, InputIcon } from '@/components/ui/input';
+import { FormControl } from '../components/ui/form-control';
+import { VStack } from '../components/ui/vstack';
+import { Heading } from '../components/ui/heading';
+import { Button } from '../components/ui/button';
+import { ButtonText } from '../components/ui/button';
+import { EyeIcon, EyeOffIcon } from '../components/ui/icon';
+import { Input, InputField, InputSlot, InputIcon } from '../components/ui/input';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
+
+const IP_ADDRESS = 'http://13.229.202.42:5000/api';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,9 +22,9 @@ const styles = StyleSheet.create({
   },
   formControl: {
     padding: 16,
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: '#ccc',
+    // borderWidth: 1,
+    // borderRadius: 8,
+    // borderColor: '#ccc',
     backgroundColor: '#fff',
     width: '100%',
     maxWidth: 400,
@@ -40,6 +43,11 @@ const styles = StyleSheet.create({
     marginTop: 16,
     textAlign: 'center',
   },
+  logo: {
+    width: 100,
+    height: 100,
+    marginBottom: 20,
+  },
 });
 
 export default function Login() {
@@ -54,22 +62,25 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/users/login', {
-        method: 'POST',
+      const res = await axios.get(`${IP_ADDRESS}/users`, {
+        email,
+        password,
+      }, {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
       });
 
-      const data = await response.json();
+      /** @type {object[]} */
+      const users = res.data;
 
-      if (data.success) {
-        Alert.alert('Success', 'Login successful');
-        // Navigate to the next screen or perform any other actions
-      } else {
-        Alert.alert('Error', data.message || 'Login failed');
+      if (!users.find(u => u.email === email && u.password === password) ) {
+        Alert.alert('Error', 'Invalid email or password');
+        return;
       }
+
+      navigation.navigate('Home'); // Navigate to the Home screen
+
     } catch (error) {
       Alert.alert('Error', error.message);
     }
@@ -77,6 +88,7 @@ export default function Login() {
 
   return (
     <View style={styles.container}>
+      {/* <Image source={require('../assets/icon.png')} style={styles.logo} /> */}
       <FormControl style={styles.formControl}>
         <VStack space="xl">
           <Heading className="text-typography-900">Login</Heading>
