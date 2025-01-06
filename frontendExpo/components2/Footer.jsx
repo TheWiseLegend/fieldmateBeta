@@ -56,8 +56,8 @@ export default function Footer({}) {
             // @ts-expect-error
             return <MaterialCommunityIcons name={iconName} size={size + 4} color={color} />;
           },
-          tabBarLabelStyle: { fontSize: 14 }, // Increase label size
-          tabBarStyle: { height: 60, paddingBottom: 5 }, // Increase tab bar height
+          tabBarLabelStyle: { fontSize: 14 },
+          tabBarStyle: { height: 60, paddingBottom: 5 },
           headerShown: false
         })}
       >

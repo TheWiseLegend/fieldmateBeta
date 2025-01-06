@@ -16,11 +16,11 @@ import {
 
 export default function Filters() {
   return (
-    <View style={[styles.container, styles.filters]}>
+    <View style={styles.container}>
       <Select>
         <SelectTrigger variant="rounded" size="sm" style={styles.selectTrigger} className="px-3">
           <SelectIcon size={25} as={MapPin} />
-          <SelectInput placeholder="State" value="-" />
+          <SelectInput placeholder="State" />
           <SelectIcon size={25} as={ChevronDown} style={styles.chevronIcon} />
         </SelectTrigger>
         <SelectPortal>
@@ -41,7 +41,7 @@ export default function Filters() {
       <Select>
         <SelectTrigger variant="rounded" size="sm" style={styles.selectTrigger} className="px-3">
           <SelectIcon size={25} as={SortDescIcon} />
-          <SelectInput placeholder="Sort" value="-" />
+          <SelectInput placeholder="Sort" />
           <SelectIcon size={25} as={ChevronDown} style={styles.chevronIcon} />
         </SelectTrigger>
         <SelectPortal>
@@ -61,20 +61,13 @@ export default function Filters() {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row', // Arrange children in a row
-    justifyContent: 'space-around', // Distribute space evenly around the components
-    marginLeft: 10, // Adjust the value to move the component to the right
-    marginTop: 110 // Adjust the value to move the component down
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginLeft: 10,
+    marginTop: 110
   },
   selectTrigger: {
-    width: 160, // Adjust the width as needed
-    height: 40 // Adjust the height as needed
-  },
-  filters: {
-    position: 'absolute',
-    top: 60,
-    left: 0,
-    right: 0,
-    zIndex: 1
+    width: 160,
+    height: 40
   }
 });
