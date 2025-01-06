@@ -5,9 +5,9 @@ import { Border, Color, FontFamily, FontSize } from '../GlobalStyles.js';
 
 /**
  * @param {object} props
- * @param {object} [props.name='Stadium Name']
+ * @param {object} props.data
  */
-export default function StadiumCard({ name = 'Stadium Name' }) {
+export default function StadiumCard({ data }) {
   return (
     <View style={styles.frame}>
       <View style={styles.image5Parent}>
@@ -16,36 +16,30 @@ export default function StadiumCard({ name = 'Stadium Name' }) {
           contentFit="cover" // @ts-expect-error
           source={require('../assets/image-5.png')}
         />
-        <View style={[styles.titleParent, styles.image5IconPosition]}>
-          <Text style={[styles.title, styles.titleTypo]}>{`Name `}</Text>
-          <Image
-            style={styles.frameChild}
-            contentFit="cover" // @ts-expect-error
-            source={require('../assets/rectangle-5.png')}
-          />
 
-          <View style={styles.frame1}>
-            <Text style={styles.rm}>30.00 RM</Text>
+        <View style={[styles.titleParent, styles.image5IconPosition]}>
+          <View style={[styles.frame5, styles.frameFlexBox]}>
+            <Text style={[styles.stadiumName, styles.titleTypo]}>{data.field_name || 'NAME'}</Text>
           </View>
+
           <Image
             style={[styles.frameIcon, styles.frameIconPosition]}
             contentFit="cover" // @ts-expect-error
             source={require('../assets/frame.png')}
           />
-
           <View style={[styles.frame2, styles.framePosition]}>
-            <Text style={[styles.location, styles.textTypo]}>Location</Text>
+            <Text style={[styles.location, styles.textTypo]}>{data.address}</Text>
           </View>
 
-          <View style={[styles.frame3, styles.frameFlexBox]}>
-            <Text style={[styles.startingFrom, styles.textTypo]}>Starting from</Text>
-          </View>
           <View style={[styles.frame4, styles.framePosition]}>
             <Text style={[styles.text, styles.textTypo]}>4.2/5</Text>
           </View>
 
-          <View style={[styles.frame5, styles.frameFlexBox]}>
-            <Text style={[styles.stadiumName, styles.titleTypo]}>{name}</Text>
+          <View style={[styles.frame3, styles.frameFlexBox]}>
+            <Text style={[styles.startingFrom, styles.textTypo]}>Price</Text>
+          </View>
+          <View style={styles.frame1}>
+            <Text style={styles.rm}>{data.price} RM</Text>
           </View>
 
           <Image
@@ -107,27 +101,6 @@ const styles = StyleSheet.create({
   image5Icon: {
     height: 155,
     width: 403
-  },
-  title: {
-    height: '13.02%',
-    width: '12.99%',
-    top: '55.62%',
-    left: '2.26%',
-    display: 'none',
-    position: 'absolute'
-  },
-  frameChild: {
-    height: '100%',
-    width: '114.49%',
-    top: '0%',
-    right: '-14.49%',
-    bottom: '0%',
-    left: '0%',
-    borderRadius: Border.br_mini,
-    maxWidth: '100%',
-    maxHeight: '100%',
-    position: 'absolute',
-    overflow: 'hidden'
   },
   rm: {
     fontSize: FontSize.size_lg,

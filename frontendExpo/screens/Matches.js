@@ -25,7 +25,6 @@ export default function Matches() {
     try {
       data = (await axios.get(`${BASE_URL}/lfgs`)).data;
       data = data.filter((m) => m.status === 'open' && m.required_players > 0);
-      // .sort((a, b) => a.required_players - b.required_players)
     } catch (err) {
       console.error('Error fetching matches:', err);
     }
