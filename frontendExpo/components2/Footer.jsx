@@ -4,13 +4,15 @@ import React from 'react';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 
-// import HomeScreenComponent from '../screens/Home.js';
-// import StadiumsScreenComponent from '../screens/Stadiums.js';
-// import MatchesScreenComponent from '../screens/Matches.js';
+import HomeScreenComponent from '../screens/Home.js';
+import StadiumsScreenComponent from '../screens/Stadiums.js';
+import MatchesScreenComponent from '../screens/Matches.js';
 import StadiumViewScreenComponent from '../screens/StadiumView.js';
 import BookingScreenComponent from '../screens/Booking.js';
 import PaymentScreenComponent from '../screens/Payment.js';
 import MyActivityScreenComponent from '../screens2/MyActivity.jsx';
+import LoginComponent from '../components2/Login.jsx';
+import RegistrationComponent from '../components2/Registration.jsx';
 
 const HomeScreen = 'Home';
 const StadiumsScreen = 'Stadiums';
@@ -19,6 +21,8 @@ const StadiumViewScreen = 'StadiumView';
 const BookingScreen = 'Booking';
 const PaymentScreen = 'Payment';
 const MyActivityScreen = 'My Activity';
+const LoginScreen = 'Login';
+const RegistrationScreen = 'Registration';
 
 const Tab = createBottomTabNavigator();
 
@@ -50,8 +54,10 @@ export default function Footer({}) {
       >
         <Tab.Screen name={HomeScreen} component={HomeScreenComponent} />
         <Tab.Screen name={StadiumsScreen} component={StadiumsScreenComponent} />
-        <Tab.Screen name={MatchesScreen} component={MatchesScreenComponent} />
-        <Tab.Screen name={MyActivityScreen} component={MyActivityScreenComponent} />
+        {/* <Tab.Screen name={MatchesScreen} component={MatchesScreenComponent} />
+        <Tab.Screen name={MyActivityScreen} component={MyActivityScreenComponent} /> */}
+        <Tab.Screen name={LoginScreen} component={LoginComponent} />
+        <Tab.Screen name={RegistrationScreen} component={RegistrationComponent} />
       </Tab.Navigator>
     </NavigationContainer>
   );
