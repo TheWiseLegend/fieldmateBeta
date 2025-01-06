@@ -3,7 +3,10 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { CalendarMinus2, MapPin, Users } from 'lucide-react-native';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 
-export default function LFGCard() {
+/**
+ * @param {object} props
+ */
+export default function LFGCard({}) {
   return (
     <View className="p-3">
       <View style={styles.cardContainer}>

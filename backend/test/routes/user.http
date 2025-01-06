@@ -13,7 +13,7 @@ GET {{baseUrl}}/1
 Content-Type: application/json
 
 {
-  
+
 }
 
 ### Create a user

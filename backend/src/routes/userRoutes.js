@@ -15,12 +15,3 @@ router.put('/:id', UPDATE);
 router.delete('/:id', DELETE);
 
 export default router;
-// router.get('/', getUser);  // get user info
-// router.post('/', createUser);  // Create user
-// router.post('/login', getUser);  // Create user
-// router.post('/register', createUser);  // Create user
-// router.put('/:id', updateUser);  // Update user
-// router.delete('/:id', deleteUser);  // Delete user
-
-// export default router;
-
