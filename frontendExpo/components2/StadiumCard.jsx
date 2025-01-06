@@ -109,16 +109,16 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.title1,
     color: Color.blue,
     height: 40,
-    width: 84,
+    width: 150, // Increased width
     textAlign: 'left'
   },
   frame1: {
-    left: 295,
+    left: 280,
     paddingVertical: 0,
     paddingHorizontal: 0,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    width: 84,
+    width: 150, // Adjusted width
     top: 0,
     position: 'absolute',
     height: 242,
@@ -131,13 +131,13 @@ const styles = StyleSheet.create({
   },
   location: {
     height: 37,
-    width: 75,
+    width: 200, // Increased width
     fontSize: FontSize.secondaryNotActive_size,
     color: Color.grayIcon
   },
   frame2: {
     height: 231,
-    width: 75
+    width: 200 // Increased width
   },
   startingFrom: {
     fontSize: FontSize.size_smi,
@@ -160,12 +160,12 @@ const styles = StyleSheet.create({
   },
   stadiumName: {
     height: 38,
-    width: 122
+    width: 250 // Increased width
   },
   frame5: {
     left: 12,
     height: 196,
-    width: 122
+    width: 250 // Increased width
   },
   frameIcon1: {
     left: 17,
