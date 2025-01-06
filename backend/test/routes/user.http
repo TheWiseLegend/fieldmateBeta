@@ -21,9 +21,10 @@ POST {{baseUrl}}/
 Content-Type: application/json
 
 {
-  "name": "John Doe",
-  "email": "john.doe@example.com",
-  "password": "password123"
+  "name": "Nor Binti Mohd Ahmad",
+  "email": "nor.ahmad@uni.edu.my",
+  "password": "987654321",
+  "phone": "01111778899"
 }
 
 ### Create a vendor user
@@ -31,22 +32,22 @@ POST {{baseUrl}}/
 Content-Type: application/json
 
 {
-  "name": "Vendor User",
-  "email": "vendor@example.com",
-  "password": "vendorpassword",
-  "phone": "1234567890",
+  "name": "Amr Smith",
+  "email": "Amr.smith@vender.co",
+  "password": "pray-for-gaza",
+  "phone": "01122334455",
   "user_role": "vendor"
 }
 
 ### Update a user
-PUT {{baseUrl}}/1
+PUT {{baseUrl}}/2
 Content-Type: application/json
 
 {
-  "name": "John Smith",
-  "email": "john.smith@example.com",
-  "password": "newpassword123",
-  "phone": "0987654321"
+  "name": "Amr Smith",
+  "email": "Amr.smith@example.co",
+  "password": "pray-for-gaza",
+  "phone": "01122334455"
 }
 
 ### Delete a user

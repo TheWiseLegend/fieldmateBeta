@@ -12,39 +12,6 @@ import axios from 'axios';
 
 const IP_ADDRESS = 'http://13.229.202.42:5000/api';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
-    backgroundColor: '#f5f5f5',
-  },
-  formControl: {
-    padding: 16,
-    // borderWidth: 1,
-    // borderRadius: 8,
-    // borderColor: '#ccc',
-    backgroundColor: '#fff',
-    width: '100%',
-    maxWidth: 400,
-  },
-  input: {
-    minWidth: 250,
-  },
-  button: {
-    marginTop: 16,
-  },
-  buttonText: {
-    color: '#fff',
-  },
-  linkText: {
-    color: '#007BFF',
-    marginTop: 16,
-    textAlign: 'center',
-  },
-});
-
 export default function Registration() {
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState('');
@@ -54,11 +21,11 @@ export default function Registration() {
   const [phone, setPhone] = useState('');
   const navigation = useNavigation();
 
-  const handleState = () => {
+  function handleState() {
     setShowPassword((showState) => !showState);
-  };
+  }
 
-  const handleRegister = async () => {
+  async function handleRegister() {
     if (!name || !email || !password || !confirmPassword || !phone) {
       Alert.alert('Error', 'All fields are required');
       console.error('Error', 'All fields are required');
@@ -72,21 +39,25 @@ export default function Registration() {
     }
 
     try {
-    await axios.post(`${IP_ADDRESS}/users`, {
-        name,
-        email,
-        password,
-        phone,
-        user_role: 'player',
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
+      await axios.post(
+        `${IP_ADDRESS}/users`,
+        {
+          name,
+          email,
+          password,
+          phone,
+          user_role: 'player'
         },
-      });
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
 
       navigation.navigate('Login');
-    } catch (error) {
-      Alert.alert('Error', error.message);
+    } catch (err) {
+      Alert.alert('Error', err.message);
     }
   }
 
@@ -116,7 +87,12 @@ export default function Registration() {
           <VStack space="xs">
             <Text className="text-typography-500">Password</Text>
             <Input style={styles.input} variant="rounded">
-              <InputField type={showPassword ? 'text' : 'password'} value={password} onChangeText={setPassword} required />
+              <InputField
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChangeText={setPassword}
+                required
+              />
               <InputSlot className="pr-3" onPress={handleState}>
                 <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} />
               </InputSlot>
@@ -125,7 +101,12 @@ export default function Registration() {
           <VStack space="xs">
             <Text className="text-typography-500">Confirm Password</Text>
             <Input style={styles.input} variant="rounded">
-              <InputField type={showPassword ? 'text' : 'password'} value={confirmPassword} onChangeText={setConfirmPassword} required />
+              <InputField
+                type={showPassword ? 'text' : 'password'}
+                value={confirmPassword}
+                onChangeText={setConfirmPassword}
+                required
+              />
               <InputSlot className="pr-3" onPress={handleState}>
                 <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} />
               </InputSlot>
@@ -142,3 +123,36 @@ export default function Registration() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16,
+    backgroundColor: '#f5f5f5'
+  },
+  formControl: {
+    padding: 16,
+    // borderWidth: 1,
+    // borderRadius: 8,
+    // borderColor: '#ccc',
+    backgroundColor: '#fff',
+    width: '100%',
+    maxWidth: 400
+  },
+  input: {
+    minWidth: 250
+  },
+  button: {
+    marginTop: 16
+  },
+  buttonText: {
+    color: '#fff'
+  },
+  linkText: {
+    color: '#007BFF',
+    marginTop: 16,
+    textAlign: 'center'
+  }
+});

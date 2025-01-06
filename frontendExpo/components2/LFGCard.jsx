@@ -1,16 +1,69 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { CalendarMinus2, MapPin, Users } from 'lucide-react-native';
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarImage } from '../components/ui/avatar';
+import axios from 'axios';
+
+const BASE_URL = 'http://13.229.202.42:5000/api';
+
+/**
+ * @typedef {object} LFGData
+ * @property {string} name
+ * @property {string} address
+ * @property {number} price
+ * @property {number} player_count
+ * @property {number} duration
+ * @property {Date} start_datetime
+ */
 
 /**
  * @param {object} props
+ * @param {object} props.data
  */
-export default function LFGCard({}) {
+export default function LFGCard({ data }) {
+  /** @type {[LFGData, React.Dispatch<React.SetStateAction<LFGData>>]} */
+  const [lfgData, setLfgData] = useState({
+    name: 'User123',
+    address: 'Malaysia',
+    price: 999,
+    duration: 0,
+    player_count: 0,
+    start_datetime: new Date()
+  });
+
+  useEffect(() => {
+    fetchData();
+  }, [data]);
+
+  async function fetchData() {
+    try {
+      /** @type {object[]} */
+      const bookings = (await axios.get(`${BASE_URL}/bookings`)).data;
+      const booking = bookings.find((b) => b.lfg_id === data.lfg_id);
+
+      /** @type {object} */
+      const field = (await axios.get(`${BASE_URL}/fields/${booking.field_id}`)).data[0];
+
+      /** @type {object} */
+      const user = (await axios.get(`${BASE_URL}/users/${booking.user_id}`)).data[0];
+
+      setLfgData({
+        name: user.name,
+        address: field.address,
+        price: field.price,
+        duration: booking.duration,
+        player_count: booking.current_players,
+        start_datetime: new Date(booking.start_datetime)
+      });
+    } catch (err) {
+      console.error('Error fetching data:', err);
+    }
+  }
+
   return (
     <View className="p-3">
       <View style={styles.cardContainer}>
-        <Text style={styles.priceText}>30.00 RM</Text>
+        <Text style={styles.priceText}>{lfgData.price} RM</Text>
         <View style={styles.contentContainer}>
           <View style={styles.leftSection}>
             <View style={styles.row}>
@@ -21,21 +74,25 @@ export default function LFGCard({}) {
                   }}
                 />
               </Avatar>
-              <Text style={styles.nameText}>Name</Text>
+              <Text style={styles.nameText}>{lfgData.name}</Text>
             </View>
+
             <View style={styles.row}>
               <CalendarMinus2 style={styles.icon} size={20} />
-              <Text style={styles.infoText}>20 Aug - 4 Sep</Text>
+              <Text style={styles.infoText}>{lfgData.start_datetime?.toLocaleString()}</Text>
             </View>
+
             <View style={styles.row}>
               <MapPin style={styles.icon} size={20} />
-              <Text style={styles.infoText}>Location</Text>
+              <Text style={styles.infoText}>{lfgData.address}</Text>
             </View>
+
             <View style={styles.row}>
               <Users style={styles.icon} size={20} />
-              <Text style={styles.infoText}>Players px</Text>
+              <Text style={styles.infoText}>{lfgData.player_count} players</Text>
             </View>
           </View>
+
           <TouchableOpacity style={styles.button} onPress={() => alert('Join us clicked')}>
             <Text style={styles.buttonText}>Join us</Text>
           </TouchableOpacity>

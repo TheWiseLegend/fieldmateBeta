@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
-import axios from 'axios'
+import axios from 'axios';
 import Recommendation from '../components2/Recommendation.jsx';
 import LFGCard from '../components2/LFGCard.jsx';
 import Header from '../components2/Header.jsx';
 import { Border, Color, FontSize, FontFamily } from '../GlobalStyles.js';
 
-const IP_ADDRESS = 'http://13.229.202.42:5000/api'
+const BASE_URL = 'http://13.229.202.42:5000/api';
 
 export default function Home() {
+  /** @type {[object[], React.Dispatch<React.SetStateAction<object[]>>]} */ // @ts-expect-error
   const [matches, setMatches] = useState([]);
 
   useEffect(() => {
@@ -16,18 +17,21 @@ export default function Home() {
   }, []);
 
   async function fetchMatches() {
-    let res;
+    /** @type {object[]} */
+    let data;
 
     try {
-      res = await axios.get(`${IP_ADDRESS}/users?limit=1`);
-    } catch (error) {
-      console.error('Error fetching matches:', error);
+      data = (await axios.get(`${BASE_URL}/lfgs`)).data;
+      data = data
+        .filter((m) => m.status === 'open' && m.required_players > 0)
+        .sort((a, b) => a.required_players - b.required_players)
+        .slice(0, 2);
+    } catch (err) {
+      console.error('Error fetching matches:', err);
     }
 
-    const data = res.data;
-
     setMatches(data);
-  };
+  }
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -37,9 +41,8 @@ export default function Home() {
         <Text style={[styles.headline, styles.headlineFlexBox]}>Matches near you</Text>
         <View style={styles.marginBottom} />
 
-        {matches.map((match, i) => (
-          // <LFGCard key={match.lfg_id} match={match} />
-          <LFGCard key={i} match={match} />
+        {matches.map((m) => (
+          <LFGCard key={m.lfg_id} data={m} />
         ))}
       </View>
     </ScrollView>

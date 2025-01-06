@@ -12,44 +12,6 @@ import axios from 'axios';
 
 const IP_ADDRESS = 'http://13.229.202.42:5000/api';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
-    backgroundColor: '#f5f5f5',
-  },
-  formControl: {
-    padding: 16,
-    // borderWidth: 1,
-    // borderRadius: 8,
-    // borderColor: '#ccc',
-    backgroundColor: '#fff',
-    width: '100%',
-    maxWidth: 400,
-  },
-  input: {
-    minWidth: 250,
-  },
-  button: {
-    marginTop: 16,
-  },
-  buttonText: {
-    color: '#fff',
-  },
-  linkText: {
-    color: '#007BFF',
-    marginTop: 16,
-    textAlign: 'center',
-  },
-  logo: {
-    width: 100,
-    height: 100,
-    marginBottom: 20,
-  },
-});
-
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
@@ -62,25 +24,15 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.get(`${IP_ADDRESS}/users`, {
-        email,
-        password,
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
       /** @type {object[]} */
-      const users = res.data;
+      const users = (await axios.get(`${IP_ADDRESS}/users`)).data;
 
-      if (!users.find(u => u.email === email && u.password === password) ) {
-        Alert.alert('Error', 'Invalid email or password');
+      if (!users.find((u) => u.email === email && u.password === password)) {
+        Alert.alert('Error: Invalid email or password');
         return;
       }
 
-      navigation.navigate('Home'); // Navigate to the Home screen
-
+      navigation.navigate('Home');
     } catch (error) {
       Alert.alert('Error', error.message);
     }
@@ -118,3 +70,41 @@ export default function Login() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16,
+    backgroundColor: '#f5f5f5'
+  },
+  formControl: {
+    padding: 16,
+    // borderWidth: 1,
+    // borderRadius: 8,
+    // borderColor: '#ccc',
+    backgroundColor: '#fff',
+    width: '100%',
+    maxWidth: 400
+  },
+  input: {
+    minWidth: 250
+  },
+  button: {
+    marginTop: 16
+  },
+  buttonText: {
+    color: '#fff'
+  },
+  linkText: {
+    color: '#007BFF',
+    marginTop: 16,
+    textAlign: 'center'
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    marginBottom: 20
+  }
+});

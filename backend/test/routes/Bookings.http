@@ -21,12 +21,12 @@ POST {{baseUrl}}/
 Content-Type: application/json
 
 {
-  "user_id": 101,
-  "field_id": 105,
-  "start_datetime": "2024-11-01T10:00:00Z",
+  "user_id": 17,
+  "field_id": 2,
+  "start_datetime": "2025-1-07T6:00:00Z",
   "duration": 60,
-  "lfg_id": 1,
-  "current_players": 1,
+  "lfg_id": 7,
+  "current_players": 4
 }
 
 ### Update a booking

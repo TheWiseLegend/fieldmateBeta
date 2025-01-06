@@ -21,7 +21,7 @@ POST {{baseUrl}}/
 Content-Type: application/json
 
 {
-  "required_players": 5,
+  "required_players": 9
 }
 
 ### Update an LFG
