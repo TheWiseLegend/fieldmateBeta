@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MapPin, ChevronDown, SortDescIcon } from 'lucide-react-native';
 import { StyleSheet, View } from 'react-native';
 import {
@@ -14,14 +14,51 @@ import {
   SelectItem
 } from '../components/ui/select';
 
-export default function Filters() {
+/** @type {[string, string][]} */
+const states = [
+  ['Kuala Lumpur', 'kuala lumpur'],
+  ['Selangor', 'selangor'],
+  ['Johor', 'johor'],
+  ['Sabah', 'sabah'],
+  ['Serawak', 'serawak'],
+  ['Terengannu', 'terengannu']
+];
+
+/** @type {[string, string][]} */
+const sorts = [
+  ['Highest Price', '+price'],
+  ['Lowest Price', '-price']
+];
+
+/**
+ * @param {object} props
+ * @param {[string, string][]} [props.extraStates]
+ * @param {[string, string][]} [props.extraSorts]
+ * @param {Function} props.onStateChange
+ * @param {Function} props.onSortChange
+ */
+export default function Filters({ extraStates, extraSorts, onStateChange, onSortChange }) {
+  const [state, setState] = useState('State');
+  const [sort, setSort] = useState('Sort');
+
+  if (extraStates && !states.includes(extraStates[0])) states.push(...(extraStates || []));
+  if (extraSorts && !sorts.includes(extraSorts[0])) sorts.push(...(extraSorts || []));
+
+  useEffect(() => {
+    onStateChange(state);
+  }, [state]);
+
+  useEffect(() => {
+    onSortChange(sort);
+  }, [sort]);
+
   return (
     <View style={styles.container}>
-      <Select>
+      <Select placeholder="State" selectedValue={state} onValueChange={(value) => setState(value)}>
         <SelectTrigger variant="rounded" size="sm" style={styles.selectTrigger} className="px-3">
-          <SelectIcon size={25} as={MapPin} />
+          <SelectIcon size="xl" as={MapPin} />
           <SelectInput placeholder="State" />
-          <SelectIcon size={25} as={ChevronDown} style={styles.chevronIcon} />
+          <SelectIcon size="xl" as={ChevronDown} />
         </SelectTrigger>
         <SelectPortal>
           <SelectBackdrop />
@@ -29,20 +66,18 @@ export default function Filters() {
             <SelectDragIndicatorWrapper>
               <SelectDragIndicator />
             </SelectDragIndicatorWrapper>
-            <SelectItem label="Selangor" value="sel" />
-            <SelectItem label="Kuala Lumpur" value="kl" />
-            <SelectItem label="Sabah" value="sab" />
-            <SelectItem label="Serawak" value="ser" />
-            <SelectItem label="Terengannu" value="ter" />
+            {states.map(([label, value]) => (
+              <SelectItem key={value} label={label} value={value} />
+            ))}
           </SelectContent>
         </SelectPortal>
       </Select>
 
-      <Select>
+      <Select placeholder="Sort" selectedValue={sort} onValueChange={(value) => setSort(value)}>
         <SelectTrigger variant="rounded" size="sm" style={styles.selectTrigger} className="px-3">
-          <SelectIcon size={25} as={SortDescIcon} />
+          <SelectIcon size="xl" as={SortDescIcon} />
           <SelectInput placeholder="Sort" />
-          <SelectIcon size={25} as={ChevronDown} style={styles.chevronIcon} />
+          <SelectIcon size="xl" as={ChevronDown} />
         </SelectTrigger>
         <SelectPortal>
           <SelectBackdrop />
@@ -50,8 +85,9 @@ export default function Filters() {
             <SelectDragIndicatorWrapper>
               <SelectDragIndicator />
             </SelectDragIndicatorWrapper>
-            <SelectItem label="Lowest Price" value="lp" />
-            <SelectItem label="Good Rating" value="gr" />
+            {sorts.map(([label, value]) => (
+              <SelectItem key={value} label={label} value={value} />
+            ))}
           </SelectContent>
         </SelectPortal>
       </Select>
