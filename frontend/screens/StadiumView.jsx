@@ -1,10 +1,10 @@
-/** @import { FullField } from './Stadiums.js' */
+/** @import { FullField } from './Stadiums.jsx' */
 import React from 'react';
 import { Image } from 'expo-image';
 import { StyleSheet, Text, View } from 'react-native';
-import StadiumViewInfo from '../components/StadiumViewInfo.js';
+import StadiumViewInfo from '../components/StadiumViewInfo.jsx';
 import Facilities from '../components/Facilities.jsx';
-import BookCard from '../components/BookCard.js';
+import BookCard from '../components/BookCard.jsx';
 import Reviews from '../components/Reviews.jsx';
 import Header from '../components/Header.jsx';
 import { FontFamily, Color } from '../GlobalStyles.js';

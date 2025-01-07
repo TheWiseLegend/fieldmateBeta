@@ -1,4 +1,4 @@
-/** @import { FullField } from '../screens/Stadiums.js' */
+/** @import { FullField } from '../screens/Stadiums.jsx' */
 import React from 'react';
 import { Text, StyleSheet, View, TouchableOpacity, Linking } from 'react-native';
 import { Padding, Color, FontFamily, FontSize, Gap } from '../GlobalStyles.js';

@@ -1,4 +1,4 @@
-/** @import { Field } from './Stadiums.js' */
+/** @import { Field } from './Stadiums.jsx' */
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import WeekdaysDatePicker from '../components/WeekdaysDatePicker.jsx';

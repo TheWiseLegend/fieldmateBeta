@@ -1,10 +1,10 @@
 import React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { Image } from 'expo-image';
-import Frame6 from '../components/Frame6.js';
-import Frame5 from '../components/Frame5.js';
-import Frame from '../components/Frame.js';
-import Frame1 from '../components/Frame1.js';
+import Frame6 from '../components/Frame6.jsx';
+import Frame5 from '../components/Frame5.jsx';
+import Frame from '../components/Frame.jsx';
+import Frame1 from '../components/Frame1.jsx';
 import Header from '../components/Header.jsx';
 import { FontSize, Color, FontFamily, Border } from '../GlobalStyles.js';
 
