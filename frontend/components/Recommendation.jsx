@@ -27,6 +27,7 @@ export default function Recommendation({}) {
             </View>
           </ImageBackground>
         </TouchableOpacity>
+
         <TouchableOpacity style={styles.stadiumImage} onPress={() => navigation.navigate('Matches')}>
           <ImageBackground
             imageStyle={styles.roundedImage}
@@ -45,50 +46,44 @@ export default function Recommendation({}) {
 
 const styles = StyleSheet.create({
   container: {
+    width: '100%',
     height: 215,
-    width: 430,
-    marginTop: 165,
     padding: 20
   },
   textTitle: {
-    fontSize: 16,
-    lineHeight: 25,
-    fontFamily: FontFamily.robotoMedium,
-    color: Color.surface,
+    fontSize: 20,
     textAlign: 'center',
-    letterSpacing: 0
+    color: Color.surface,
+    fontFamily: FontFamily.robotoMedium
   },
   subtitle3: {
-    fontSize: FontSize.size_lg_6,
-    lineHeight: 25,
     fontWeight: '500',
-    fontFamily: FontFamily.robotoMedium,
     color: Color.onSurfaceMediumEmphasis,
-    textAlign: 'left',
-    letterSpacing: 0
+    fontSize: FontSize.size_lg_6,
+    fontFamily: FontFamily.robotoMedium
   },
   stadiumImage: {
-    height: 110,
     width: 175,
+    height: 110,
     position: 'relative' // Ensure the textBackground is positioned relative to this
   },
   gridImage: {
-    width: '96%',
+    width: '100%',
     marginTop: 30,
     flexDirection: 'row', // Arrange children in a row
     gap: 12 // Distribute space evenly between the items
   },
   roundedImage: {
-    borderRadius: 12 // Adjust the value to make the image more or less rounded
+    borderRadius: 12
   },
   textBackground: {
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    height: 40,
+    borderRadius: 10, // Adjust the value to make the image more or less rounded
+    bottom: 0, // Position at the bottom of the ImageBackground
     width: '100%',
+    height: 40,
+    backgroundColor: 'rgba(0,0,0,0.5)',
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
-    bottom: 0, // Position at the bottom of the ImageBackground
-    borderRadius: 10 // Adjust the value to make the image more or less rounded
+    position: 'absolute'
   }
 });

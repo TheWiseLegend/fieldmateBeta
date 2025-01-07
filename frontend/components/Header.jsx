@@ -7,9 +7,8 @@ import { Padding, Border } from '../GlobalStyles';
 
 /**
  * @param {object} props
- * @param {Function} [props.onBurgerPress]
  */
-export default function Header({ onBurgerPress }) {
+export default function Header({}) {
   /** @type {MyNavigationProp} */
   const navigation = useNavigation();
 
@@ -19,7 +18,7 @@ export default function Header({ onBurgerPress }) {
         name={localStorage.getItem('client_user') === null ? 'sign-in' : 'person-fill'}
         size={24}
         color="black"
-        style={styles.burgerButton}
+        style={styles.profile}
         onPress={() => navigation.navigate('Profile')}
       />
 
@@ -27,7 +26,7 @@ export default function Header({ onBurgerPress }) {
         name="bell"
         size={24}
         color="black"
-        style={styles.doorbellIcon}
+        style={styles.doorbell}
         contentFit="cover" // @ts-expect-error
         source={require('../assets/doorbell.png')}
         onPress={() => alert('Soon...')}
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     flexDirection: 'row'
   },
-  burgerButton: {
+  profile: {
     top: 59,
     left: 21,
     width: 48,
@@ -55,11 +54,35 @@ const styles = StyleSheet.create({
     position: 'absolute',
     overflow: 'hidden'
   },
-  doorbellIcon: {
+  doorbell: {
     top: 71,
     left: 332,
     width: 40,
     height: 45,
     position: 'absolute'
   }
+
+  // header: {
+  //   top: 50,
+  //   width: '100%',
+  //   height: 120,
+  //   position: 'relative',
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-between',
+  //   alignItems: 'center',
+  //   padding: Padding.md,
+  //   borderBottomWidth: Border.width,
+  //   borderBottomColor: 'black'
+  // },
+  // profile: {
+  //   left: '10%',
+  //   width: 48,
+  //   height: 48
+  // },
+  // doorbell: {
+  //   // left: '80%',
+  //   // right: '10%',
+  //   width: 40,
+  //   height: 45
+  // }
 });

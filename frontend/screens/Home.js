@@ -40,16 +40,8 @@ export default function Home() {
     <ScrollView>
       <View id="home-screen" className="screen" style={styles.home}>
         <Header />
-        {/* <Header onBurgerPress={() => setShowDrawer(true)} /> */}
-        {/* <ProfileDrawer
-          isOpen={showDrawer}
-          onClose={() => setShowDrawer(false)}
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn}
-        /> */}
         <Recommendation />
-        <Text style={[styles.headline, styles.headlineFlexBox]}>Matches near you</Text>
-        <View style={styles.marginBottom} />
+        <Text style={styles.headline}>Matches near you</Text>
 
         {matches.map((m) => (
           <LFGCard key={m.lfg_id} data={m} />
@@ -60,27 +52,19 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
-  headlineFlexBox: {
-    textAlign: 'left',
-    letterSpacing: 0
-  },
-  marginBottom: {
-    height: 10
-  },
-  headline: {
-    lineHeight: 28,
-    fontWeight: '600',
-    fontFamily: FontFamily.title1,
-    color: Color.colorBlack,
-    fontSize: FontSize.title2_size,
-    textAlign: 'left',
-    letterSpacing: 0,
-    marginTop: 20
-  },
   home: {
-    backgroundColor: Color.surface,
     flex: 1,
     width: '100%',
-    borderRadius: Border.br_mini
+    borderRadius: Border.br_mini,
+    backgroundColor: Color.surface
+  },
+  headline: {
+    marginTop: 20,
+    left: 20,
+    width: '100%',
+    fontWeight: '600',
+    color: Color.colorBlack,
+    fontSize: FontSize.title2_size,
+    fontFamily: FontFamily.title1
   }
 });
