@@ -21,8 +21,8 @@ POST {{baseUrl}}/
 Content-Type: application/json
 
 {
-  "field_id": 1,
-  "amenity_id": 1
+  "field_id": 3,
+  "amenity_id": 4
 }
 
 ### Update a field amenity

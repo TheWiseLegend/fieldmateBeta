@@ -98,9 +98,7 @@ export default function Filters({ extraStates, extraSorts, onStateChange, onSort
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginLeft: 10,
-    marginTop: 110
+    justifyContent: 'space-around'
   },
   selectTrigger: {
     width: 160,

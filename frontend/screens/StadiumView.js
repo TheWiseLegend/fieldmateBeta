@@ -1,20 +1,21 @@
+/** @import { FullField } from './Stadiums.js' */
 import React from 'react';
 import { Image } from 'expo-image';
 import { StyleSheet, Text, View } from 'react-native';
-import FrameComponent from '../components/FrameComponent.js';
-import BookCard from '../components/BookCard.js';
-import Header from '../components/Header.jsx';
+import StadiumViewInfo from '../components/StadiumViewInfo.js';
 import Facilities from '../components/Facilities.jsx';
+import BookCard from '../components/BookCard.js';
 import Reviews from '../components/Reviews.jsx';
-import { FontFamily, Color, Border } from '../GlobalStyles.js';
+import Header from '../components/Header.jsx';
+import { FontFamily, Color } from '../GlobalStyles.js';
 
 /**
  * @param {object} props
  */
 export default function StadiumView({}) {
   const json = localStorage.getItem('field_view');
-  /** @type {object} */
-  const data = json
+  /** @type {FullField} */
+  const field = json
     ? JSON.parse(json)
     : {
         field_name: 'NAME',
@@ -31,14 +32,14 @@ export default function StadiumView({}) {
         contentFit="cover" // @ts-expect-error
         source={require('../assets/field.png')}
       />
-      <Text style={styles.stadiumName}>{data.field_name}</Text>
+      <Text style={styles.stadiumName}>{field.field_name}</Text>
 
-      <Reviews />
+      <Reviews rating={field.rating} />
 
-      <Facilities />
+      <Facilities field={field} />
 
-      <FrameComponent />
-      <BookCard data={data} />
+      <StadiumViewInfo field={field} />
+      <BookCard data={field} />
     </View>
   );
 }
@@ -50,32 +51,17 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   StadiumBanner: {
-    borderBottomRightRadius: Border.br_10xs,
-    borderBottomLeftRadius: Border.br_10xs,
-    top: 0,
-    left: 0,
-    height: 244,
+    height: 200,
     width: '100%',
-    maxWidth: '100%',
-    alignSelf: 'stretch',
-    overflow: 'hidden',
-    position: 'absolute',
-    justifyContent: 'center',
-    alignItems: 'center'
+    alignSelf: 'stretch'
   },
   stadiumName: {
-    height: 34,
-    fontSize: 26,
-    lineHeight: 24,
-    letterSpacing: 0,
-    top: 260,
+    top: '2%',
     left: '5%',
-    width: '80%',
-    justifyContent: 'center',
-    position: 'absolute',
-    color: Color.colorBlack,
-    fontFamily: FontFamily.openSansBold,
+    width: '100%',
+    fontSize: 26,
     fontWeight: '700',
-    textAlign: 'left'
+    color: Color.colorBlack,
+    fontFamily: FontFamily.openSansBold
   }
 });

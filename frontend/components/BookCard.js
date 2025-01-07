@@ -1,6 +1,6 @@
 /** @import { MyNavigationProp } from './Footer.jsx' */
 import React from 'react';
-import { StyleSheet, Button, View, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Border, Color, FontSize, FontFamily, Padding } from '../GlobalStyles.js';
 
@@ -18,110 +18,72 @@ export default function BookCard({ data }) {
 
   return (
     <View style={styles.frameWrapper}>
-      <View style={[styles.frame, styles.frameFlexBox]}>
-        <View style={[styles.frame1, styles.frameFlexBox]}>
-          <View style={styles.frameChild} />
+      <View>
+        <Text style={styles.price}>Price</Text>
+        <Text style={styles.rm}>{data.price} RM</Text>
+      </View>
 
-          <Text style={[styles.startingFrom, styles.rmFlexBox]}>Price</Text>
-          <Text style={[styles.rm, styles.rmFlexBox]}>{data.price} RM</Text>
-
-          <View style={styles.createMatchButton}>
-            {/* <Button title="Book" onPress={() => handlePress()} style={[styles.book, styles.bookLayout]} /> */}
-            <Text onPress={() => handlePress()} style={[styles.book, styles.bookLayout]}>
-              Book
-            </Text>
-          </View>
-        </View>
+      <View style={styles.btn}>
+        <Text onPress={() => handlePress()} style={styles.book}>
+          Book
+        </Text>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  frameFlexBox: {
-    overflow: 'hidden',
-    alignSelf: 'stretch'
-  },
-  bookLayout: {
-    lineHeight: 22,
-    letterSpacing: 0
-  },
-  rmFlexBox: {
-    textAlign: 'left',
-    position: 'absolute'
-  },
-  frameChild: {
-    top: 0,
-    left: 0,
+  frameWrapper: {
+    top: '5%',
+    width: '100%',
+    height: 150,
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    flexDirection: 'row',
+
     elevation: 4,
-    borderRadius: Border.br_3xs,
-    backgroundColor: Color.surface,
+    borderWidth: 1,
     borderStyle: 'solid',
     borderColor: Color.colorSilver_200,
-    borderWidth: 1,
-    width: 418,
-    height: 131,
-    position: 'absolute'
+    backgroundColor: Color.surface,
+    borderRadius: Border.br_3xs
   },
-  book: {
-    fontSize: FontSize.size_14xl,
-    fontWeight: '700',
-    fontFamily: FontFamily.openSansBold,
-    color: Color.surface,
-    textAlign: 'center',
-    display: 'flex',
-    width: 119,
-    justifyContent: 'center',
-    alignItems: 'center'
+  price: {
+    top: '15%',
+    left: '2%',
+    color: Color.grayIcon,
+    fontSize: FontSize.title1_size,
+    fontFamily: FontFamily.secondaryNotActive
   },
-  createMatchButton: {
-    height: '45.78%',
-    width: '45.67%',
-    top: '22.89%',
-    right: '2.81%',
-    bottom: '31.33%',
-    left: '51.52%',
-    borderRadius: Border.br_smi,
-    backgroundColor: Color.colorMediumslateblue,
+  rm: {
+    top: '20%',
+    left: '2%',
+    fontWeight: '600',
+    color: Color.blue,
+    fontSize: FontSize.size_13xl,
+    fontFamily: FontFamily.title1
+  },
+  btn: {
+    height: '50%',
+    width: '45%',
+    top: '20%',
+    bottom: '20%',
+    left: '5%',
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: Padding.p_8xs,
-    alignItems: 'center',
-    position: 'absolute'
+    borderRadius: Border.br_smi,
+    backgroundColor: Color.colorMediumslateblue
   },
-  rm: {
-    height: '60.84%',
-    width: '41.15%',
-    top: '39.16%',
-    left: '7.17%',
-    fontSize: FontSize.size_13xl,
-    lineHeight: 28,
-    fontWeight: '600',
-    fontFamily: FontFamily.title1,
-    color: Color.blue
-  },
-  startingFrom: {
-    height: '33.73%',
-    width: '54.78%',
-    top: '14.46%',
-    left: '5.74%',
-    fontSize: FontSize.title1_size,
-    fontFamily: FontFamily.secondaryNotActive,
-    color: Color.grayIcon,
-    lineHeight: 22,
-    letterSpacing: 0
-  },
-  frame1: {
-    height: 166
-  },
-  frame: {
-    justifyContent: 'center'
-  },
-  frameWrapper: {
-    top: '80%',
+  book: {
     width: '100%',
+    fontWeight: '700',
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute'
+    display: 'flex',
+    color: Color.surface,
+    fontSize: FontSize.size_14xl,
+    fontFamily: FontFamily.openSansBold
   }
 });

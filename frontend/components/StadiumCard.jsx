@@ -1,5 +1,5 @@
 /** @import { MyNavigationProp } from './Footer.jsx' */
-/** @import { RatedField } from '../screens/Stadiums.js' */
+/** @import { FullField } from '../screens/Stadiums.js' */
 import React from 'react';
 import { Image } from 'expo-image';
 import { StyleSheet, Button, View, Text } from 'react-native';
@@ -8,14 +8,14 @@ import { Color, FontFamily, FontSize } from '../GlobalStyles.js';
 
 /**
  * @param {object} props
- * @param {RatedField} props.data
+ * @param {FullField} props.field
  */
-export default function StadiumCard({ data }) {
+export default function StadiumCard({ field }) {
   /** @type {MyNavigationProp} */
   const navigation = useNavigation();
 
   function handleNavigation() {
-    localStorage.setItem('field_view', JSON.stringify(data));
+    localStorage.setItem('field_view', JSON.stringify(field));
     navigation.navigate('Stadium View');
   }
 
@@ -32,7 +32,7 @@ export default function StadiumCard({ data }) {
       </View>
 
       <View style={styles.inner}>
-        <Text style={styles.name}>{data.field_name || 'NAME'}</Text>
+        <Text style={styles.name}>{field.field_name || 'NAME'}</Text>
 
         <View style={styles.row}>
           <Image
@@ -40,7 +40,7 @@ export default function StadiumCard({ data }) {
             contentFit="cover" // @ts-expect-error
             source={require('../assets/location.png')}
           />
-          <Text style={styles.text}>{data.address || 'ADDRESS'}</Text>
+          <Text style={styles.text}>{field.address || 'ADDRESS'}</Text>
         </View>
 
         <View style={styles.row}>
@@ -49,12 +49,12 @@ export default function StadiumCard({ data }) {
             contentFit="cover" // @ts-expect-error
             source={require('../assets/star-rate.png')}
           />
-          <Text style={styles.text}>{data.rating || 0}/5</Text>
+          <Text style={styles.text}>{field.rating || 0}/5</Text>
         </View>
 
         <View style={styles.priceRow}>
           <Text style={styles.text}>Price</Text>
-          <Text style={styles.price}>{data.price || 0} RM</Text>
+          <Text style={styles.price}>{field.price || 0} RM</Text>
         </View>
       </View>
     </View>

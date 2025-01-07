@@ -5,85 +5,59 @@ import { Color, FontFamily, FontSize } from '../GlobalStyles.js';
 
 /**
  * @param {object} props
+ * @param {number} props.rating
  */
-export default function Reviews({}) {
+export default function Reviews({ rating }) {
   return (
-    <View style={styles.frame2}>
-      <View style={styles.frameWrapper}>
-        <View style={[styles.frame3, styles.frame3FlexBox]}>
-          <Image
-            style={[styles.groupIcon, styles.groupIconLayout]}
-            contentFit="cover" // @ts-expect-error
-            source={require('../assets/group.png')}
-          />
-          <Text style={[styles.text, styles.textLayout]}>4.2/5 (33)</Text>
+    <View style={styles.container}>
+      <Image
+        style={styles.groupIcon}
+        contentFit="cover" // @ts-expect-error
+        source={require('../assets/group.png')}
+      />
+      <Text style={styles.text}>{rating}/5</Text>
 
-          <Text style={[styles.seeAllReviews, styles.textLayout]}>See all reviews</Text>
-        </View>
-      </View>
+      {/* <Text style={styles.seeAllReviews}>See all reviews</Text> */}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  frame3FlexBox: {
+  container: {
+    top: '3%',
+    left: '50%',
+    width: '50%',
+    height: 27,
+    justifyContent: 'center',
     alignSelf: 'stretch',
-    overflow: 'hidden'
+    alignItems: 'center',
+    flexDirection: 'row'
   },
   text: {
-    width: '34.84%',
-    top: '3.7%',
-    left: '7.74%',
+    marginLeft: 5,
+    width: '35%',
+    left: '8%',
+    color: Color.colorBlack,
     fontSize: FontSize.size_xl,
-    fontFamily: FontFamily.secondaryNotActive,
-    color: Color.colorBlack
-  },
-  frame3: {
-    height: 27,
-    overflow: 'hidden'
-  },
-  frameWrapper: {
-    width: 310,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  frame2: {
-    top: 300,
-    left: 20,
-    width: 411,
-    justifyContent: 'center',
-    position: 'absolute',
-    overflow: 'hidden'
+    fontFamily: FontFamily.secondaryNotActive
   },
   groupIcon: {
-    height: '92.59%',
-    width: '7.16%',
-    top: '0%',
-    right: '92.84%',
-    bottom: '7.41%',
     left: '0%',
+    width: '7%',
+    height: '93%',
+    right: '93%',
+    bottom: '7%',
     maxWidth: '100%',
-    overflow: 'hidden'
-  },
-  groupIconLayout: {
-    position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  seeAllReviews: {
-    width: '49.35%',
-    top: '11.11%',
-    left: '60.65%',
-    fontSize: FontSize.secondaryNotActive_size,
-    color: Color.colorRoyalblue_100,
-    fontFamily: FontFamily.openSansBold,
-    fontWeight: '700'
-  },
-  textLayout: {
-    position: 'absolute',
-    textAlign: 'left',
-    lineHeight: 27,
-    letterSpacing: 0,
-    marginLeft: 5
   }
+  // seeAllReviews: {
+  //   marginLeft: 5,
+  //   left: '60%',
+  //   width: '50%',
+  //   fontWeight: '700',
+  //   color: Color.colorRoyalblue_100,
+  //   fontSize: FontSize.secondaryNotActive_size,
+  //   fontFamily: FontFamily.openSansBold
+  // }
 });

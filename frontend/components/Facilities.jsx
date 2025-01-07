@@ -1,85 +1,83 @@
+/** @import { FullField } from '../screens/Stadiums.jsx' */
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { Color, Border, FontFamily, FontSize } from '../GlobalStyles.js';
 import { Icon } from './ui/icon/index';
-import { Home } from 'lucide-react-native';
+import { ShowerHead, GlassWater, Shirt, Coffee, WifiHigh } from 'lucide-react-native';
+import { Color, Border, FontFamily, FontSize } from '../GlobalStyles.js';
+
+/** @typedef {'Cafe' | 'WiFi' | 'Water' | 'Shower' | 'Shirts' | 'Boots'} FacilityNames */
 
 /**
  * @param {object} props
+ * @param {FullField} props.field
  */
-export default function Facilities({}) {
+export default function Facilities({ field }) {
   return (
-    <View>
-      <Text style={styles.facilities}>Facilities</Text>
+    <View style={styles.container}>
+      {field.facilities.length > 0 ? (
+        <>
+          <Text style={styles.title}>Facilities</Text>
 
-      <View style={styles.frame4}>
-        <View style={styles.frame5}>
-          <View style={styles.date}>
-            <View style={styles.background}>
-              <Icon size="lg" as={Home}></Icon>
-            </View>
-            <View style={styles.background}>
-              <Icon size="lg" as={Home}></Icon>
-            </View>
-            <View style={styles.background}>
-              <Icon size="lg" as={Home}></Icon>
-            </View>
-            <View style={styles.background}>
-              <Icon size="lg" as={Home}></Icon>
-            </View>
+          <View style={styles.grid}>
+            {field.facilities.map((name, i) => (
+              <View style={styles.background} key={i}>
+                <Icon
+                  size="lg"
+                  as={
+                    name === 'Cafe'
+                      ? Coffee
+                      : name === 'WiFi'
+                        ? WifiHigh
+                        : name === 'Water'
+                          ? GlassWater
+                          : name === 'Shower'
+                            ? ShowerHead
+                            : name === 'Shirts'
+                              ? Shirt
+                              : null
+                  }
+                ></Icon>
+              </View>
+            ))}
           </View>
-        </View>
-      </View>
+        </>
+      ) : (
+        <Text style={styles.title}>NO Facilities</Text>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  facilities: {
-    top: 350,
-    left: 33,
-    width: 398,
-    height: 25,
-    lineHeight: 22,
+  container: {
+    width: '100%',
+    height: 'auto'
+  },
+  title: {
+    left: '5%',
     fontWeight: '500',
-    textAlign: 'left',
-    justifyContent: 'center',
-    position: 'absolute',
-    overflow: 'hidden',
-    color: Color.darkGray,
     fontSize: FontSize.buttonText_size,
     fontFamily: FontFamily.poppinsMedium
   },
-  date: {
-    width: 340,
-    justifyContent: 'space-between',
+  grid: {
+    top: '10%',
+    left: '10%',
+    width: '80%',
+    height: 55,
+    gap: 5,
     flexDirection: 'row',
-    alignItems: 'center'
-  },
-  frame5: {
-    gap: 30,
-    flexDirection: 'row',
-    height: 54,
-    overflow: 'hidden',
     alignSelf: 'stretch',
-    alignItems: 'center'
-  },
-  frame4: {
-    top: 380,
-    left: 31,
-    width: 400,
-    justifyContent: 'center',
-    position: 'absolute',
-    overflow: 'hidden'
+    alignItems: 'center',
+    justifyContent: 'space-between'
   },
   background: {
-    borderRadius: Border.br_7xs,
-    borderStyle: 'solid',
-    borderColor: Color.colorLightgray,
-    borderWidth: 1,
-    width: 62,
-    height: 54,
+    width: 50,
+    height: 50,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderRadius: Border.br_7xs,
+    borderColor: Color.colorLightgray
   }
 });

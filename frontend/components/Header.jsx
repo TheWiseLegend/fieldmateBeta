@@ -38,13 +38,13 @@ export default function Header({}) {
 const styles = StyleSheet.create({
   header: {
     width: '100%',
-    height: 120,
+    height: 80,
     position: 'relative',
     flexDirection: 'row'
   },
   profile: {
-    top: 59,
-    left: 21,
+    top: 20,
+    left: 20,
     width: 48,
     height: 48,
     gap: 7,
@@ -55,8 +55,8 @@ const styles = StyleSheet.create({
     overflow: 'hidden'
   },
   doorbell: {
-    top: 71,
-    left: 332,
+    top: 30,
+    left: 330,
     width: 40,
     height: 45,
     position: 'absolute'
