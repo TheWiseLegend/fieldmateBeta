@@ -1,10 +1,10 @@
 /** @import { Field } from './Stadiums.js' */
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import WeekdaysDatePicker from '../components2/WeekdaysDatePicker.jsx';
-import LFGCard from '../components2/LFGCard.jsx';
-import Header from '../components2/Header.jsx';
-import Filters from '../components2/Filters.jsx';
+import WeekdaysDatePicker from '../components/WeekdaysDatePicker.jsx';
+import LFGCard from '../components/LFGCard.jsx';
+import Header from '../components/Header.jsx';
+import Filters from '../components/Filters.jsx';
 import { Color, Border } from '../GlobalStyles.js';
 import axios from 'axios';
 

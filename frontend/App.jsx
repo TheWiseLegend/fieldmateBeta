@@ -1,7 +1,7 @@
 import React from 'react';
 import { GluestackUIProvider } from './components/ui/gluestack-ui-provider';
 import { useFonts } from 'expo-font';
-import Footer from './components2/Footer';
+import Footer from './components/Footer';
 import './global.css';
 
 export default function App() {

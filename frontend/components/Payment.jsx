@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Radio, RadioGroup, RadioIcon, RadioIndicator, RadioLabel } from '../components/ui/radio';
-import { CircleIcon, Icon } from '../components/ui/icon';
-import { VStack } from '../components/ui/vstack';
+import { Radio, RadioGroup, RadioIcon, RadioIndicator, RadioLabel } from './ui/radio';
+import { CircleIcon, Icon } from './ui/icon';
+import { VStack } from './ui/vstack';
 import { QrCode, Banknote } from 'lucide-react-native';
 
 /**

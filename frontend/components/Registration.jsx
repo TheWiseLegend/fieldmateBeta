@@ -1,13 +1,14 @@
+/** @import { MyNavigationProp } from './Footer.jsx' */
 import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Alert, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { FormControl } from '../components/ui/form-control';
-import { VStack } from '../components/ui/vstack';
-import { Heading } from '../components/ui/heading';
-import { Button } from '../components/ui/button';
-import { ButtonText } from '../components/ui/button';
-import { EyeIcon, EyeOffIcon } from '../components/ui/icon';
-import { Input, InputField, InputSlot, InputIcon } from '../components/ui/input';
+import { FormControl } from './ui/form-control';
+import { VStack } from './ui/vstack';
+import { Heading } from './ui/heading';
+import { Button } from './ui/button';
+import { ButtonText } from './ui/button';
+import { EyeIcon, EyeOffIcon } from './ui/icon';
+import { Input, InputField, InputSlot, InputIcon } from './ui/input';
 import axios from 'axios';
 
 const IP_ADDRESS = 'http://13.229.202.42:5000/api';
@@ -19,6 +20,7 @@ export default function Registration() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phone, setPhone] = useState('');
+  /** @type {MyNavigationProp} */
   const navigation = useNavigation();
 
   function handleState() {
@@ -55,7 +57,6 @@ export default function Registration() {
         }
       );
 
-      // @ts-expect-error
       navigation.navigate('Login');
     } catch (err) {
       Alert.alert('Error', err.message);
@@ -110,7 +111,6 @@ export default function Registration() {
           <Button style={styles.button} onPress={handleRegister}>
             <ButtonText style={styles.buttonText}>Sign Up</ButtonText>
           </Button>
-          {/* @ts-expect-error */}
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
             <Text style={styles.linkText}>Already have an account? Log in</Text>
           </TouchableOpacity>

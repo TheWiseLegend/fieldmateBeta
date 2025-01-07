@@ -1,3 +1,4 @@
+/** @import { MyNavigationProp } from './Footer.jsx' */
 /** @import { RatedField } from '../screens/Stadiums.js' */
 import React from 'react';
 import { Image } from 'expo-image';
@@ -10,11 +11,11 @@ import { Color, FontFamily, FontSize } from '../GlobalStyles.js';
  * @param {RatedField} props.data
  */
 export default function StadiumCard({ data }) {
+  /** @type {MyNavigationProp} */
   const navigation = useNavigation();
 
   function handleNavigation() {
     localStorage.setItem('field_view', JSON.stringify(data));
-    // @ts-expect-error
     navigation.navigate('Stadium View');
   }
 

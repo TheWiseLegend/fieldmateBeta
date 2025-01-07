@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import StadiumCard from '../components2/StadiumCard.jsx';
-import Header from '../components2/Header.jsx';
-import Filters from '../components2/Filters.jsx';
+import StadiumCard from '../components/StadiumCard.jsx';
+import Header from '../components/Header.jsx';
+import Filters from '../components/Filters.jsx';
 import { Color, Border } from '../GlobalStyles.js';
 import axios from 'axios';
 

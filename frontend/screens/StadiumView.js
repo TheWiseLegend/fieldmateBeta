@@ -3,9 +3,9 @@ import { Image } from 'expo-image';
 import { StyleSheet, Text, View } from 'react-native';
 import FrameComponent from '../components/FrameComponent.js';
 import BookCard from '../components/BookCard.js';
-import Header from '../components2/Header.jsx';
-import Facilities from '../components2/Facilities.jsx';
-import Reviews from '../components2/Reviews.jsx';
+import Header from '../components/Header.jsx';
+import Facilities from '../components/Facilities.jsx';
+import Reviews from '../components/Reviews.jsx';
 import { FontFamily, Color, Border } from '../GlobalStyles.js';
 
 /**

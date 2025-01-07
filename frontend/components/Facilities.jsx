@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Color, Border, FontFamily, FontSize } from '../GlobalStyles.js';
-import { Icon } from '../components/ui/icon';
+import { Icon } from './ui/icon/index.js';
 import { Home } from 'lucide-react-native';
 
 /**

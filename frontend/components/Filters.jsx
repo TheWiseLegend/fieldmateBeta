@@ -12,7 +12,7 @@ import {
   SelectDragIndicatorWrapper,
   SelectDragIndicator,
   SelectItem
-} from '../components/ui/select';
+} from './ui/select';
 
 /** @type {[string, string][]} */
 const states = [

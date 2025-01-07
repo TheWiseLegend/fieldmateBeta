@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import axios from 'axios';
-import Recommendation from '../components2/Recommendation.jsx';
-import LFGCard from '../components2/LFGCard.jsx';
-import Header from '../components2/Header.jsx';
+import Recommendation from '../components/Recommendation.jsx';
+import LFGCard from '../components/LFGCard.jsx';
+import Header from '../components/Header.jsx';
+// import ProfileDrawer from '../components/Drawer.jsx';
 import { Border, Color, FontSize, FontFamily } from '../GlobalStyles.js';
-import ProfileDrawer from '../components2/Drawer';
 
 const BASE_URL = 'http://13.229.202.42:5000/api';
 
 export default function Home() {
-  /** @type {[object[], React.Dispatch<React.SetStateAction<object[]>>]} */ // @ts-expect-error
+  /** @type {[object[], React.Dispatch<React.SetStateAction<object[]>>]} */
   const [matches, setMatches] = useState([]);
-  const [showDrawer, setShowDrawer] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Manage authentication state
+  // const [showDrawer, setShowDrawer] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     fetchMatches();
@@ -37,15 +37,16 @@ export default function Home() {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
+    <ScrollView>
       <View id="home-screen" className="screen" style={styles.home}>
-        <Header onBurgerPress={() => setShowDrawer(true)} />
-        <ProfileDrawer
+        <Header />
+        {/* <Header onBurgerPress={() => setShowDrawer(true)} /> */}
+        {/* <ProfileDrawer
           isOpen={showDrawer}
           onClose={() => setShowDrawer(false)}
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
-        />
+        /> */}
         <Recommendation />
         <Text style={[styles.headline, styles.headlineFlexBox]}>Matches near you</Text>
         <View style={styles.marginBottom} />

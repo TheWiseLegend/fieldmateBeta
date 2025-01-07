@@ -1,3 +1,4 @@
+/** @import { MyNavigationProp } from './Footer.jsx' */
 import React from 'react';
 import { StyleSheet, Button, View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -8,10 +9,10 @@ import { Border, Color, FontSize, FontFamily, Padding } from '../GlobalStyles.js
  * @param {object} props.data
  */
 export default function BookCard({ data }) {
+  /** @type {MyNavigationProp} */
   const navigation = useNavigation();
 
   function handlePress() {
-    // @ts-expect-error
     navigation.navigate('Booking');
   }
 

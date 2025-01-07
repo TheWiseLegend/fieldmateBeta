@@ -1,12 +1,13 @@
+/** @import { MyNavigationProp } from './Footer.jsx' */
 import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Alert, Text } from 'react-native';
-import { FormControl } from '../components/ui/form-control';
-import { VStack } from '../components/ui/vstack';
-import { Heading } from '../components/ui/heading';
-import { Button } from '../components/ui/button';
-import { ButtonText } from '../components/ui/button';
-import { EyeIcon, EyeOffIcon } from '../components/ui/icon';
-import { Input, InputField, InputSlot, InputIcon } from '../components/ui/input';
+import { FormControl } from './ui/form-control';
+import { VStack } from './ui/vstack';
+import { Heading } from './ui/heading';
+import { Button } from './ui/button';
+import { ButtonText } from './ui/button';
+import { EyeIcon, EyeOffIcon } from './ui/icon';
+import { Input, InputField, InputSlot, InputIcon } from './ui/input';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
@@ -16,6 +17,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  /** @type {MyNavigationProp} */
   const navigation = useNavigation();
 
   const handleState = () => {

@@ -1,10 +1,11 @@
+/** @import { MyNavigationProp } from './Footer.jsx' */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, ButtonText } from '../components/ui/button';
-import { Heading } from '../components/ui/heading';
-import { Text } from '../components/ui/text';
-import { Avatar, AvatarImage } from '../components/ui/avatar';
-import { Drawer, DrawerBackdrop, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter } from '../components/ui/drawer';
+import { Button, ButtonText } from './ui/button';
+import { Heading } from './ui/heading';
+import { Text } from './ui/text';
+import { Avatar, AvatarImage } from './ui/avatar';
+import { Drawer, DrawerBackdrop, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter } from './ui/drawer';
 import { useNavigation } from '@react-navigation/native';
 
 /**
@@ -16,6 +17,7 @@ import { useNavigation } from '@react-navigation/native';
  */
 
 export default function ProfileDrawer({ isOpen, onClose, isLoggedIn, setIsLoggedIn }) {
+  /** @type {MyNavigationProp} */
   const navigation = useNavigation();
 
   const handleLogout = () => {
@@ -44,16 +46,16 @@ export default function ProfileDrawer({ isOpen, onClose, isLoggedIn, setIsLogged
               </View>
             </DrawerHeader>
             <DrawerBody contentContainerStyle={styles.body}>
-              <Text size="2x2" className="text-typography-800" style={styles.section}>
+              <Text size="md" className="text-typography-800" style={styles.section}>
                 Edit Account
               </Text>
-              <Text size="2x2" className="text-typography-800" style={styles.section}>
+              <Text size="md" className="text-typography-800" style={styles.section}>
                 Settings
               </Text>
-              <Text size="2x2" className="text-typography-800" style={styles.section}>
+              <Text size="md" className="text-typography-800" style={styles.section}>
                 Privacy
               </Text>
-              <Text size="2x2" className="text-typography-800" style={styles.section}>
+              <Text size="md" className="text-typography-800" style={styles.section}>
                 Help
               </Text>
             </DrawerBody>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Image } from 'expo-image';
-import Header from '../components2/Header.jsx';
+import Header from '../components/Header.jsx';
 import { Color, Border, FontSize, FontFamily } from '../GlobalStyles.js';
 
 export default function PaymentSection() {

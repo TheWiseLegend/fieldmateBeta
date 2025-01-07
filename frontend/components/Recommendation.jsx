@@ -1,3 +1,4 @@
+/** @import { MyNavigationProp } from './Footer.jsx' */
 import React from 'react';
 import { ImageBackground, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -7,6 +8,7 @@ import { Color, FontSize, FontFamily } from '../GlobalStyles.js';
  * @param {object} props
  */
 export default function Recommendation({}) {
+  /** @type {MyNavigationProp} */
   const navigation = useNavigation();
 
   return (
