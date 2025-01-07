@@ -20,7 +20,7 @@ function getStyleValue(key, value) {
  * @param {string} [props.backgroundBorderColor]
  * @param {string} [props.pMColor]
  */
-export default function Frame({ frameTop, backgroundBorderColor, pM, pMColor, pM1, pM2 }) {
+export default function BookingTime({ frameTop, backgroundBorderColor, pM, pMColor, pM1, pM2 }) {
   const frameStyle = useMemo(() => {
     return { ...getStyleValue('top', frameTop) };
   }, [frameTop]);

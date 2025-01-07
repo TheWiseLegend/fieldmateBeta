@@ -19,7 +19,7 @@ function getStyleValue(key, value) {
  * @param {number} [props.frameTop]
  * @param {number} [props.frameLeft]
  */
-export default function Frame1({ frameTop, frameLeft, pM, pM1, pM2 }) {
+export default function BookingTime2({ frameTop, frameLeft, pM, pM1, pM2 }) {
   const frame1Style = useMemo(() => {
     return {
       ...getStyleValue('top', frameTop),

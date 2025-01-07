@@ -6,7 +6,7 @@ import { Color, FontSize, FontFamily, Border } from '../GlobalStyles';
 /**
  * @param {object} props
  */
-export default function Frame6({}) {
+export default function Duration({}) {
   return (
     <View style={styles.frame}>
       <View style={styles.date}>
