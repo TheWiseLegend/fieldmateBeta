@@ -1,12 +1,13 @@
+/** @import { RatedField } from '../screens/Stadiums.js' */
 import React from 'react';
 import { Image } from 'expo-image';
 import { StyleSheet, Button, View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Border, Color, FontFamily, FontSize } from '../GlobalStyles.js';
+import { Color, FontFamily, FontSize } from '../GlobalStyles.js';
 
 /**
  * @param {object} props
- * @param {object} props.data
+ * @param {RatedField} props.data
  */
 export default function StadiumCard({ data }) {
   const navigation = useNavigation();
@@ -18,183 +19,99 @@ export default function StadiumCard({ data }) {
   }
 
   return (
-    <View style={styles.frame}>
-      <View style={styles.image5Parent}>
-        <Image
-          style={[styles.image5Icon, styles.image5IconPosition]}
-          contentFit="cover" // @ts-expect-error
-          source={require('../assets/image-5.png')}
-        />
+    <View style={styles.stadiumCard}>
+      <Image
+        style={styles.banner}
+        contentFit="cover" // @ts-expect-error
+        source={require('../assets/field.png')}
+      />
 
-        <View style={[styles.titleParent, styles.image5IconPosition]}>
-          <View style={[styles.frame5, styles.frameFlexBox]}>
-            <Text style={[styles.stadiumName, styles.titleTypo]}>{data.field_name || 'NAME'}</Text>
-          </View>
+      <View style={styles.viewButton}>
+        <Button title="View" onPress={() => handleNavigation()} />
+      </View>
 
+      <View style={styles.inner}>
+        <Text style={styles.name}>{data.field_name || 'NAME'}</Text>
+
+        <View style={styles.row}>
           <Image
-            style={[styles.frameIcon, styles.frameIconPosition]}
+            style={styles.locationIcon}
             contentFit="cover" // @ts-expect-error
-            source={require('../assets/frame.png')}
+            source={require('../assets/location.png')}
           />
-          <View style={[styles.frame2, styles.framePosition]}>
-            <Text style={[styles.location, styles.textTypo]}>{data.address}</Text>
-          </View>
-
-          <View style={[styles.frame4, styles.framePosition]}>
-            <Text style={[styles.text, styles.textTypo]}>4.2/5</Text>
-          </View>
-
-          <View style={[styles.frame3, styles.frameFlexBox]}>
-            <Text style={[styles.startingFrom, styles.textTypo]}>Price</Text>
-          </View>
-          <View style={styles.frame1}>
-            <Text style={styles.rm}>{data.price} RM</Text>
-          </View>
-
-          <Image
-            style={[styles.frameIcon1, styles.frameIconPosition]}
-            contentFit="cover" // @ts-expect-error
-            source={require('../assets/frame1.png')}
-          />
+          <Text style={styles.text}>{data.address || 'ADDRESS'}</Text>
         </View>
 
-        <Button title="View" onPress={() => handleNavigation()} />
+        <View style={styles.row}>
+          <Image
+            style={styles.ratingIcon}
+            contentFit="cover" // @ts-expect-error
+            source={require('../assets/star-rate.png')}
+          />
+          <Text style={styles.text}>{data.rating || 0}/5</Text>
+        </View>
+
+        <View style={styles.priceRow}>
+          <Text style={styles.text}>Price</Text>
+          <Text style={styles.price}>{data.price || 0} RM</Text>
+        </View>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  image5IconPosition: {
-    borderTopRightRadius: Border.br_mini,
-    borderTopLeftRadius: Border.br_mini,
-    left: 0,
-    top: 0,
+  stadiumCard: {
+    width: '100%',
+    height: 300
+  },
+  viewButton: {
+    top: -10,
+    width: '100%',
     position: 'absolute'
   },
-  titleTypo: {
-    textAlign: 'left',
-    color: Color.colorBlack,
-    fontFamily: FontFamily.secondaryNotActive,
-    lineHeight: 22,
-    letterSpacing: 0,
-    fontSize: FontSize.secondaryNotActive_size
+  banner: {
+    width: '100%',
+    height: 150
   },
-  frameIconPosition: {
-    top: 0,
-    position: 'absolute',
-    overflow: 'hidden'
+  inner: {
+    padding: 10
   },
-  framePosition: {
-    left: 38,
-    paddingVertical: 0,
-    paddingHorizontal: 0,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    top: 0,
-    position: 'absolute',
-    overflow: 'hidden'
-  },
-  textTypo: {
-    color: Color.grayIcon,
-    textAlign: 'left',
-    fontFamily: FontFamily.secondaryNotActive,
-    lineHeight: 22,
-    letterSpacing: 0
-  },
-  frameFlexBox: {
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    top: 0,
-    position: 'absolute',
-    overflow: 'hidden'
-  },
-  image5Icon: {
-    height: 155,
-    width: 403
-  },
-  rm: {
-    fontSize: FontSize.size_lg,
-    lineHeight: 28,
-    fontWeight: '600',
-    fontFamily: FontFamily.title1,
-    color: Color.blue,
-    height: 40,
-    width: 150, // Increased width
-    textAlign: 'left'
-  },
-  frame1: {
-    left: 280,
-    paddingVertical: 0,
-    paddingHorizontal: 0,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    width: 150, // Adjusted width
-    top: 0,
-    position: 'absolute',
-    height: 242,
-    overflow: 'hidden'
-  },
-  frameIcon: {
-    left: 18,
-    width: 11,
-    height: 213
-  },
-  location: {
-    height: 37,
-    width: 200, // Increased width
+  name: {
+    lineHeight: 26,
+    letterSpacing: 1,
     fontSize: FontSize.secondaryNotActive_size,
-    color: Color.grayIcon
+    fontFamily: FontFamily.secondaryNotActive
   },
-  frame2: {
-    height: 231,
-    width: 200 // Increased width
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center'
   },
-  startingFrom: {
-    fontSize: FontSize.size_smi,
-    height: 23,
-    width: 75
+  locationIcon: {
+    left: 3,
+    width: 15,
+    height: 20,
+    marginRight: 10
   },
-  frame3: {
-    left: 300,
-    height: 202,
-    width: 75
+  ratingIcon: {
+    width: 20,
+    height: 20,
+    marginRight: 5
+  },
+  priceRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10
+  },
+  price: {
+    marginLeft: 10,
+    fontWeight: '600',
+    color: Color.blue,
+    fontSize: FontSize.size_lg,
+    fontFamily: FontFamily.title1
   },
   text: {
-    fontSize: FontSize.size_3xs,
-    height: 17,
-    width: 35
-  },
-  frame4: {
-    height: 241,
-    width: 35
-  },
-  stadiumName: {
-    height: 38,
-    width: 250 // Increased width
-  },
-  frame5: {
-    left: 12,
-    height: 196,
-    width: 250 // Increased width
-  },
-  frameIcon1: {
-    left: 17,
-    width: 15,
-    height: 237
-  },
-  titleParent: {
-    width: 354,
-    height: 242
-  },
-  image5Parent: {
-    height: 242,
-    width: 403
-  },
-  frame: {
-    alignSelf: 'stretch',
-    alignItems: 'flex-end',
-    justifyContent: 'center',
-    overflow: 'hidden'
+    fontSize: FontSize.size_sm,
+    fontFamily: FontFamily.secondaryNotActive
   }
 });

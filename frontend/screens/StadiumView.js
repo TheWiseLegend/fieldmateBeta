@@ -29,7 +29,7 @@ export default function StadiumView({}) {
       <Image
         style={styles.StadiumBanner}
         contentFit="cover" // @ts-expect-error
-        source={require('../assets/image-5.png')}
+        source={require('../assets/field.png')}
       />
       <Text style={styles.stadiumName}>{data.field_name}</Text>
 
