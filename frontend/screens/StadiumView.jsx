@@ -1,4 +1,4 @@
-/** @import { FullField } from './Stadiums.jsx' */
+/** @import { FullField } from '../types.js' */
 import React from 'react';
 import { Image } from 'expo-image';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';

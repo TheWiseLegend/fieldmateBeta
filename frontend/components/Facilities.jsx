@@ -1,4 +1,4 @@
-/** @import { FullField } from '../screens/Stadiums.jsx' */
+/** @import { FullField } from '../types.js' */
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Icon } from './ui/icon/index';

@@ -1,5 +1,4 @@
-/** @import { MyNavigationProp } from './Footer.jsx' */
-/** @import { FullField } from '../screens/Stadiums.jsx' */
+/** @import { FullField, MyNavigationProp } from '../types.js' */
 import React from 'react';
 import { Image } from 'expo-image';
 import { StyleSheet, Button, View, Text } from 'react-native';

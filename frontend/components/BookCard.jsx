@@ -1,4 +1,4 @@
-/** @import { MyNavigationProp } from './Footer.jsx' */
+/** @import { MyNavigationProp } from '../types.js' */
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';

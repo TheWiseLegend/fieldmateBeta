@@ -10,9 +10,9 @@ export default {};
  */
 
 /** @typedef {RootNavigations | StadiumsNavigations | ProfileNavigations} Navigations */
-/** @typedef {'Home' | 'Matches' | 'Stadiums' | 'Profile'} RootNavigations */
+/** @typedef {'Home' | 'Matches' | 'Stadiums' | 'Activity'} RootNavigations */
 /** @typedef {'Stadiums' | 'Stadium View' | 'Booking' | 'Payment'} StadiumsNavigations */
-/** @typedef {'Profile' | 'Login' | 'Registration'} ProfileNavigations */
+/** @typedef {'Home' | 'Profile' | 'Login' | 'Registration'} ProfileNavigations */
 
 /**
  * @typedef {object} LFGData
