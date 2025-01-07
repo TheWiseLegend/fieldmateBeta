@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from 'expo-image';
 import { StyleSheet, View, Text } from 'react-native';
-import WeekdaysDatePicker from '../components2/WeekdaysDatePicker.jsx';
+import WeekdaysDatePicker from './WeekdaysDatePicker.jsx';
 import { Color, Border, FontFamily, FontSize, Padding } from '../GlobalStyles.js';
 
 /**

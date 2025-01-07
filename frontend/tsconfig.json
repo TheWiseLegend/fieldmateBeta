@@ -1,9 +1,13 @@
 {
+<<<<<<< Updated upstream:frontend/tsconfig.json
   "compilerOptions": {
     "allowJs": true,
     "checkJs": true,
 
     "jsx": "react-native"
   },
+=======
+  "compilerOptions": {},
+>>>>>>> Stashed changes:frontendExpo/tsconfig.json
   "extends": "expo/tsconfig.base"
 }

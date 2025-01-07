@@ -5,8 +5,10 @@ import { Padding, Border } from '../GlobalStyles';
 
 /**
  * @param {object} props
+ * @param {() => void} props.onBurgerPress
  */
-export default function Header({}) {
+
+export default function Header({onBurgerPress}) {
   return (
     <>
       <Octicons
@@ -14,7 +16,7 @@ export default function Header({}) {
         size={24}
         color="black"
         style={[styles.burgerButton, styles.menuLayout]}
-        onPress={() => alert('This is a button!')}
+        onPress={onBurgerPress}
       />
 
       <Octicons
