@@ -10,20 +10,31 @@ import axios from 'axios';
 
 const BASE_URL = 'http://13.229.202.42:5000/api';
 
+/** @type {Record<DayKeys, number>} */
+const dayValues = {
+  sun: 0,
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6
+};
+
 export default function Matches() {
   /** @type {[FullMatch[], React.Dispatch<React.SetStateAction<FullMatch[]>>]} */
   const [matches, setMatches] = useState([]);
   /** @type {[FullMatch[], React.Dispatch<React.SetStateAction<FullMatch[]>>]} */
   const [filteredMathces, setFilteredMathces] = useState([]);
-  /** @type {[[string, string], React.Dispatch<React.SetStateAction<[string, string]>>]} */
-  const [filters, setFilters] = useState(['', '']);
+  /** @type {[[string, string, string], React.Dispatch<React.SetStateAction<[string, string, string]>>]} */
+  const [filters, setFilters] = useState(['', '', '']);
 
   useEffect(() => {
     fetchData();
   }, []);
 
   useEffect(() => {
-    const [state, sort] = filters;
+    const [state, sort, day] = filters;
     /** @type {FullMatch[]} */
     let filtered = matches;
 
@@ -31,6 +42,9 @@ export default function Matches() {
 
     if (sort === '+price') filtered = filtered.sort((a, b) => a.field.price - b.field.price);
     else if (sort === '-price') filtered = filtered.sort((a, b) => b.field.price - a.field.price);
+
+    if (day)
+      filtered = filtered.filter((m) => m.booking && new Date(m.booking.start_datetime).getDay() === dayValues[day]);
 
     setFilteredMathces(filtered);
   }, [filters]);
@@ -52,8 +66,9 @@ export default function Matches() {
 
       mData = mData.filter((m) => m.status === 'open' && m.required_players > 0);
       mData = mData.map((m) => {
-        const b = bData.find((b) => b.lfg_id === m.lfg_id);
-        return { ...m, booking: b, field: fData.find((f) => f.field_id === b.field_id) };
+        const booking = bData.find((b) => b.lfg_id === m.lfg_id);
+        const field = fData.find((f) => f.field_id === booking.field_id);
+        return { ...m, booking, field };
       });
 
       // @ts-expect-error
@@ -69,21 +84,21 @@ export default function Matches() {
    * @param {string} state
    */
   function handleStateChange(state) {
-    setFilters([state, filters[1]]);
+    setFilters([state, filters[1], filters[2]]);
   }
 
   /**
    * @param {string} sort
    */
   function handleSortChange(sort) {
-    setFilters([filters[0], sort]);
+    setFilters([filters[0], sort, filters[2]]);
   }
 
   /**
    * @param {DayKeys | null} day
    */
   function handleDayChange(day) {
-    //
+    setFilters([filters[0], filters[1], day]);
   }
 
   return (
