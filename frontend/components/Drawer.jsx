@@ -1,5 +1,4 @@
-/** @import { MyNavigationProp } from './Footer.jsx' */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, ButtonText } from './ui/button';
 import { Heading } from './ui/heading';
@@ -12,15 +11,23 @@ import { useNavigation } from '@react-navigation/native';
  * @param {object} props
  * @param {boolean} props.isOpen
  * @param {() => void} props.onClose
- * @param {boolean} props.isLoggedIn
- * @param {React.Dispatch<React.SetStateAction<boolean>>} props.setIsLoggedIn
  */
 
-export default function ProfileDrawer({ isOpen, onClose, isLoggedIn, setIsLoggedIn }) {
-  /** @type {MyNavigationProp} */
+export default function ProfileDrawer({ isOpen, onClose }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigation = useNavigation();
 
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
+
   const handleLogout = () => {
+    localStorage.removeItem('user');
     setIsLoggedIn(false);
     onClose();
   };
@@ -69,7 +76,10 @@ export default function ProfileDrawer({ isOpen, onClose, isLoggedIn, setIsLogged
           <DrawerBody contentContainerStyle={styles.body}>
             <Button
               onPress={() => {
-                navigation.navigate('Login');
+                navigation.navigate(
+                  // @ts-ignore
+                  'Login'
+                );
                 onClose();
               }}
               style={styles.authButton}
@@ -78,7 +88,10 @@ export default function ProfileDrawer({ isOpen, onClose, isLoggedIn, setIsLogged
             </Button>
             <Button
               onPress={() => {
-                navigation.navigate('Registration');
+                navigation.navigate(
+                  // @ts-ignore
+                  'Registration'
+                );
                 onClose();
               }}
               style={styles.authButton}
