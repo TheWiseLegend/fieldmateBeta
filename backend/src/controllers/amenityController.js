@@ -65,7 +65,7 @@ export async function UPDATE(req, res) {
   const toUpdate = pairs.map(([key], i) => `${key} = $${i + 1}`).join(', ');
   const values = pairs.map(([_, val]) => val);
 
-  const query = `UPDATE ${TABLE_NAME} SET ${toUpdate} WHERE amenity_id = $${toUpdate.length + 1} RETURNING *`;
+  const query = `UPDATE ${TABLE_NAME} SET ${toUpdate} WHERE amenity_id = $${pairs.length + 1} RETURNING *`;
   values.push(id);
 
   try {

@@ -22,12 +22,13 @@ Content-Type: application/json
 
 {
   "rating": 5,
-  "user_id": 101,
-  "field_id": 101
+  "user_id": 10,
+  "field_id": 3,
+  "review_text": "Best field ever!"
 }
 
 ### Update a review
-PUT {{baseUrl}}/1
+PUT {{baseUrl}}/5
 Content-Type: application/json
 
 {
