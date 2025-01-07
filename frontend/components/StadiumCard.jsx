@@ -79,10 +79,14 @@ const styles = StyleSheet.create({
     padding: 10
   },
   name: {
-    lineHeight: 26,
+    alignContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    fontWeight: '600',
     letterSpacing: 1,
     fontSize: FontSize.secondaryNotActive_size,
-    fontFamily: FontFamily.secondaryNotActive
+    fontFamily: FontFamily.secondaryNotActive,
+    marginBottom: 10
   },
   row: {
     flexDirection: 'row',
@@ -112,7 +116,7 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.title1
   },
   text: {
-    fontSize: FontSize.size_sm,
+    fontSize: FontSize.size_lg,
     fontFamily: FontFamily.secondaryNotActive
   }
 });
