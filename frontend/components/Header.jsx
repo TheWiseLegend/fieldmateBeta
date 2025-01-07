@@ -1,6 +1,8 @@
+/** @import { MyNavigationProp } from './Footer.jsx' */
 import React from 'react';
-import Octicons from '@expo/vector-icons/Octicons';
 import { StyleSheet, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import Octicons from '@expo/vector-icons/Octicons';
 import { Padding, Border } from '../GlobalStyles';
 
 /**
@@ -8,14 +10,17 @@ import { Padding, Border } from '../GlobalStyles';
  * @param {Function} [props.onBurgerPress]
  */
 export default function Header({ onBurgerPress }) {
+  /** @type {MyNavigationProp} */
+  const navigation = useNavigation();
+
   return (
     <View style={styles.header}>
       <Octicons
-        name="three-bars"
+        name={localStorage.getItem('client_user') === null ? 'sign-in' : 'person-fill'}
         size={24}
         color="black"
         style={styles.burgerButton}
-        // onPress={onBurgerPress}
+        onPress={() => navigation.navigate('Profile')}
       />
 
       <Octicons
@@ -23,10 +28,9 @@ export default function Header({ onBurgerPress }) {
         size={24}
         color="black"
         style={styles.doorbellIcon}
-        contentFit="cover"
-        // @ts-expect-error
+        contentFit="cover" // @ts-expect-error
         source={require('../assets/doorbell.png')}
-        onPress={() => alert('This is a button!')}
+        onPress={() => alert('Soon...')}
       />
     </View>
   );

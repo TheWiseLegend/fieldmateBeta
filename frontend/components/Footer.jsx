@@ -3,14 +3,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons.js';
-import LoginComponent from './Login.jsx';
-import RegistrationComponent from './Registration.jsx';
 import HomeComponent from '../screens/Home.js';
-import StadiumsComponent from '../screens/Stadiums.js';
 import MatchesComponent from '../screens/Matches.js';
+import StadiumsComponent from '../screens/Stadiums.js';
 import StadiumViewComponent from '../screens/StadiumView.js';
 import BookingComponent from '../screens/Booking.js';
 import PaymentComponent from '../screens/Payment.js';
+import ProfileComponent from './Profile.jsx';
+import LoginComponent from './Login.jsx';
+import RegistrationComponent from './Registration.jsx';
 
 /**
  * @typedef {object} MyNavigationProp
@@ -65,10 +66,9 @@ export default function Footer({}) {
           headerShown: false
         })}
       >
-        <Tab.Screen name={navigations.Home} component={HomeComponent} />
+        <Tab.Screen name={navigations.Home} component={ProfileStack} />
         <Tab.Screen name={navigations.Stadiums} component={StadiumStack} />
         <Tab.Screen name={navigations.Matches} component={MatchesComponent} />
-        <Tab.Screen name={navigations.Login} component={LoginStack} />
       </Tab.Navigator>
     </NavigationContainer>
   );
@@ -91,9 +91,11 @@ function StadiumStack({}) {
 /**
  * @param {object} props
  */
-function LoginStack({}) {
+function ProfileStack({}) {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name={navigations.Home} component={HomeComponent} />
+      <Stack.Screen name={navigations.Profile} component={ProfileComponent} />
       <Stack.Screen name={navigations.Login} component={LoginComponent} />
       <Stack.Screen name={navigations.Registration} component={RegistrationComponent} />
     </Stack.Navigator>
