@@ -1,6 +1,5 @@
 import React from 'react';
 import Octicons from '@expo/vector-icons/Octicons';
-import { Image } from 'expo-image';
 import { StyleSheet } from 'react-native';
 import { Padding, Border } from '../GlobalStyles';
 

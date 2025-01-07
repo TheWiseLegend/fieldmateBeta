@@ -1,7 +1,7 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Border, Color, FontSize, FontFamily } from '../GlobalStyles.js';
+import { Color, FontSize, FontFamily } from '../GlobalStyles.js';
 
 /**
  * @param {object} props
@@ -10,13 +10,14 @@ export default function Recommendation({}) {
   const navigation = useNavigation();
 
   return (
+    // @ts-expect-error
     <ImageBackground source={require('../assets/bg0.png')} style={styles.container}>
       <Text style={styles.subtitle3}>What are you looking for?</Text>
       <View style={styles.gridImage}>
         <TouchableOpacity style={styles.stadiumImage} onPress={() => navigation.navigate('Stadiums')}>
           <ImageBackground
             imageStyle={styles.roundedImage}
-            style={styles.stadiumImage}
+            style={styles.stadiumImage} // @ts-expect-error
             source={require('../assets/stadium-2.png')}
           >
             <View style={styles.textBackground}>
@@ -27,7 +28,7 @@ export default function Recommendation({}) {
         <TouchableOpacity style={styles.stadiumImage} onPress={() => navigation.navigate('Matches')}>
           <ImageBackground
             imageStyle={styles.roundedImage}
-            style={styles.stadiumImage}
+            style={styles.stadiumImage} // @ts-expect-error
             source={require('../assets/stadium-2.png')}
           >
             <View style={styles.textBackground}>

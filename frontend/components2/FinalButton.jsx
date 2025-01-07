@@ -16,27 +16,20 @@ export default function FinalButton({ text }) {
 
 const styles = StyleSheet.create({
   createMatch: {
-    fontSize: FontSize.buttonText_size,
-    fontWeight: '700',
-    fontFamily: FontFamily.openSansBold,
-    color: Color.surface,
-    textAlign: 'center',
     lineHeight: 22,
-    letterSpacing: 0
+    letterSpacing: 0,
+    fontWeight: '700',
+    textAlign: 'center',
+    color: Color.surface,
+    fontSize: FontSize.buttonText_size,
+    fontFamily: FontFamily.openSansBold
   },
   createMatchButton: {
-    marginTop: 351,
-    marginLeft: -143,
-    top: '50%',
-    borderRadius: Border.br_20xl,
-    width: 293,
-    padding: Padding.p_8xs,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    height: 45,
-    backgroundColor: Color.colorMediumslateblue,
     left: '50%',
-    position: 'absolute'
+    width: '50%',
+    height: 45,
+    padding: Padding.p_8xs,
+    borderRadius: Border.br_20xl,
+    backgroundColor: Color.colorMediumslateblue
   }
 });

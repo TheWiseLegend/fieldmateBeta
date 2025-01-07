@@ -28,7 +28,7 @@ export default function Payment({}) {
                 </View>
 
                 <View>
-                  <Icon size={32} as={Banknote}></Icon>
+                  <Icon size="md" as={Banknote}></Icon>
                 </View>
               </View>
             </Radio>
@@ -43,7 +43,7 @@ export default function Payment({}) {
                 </View>
 
                 <View>
-                  <Icon size={32} as={QrCode}></Icon>
+                  <Icon size="md" as={QrCode}></Icon>
                 </View>
               </View>
             </Radio>
