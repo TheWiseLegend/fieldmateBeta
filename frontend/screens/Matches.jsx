@@ -1,7 +1,8 @@
 /** @import { Field } from './Stadiums.jsx' */
+/** @import { DayKeys } from '../components/DayPicker.jsx' */
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import WeekdaysDatePicker from '../components/WeekdaysDatePicker.jsx';
+import DayPicker from '../components/DayPicker.jsx';
 import LFGCard from '../components/LFGCard.jsx';
 import Header from '../components/Header.jsx';
 import Filters from '../components/Filters.jsx';
@@ -79,19 +80,23 @@ export default function Matches() {
     setFilters([filters[0], sort]);
   }
 
+  /**
+   * @param {DayKeys | null} day
+   */
+  function handleDayChange(day) {
+    //
+  }
+
   return (
-    <View style={styles.container}>
+    <View id="matches-screen" className="screen" style={styles.container}>
       <Header />
       <Filters onStateChange={handleStateChange} onSortChange={handleSortChange} />
+      <DayPicker onDayChange={handleDayChange} />
 
-      <ScrollView>
-        <View style={styles.content}>
-          {/* <WeekdaysDatePicker /> */}
-
-          {filteredMathces.map((m) => (
-            <LFGCard key={m.lfg_id} data={m} />
-          ))}
-        </View>
+      <ScrollView style={styles.content}>
+        {filteredMathces.map((m) => (
+          <LFGCard key={m.lfg_id} data={m} />
+        ))}
       </ScrollView>
     </View>
   );

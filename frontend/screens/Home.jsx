@@ -37,22 +37,22 @@ export default function Home() {
   }
 
   return (
-    <ScrollView>
-      <View id="home-screen" className="screen" style={styles.home}>
-        <Header />
-        <Recommendation />
-        <Text style={styles.headline}>Matches near you</Text>
+    <View id="home-screen" className="screen" style={styles.container}>
+      <Header />
+      <Recommendation />
+      <Text style={styles.headline}>Matches near you</Text>
 
+      <ScrollView>
         {matches.map((m) => (
           <LFGCard key={m.lfg_id} data={m} />
         ))}
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  home: {
+  container: {
     flex: 1,
     width: '100%',
     borderRadius: Border.br_mini,

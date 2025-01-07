@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, View } from 'react-native';
+import { Text, StyleSheet, View, ScrollView } from 'react-native';
 import { Image } from 'expo-image';
 import Frame6 from '../components/Frame6.jsx';
 import Frame5 from '../components/Frame5.jsx';
@@ -10,9 +10,10 @@ import { FontSize, Color, FontFamily, Border } from '../GlobalStyles.js';
 
 export default function BookingSection() {
   return (
-    <View id="booking-screen" className="screen" style={styles.bookingSection}>
+    <View id="booking-screen" className="screen" style={styles.container}>
       <Header />
-      <View style={[styles.bookASlotWrapper, styles.primaryButtonFlexBox]}>
+
+      <ScrollView style={[styles.bookASlotWrapper, styles.primaryButtonFlexBox]}>
         <View style={styles.bookASlot}>
           <Text style={[styles.bookingTime, styles.doYouWantTypo]}>Booking Time</Text>
 
@@ -53,12 +54,17 @@ export default function BookingSection() {
 
           <Frame5 />
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'center'
+  },
   primaryButtonFlexBox: {
     justifyContent: 'center',
     alignItems: 'center'
@@ -141,10 +147,5 @@ const styles = StyleSheet.create({
 
   bookASlotWrapper: {
     alignSelf: 'stretch'
-  },
-  bookingSection: {
-    flex: 1,
-    width: '100%',
-    alignItems: 'center'
   }
 });

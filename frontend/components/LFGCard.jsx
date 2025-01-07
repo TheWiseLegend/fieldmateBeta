@@ -61,42 +61,40 @@ export default function LFGCard({ data }) {
   }
 
   return (
-    <View className="p-3">
-      <View style={styles.cardContainer}>
-        <Text style={styles.priceText}>{lfgData.price} RM</Text>
-        <View style={styles.contentContainer}>
-          <View style={styles.leftSection}>
-            <View style={styles.row}>
-              <Avatar size="md" style={styles.avatar}>
-                <AvatarImage
-                  source={{
-                    uri: 'https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_2x3.jpg'
-                  }}
-                />
-              </Avatar>
-              <Text style={styles.nameText}>{lfgData.name}</Text>
-            </View>
-
-            <View style={styles.row}>
-              <CalendarMinus2 style={styles.icon} size={20} />
-              <Text style={styles.infoText}>{lfgData.start_datetime?.toLocaleString()}</Text>
-            </View>
-
-            <View style={styles.row}>
-              <MapPin style={styles.icon} size={20} />
-              <Text style={styles.infoText}>{lfgData.address}</Text>
-            </View>
-
-            <View style={styles.row}>
-              <Users style={styles.icon} size={20} />
-              <Text style={styles.infoText}>{lfgData.player_count} players</Text>
-            </View>
+    <View className="p-3" style={styles.cardContainer}>
+      <Text style={styles.priceText}>{lfgData.price} RM</Text>
+      <View style={styles.contentContainer}>
+        <View style={styles.leftSection}>
+          <View style={styles.row}>
+            <Avatar size="md" style={styles.avatar}>
+              <AvatarImage
+                source={{
+                  uri: 'https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_2x3.jpg'
+                }}
+              />
+            </Avatar>
+            <Text style={styles.nameText}>{lfgData.name}</Text>
           </View>
 
-          <TouchableOpacity style={styles.button} onPress={() => alert('Join us clicked')}>
-            <Text style={styles.buttonText}>Join us</Text>
-          </TouchableOpacity>
+          <View style={styles.row}>
+            <CalendarMinus2 style={styles.icon} size={20} />
+            <Text style={styles.infoText}>{lfgData.start_datetime?.toLocaleString()}</Text>
+          </View>
+
+          <View style={styles.row}>
+            <MapPin style={styles.icon} size={20} />
+            <Text style={styles.infoText}>{lfgData.address}</Text>
+          </View>
+
+          <View style={styles.row}>
+            <Users style={styles.icon} size={20} />
+            <Text style={styles.infoText}>{lfgData.player_count} players</Text>
+          </View>
         </View>
+
+        <TouchableOpacity style={styles.button} onPress={() => alert('Join us clicked')}>
+          <Text style={styles.buttonText}>Join us</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

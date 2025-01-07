@@ -1,7 +1,7 @@
 /** @import { User } from '../components/Login.jsx' */
 /** @import { FacilityNames } from '../components/Facilities.jsx' */
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import StadiumCard from '../components/StadiumCard.jsx';
 import Header from '../components/Header.jsx';
 import Filters from '../components/Filters.jsx';
@@ -109,29 +109,22 @@ export default function Stadiums() {
   }
 
   return (
-    <View id="stadiums-screen" className="screen" style={styles.stadiums}>
+    <View id="stadiums-screen" className="screen">
       <Header />
-
       <Filters extraSorts={extraFilterSorts} onStateChange={handleStateChange} onSortChange={handleSortChange} />
 
-      <View style={styles.frameParent}>
+      <ScrollView style={styles.content}>
         {filteredFields.map((f) => (
           <StadiumCard key={f.field_id} field={f} />
         ))}
-      </View>
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  stadiums: {
-    borderRadius: Border.br_mini,
-    backgroundColor: Color.surface,
-    height: 1200,
-    flex: 1
-  },
-  frameParent: {
-    top: '5%'
+  content: {
+    marginTop: '5%'
   }
 });
 

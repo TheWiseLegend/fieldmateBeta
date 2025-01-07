@@ -1,7 +1,7 @@
 /** @import { FullField } from './Stadiums.jsx' */
 import React from 'react';
 import { Image } from 'expo-image';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import StadiumViewInfo from '../components/StadiumViewInfo.jsx';
 import Facilities from '../components/Facilities.jsx';
 import BookCard from '../components/BookCard.jsx';
@@ -27,19 +27,21 @@ export default function StadiumView({}) {
     <View id="stadium-view-screen" className="screen" style={styles.stadiumView}>
       <Header />
 
-      <Image
-        style={styles.StadiumBanner}
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/field.png')}
-      />
-      <Text style={styles.stadiumName}>{field.field_name}</Text>
+      <ScrollView>
+        <Image
+          style={styles.StadiumBanner}
+          contentFit="cover" // @ts-expect-error
+          source={require('../assets/field.png')}
+        />
+        <Text style={styles.stadiumName}>{field.field_name}</Text>
 
-      <Reviews rating={field.rating} />
+        <Reviews rating={field.rating} />
 
-      <Facilities field={field} />
+        <Facilities field={field} />
 
-      <StadiumViewInfo field={field} />
-      <BookCard data={field} />
+        <StadiumViewInfo field={field} />
+        <BookCard data={field} />
+      </ScrollView>
     </View>
   );
 }

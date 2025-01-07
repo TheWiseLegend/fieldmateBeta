@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { Image } from 'expo-image';
 import Header from '../components/Header.jsx';
 import { Color, Border, FontSize, FontFamily } from '../GlobalStyles.js';
@@ -9,78 +9,80 @@ export default function PaymentSection() {
     <View id="payment-screen" className="screen" style={styles.paymentSection}>
       <Header />
 
-      {/* <View style={styles.paymentSectionChild} />
-      <View style={[styles.paymentSectionItem, styles.paymentShadowBox]} />
-      <View style={[styles.paymentSectionInner, styles.paymentShadowBox]} /> */}
+      <ScrollView>
+        {/* <View style={styles.paymentSectionChild} />
+            <View style={[styles.paymentSectionItem, styles.paymentShadowBox]} />
+            <View style={[styles.paymentSectionInner, styles.paymentShadowBox]} /> */}
 
-      <Text style={styles.paymentMethod}>Payment Method</Text>
-      <Image
-        style={styles.ellipseIcon}
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/circle.png')}
-      />
+        <Text style={styles.paymentMethod}>Payment Method</Text>
+        <Image
+          style={styles.ellipseIcon}
+          contentFit="cover" // @ts-expect-error
+          source={require('../assets/circle.png')}
+        />
 
-      <Image
-        style={[styles.vectorIcon, styles.iconLayout]}
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/arrow-left2.png')}
-      />
-      <Text style={styles.confirmBook}>{`Confirm & Book`}</Text>
-      <View style={styles.primaryButton}>
-        <Text style={styles.confirmPayment}>Confirm Payment</Text>
-      </View>
+        <Image
+          style={[styles.vectorIcon, styles.iconLayout]}
+          contentFit="cover" // @ts-expect-error
+          source={require('../assets/arrow-left2.png')}
+        />
+        <Text style={styles.confirmBook}>{`Confirm & Book`}</Text>
+        <View style={styles.primaryButton}>
+          <Text style={styles.confirmPayment}>Confirm Payment</Text>
+        </View>
 
-      <Image
-        style={[styles.bgIcon, styles.iconLayout]}
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/bg.png')}
-      />
-      <Text style={[styles.pm900, styles.pm900Typo]}>8:00 pm - 9:00 pm</Text>
+        <Image
+          style={[styles.bgIcon, styles.iconLayout]}
+          contentFit="cover" // @ts-expect-error
+          source={require('../assets/bg.png')}
+        />
+        <Text style={[styles.pm900, styles.pm900Typo]}>8:00 pm - 9:00 pm</Text>
 
-      <Text style={[styles.bookingDate, styles.bookingTypo]}>Booking Date</Text>
-      <Image
-        style={[styles.vectorIcon1, styles.iconLayout]}
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/vector8.png')}
-      />
+        <Text style={[styles.bookingDate, styles.bookingTypo]}>Booking Date</Text>
+        <Image
+          style={[styles.vectorIcon1, styles.iconLayout]}
+          contentFit="cover" // @ts-expect-error
+          source={require('../assets/vector8.png')}
+        />
 
-      <Text style={styles.stadiumName}>{`Stadium Name `}</Text>
-      <Text style={[styles.bookingTime, styles.bookingTypo]}>Booking Time</Text>
+        <Text style={styles.stadiumName}>{`Stadium Name `}</Text>
+        <Text style={[styles.bookingTime, styles.bookingTypo]}>Booking Time</Text>
 
-      <Text style={[styles.december2024, styles.pm900Typo]}>09 December 2024</Text>
+        <Text style={[styles.december2024, styles.pm900Typo]}>09 December 2024</Text>
 
-      <Text style={[styles.cashOnSite, styles.qrTypo]}>Cash (On site)</Text>
-      <Image
-        style={[styles.paymentSectionChild1, styles.paymentChildLayout]}
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/circle-outline.png')}
-      />
+        <Text style={[styles.cashOnSite, styles.qrTypo]}>Cash (On site)</Text>
+        <Image
+          style={[styles.paymentSectionChild1, styles.paymentChildLayout]}
+          contentFit="cover" // @ts-expect-error
+          source={require('../assets/circle-outline.png')}
+        />
 
-      <Image
-        style={[styles.cashIcon, styles.cashPosition]}
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/cash.png')}
-      />
-      <Text style={[styles.qr, styles.qrPosition]}>QR</Text>
+        <Image
+          style={[styles.cashIcon, styles.cashPosition]}
+          contentFit="cover" // @ts-expect-error
+          source={require('../assets/cash.png')}
+        />
+        <Text style={[styles.qr, styles.qrPosition]}>QR</Text>
 
-      <Image
-        style={[styles.paymentSectionChild2, styles.paymentChildLayout]}
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/circle-outline.png')}
-      />
+        <Image
+          style={[styles.paymentSectionChild2, styles.paymentChildLayout]}
+          contentFit="cover" // @ts-expect-error
+          source={require('../assets/circle-outline.png')}
+        />
 
-      <Image
-        style={[styles.frameIcon, styles.qrPosition]}
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/frame-3.png')}
-      />
-      <Text style={[styles.orderDetails, styles.textPosition]}>Order Details</Text>
+        <Image
+          style={[styles.frameIcon, styles.qrPosition]}
+          contentFit="cover" // @ts-expect-error
+          source={require('../assets/frame-3.png')}
+        />
+        <Text style={[styles.orderDetails, styles.textPosition]}>Order Details</Text>
 
-      <Text style={[styles.totalCart, styles.totalCartPosition]}>Subtotal</Text>
-      <Text style={[styles.text, styles.textPosition]}>$ 80 RM</Text>
-      <Text style={[styles.cancellationPolicy, styles.upTo24Layout]}>CANCELLATION POLICY</Text>
+        <Text style={[styles.totalCart, styles.totalCartPosition]}>Subtotal</Text>
+        <Text style={[styles.text, styles.textPosition]}>$ 80 RM</Text>
+        <Text style={[styles.cancellationPolicy, styles.upTo24Layout]}>CANCELLATION POLICY</Text>
 
-      <Text style={[styles.upTo24, styles.upTo24Layout]}>Up to 24 Hours</Text>
+        <Text style={[styles.upTo24, styles.upTo24Layout]}>Up to 24 Hours</Text>
+      </ScrollView>
     </View>
   );
 }

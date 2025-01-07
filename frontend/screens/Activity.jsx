@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { Button, ButtonText } from '../components/ui/button';
-import MyActivity from '../components2/MyActivity';
-import Header from '../components2/Header';
-import ProfileDrawer from '../components2/Drawer';
+import MyActivity from '../components/MyActivity';
+import Header from '../components/Header';
+import ProfileDrawer from '../components/Drawer';
+import { StyleSheet, View, ScrollView } from 'react-native';
 
 export default function Activity() {
   const [showDrawer, setShowDrawer] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Manage authentication state
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-    <>
+    <View id="activity-screen" className="screen" style={styles.container}>
       <Header onBurgerPress={() => setShowDrawer(true)} />
       <ProfileDrawer
         isOpen={showDrawer}
@@ -19,6 +18,14 @@ export default function Activity() {
         setIsLoggedIn={setIsLoggedIn}
       />
       <MyActivity />;
-    </>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: '100%',
+    backgroundColor: '#f5f5f5'
+  }
+});
