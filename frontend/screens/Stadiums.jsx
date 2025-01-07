@@ -1,11 +1,9 @@
-/** @import { User } from '../components/Login.jsx' */
-/** @import { FacilityNames } from '../components/Facilities.jsx' */
+/** @import { Amenity, Field, FieldAmenity, FullField, Review, User } from '../types.js' */
 import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import StadiumCard from '../components/StadiumCard.jsx';
 import Header from '../components/Header.jsx';
 import Filters from '../components/Filters.jsx';
-import { Color, Border } from '../GlobalStyles.js';
 import axios from 'axios';
 
 const BASE_URL = 'http://13.229.202.42:5000/api';
@@ -127,43 +125,3 @@ const styles = StyleSheet.create({
     marginTop: '5%'
   }
 });
-
-/** @typedef {RatedField & {vendor: User, facilities: FacilityNames[]}} FullField */
-/** @typedef {Field & {rating: number}} RatedField */
-
-/**
- * @typedef {object} Field
- * @property {string} field_id
- * @property {string} vendor_id
- * @property {string} field_name
- * @property {string} address
- * @property {number} capacity
- * @property {number} price
- * @property {'available' | 'unavailable' | 'maintenance'} status
- * @property {string} [maps_id]
- * @property {string} created_at
- * @property {string} updated_at
- */
-
-/**
- * @typedef {object} Review
- * @property {string} review_id
- * @property {0 | 1 | 2 | 3 | 4 | 5} rating
- * @property {string} user_id
- * @property {string} field_id
- * @property {string} [review_text]
- * @property {string} created_at
- * @property {string} updated_at
- */
-
-/**
- * @typedef {object} Amenity
- * @property {string} amenity_id
- * @property {string} amenity_name
- */
-
-/**
- * @typedef {object} FieldAmenity
- * @property {string} field_id
- * @property {string} amenity_id
- */

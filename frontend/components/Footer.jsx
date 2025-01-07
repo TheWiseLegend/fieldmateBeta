@@ -1,3 +1,4 @@
+/** @import { Navigations } from '../types.js' */
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -12,16 +13,6 @@ import PaymentComponent from '../screens/Payment.jsx';
 import ProfileComponent from './Profile.jsx';
 import LoginComponent from './Login.jsx';
 import RegistrationComponent from './Registration.jsx';
-
-/**
- * @typedef {object} MyNavigationProp
- * @property {(screen: Navigations) => void} navigate
- */
-
-/** @typedef {RootNavigations | StadiumsNavigations | ProfileNavigations} Navigations */
-/** @typedef {'Home' | 'Matches' | 'Stadiums' | 'Profile'} RootNavigations */
-/** @typedef {'Stadiums' | 'Stadium View' | 'Booking' | 'Payment'} StadiumsNavigations */
-/** @typedef {'Profile' | 'Login' | 'Registration'} ProfileNavigations */
 
 /** @type {{[key: string]: Navigations}} */
 const navigations = {

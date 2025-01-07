@@ -1,4 +1,4 @@
-/** @import { MyNavigationProp } from './Footer.jsx' */
+/** @import { User, MyNavigationProp } from '../types.js' */
 import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Alert, Text } from 'react-native';
 import { FormControl } from './ui/form-control';
@@ -120,15 +120,3 @@ const styles = StyleSheet.create({
     marginBottom: 20
   }
 });
-
-/**
- * @typedef {object} User
- * @property {string} user_id
- * @property {string} name MAX(50)
- * @property {string} email MAX(100)
- * @property {string} password MAX(100)
- * @property {string} phone MAX(15)
- * @property {'player' | 'vendor'} user_role MAX(10), DEFAULT 'player'
- * @property {string} created_at
- * @property {string} updated_at
- */

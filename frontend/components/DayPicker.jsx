@@ -1,8 +1,7 @@
+/** @import { DayKeys } from '../types.js' */
 import React, { useState } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { FontSize, FontFamily, Color, Border } from '../GlobalStyles.js';
-
-/** @typedef {'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun'} DayKeys */
 
 /** @type {DayKeys[]} */
 const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];

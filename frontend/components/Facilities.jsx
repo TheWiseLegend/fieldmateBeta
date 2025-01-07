@@ -5,8 +5,6 @@ import { Icon } from './ui/icon/index';
 import { ShowerHead, GlassWater, Shirt, Coffee, WifiHigh } from 'lucide-react-native';
 import { Color, Border, FontFamily, FontSize } from '../GlobalStyles.js';
 
-/** @typedef {'Cafe' | 'WiFi' | 'Water' | 'Shower' | 'Shirts' | 'Boots'} FacilityNames */
-
 /**
  * @param {object} props
  * @param {FullField} props.field

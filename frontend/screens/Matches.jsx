@@ -1,5 +1,4 @@
-/** @import { Field } from './Stadiums.jsx' */
-/** @import { DayKeys } from '../components/DayPicker.jsx' */
+/** @import { Booking, DayKeys, Field, FullMatch, Match } from '../types.js' */
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import DayPicker from '../components/DayPicker.jsx';
@@ -114,30 +113,3 @@ const styles = StyleSheet.create({
     backgroundColor: Color.surface
   }
 });
-
-/**
- * @typedef {Match & {field: Field, booking: Booking}} FullMatch
- */
-
-/**
- * @typedef {object} Match
- * @property {string} lfg_id
- * @property {'open' | 'closed'} status
- * @property {number} required_players
- * @property {string} created_at
- * @property {string} updated_at
- */
-
-/**
- * @typedef {object} Booking
- * @property {string} booking_id
- * @property {string} user_id
- * @property {string} field_id
- * @property {string} start_datetime
- * @property {60 | 120} duration
- * @property {string} [lfg_id]
- * @property {number} current_players
- * @property {'pending' | 'confirmed' | 'cancelled'} status
- * @property {string} created_at
- * @property {string} updated_at
- */

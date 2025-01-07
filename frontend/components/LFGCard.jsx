@@ -1,3 +1,4 @@
+/** @import { LFGData } from '../types.js' */
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { CalendarMinus2, MapPin, Users } from 'lucide-react-native';
@@ -5,16 +6,6 @@ import { Avatar, AvatarImage } from './ui/avatar';
 import axios from 'axios';
 
 const BASE_URL = 'http://13.229.202.42:5000/api';
-
-/**
- * @typedef {object} LFGData
- * @property {string} name
- * @property {string} address
- * @property {number} price
- * @property {number} player_count
- * @property {number} duration
- * @property {Date} start_datetime
- */
 
 /**
  * @param {object} props
