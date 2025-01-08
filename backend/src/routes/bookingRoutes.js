@@ -11,6 +11,7 @@ const router = Router();
 router.get('/', GET);
 router.get('/:id', GET);
 router.post('/', CREATE);
+// @ts-ignore
 router.put('/:id', UPDATE);
 router.delete('/:id', DELETE);
 

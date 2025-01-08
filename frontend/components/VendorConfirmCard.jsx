@@ -1,17 +1,29 @@
-// @ts-ignore
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Button, ButtonText } from '../components/ui/button';
-import { TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import axios from 'axios';
+const BASE_URL = 'http://13.229.202.42:5000/api';
 
 /**
  * @param {object} props
+ * @param {string} props.stadiumName
+ * @param {string} props.date
+ * @param {string} props.time
+ * @param {string} props.status
+ * @param {string} props.bookingId
+ * @param {function} props.onStatusChange
  */
-export default function VendorConfirmCard({}) {
-  const [stadiumName, setStadiumName] = React.useState('Stadium Name');
-  const [date, setDate] = React.useState('09 December 2024');
-  const [time, setTime] = React.useState('8:00 pm - 9:00 pm');
-  const [status, setStatus] = React.useState('Pending');
+export default function VendorConfirmCard({ stadiumName, date, time, status, bookingId, onStatusChange }) {
+  const updateBookingStatus = async (newStatus) => {
+    console.log(bookingId)
+    try {
+      await axios.put(`${BASE_URL}/bookings/${bookingId}`, { status: newStatus });
+      Alert.alert('Success', `Booking status updated to ${newStatus}`);
+      onStatusChange(bookingId, newStatus);
+    } catch (error) {
+      console.error('Error updating booking status:', error);
+      Alert.alert('Error', 'Failed to update booking status');
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -32,10 +44,18 @@ export default function VendorConfirmCard({}) {
         </View>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.confirmButton} activeOpacity={0.7}>
+        <TouchableOpacity
+          style={styles.confirmButton}
+          activeOpacity={0.7}
+          onPress={() => updateBookingStatus('confirmed')}
+        >
           <Text style={styles.buttonText}>Confirm</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.declineButton} activeOpacity={0.7}>
+        <TouchableOpacity
+          style={styles.declineButton}
+          activeOpacity={0.7}
+          onPress={() => updateBookingStatus('cancelled')}
+        >
           <Text style={styles.buttonText}>Decline</Text>
         </TouchableOpacity>
       </View>

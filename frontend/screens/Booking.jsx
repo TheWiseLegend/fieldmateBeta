@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet, View, ScrollView } from 'react-native';
-// @ts-ignore
 import { Image } from 'expo-image';
 import DateTimePicker from 'react-native-ui-datepicker';
 import dayjs from 'dayjs';
@@ -8,16 +7,16 @@ import { HStack } from '../components/ui/hstack';
 import { VStack } from '../components/ui/vstack';
 import { Radio, RadioGroup, RadioLabel } from '../components/ui/radio';
 import Header from '../components/Header.jsx';
-// @ts-ignore
 import { FontSize, Color, FontFamily, Border } from '../GlobalStyles.js';
 import { Switch } from '../components/ui/switch';
 import FinalButton from '../components/FinalButton.jsx';
-import { getData } from '../storage';
+import { getData, storeData } from '../storage';
 import axios from 'axios';
-const BASE_URL = 'http://13.229.202.42:5000/api';
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function BookingSection() {
+  const navigation = useNavigation();
   const [date, setDate] = useState(dayjs());
   const [selectedTime, setSelectedTime] = useState(null);
   const [selectedDuration, setSelectedDuration] = useState('60 min');
@@ -44,26 +43,27 @@ export default function BookingSection() {
       ]);
     }
   }, [selectedDuration]);
+
   async function handleSubmit() {
     if (!selectedTime || !selectedDuration) {
       alert('Please select a time and duration.');
       return;
     }
-  
+
     let startTime;
     if (selectedTime.includes(' - ')) {
       [startTime] = selectedTime.split(' - ');
     } else {
       startTime = selectedTime;
     }
-  
+
     // Ensure date is a valid dayjs object
     const parsedDate = dayjs(date);
     if (!parsedDate.isValid()) {
       alert('Invalid date.');
       return;
     }
-  
+
     // Manually convert startTime to 24-hour format
     const [time, modifier] = startTime.split(' ');
     let [hours, minutes] = time.split(':');
@@ -72,10 +72,9 @@ export default function BookingSection() {
     } else if (modifier === 'AM' && hours === '12') {
       hours = '00';
     }
-  
-    // @ts-ignore
+
     const formattedTime = `${hours}:${minutes}`;
-  
+
     // Combine date and time
     const combinedDateTime = parsedDate
       .hour(parseInt(hours, 10))
@@ -83,37 +82,15 @@ export default function BookingSection() {
       .second(0)
       .millisecond(0)
       .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
-      // @ts-ignore
-      const duration = parseInt(selectedDuration.split(' ')[0], 10);
-      // @ts-ignore
-      const user = await getData('client_user');
-      // @ts-ignore
-      const user_id = JSON.parse(user).user_id;
 
-      // @ts-ignore
-      const field = await getData('field_view');
-      const field_id = JSON.parse(field).field_id;
-      console.log(typeof(combinedDateTime));
-      // @ts-ignore
-      const Booking = {
-        user_id,
-        field_id,
-        start_datetime: combinedDateTime,
-        duration,
-        current_players: 0
-      };
+    // Slice the duration to get the integer part
+    const duration = parseInt(selectedDuration.split(' ')[0], 10);
 
-      try {
-        await axios.post(`${BASE_URL}/bookings`, Booking, {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-        alert('Booking successful!');
-      } catch (err) {
-        // @ts-ignore
-        console.error('Error creating booking:', err.message);
-      }
+    await storeData('booking_time', JSON.stringify(combinedDateTime));
+    await storeData('booking_duration', JSON.stringify(duration));
+    // @ts-ignore
+    navigation.navigate('Payment');
+    
   }
 
   return (
@@ -129,7 +106,6 @@ export default function BookingSection() {
             <DateTimePicker
               mode="single"
               date={date}
-              // @ts-ignore
               onChange={(newDate) => setDate(newDate.date)}
             />
           </View>
@@ -167,9 +143,7 @@ export default function BookingSection() {
               ))
             ) : (
               <VStack space="lg">
-                {timeSlots.map((time, 
-// @ts-ignore
-                index) => (
+                {timeSlots.map((time, index) => (
                   <Radio
                     key={time}
                     value={time}

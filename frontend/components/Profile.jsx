@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Heading } from './ui/heading';
 import { Button, ButtonText } from './ui/button';
 import { Avatar, AvatarImage } from './ui/avatar';
-import { storeData } from '../storage';
+import { getData, storeData } from '../storage';
 
 /**
  * @param {object} props

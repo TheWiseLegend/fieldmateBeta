@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 60,
+    marginTop: 0,
   },
   disabledContainer: {
     opacity: 0.5,

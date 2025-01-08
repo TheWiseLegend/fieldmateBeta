@@ -33,7 +33,7 @@ const navigations = {
   Home: 'Home',
   Profile: 'Profile',
   Login: 'Login',
-  Registration: 'Registration'
+  Registration: 'Registration',
 };
 
 const Tab = createBottomTabNavigator();
