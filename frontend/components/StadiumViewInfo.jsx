@@ -2,12 +2,16 @@
 import React from 'react';
 import { Text, StyleSheet, View, TouchableOpacity, Linking } from 'react-native';
 import { Padding, Color, FontFamily, FontSize, Gap } from '../GlobalStyles.js';
+import { CircleArrowLeft } from 'lucide-react-native';
+import { useNavigation } from '@react-navigation/native';
 
 /**
  * @param {object} props
  * @param {FullField} props.field
  */
 export default function StadiumViewInfo({ field }) {
+  const navigation = useNavigation();
+
   function handleContactUs() {
     if (!field.vendor.phone) return;
 
@@ -23,6 +27,9 @@ export default function StadiumViewInfo({ field }) {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <CircleArrowLeft color="#673AB7" size={24} />
+      </TouchableOpacity>
       <View style={styles.frame}>
         <View style={styles.frameChild}>
           <Text style={styles.openingTimes}>Opening Times:</Text>
@@ -51,6 +58,15 @@ const styles = StyleSheet.create({
     width: '100%',
     gap: Gap.gap_lg,
     alignItems: 'center'
+  },
+  backButton: {
+    position: 'absolute',
+    top: -350, // Adjust the top position as needed
+    left: 10,
+    zIndex: 1,
+    backgroundColor: '#FFFFFF', // White background color for the button
+    borderRadius: 30, // Make the button circular
+    padding: 5 // Add padding to make the button bigger
   },
   frame: {
     width: '100%',
