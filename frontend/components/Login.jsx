@@ -9,6 +9,7 @@ import { EyeIcon, EyeOffIcon } from './ui/icon';
 import { Input, InputField, InputSlot, InputIcon } from './ui/input';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
+import { storeData } from '../storage';
 
 const BASE_URL = 'http://13.229.202.42:5000/api';
 
@@ -37,7 +38,7 @@ export default function Login({}) {
         return;
       }
 
-      localStorage.setItem('client_user', JSON.stringify(user));
+      storeData('client_user', JSON.stringify(user));
       navigation.navigate('Home');
     } catch (error) {
       Alert.alert('Error', error.message);

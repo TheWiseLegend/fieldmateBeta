@@ -1,5 +1,5 @@
 /** @import { MyNavigationProp, User } from '../types.js' */
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Button, ButtonText } from './ui/button';
 import { Heading } from './ui/heading';
@@ -7,6 +7,8 @@ import { Text } from './ui/text';
 import { Avatar, AvatarImage } from './ui/avatar';
 import { Drawer, DrawerBackdrop, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter } from './ui/drawer';
 import { useNavigation } from '@react-navigation/native';
+import { getData } from '../storage';
+
 
 /**
  * @param {object} props
@@ -16,18 +18,27 @@ import { useNavigation } from '@react-navigation/native';
 export default function ProfilDrawer({ isOpen, onClose }) {
   /** @type {MyNavigationProp} */
   const navigation = useNavigation();
+  const [user, setUser] = useState(null);
 
-  const json = localStorage.getItem('client_user');
-  if (json === null) {
-    navigation.navigate('Login');
-    return null;
-  }
+  useEffect(() => {
+    async function fetchUserData() {
+      const json = await getData('client_user');
+      if (json === null) {
+        navigation.navigate('Login');
+        return;
+      }
 
-  /** @type {User | null} */
-  let user;
-  try {
-    user = JSON.parse(json);
-  } catch {}
+      try {
+        const userData = JSON.parse(json);
+        setUser(userData);
+      } catch {
+        // Handle JSON parse error
+      }
+    }
+
+    fetchUserData();
+  }, [navigation]);
+
 
   /**
    * @param {string} section

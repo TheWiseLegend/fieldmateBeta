@@ -57,7 +57,9 @@ const styles = StyleSheet.create({
     top: '2%',
     width: '100%',
     gap: Gap.gap_lg,
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: 20,
+    paddingRight: 50,
   },
   backButton: {
     position: 'absolute',
@@ -74,7 +76,8 @@ const styles = StyleSheet.create({
     gap: Gap.gap_sm,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: '#7777772E'
+    backgroundColor: '#7777772E',
+    borderRadius: 10,
   },
   frameChild: {
     left: '5%',
@@ -83,7 +86,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     top: '20%',
-    bottom: '20%',
+    bottom: '30%',
     right: '2%',
     width: 'auto',
     height: '50%',
@@ -97,7 +100,8 @@ const styles = StyleSheet.create({
     top: '10%',
     bottom: '10%',
     left: '5%',
-    height: 'auto'
+    height: 'auto',
+    width: '65%',
   },
   openingTimes: {
     alignSelf: 'stretch',
@@ -106,9 +110,9 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.poppinsMedium
   },
   text: {
-    alignSelf: 'stretch',
     fontFamily: FontFamily.secondaryNotActive,
-    fontSize: FontSize.secondaryNotActive_size
+    fontSize: FontSize.secondaryNotActive_size,
+    width: '100%'
   },
   btnText: {
     fontWeight: '700',

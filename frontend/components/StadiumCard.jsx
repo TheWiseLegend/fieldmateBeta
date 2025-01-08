@@ -1,9 +1,10 @@
 /** @import { FullField, MyNavigationProp } from '../types.js' */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Image } from 'expo-image';
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Color, FontFamily, FontSize, Border, Padding } from '../GlobalStyles.js';
+import { storeData } from '../storage.js'
 
 /**
  * @param {object} props
@@ -12,10 +13,18 @@ import { Color, FontFamily, FontSize, Border, Padding } from '../GlobalStyles.js
 export default function StadiumCard({ field }) {
   /** @type {MyNavigationProp} */
   const navigation = useNavigation();
+  // store the props into a variable
+  const newField = field;
 
-  function handleNavigation() {
-    localStorage.setItem('field_view', JSON.stringify(field));
-    navigation.navigate('Stadium View');
+
+  async function handleNavigation() {
+    try {
+      await storeData('field_view', JSON.stringify(field));
+      
+      navigation.navigate('Stadium View');
+    } catch (error) {
+      console.error('Error storing data or navigating:', field);
+    }
   }
 
   return (

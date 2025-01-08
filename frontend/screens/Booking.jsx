@@ -1,82 +1,125 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, StyleSheet, View, ScrollView } from 'react-native';
 import { Image } from 'expo-image';
-import Duration from '../components/BookingDuration.jsx';
-import BookingDate from '../components/BookingDate.jsx';
-import BookingTime from '../components/BookingTime.jsx';
-import BookingTime2 from '../components/BookingTime2.jsx';
+import DateTimePicker from 'react-native-ui-datepicker';
+import dayjs from 'dayjs';
+import { HStack } from '../components/ui/hstack';
+import { Radio, RadioGroup, RadioIndicator, RadioLabel } from '../components/ui/radio';
 import Header from '../components/Header.jsx';
 import { FontSize, Color, FontFamily, Border } from '../GlobalStyles.js';
+import {Switch} from '../components/ui/switch';
+
 
 export default function BookingSection() {
+  const [date, setDate] = useState(dayjs());
+  const [selectedTime, setSelectedTime] = useState(null);
+  const [selectedDuration, setSelectedDuration] = useState(null);
+  const [selectedMatch, setSelectedMatch] = useState(false);
+  const timeSlots = [
+    '12:00 PM', '1:00 PM', '2:00 PM',
+    '3:00 PM', '4:00 PM', '5:00 PM',
+    '6:00 PM', '7:00 PM', '8:00 PM',
+    '9:00 PM', '10:00 PM', '11:00 PM'
+  ];
+
+
+
   return (
     <View id="booking-screen" className="screen">
       <Header />
 
-      {/* <ScrollView> */}
+      <ScrollView contentContainerStyle={styles.containerScroll}>
       <View style={styles.container}>
-        <Image
-          style={styles.frameChild}
-          contentFit="cover" // @ts-expect-error
-          source={require('../assets/circle.png')}
-        />
-        <Image
-          style={styles.frameIcon}
-          contentFit="cover" // @ts-expect-error
-          source={require('../assets/arrow-left.png')}
-        />
-
         <View style={styles.titleParent}>
           <Text style={styles.title}>Book A Slot</Text>
         </View>
-
-        <BookingDate />
-
-        {/* <Duration />
-
-        <Text style={styles.bookingTime}>Booking Time</Text>
-        <BookingTime pM="12:00 PM" pM1="1:00 PM" pM2="2:00 PM" />
-        <BookingTime2 pM="3:00 PM" pM1="4:00 PM" pM2="5:00 PM" />
-        <BookingTime2 frameTop={542} frameLeft={52} pM="6:00 PM" pM1="7:00 PM" pM2="8:00 PM" />
-        <BookingTime
-          pM="9:00 PM"
-          pM1="10:00 PM"
-          pM2="11:00 PM"
-          frameTop={609}
-          pMColor="#bababa"
-          backgroundBorderColor="#d7d7d7"
-        />
-
-        <Text style={styles.doYouWant}>Are you looking for more players?</Text>
-
-        <View style={styles.sync}>
-          <Text style={styles.createAMatch}>Create a Match</Text>
-
-          <Image
-            style={styles.toggleIcon}
-            contentFit="cover" // @ts-expect-error
-            source={require('../assets/toggle.png')}
+        <View style={styles.bookingDate}>
+          <DateTimePicker
+            mode="single"
+            date={date}
+            onChange={(newDate) => setDate(newDate.date)}
           />
         </View>
 
-        <View style={styles.primaryButton}>
-          <Text style={styles.proceedToPayment}>Proceed to payment</Text>
-        </View> */}
+        <Text style={styles.subtitle}>Duration</Text>
+        <RadioGroup style={styles.centerGroup} className='mb-6' value={selectedDuration} onChange={setSelectedDuration}>
+          <HStack style={styles.durationTimes}>
+            {['60 min', '120 min'].map((time) => (
+              <Radio
+                key={time}
+                value={time}
+                style={[styles.timeSlot, selectedDuration === time && styles.selectedTimeSlot]}
+              >
+                <RadioLabel style={styles.timeText}>{time}</RadioLabel>
+              </Radio>
+            ))}
+          </HStack>
+        </RadioGroup>
+        <Text style={styles.subtitle}>Booking Time</Text>
+        <RadioGroup style={styles.bookingTimes} value={selectedTime} onChange={setSelectedTime}>
+            {Array.from({ length: 5 }).map((_, rowIndex) => (
+              <HStack key={rowIndex} space="4xl" style={styles.row}>
+                {timeSlots.slice(rowIndex * 3, rowIndex * 3 + 3).map((time) => (
+                  <Radio
+                    key={time}
+                    value={time}
+                    style={[styles.timeSlot, selectedTime === time && styles.selectedTimeSlot]}
+                  >
+                    <RadioLabel style={styles.timeText}>{time}</RadioLabel>
+                  </Radio>
+                ))}
+              </HStack>
+            ))}
+          </RadioGroup>
       </View>
-      {/* </ScrollView> */}
+
+      <Text style={styles.text}>Do you want to create a match post?</Text>
+      <HStack space='3xl' style={styles.centerMatch}>
+        <Text style={styles.textsm}>Create a Match</Text>
+        
+        <Switch size="md" isDisabled={false} value={selectedMatch} onValueChange={setSelectedMatch}
+        />
+      
+      </HStack>
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleParent: {
-    left: 110,
-    width: 198,
+  container: {
+    width: '100%',
+    padding: 20,
+  },
+  containerScroll: {
+    paddingBottom: 300,
+  },
+  centerMatch:{
+    alignItems: 'center',
+    width: '100%',
+  },
+  durationTimes:{
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '80%',
 
+  },
+  bookingTimes:{
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+  },
+  centerGroup:{
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  titleParent: {
+    left: 100,
+    width: 198,
     justifyContent: 'flex-end',
     alignItems: 'center',
     top: 0,
-    position: 'absolute'
+    position: 'absolute',
   },
   title: {
     alignSelf: 'stretch',
@@ -85,93 +128,66 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: FontFamily.poppinsMedium,
     fontWeight: '500',
-    lineHeight: 22
+    lineHeight: 35,
   },
-
-  frameChild: {
-    top: 0,
-    left: 0,
-    width: 35,
-    height: 35,
-    position: 'absolute'
+  text: {
+    fontSize: FontSize.size_lg,
+    color: Color.colorBlack,
+    textAlign: 'left',
+    fontFamily: FontFamily.poppinsMedium,
+    fontWeight: '300',
+    lineHeight: 35,
+    marginLeft: 10,
   },
-  frameIcon: {
-    top: 0,
-    left: 6,
-    width: 24,
-    height: 25,
-    position: 'absolute'
+  textsm: {
+    fontSize: FontSize.size_sm,
+    color: Color.colorBlack,
+    textAlign: 'left',
+    fontFamily: FontFamily.poppinsRegular,
+    fontWeight: '300',
+    lineHeight: 35,
+    marginLeft: 10,
   },
-
-  container: {
-    flex: 1,
-    width: '100%',
-    justifyContent: 'center',
+  bookingDate: {
+    marginTop: 20,
+  },
+  timeSlot: {
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
     alignItems: 'center',
-    alignSelf: 'stretch'
-  },
-  bookingTime: {
-    top: 367,
-    left: 20,
-    width: 169,
-    height: 25,
-    position: 'absolute',
-    fontWeight: '500',
-    color: Color.darkGray,
-    fontSize: FontSize.buttonText_size,
-    fontFamily: FontFamily.poppinsMedium
-  },
-  doYouWant: {
-    top: 687,
-    left: 20,
-    width: 329,
-    height: 31,
-    position: 'absolute',
-    fontWeight: '500',
-    color: Color.darkGray,
-    fontSize: FontSize.buttonText_size,
-    fontFamily: FontFamily.poppinsMedium
-  },
-  createAMatch: {
-    top: 0,
-    left: 0,
-    position: 'absolute',
-    color: Color.colorLightslategray,
-    fontSize: FontSize.buttonText_size,
-    fontFamily: FontFamily.poppinsRegular
-  },
-  toggleIcon: {
-    top: '8.33%',
-    right: '0%',
-    bottom: '4.17%',
-    left: '89.08%',
-    width: '10.92%',
-    height: '87.5%',
-    position: 'absolute'
-  },
-  sync: {
-    top: 755,
-    left: 17,
-    width: 293,
-    height: 24,
-    position: 'absolute'
-  },
-  proceedToPayment: {
-    textTransform: 'uppercase',
-    fontWeight: '600',
-    color: Color.surface,
-    fontSize: FontSize.buttonText_size,
-    fontFamily: FontFamily.title1
-  },
-  primaryButton: {
-    height: 60,
-    top: 832,
-    right: 65,
-    left: 47,
     justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    borderRadius: Border.br_33xl,
-    backgroundColor: Color.colorDarkslategray
+    width: 85,
+    height: 45,
+    
+
+  },
+  subtitle:{
+    fontSize: FontSize.size_lg,
+    color: Color.colorBlack,
+    textAlign: 'left',
+    fontFamily: FontFamily.poppinsMedium,
+    fontWeight: '500',
+    lineHeight: 35,
+  },
+  timeText: {
+    fontSize: FontSize.size_sm,
+    textAlign: 'center',
+    fontFamily: FontFamily.poppinsMedium,
+    fontWeight: '500',
+  },
+  selectedTimeSlot: {
+    borderColor: '#007BFF', // Highlight color for selected time slot
+  },
+  rectangle: {
+    width: 80,
+    height: 80,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    backgroundColor: '#fff',
+  },
+  row:{
+    marginBottom: 10,
   }
 });

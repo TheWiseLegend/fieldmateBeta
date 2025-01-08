@@ -13,7 +13,7 @@ export default function Recommendation({}) {
 
   return (
     // @ts-expect-error
-    <ImageBackground source={require('../assets/bg0.png')} style={styles.container}>
+    <ImageBackground source={require('../assets/bg0.png')} style={styles.container} imageStyle={styles.backgroundImage}>
       <Text style={styles.subtitle3}>What are you looking for?</Text>
       <View style={styles.gridImage}>
         <TouchableOpacity style={styles.stadiumImage} onPress={() => navigation.navigate('Stadiums')}>
@@ -46,9 +46,12 @@ export default function Recommendation({}) {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: '120%',
     height: 215,
-    padding: 20
+    padding: 20,
+  },
+  backgroundImage: {
+    resizeMode: 'cover'
   },
   textTitle: {
     fontSize: 20,
