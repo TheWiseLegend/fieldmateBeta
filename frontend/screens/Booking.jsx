@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet, View, ScrollView } from 'react-native';
+// @ts-ignore
 import { Image } from 'expo-image';
 import DateTimePicker from 'react-native-ui-datepicker';
 import dayjs from 'dayjs';
@@ -7,8 +8,14 @@ import { HStack } from '../components/ui/hstack';
 import { VStack } from '../components/ui/vstack';
 import { Radio, RadioGroup, RadioLabel } from '../components/ui/radio';
 import Header from '../components/Header.jsx';
+// @ts-ignore
 import { FontSize, Color, FontFamily, Border } from '../GlobalStyles.js';
 import { Switch } from '../components/ui/switch';
+import FinalButton from '../components/FinalButton.jsx';
+import { getData } from '../storage';
+import axios from 'axios';
+const BASE_URL = 'http://13.229.202.42:5000/api';
+
 
 export default function BookingSection() {
   const [date, setDate] = useState(dayjs());
@@ -37,6 +44,77 @@ export default function BookingSection() {
       ]);
     }
   }, [selectedDuration]);
+  async function handleSubmit() {
+    if (!selectedTime || !selectedDuration) {
+      alert('Please select a time and duration.');
+      return;
+    }
+  
+    let startTime;
+    if (selectedTime.includes(' - ')) {
+      [startTime] = selectedTime.split(' - ');
+    } else {
+      startTime = selectedTime;
+    }
+  
+    // Ensure date is a valid dayjs object
+    const parsedDate = dayjs(date);
+    if (!parsedDate.isValid()) {
+      alert('Invalid date.');
+      return;
+    }
+  
+    // Manually convert startTime to 24-hour format
+    const [time, modifier] = startTime.split(' ');
+    let [hours, minutes] = time.split(':');
+    if (modifier === 'PM' && hours !== '12') {
+      hours = String(parseInt(hours, 10) + 12);
+    } else if (modifier === 'AM' && hours === '12') {
+      hours = '00';
+    }
+  
+    // @ts-ignore
+    const formattedTime = `${hours}:${minutes}`;
+  
+    // Combine date and time
+    const combinedDateTime = parsedDate
+      .hour(parseInt(hours, 10))
+      .minute(parseInt(minutes, 10))
+      .second(0)
+      .millisecond(0)
+      .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
+      // @ts-ignore
+      const duration = parseInt(selectedDuration.split(' ')[0], 10);
+      // @ts-ignore
+      const user = await getData('client_user');
+      // @ts-ignore
+      const user_id = JSON.parse(user).user_id;
+
+      // @ts-ignore
+      const field = await getData('field_view');
+      const field_id = JSON.parse(field).field_id;
+      console.log(typeof(combinedDateTime));
+      // @ts-ignore
+      const Booking = {
+        user_id,
+        field_id,
+        start_datetime: combinedDateTime,
+        duration,
+        current_players: 0
+      };
+
+      try {
+        await axios.post(`${BASE_URL}/bookings`, Booking, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        alert('Booking successful!');
+      } catch (err) {
+        // @ts-ignore
+        console.error('Error creating booking:', err.message);
+      }
+  }
 
   return (
     <View id="booking-screen" className="screen">
@@ -51,6 +129,7 @@ export default function BookingSection() {
             <DateTimePicker
               mode="single"
               date={date}
+              // @ts-ignore
               onChange={(newDate) => setDate(newDate.date)}
             />
           </View>
@@ -88,7 +167,9 @@ export default function BookingSection() {
               ))
             ) : (
               <VStack space="lg">
-                {timeSlots.map((time, index) => (
+                {timeSlots.map((time, 
+// @ts-ignore
+                index) => (
                   <Radio
                     key={time}
                     value={time}
@@ -107,6 +188,11 @@ export default function BookingSection() {
           <Text style={styles.textsm}>Create a Match</Text>
           <Switch size="md" isDisabled={false} value={selectedMatch} onValueChange={setSelectedMatch} />
         </HStack>
+        <FinalButton
+          text="PROCEED TO PAYMENT"
+          onPress={handleSubmit}
+          disabled={!selectedTime || !selectedDuration}
+        />
       </ScrollView>
     </View>
   );
@@ -118,7 +204,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   containerScroll: {
-    paddingBottom: 300,
+    paddingBottom: 150,
   },
   centerMatch: {
     alignItems: 'center',
