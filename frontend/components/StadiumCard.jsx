@@ -1,9 +1,9 @@
 /** @import { FullField, MyNavigationProp } from '../types.js' */
 import React from 'react';
 import { Image } from 'expo-image';
-import { StyleSheet, Button, View, Text } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Color, FontFamily, FontSize } from '../GlobalStyles.js';
+import { Color, FontFamily, FontSize, Border, Padding } from '../GlobalStyles.js';
 
 /**
  * @param {object} props
@@ -19,103 +19,114 @@ export default function StadiumCard({ field }) {
   }
 
   return (
-    <View style={styles.stadiumCard}>
+    <TouchableOpacity style={styles.cardContainer} onPress={() => handleNavigation()}>
+      {/* Banner Image */}
       <Image
         style={styles.banner}
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/field.png')}
+        contentFit="cover"
+        source={require(// @ts-ignore
+        '../assets/field.png')}
       />
 
-      <View style={styles.viewButton}>
-        <Button title="View" onPress={() => handleNavigation()} />
-      </View>
+      {/* Card Details */}
+      <View style={styles.details}>
+        {/* Stadium Name */}
+        <Text style={styles.name}>{field.field_name || 'Stadium Name'}</Text>
 
-      <View style={styles.inner}>
-        <Text style={styles.name}>{field.field_name || 'NAME'}</Text>
-
-        <View style={styles.row}>
+        {/* Location */}
+        <View style={styles.infoRow}>
           <Image
-            style={styles.locationIcon}
-            contentFit="cover" // @ts-expect-error
-            source={require('../assets/location.png')}
+            style={styles.icon}
+            contentFit="cover"
+            source={require(// @ts-ignore
+            '../assets/location.png')}
           />
-          <Text style={styles.text}>{field.address || 'ADDRESS'}</Text>
+          <Text style={styles.infoText}>{field.address || 'No address available'}</Text>
         </View>
 
-        <View style={styles.row}>
+        {/* Rating */}
+        <View style={styles.infoRow}>
           <Image
-            style={styles.ratingIcon}
-            contentFit="cover" // @ts-expect-error
-            source={require('../assets/star-rate.png')}
+            style={styles.icon}
+            contentFit="cover"
+            source={require(// @ts-ignore
+            '../assets/star-rate.png')}
           />
-          <Text style={styles.text}>{field.rating || 0}/5</Text>
+          <Text style={styles.infoText}>⭐ {field.rating || '0.0'}/5</Text>
         </View>
 
+        {/* Price */}
         <View style={styles.priceRow}>
-          <Text style={styles.text}>Price</Text>
-          <Text style={styles.price}>{field.price || 0} RM</Text>
+          <Text style={styles.priceLabel}>Starting from</Text>
+          <Text style={styles.price}>{field.price || '0.00'} RM</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  stadiumCard: {
-    width: '100%',
-    height: 300
-  },
-  viewButton: {
-    top: -10,
-    width: '100%',
-    position: 'absolute'
+  cardContainer: {
+    backgroundColor: '#fff',
+    borderRadius: Border.br_md,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+    marginBottom: Padding.p_md,
+    borderWidth: 1,
+    borderColor: '#D1C4E9', // Light mauve border color
+    marginHorizontal: 5 // Add horizontal margin to add space between cards
   },
   banner: {
     width: '100%',
-    height: 150
+    height: 180
   },
-  inner: {
-    padding: 10
+  details: {
+    padding: Padding.p_md
   },
   name: {
-    alignContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
-    fontWeight: '600',
-    letterSpacing: 1,
-    fontSize: FontSize.secondaryNotActive_size,
-    fontFamily: FontFamily.secondaryNotActive,
+    fontSize: FontSize.size_xl,
+    fontFamily: FontFamily.title1,
+    fontWeight: 'bold',
+    color: '#673AB7', // Purple color for the stadium name
     marginBottom: 10
   },
-  row: {
+  infoRow: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 8
   },
-  locationIcon: {
-    left: 3,
+  icon: {
     width: 15,
-    height: 20,
+    height: 15,
     marginRight: 10
   },
-  ratingIcon: {
-    width: 20,
-    height: 20,
-    marginRight: 5
+  infoText: {
+    fontSize: FontSize.size_md,
+    fontFamily: FontFamily.secondary,
+    color: '#666' // Grey color for the info text
   },
   priceRow: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 10
+    marginTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#D1C4E9', // Light mauve border color
+    paddingTop: 10
+  },
+  priceLabel: {
+    fontSize: FontSize.size_sm,
+    fontFamily: FontFamily.secondary,
+    color: '#666' // Grey color for the price label
   },
   price: {
-    marginLeft: 10,
-    fontWeight: '600',
-    color: Color.blue,
     fontSize: FontSize.size_lg,
-    fontFamily: FontFamily.title1
-  },
-  text: {
-    fontSize: FontSize.size_lg,
-    fontFamily: FontFamily.secondaryNotActive
+    fontFamily: FontFamily.title1,
+    fontWeight: 'bold',
+    color: '#673AB7' // Purple color for the price
   }
 });
