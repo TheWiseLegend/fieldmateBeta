@@ -23,7 +23,7 @@ export default function ProfilDrawer({ isOpen, onClose }) {
 
   useEffect(() => {
     async function fetchUserData() {
-      if(user){
+      if(!user){
 
         const json = await getData('client_user');
         if (json === null) {
@@ -55,8 +55,9 @@ export default function ProfilDrawer({ isOpen, onClose }) {
     }
   }
 
-  function handleLogout() {
-    removeData('client_user');
+  async function handleLogout() {
+    await removeData('client_user');
+    navigation.navigate('Login');
     onClose();
   }
 

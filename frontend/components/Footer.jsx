@@ -15,7 +15,7 @@ import PaymentComponent from '../screens/Payment.jsx';
 import ProfileComponent from './Profile.jsx';
 import LoginComponent from './Login.jsx';
 import RegistrationComponent from './Registration.jsx';
-import VendorDashBoardComponent from '../screens/VendorDashboard.jsx';
+import VendorDashBoard from '../screens/VendorDashboard.jsx';
 import { getData } from '../storage.js';
 
 /** @type {{[key: string]: Navigations}} */
@@ -50,6 +50,7 @@ export default function Footer({}) {
       const user = await getData('client_user');
       if (user) {
         const parsedUser = JSON.parse(user);
+        console.log('Parsed user:', parsedUser);
         setUserRole(parsedUser.user_role);
       }
     }
@@ -83,10 +84,9 @@ export default function Footer({}) {
         <Tab.Screen name={navigations.Stadiums} component={StadiumStack} />
         <Tab.Screen name={navigations.Matches} component={MatchesComponent} />
         <Tab.Screen name={navigations.Activity} component={ActivityComponent} />
-        <Tab.Screen name={navigations.VendorDashBoard} component={VendorDashBoardComponent} />
 
-        {userRole === 'vendor' && (
-          <Tab.Screen name={navigations.VendorDashBoard} component={VendorDashBoardComponent} />
+        {userRole == 'vendor' && (
+          <Tab.Screen name={navigations.VendorDashBoard} component={VendorDashBoard} />
         )}
       </Tab.Navigator>
     </NavigationContainer>

@@ -1,86 +1,112 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet, View, ScrollView } from 'react-native';
 import { Image } from 'expo-image';
 import DateTimePicker from 'react-native-ui-datepicker';
 import dayjs from 'dayjs';
 import { HStack } from '../components/ui/hstack';
-import { Radio, RadioGroup, RadioIndicator, RadioLabel } from '../components/ui/radio';
+import { VStack } from '../components/ui/vstack';
+import { Radio, RadioGroup, RadioLabel } from '../components/ui/radio';
 import Header from '../components/Header.jsx';
 import { FontSize, Color, FontFamily, Border } from '../GlobalStyles.js';
-import {Switch} from '../components/ui/switch';
-
+import { Switch } from '../components/ui/switch';
 
 export default function BookingSection() {
   const [date, setDate] = useState(dayjs());
   const [selectedTime, setSelectedTime] = useState(null);
-  const [selectedDuration, setSelectedDuration] = useState(null);
+  const [selectedDuration, setSelectedDuration] = useState('60 min');
   const [selectedMatch, setSelectedMatch] = useState(false);
-  const timeSlots = [
+  const [timeSlots, setTimeSlots] = useState([
     '12:00 PM', '1:00 PM', '2:00 PM',
     '3:00 PM', '4:00 PM', '5:00 PM',
     '6:00 PM', '7:00 PM', '8:00 PM',
     '9:00 PM', '10:00 PM', '11:00 PM'
-  ];
+  ]);
 
-
+  useEffect(() => {
+    if (selectedDuration === '120 min') {
+      setTimeSlots([
+        '12:00 PM - 2:00 PM', '2:00 PM - 4:00 PM', '4:00 PM - 6:00 PM',
+        '6:00 PM - 8:00 PM', '8:00 PM - 10:00 PM', '10:00 PM - 12:00 AM'
+      ]);
+    } else {
+      setTimeSlots([
+        '12:00 PM', '1:00 PM', '2:00 PM',
+        '3:00 PM', '4:00 PM', '5:00 PM',
+        '6:00 PM', '7:00 PM', '8:00 PM',
+        '9:00 PM', '10:00 PM', '11:00 PM'
+      ]);
+    }
+  }, [selectedDuration]);
 
   return (
     <View id="booking-screen" className="screen">
       <Header />
 
       <ScrollView contentContainerStyle={styles.containerScroll}>
-      <View style={styles.container}>
-        <View style={styles.titleParent}>
-          <Text style={styles.title}>Book A Slot</Text>
-        </View>
-        <View style={styles.bookingDate}>
-          <DateTimePicker
-            mode="single"
-            date={date}
-            onChange={(newDate) => setDate(newDate.date)}
-          />
-        </View>
+        <View style={styles.container}>
+          <View style={styles.titleParent}>
+            <Text style={styles.title}>Book A Slot</Text>
+          </View>
+          <View style={styles.bookingDate}>
+            <DateTimePicker
+              mode="single"
+              date={date}
+              onChange={(newDate) => setDate(newDate.date)}
+            />
+          </View>
 
-        <Text style={styles.subtitle}>Duration</Text>
-        <RadioGroup style={styles.centerGroup} className='mb-6' value={selectedDuration} onChange={setSelectedDuration}>
-          <HStack style={styles.durationTimes}>
-            {['60 min', '120 min'].map((time) => (
-              <Radio
-                key={time}
-                value={time}
-                style={[styles.timeSlot, selectedDuration === time && styles.selectedTimeSlot]}
-              >
-                <RadioLabel style={styles.timeText}>{time}</RadioLabel>
-              </Radio>
-            ))}
-          </HStack>
-        </RadioGroup>
-        <Text style={styles.subtitle}>Booking Time</Text>
-        <RadioGroup style={styles.bookingTimes} value={selectedTime} onChange={setSelectedTime}>
-            {Array.from({ length: 5 }).map((_, rowIndex) => (
-              <HStack key={rowIndex} space="4xl" style={styles.row}>
-                {timeSlots.slice(rowIndex * 3, rowIndex * 3 + 3).map((time) => (
+          <Text style={styles.subtitle}>Duration</Text>
+          <RadioGroup style={styles.centerGroup} className='mb-6' value={selectedDuration} onChange={setSelectedDuration}>
+            <HStack style={styles.durationTimes}>
+              {['60 min', '120 min'].map((time) => (
+                <Radio
+                  key={time}
+                  value={time}
+                  style={[styles.timeSlot, selectedDuration === time && styles.selectedTimeSlot]}
+                >
+                  <RadioLabel style={styles.timeText}>{time}</RadioLabel>
+                </Radio>
+              ))}
+            </HStack>
+          </RadioGroup>
+
+          <Text style={styles.subtitle}>Booking Time</Text>
+          <RadioGroup style={styles.bookingTimes} value={selectedTime} onChange={setSelectedTime}>
+            {selectedDuration === '60 min' ? (
+              Array.from({ length: Math.ceil(timeSlots.length / 3) }).map((_, rowIndex) => (
+                <HStack key={rowIndex} space="lg" style={styles.row}>
+                  {timeSlots.slice(rowIndex * 3, rowIndex * 3 + 3).map((time) => (
+                    <Radio
+                      key={time}
+                      value={time}
+                      style={[styles.timeSlot, selectedTime === time && styles.selectedTimeSlot]}
+                    >
+                      <RadioLabel style={styles.timeText}>{time}</RadioLabel>
+                    </Radio>
+                  ))}
+                </HStack>
+              ))
+            ) : (
+              <VStack space="lg">
+                {timeSlots.map((time, index) => (
                   <Radio
                     key={time}
                     value={time}
-                    style={[styles.timeSlot, selectedTime === time && styles.selectedTimeSlot]}
+                    style={[styles.timeSlot, selectedTime === time && styles.selectedTimeSlot, styles.longTimeSlot]}
                   >
                     <RadioLabel style={styles.timeText}>{time}</RadioLabel>
                   </Radio>
                 ))}
-              </HStack>
-            ))}
+              </VStack>
+            )}
           </RadioGroup>
-      </View>
+        </View>
 
-      <Text style={styles.text}>Do you want to create a match post?</Text>
-      <HStack space='3xl' style={styles.centerMatch}>
-        <Text style={styles.textsm}>Create a Match</Text>
-        
-        <Switch size="md" isDisabled={false} value={selectedMatch} onValueChange={setSelectedMatch}
-        />
-      
-      </HStack>
+        <Text style={styles.text}>Do you want to create a match post?</Text>
+        <HStack space='3xl' style={styles.centerMatch}>
+          <Text style={styles.textsm}>Create a Match</Text>
+          <Switch size="md" isDisabled={false} value={selectedMatch} onValueChange={setSelectedMatch} />
+        </HStack>
       </ScrollView>
     </View>
   );
@@ -94,22 +120,21 @@ const styles = StyleSheet.create({
   containerScroll: {
     paddingBottom: 300,
   },
-  centerMatch:{
+  centerMatch: {
     alignItems: 'center',
     width: '100%',
   },
-  durationTimes:{
+  durationTimes: {
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '80%',
-
   },
-  bookingTimes:{
+  bookingTimes: {
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
   },
-  centerGroup:{
+  centerGroup: {
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -160,10 +185,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 85,
     height: 45,
-    
-
   },
-  subtitle:{
+  longTimeSlot: {
+    width: 200, // Adjust the width for 120 min slots
+  },
+  subtitle: {
     fontSize: FontSize.size_lg,
     color: Color.colorBlack,
     textAlign: 'left',
@@ -187,7 +213,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     backgroundColor: '#fff',
   },
-  row:{
+  row: {
     marginBottom: 10,
-  }
+  },
 });

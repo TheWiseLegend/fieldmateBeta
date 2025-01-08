@@ -98,16 +98,11 @@ export default function Activity() {
       </View>
 
       {activities[activeTab].length === 0 ? (
-        <ActivityCard></ActivityCard>
+        <Text style={styles.contentText}>No activities found</Text>
       ) : (
         <ScrollView>
           {activities[activeTab].map((b) => (
-            <View key={b.booking_id}>
-              {/* @ts-expect-error */}
-              <Text style={styles.contentText}>{b.field.field_name}</Text>
-              <Text style={styles.contentText}>{new Date(b.start_datetime).toString()}</Text>
-              <Text style={styles.contentText}>{b.duration}</Text>
-            </View>
+            <ActivityCard key={b.booking_id} booking={b} />
           ))}
         </ScrollView>
       )}
