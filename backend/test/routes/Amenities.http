@@ -21,7 +21,7 @@ POST {{baseUrl}}/
 Content-Type: application/json
 
 {
-  "amenity_name": "WiFi"
+  "amenity_name": "Boots"
 }
 
 ### Update an amenity
