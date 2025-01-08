@@ -1,4 +1,5 @@
 /** @import { MyNavigationProp, User } from '../types.js' */
+// @ts-ignore
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Button, ButtonText } from './ui/button';
@@ -7,7 +8,7 @@ import { Text } from './ui/text';
 import { Avatar, AvatarImage } from './ui/avatar';
 import { Drawer, DrawerBackdrop, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter } from './ui/drawer';
 import { useNavigation } from '@react-navigation/native';
-import { getData } from '../storage';
+import { getData, removeData } from '../storage';
 
 
 /**
@@ -22,22 +23,26 @@ export default function ProfilDrawer({ isOpen, onClose }) {
 
   useEffect(() => {
     async function fetchUserData() {
-      const json = await getData('client_user');
-      if (json === null) {
-        navigation.navigate('Login');
-        return;
-      }
+      if(user){
 
-      try {
-        const userData = JSON.parse(json);
-        setUser(userData);
-      } catch {
-        // Handle JSON parse error
+        const json = await getData('client_user');
+        if (json === null) {
+          navigation.navigate('Login');
+          return;
+        }
+
+        try {
+          const userData = JSON.parse(json);
+          console.log('userData', userData);
+          setUser(userData);
+        } catch {
+          console.log('Error parsing user data');
+        }
       }
     }
 
     fetchUserData();
-  }, [navigation]);
+  }, [user]);
 
 
   /**
@@ -51,7 +56,7 @@ export default function ProfilDrawer({ isOpen, onClose }) {
   }
 
   function handleLogout() {
-    localStorage.removeItem('client_user');
+    removeData('client_user');
     onClose();
   }
 

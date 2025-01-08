@@ -1,3 +1,4 @@
+// @ts-ignore
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import Octicons from '@expo/vector-icons/Octicons';

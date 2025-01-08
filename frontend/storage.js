@@ -17,3 +17,11 @@ export const getData = async (key) => {
         return await AsyncStorage.getItem(key);
     }
 };
+
+export const removeData = async (key) => {
+    if (isWeb) {
+        localStorage.removeItem(key);
+    } else {
+        await AsyncStorage.removeItem(key);
+    }
+};

@@ -1,4 +1,5 @@
 /** @import { Amenity, Field, FieldAmenity, FullField, Review, User } from '../types.js' */
+// @ts-ignore
 import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import StadiumCard from '../components/StadiumCard.jsx';
@@ -86,9 +87,7 @@ export default function Stadiums() {
         return { ...f, rating: avg, vendor, facilities };
       });
 
-      // @ts-expect-error
       setFields(fData);
-      // @ts-expect-error
       setFilteredFields(fData);
     } catch (err) {
       console.error('Error fetching fields and reviews:', err);

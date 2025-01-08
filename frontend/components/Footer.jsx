@@ -1,5 +1,6 @@
 /** @import { Navigations } from '../types.js' */
-import React from 'react';
+// @ts-ignore
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -14,11 +15,15 @@ import PaymentComponent from '../screens/Payment.jsx';
 import ProfileComponent from './Profile.jsx';
 import LoginComponent from './Login.jsx';
 import RegistrationComponent from './Registration.jsx';
+import VendorDashBoardComponent from '../screens/VendorDashboard.jsx';
+import { getData } from '../storage.js';
 
 /** @type {{[key: string]: Navigations}} */
 const navigations = {
   Matches: 'Matches',
   Activity: 'Activity',
+  // @ts-ignore
+  VendorDashBoard: 'VendorDashBoard',
 
   Stadiums: 'Stadiums',
   StadiumView: 'Stadium View',
@@ -38,6 +43,20 @@ const Stack = createStackNavigator();
  * @param {object} props
  */
 export default function Footer({}) {
+  const [userRole, setUserRole] = useState(null);
+
+  useEffect(() => {
+    async function fetchUserRole() {
+      const user = await getData('client_user');
+      if (user) {
+        const parsedUser = JSON.parse(user);
+        setUserRole(parsedUser.user_role);
+      }
+    }
+
+    fetchUserRole();
+  }, []);
+
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -51,6 +70,7 @@ export default function Footer({}) {
             if (rn === navigations.Stadiums) iconName = 'soccer-field';
             else if (rn === navigations.Matches) iconName = 'soccer';
             else if (rn === navigations.Activity) iconName = 'history';
+            else if (rn === navigations.VendorDashBoard) iconName = 'account';
 
             return <MaterialCommunityIcons name={iconName} size={size + 4} color={color} />;
           },
@@ -63,6 +83,11 @@ export default function Footer({}) {
         <Tab.Screen name={navigations.Stadiums} component={StadiumStack} />
         <Tab.Screen name={navigations.Matches} component={MatchesComponent} />
         <Tab.Screen name={navigations.Activity} component={ActivityComponent} />
+        <Tab.Screen name={navigations.VendorDashBoard} component={VendorDashBoardComponent} />
+
+        {userRole === 'vendor' && (
+          <Tab.Screen name={navigations.VendorDashBoard} component={VendorDashBoardComponent} />
+        )}
       </Tab.Navigator>
     </NavigationContainer>
   );

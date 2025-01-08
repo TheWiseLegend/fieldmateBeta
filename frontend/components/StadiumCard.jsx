@@ -1,10 +1,11 @@
 /** @import { FullField, MyNavigationProp } from '../types.js' */
+// @ts-ignore
 import React, { useEffect } from 'react';
 import { Image } from 'expo-image';
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Color, FontFamily, FontSize, Border, Padding } from '../GlobalStyles.js';
-import { storeData } from '../storage.js'
+import { storeData } from '../storage.js';
 
 /**
  * @param {object} props
@@ -16,11 +17,10 @@ export default function StadiumCard({ field }) {
   // store the props into a variable
   const newField = field;
 
-
   async function handleNavigation() {
     try {
       await storeData('field_view', JSON.stringify(field));
-      
+
       navigation.navigate('Stadium View');
     } catch (error) {
       console.error('Error storing data or navigating:', field);
@@ -30,13 +30,13 @@ export default function StadiumCard({ field }) {
   return (
     <TouchableOpacity style={styles.cardContainer} onPress={() => handleNavigation()}>
       {/* Banner Image */}
+      {/*@ts-ignore */}
       <Image
         style={styles.banner}
         contentFit="cover"
         source={require(// @ts-ignore
         '../assets/field.png')}
       />
-
       {/* Card Details */}
       <View style={styles.details}>
         {/* Stadium Name */}
@@ -44,6 +44,7 @@ export default function StadiumCard({ field }) {
 
         {/* Location */}
         <View style={styles.infoRow}>
+          {/* @ts-ignore */}
           <Image
             style={styles.icon}
             contentFit="cover"
@@ -55,6 +56,7 @@ export default function StadiumCard({ field }) {
 
         {/* Rating */}
         <View style={styles.infoRow}>
+          {/* @ts-ignore */}
           <Image
             style={styles.icon}
             contentFit="cover"
