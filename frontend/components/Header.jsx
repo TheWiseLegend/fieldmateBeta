@@ -2,23 +2,26 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import Octicons from '@expo/vector-icons/Octicons';
 import Drawer from './Drawer.jsx';
+import NotificationDrawer from '../components/NotificationDrawer.jsx';
 import { Padding, Border } from '../GlobalStyles';
 
 /**
  * @param {object} props
  */
 export default function Header({}) {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isProfileDrawerOpen, setIsProfileDrawerOpen] = React.useState(false);
+  const [isNotificationDrawerOpen, setIsNotificationDrawerOpen] = React.useState(false);
 
   return (
     <View style={styles.header}>
-      <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <Drawer isOpen={isProfileDrawerOpen} onClose={() => setIsProfileDrawerOpen(false)} />
+      <NotificationDrawer isOpen={isNotificationDrawerOpen} onClose={() => setIsNotificationDrawerOpen(false)} />
 
-      <TouchableOpacity onPress={() => setIsOpen(!isOpen)} style={styles.profile}>
+      <TouchableOpacity onPress={() => setIsProfileDrawerOpen(!isProfileDrawerOpen)} style={styles.profile}>
         <Octicons name="three-bars" size={24} color="black" />
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => alert('Soon...')} style={styles.doorbell}>
+      <TouchableOpacity onPress={() => setIsNotificationDrawerOpen(!isNotificationDrawerOpen)} style={styles.doorbell}>
         <Octicons name="bell" size={24} color="black" />
       </TouchableOpacity>
     </View>
