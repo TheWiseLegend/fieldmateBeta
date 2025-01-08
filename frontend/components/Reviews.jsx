@@ -25,7 +25,7 @@ export default function Reviews({ rating }) {
 const styles = StyleSheet.create({
   container: {
     top: '3%',
-    left: '50%',
+    left: '45%',
     width: '50%',
     height: 27,
     justifyContent: 'center',
@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
   },
   groupIcon: {
     left: '0%',
-    width: '7%',
-    height: '93%',
+    width: '20',
+    height: '20',
     right: '93%',
     bottom: '7%',
     maxWidth: '100%',
