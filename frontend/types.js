@@ -1,5 +1,7 @@
 export default {};
 
+/** @typedef {'upcoming' | 'past'} ActivityTabs */
+
 /** @typedef {'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun'} DayKeys */
 
 /** @typedef {'Cafe' | 'WiFi' | 'Water' | 'Shower' | 'Shirts' | 'Boots'} FacilityNames */

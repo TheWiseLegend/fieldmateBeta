@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+/** @import { MyNavigationProp, User } from '../types.js' */
+import React from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Button, ButtonText } from './ui/button';
 import { Heading } from './ui/heading';
 import { Text } from './ui/text';
@@ -9,34 +10,45 @@ import { useNavigation } from '@react-navigation/native';
 
 /**
  * @param {object} props
- * @param {boolean} props.isOpen
- * @param {() => void} props.onClose
+ * @param {object} props.isOpen
+ * @param {Function} props.onClose
  */
-
-export default function ProfileDrawer({ isOpen, onClose }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+export default function ProfilDrawer({ isOpen, onClose }) {
+  /** @type {MyNavigationProp} */
   const navigation = useNavigation();
 
-  useEffect(() => {
-    const user = localStorage.getItem('user');
-    if (user) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, []);
+  const json = localStorage.getItem('client_user');
+  if (json === null) {
+    navigation.navigate('Login');
+    return null;
+  }
 
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    setIsLoggedIn(false);
+  /** @type {User | null} */
+  let user;
+  try {
+    user = JSON.parse(json);
+  } catch {}
+
+  /**
+   * @param {string} section
+   */
+  function handleItemPress(section) {
+    if (section === 'Edit Account') {
+      navigation.navigate('Profile');
+      onClose();
+    }
+  }
+
+  function handleLogout() {
+    localStorage.removeItem('client_user');
     onClose();
-  };
+  }
 
   return (
     <Drawer isOpen={isOpen} onClose={onClose} size="md" anchor="left">
       <DrawerBackdrop />
       <DrawerContent>
-        {isLoggedIn ? (
+        {user ? (
           <>
             <DrawerHeader style={styles.header}>
               <View style={styles.avatarContainer}>
@@ -48,23 +60,18 @@ export default function ProfileDrawer({ isOpen, onClose }) {
                   />
                 </Avatar>
                 <Heading size="3xl" style={styles.userName}>
-                  User Name
+                  {user.name || 'USER NAME'}
                 </Heading>
               </View>
             </DrawerHeader>
             <DrawerBody contentContainerStyle={styles.body}>
-              <Text size="md" className="text-typography-800" style={styles.section}>
-                Edit Account
-              </Text>
-              <Text size="md" className="text-typography-800" style={styles.section}>
-                Settings
-              </Text>
-              <Text size="md" className="text-typography-800" style={styles.section}>
-                Privacy
-              </Text>
-              <Text size="md" className="text-typography-800" style={styles.section}>
-                Help
-              </Text>
+              {['Edit Account'].map((section, i) => (
+                <TouchableOpacity key={i} onPress={() => handleItemPress(section)} style={styles.section}>
+                  <Heading size="md" className="text-typography-800">
+                    {section}
+                  </Heading>
+                </TouchableOpacity>
+              ))}
             </DrawerBody>
             <DrawerFooter style={styles.footer}>
               <Button onPress={handleLogout} className="flex-1" style={styles.logoutButton}>
@@ -76,10 +83,7 @@ export default function ProfileDrawer({ isOpen, onClose }) {
           <DrawerBody contentContainerStyle={styles.body}>
             <Button
               onPress={() => {
-                navigation.navigate(
-                  // @ts-ignore
-                  'Login'
-                );
+                navigation.navigate('Login');
                 onClose();
               }}
               style={styles.authButton}
@@ -88,10 +92,7 @@ export default function ProfileDrawer({ isOpen, onClose }) {
             </Button>
             <Button
               onPress={() => {
-                navigation.navigate(
-                  // @ts-ignore
-                  'Registration'
-                );
+                navigation.navigate('Registration');
                 onClose();
               }}
               style={styles.authButton}
@@ -116,14 +117,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   avatar: {
-    marginBottom: 20, // Increase margin to add more space below the avatar
-    marginLeft: 20 // Move the avatar a bit to the left
+    marginBottom: 20,
+    marginLeft: 20
   },
   userName: {
     textAlign: 'center',
-    marginTop: 20, // Increase margin to add more space above the user name
-    fontSize: 24, // Increase font size to make the text larger
-    fontWeight: 'bold' // Make the text bold for better visibility
+    fontWeight: 'bold',
+    marginTop: 20,
+    fontSize: 24
   },
   body: {
     alignItems: 'center',
@@ -131,7 +132,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20
   },
   section: {
-    marginVertical: 20, // Adjust margin to add more spacing
+    marginVertical: 20,
     textAlign: 'center'
   },
   footer: {

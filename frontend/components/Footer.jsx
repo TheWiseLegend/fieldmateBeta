@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons.js';
 import HomeComponent from '../screens/Home.jsx';
+import ActivityComponent from '../screens/Activity.jsx';
 import MatchesComponent from '../screens/Matches.jsx';
 import StadiumsComponent from '../screens/Stadiums.jsx';
 import StadiumViewComponent from '../screens/StadiumView.jsx';
@@ -16,14 +17,15 @@ import RegistrationComponent from './Registration.jsx';
 
 /** @type {{[key: string]: Navigations}} */
 const navigations = {
-  Home: 'Home',
   Matches: 'Matches',
+  Activity: 'Activity',
 
   Stadiums: 'Stadiums',
   StadiumView: 'Stadium View',
   Booking: 'Booking',
   Payment: 'Payment',
 
+  Home: 'Home',
   Profile: 'Profile',
   Login: 'Login',
   Registration: 'Registration'
@@ -48,7 +50,7 @@ export default function Footer({}) {
 
             if (rn === navigations.Stadiums) iconName = 'soccer-field';
             else if (rn === navigations.Matches) iconName = 'soccer';
-            else if (rn === navigations.Login) iconName = 'login';
+            else if (rn === navigations.Activity) iconName = 'history';
 
             return <MaterialCommunityIcons name={iconName} size={size + 4} color={color} />;
           },
@@ -60,6 +62,7 @@ export default function Footer({}) {
         <Tab.Screen name={navigations.Home} component={ProfileStack} />
         <Tab.Screen name={navigations.Stadiums} component={StadiumStack} />
         <Tab.Screen name={navigations.Matches} component={MatchesComponent} />
+        <Tab.Screen name={navigations.Activity} component={ActivityComponent} />
       </Tab.Navigator>
     </NavigationContainer>
   );

@@ -1,36 +1,26 @@
-/** @import { MyNavigationProp } from '../types.js' */
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import Octicons from '@expo/vector-icons/Octicons';
+import Drawer from './Drawer.jsx';
 import { Padding, Border } from '../GlobalStyles';
 
 /**
  * @param {object} props
  */
 export default function Header({}) {
-  /** @type {MyNavigationProp} */
-  const navigation = useNavigation();
+  const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <View style={styles.header}>
-      <Octicons
-        name={localStorage.getItem('client_user') === null ? 'sign-in' : 'person-fill'}
-        size={24}
-        color="black"
-        style={styles.profile}
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)} />
 
-      <Octicons
-        name="bell"
-        size={24}
-        color="black"
-        style={styles.doorbell}
-        contentFit="cover" // @ts-expect-error
-        source={require('../assets/doorbell.png')}
-        onPress={() => alert('Soon...')}
-      />
+      <TouchableOpacity onPress={() => setIsOpen(!isOpen)} style={styles.profile}>
+        <Octicons name="three-bars" size={24} color="black" />
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => alert('Soon...')} style={styles.doorbell}>
+        <Octicons name="bell" size={24} color="black" />
+      </TouchableOpacity>
     </View>
   );
 }

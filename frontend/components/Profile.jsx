@@ -1,12 +1,10 @@
 /** @import { MyNavigationProp, User } from '../types.js' */
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Heading } from './ui/heading';
 import { Button, ButtonText } from './ui/button';
-import { Text } from './ui/text';
 import { Avatar, AvatarImage } from './ui/avatar';
-import { DrawerHeader, DrawerBody, DrawerFooter } from './ui/drawer';
 
 /**
  * @param {object} props
@@ -17,23 +15,22 @@ export default function Profile({}) {
   /** @type {MyNavigationProp} */
   const navigation = useNavigation();
 
+  const json = localStorage.getItem('client_user');
+  if (json === null) {
+    navigation.navigate('Login');
+    return null;
+  }
+
   useEffect(() => {
-    const json = localStorage.getItem('client_user');
-
-    if (json === null) {
-      navigation.navigate('Login');
-    }
-
-    try {
-      setUser(JSON.parse(json));
-    } catch {}
+    if (json !== null)
+      try {
+        setUser(JSON.parse(json));
+      } catch {}
   }, []);
 
-  // /** @returns {boolean} */
-  // function isSignedIn() {
-  //   const json = localStorage.getItem('client_user');
-  //   if (json === null) return false;
-  // }
+  function handleSave() {
+    localStorage.setItem('client_user', JSON.stringify(user));
+  }
 
   function handleLogout() {
     localStorage.removeItem('client_user');
@@ -42,83 +39,86 @@ export default function Profile({}) {
 
   return (
     <View>
-      <DrawerHeader style={styles.header}>
-        <View style={styles.avatarContainer}>
-          <Avatar size="xl" style={styles.avatar}>
-            <AvatarImage
-              source={{
-                uri: 'https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_2x3.jpg'
-              }}
-            />
-          </Avatar>
-          <Heading size="3xl" style={styles.userName}>
-            {user?.name || 'USER NAME'}
-          </Heading>
-        </View>
-      </DrawerHeader>
-      <DrawerBody contentContainerStyle={styles.body}>
-        <Text size="md" className="text-typography-800" style={styles.section}>
+      <View style={styles.avatarContainer}>
+        <Avatar size="xl">
+          <AvatarImage
+            source={{
+              uri: 'https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_2x3.jpg'
+            }}
+          />
+        </Avatar>
+        <Heading size="3xl" style={styles.userName}>
           Edit Account
-        </Text>
-        <Text size="md" className="text-typography-800" style={styles.section}>
-          Settings
-        </Text>
-        <Text size="md" className="text-typography-800" style={styles.section}>
-          Privacy
-        </Text>
-        <Text size="md" className="text-typography-800" style={styles.section}>
-          Help
-        </Text>
-      </DrawerBody>
-      <DrawerFooter style={styles.footer}>
+        </Heading>
+      </View>
+
+      <View style={styles.body}>
+        {['name', 'email', 'phone'].map((key) => (
+          <TextInput
+            key={key}
+            style={styles.input}
+            placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
+            value={user[key] || ''}
+            onChangeText={(text) => setUser({ ...user, [key]: text })}
+          />
+        ))}
+      </View>
+
+      <View style={styles.footer}>
+        <Button onPress={handleSave} className="flex-1" style={styles.saveButton}>
+          <ButtonText>Save</ButtonText>
+        </Button>
         <Button onPress={handleLogout} className="flex-1" style={styles.logoutButton}>
           <ButtonText>Log Out</ButtonText>
         </Button>
-      </DrawerFooter>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  header: {
+  container: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 20
+    backgroundColor: '#f5f5f5'
   },
   avatarContainer: {
+    paddingVertical: 40,
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  avatar: {
-    marginBottom: 20, // Increase margin to add more space below the avatar
-    marginLeft: 20 // Move the avatar a bit to the left
   },
   userName: {
-    textAlign: 'center',
-    marginTop: 20, // Increase margin to add more space above the user name
-    fontSize: 24, // Increase font size to make the text larger
-    fontWeight: 'bold' // Make the text bold for better visibility
-  },
-  body: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 20
-  },
-  section: {
-    marginVertical: 20, // Adjust margin to add more spacing
+    marginTop: 10,
+    fontSize: 24,
+    fontWeight: 'bold',
     textAlign: 'center'
   },
-  footer: {
+  body: {
+    paddingVertical: 10,
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 20
-  },
-  logoutButton: {
-    width: '100%',
     justifyContent: 'center'
   },
-  authButton: {
+  input: {
+    width: '80%',
+    padding: 10,
     marginVertical: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5
+  },
+  footer: {
+    paddingVertical: 20,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  saveButton: {
+    width: '80%',
+    justifyContent: 'center',
+    marginBottom: 10
+  },
+  logoutButton: {
     width: '80%',
     justifyContent: 'center'
   }
