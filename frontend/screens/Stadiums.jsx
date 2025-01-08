@@ -5,6 +5,7 @@ import StadiumCard from '../components/StadiumCard.jsx';
 import Header from '../components/Header.jsx';
 import Filters from '../components/Filters.jsx';
 import axios from 'axios';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const BASE_URL = 'http://13.229.202.42:5000/api';
 
@@ -21,6 +22,8 @@ export default function Stadiums() {
   const [filteredFields, setFilteredFields] = useState([]);
   /** @type {[[string, string], React.Dispatch<React.SetStateAction<[string, string]>>]} */
   const [filters, setFilters] = useState(['', '']);
+  const navigation = useNavigation();
+  const route = useRoute();
 
   useEffect(() => {
     fetchData();
@@ -108,7 +111,7 @@ export default function Stadiums() {
 
   return (
     <View id="stadiums-screen" className="screen">
-      <Header />
+      {route.name !== 'Stadium View' && <Header />}
       <Filters extraSorts={extraFilterSorts} onStateChange={handleStateChange} onSortChange={handleSortChange} />
 
       <ScrollView style={styles.content}>

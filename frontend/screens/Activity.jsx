@@ -1,4 +1,5 @@
 /** @import { ActivityTabs, Booking, Field, MyNavigationProp } from '../types.js' */
+// @ts-ignore
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
