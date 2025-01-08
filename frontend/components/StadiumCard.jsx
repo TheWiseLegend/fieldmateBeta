@@ -1,9 +1,10 @@
 /** @import { FullField, MyNavigationProp } from '../types.js' */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Image } from 'expo-image';
 import { StyleSheet, Button, View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Color, FontFamily, FontSize } from '../GlobalStyles.js';
+import { storeData } from '../storage';
 
 /**
  * @param {object} props
@@ -12,10 +13,18 @@ import { Color, FontFamily, FontSize } from '../GlobalStyles.js';
 export default function StadiumCard({ field }) {
   /** @type {MyNavigationProp} */
   const navigation = useNavigation();
+  // store the props into a variable
+  const newField = field;
 
-  function handleNavigation() {
-    localStorage.setItem('field_view', JSON.stringify(field));
-    navigation.navigate('Stadium View');
+
+  async function handleNavigation() {
+    try {
+      await storeData('field_view', JSON.stringify(field));
+      
+      navigation.navigate('Stadium View');
+    } catch (error) {
+      console.error('Error storing data or navigating:', field);
+    }
   }
 
   return (
@@ -27,7 +36,7 @@ export default function StadiumCard({ field }) {
       />
 
       <View style={styles.viewButton}>
-        <Button title="View" onPress={() => handleNavigation()} />
+        <Button title="View" onPress={handleNavigation} />
       </View>
 
       <View style={styles.inner}>
@@ -63,19 +72,20 @@ export default function StadiumCard({ field }) {
 const styles = StyleSheet.create({
   stadiumCard: {
     width: '100%',
-    height: 300
+    height: 300,
+    marginBottom: 20,
   },
   viewButton: {
     top: -10,
     width: '100%',
-    position: 'absolute'
+    position: 'absolute',
   },
   banner: {
     width: '100%',
-    height: 150
+    height: 150,
   },
   inner: {
-    padding: 10
+    padding: 10,
   },
   name: {
     alignContent: 'center',
@@ -85,37 +95,37 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     fontSize: FontSize.secondaryNotActive_size,
     fontFamily: FontFamily.secondaryNotActive,
-    marginBottom: 10
+    marginBottom: 10,
   },
   row: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   locationIcon: {
     left: 3,
     width: 15,
     height: 20,
-    marginRight: 10
+    marginRight: 10,
   },
   ratingIcon: {
     width: 20,
     height: 20,
-    marginRight: 5
+    marginRight: 5,
   },
   priceRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 10
+    marginTop: 10,
   },
   price: {
     marginLeft: 10,
     fontWeight: '600',
     color: Color.blue,
     fontSize: FontSize.size_lg,
-    fontFamily: FontFamily.title1
+    fontFamily: FontFamily.title1,
   },
   text: {
     fontSize: FontSize.size_lg,
-    fontFamily: FontFamily.secondaryNotActive
-  }
+    fontFamily: FontFamily.secondaryNotActive,
+  },
 });

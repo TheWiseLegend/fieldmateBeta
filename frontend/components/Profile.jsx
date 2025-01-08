@@ -5,17 +5,18 @@ import { useNavigation } from '@react-navigation/native';
 import { Heading } from './ui/heading';
 import { Button, ButtonText } from './ui/button';
 import { Avatar, AvatarImage } from './ui/avatar';
+import { storeData } from '../storage';
 
 /**
  * @param {object} props
  */
-export default function Profile({}) {
+export default function Profile({ }) {
   /** @type {[User, React.Dispatch<React.SetStateAction<User>>]} */ // @ts-expect-error
   const [user, setUser] = useState({});
   /** @type {MyNavigationProp} */
   const navigation = useNavigation();
 
-  const json = localStorage.getItem('client_user');
+  const json = getData('client_user');
   if (json === null) {
     navigation.navigate('Login');
     return null;
@@ -25,11 +26,11 @@ export default function Profile({}) {
     if (json !== null)
       try {
         setUser(JSON.parse(json));
-      } catch {}
+      } catch { }
   }, []);
 
   function handleSave() {
-    localStorage.setItem('client_user', JSON.stringify(user));
+    storeData('client_user', JSON.stringify(user))
   }
 
   function handleLogout() {

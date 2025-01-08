@@ -5,6 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import { Button, ButtonText } from '../components/ui/button';
 import Header from '../components/Header.jsx';
 import axios from 'axios';
+import { getData } from '../storage';
+import ActivityCard from '../components/ActivityCard';
 
 const BASE_URL = 'http://13.229.202.42:5000/api';
 
@@ -16,7 +18,7 @@ export default function Activity() {
   /** @type {MyNavigationProp} */
   const navigation = useNavigation();
 
-  const json = localStorage.getItem('client_user');
+  const json = getData('client_user');
   if (!json) {
     navigation.navigate('Login');
     return null;
@@ -28,7 +30,7 @@ export default function Activity() {
 
   async function fetchData() {
     try {
-      const user = JSON.parse(json);
+      const user = JSON.parse(await json);
 
       const [bRes, fRes] = await Promise.all([axios.get(`${BASE_URL}/bookings`), axios.get(`${BASE_URL}/fields`)]);
 
@@ -83,7 +85,6 @@ export default function Activity() {
         >
           <ButtonText style={styles.buttonText}>Upcoming</ButtonText>
         </Button>
-
         <Button
           size="md" // @ts-expect-error
           variant={activeTab === 'past' ? 'solid' : 'outline'}
@@ -96,9 +97,7 @@ export default function Activity() {
       </View>
 
       {activities[activeTab].length === 0 ? (
-        <View style={styles.contentContainer}>
-          <Text style={styles.contentText}>No activities found</Text>
-        </View>
+        <ActivityCard></ActivityCard>
       ) : (
         <ScrollView>
           {activities[activeTab].map((b) => (

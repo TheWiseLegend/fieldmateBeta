@@ -10,13 +10,14 @@ import { ButtonText } from './ui/button';
 import { EyeIcon, EyeOffIcon } from './ui/icon';
 import { Input, InputField, InputSlot, InputIcon } from './ui/input';
 import axios from 'axios';
+import { storeData } from '../storage';
 
 const BASE_URL = 'http://13.229.202.42:5000/api';
 
 /**
  * @param {object} props
  */
-export default function Registration({}) {
+export default function Registration({ }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -59,7 +60,7 @@ export default function Registration({}) {
         }
       });
 
-      localStorage.setItem('client_user', JSON.stringify(user));
+      storeData('client_user', JSON.stringify(user))
       navigation.navigate('Login');
     } catch (err) {
       Alert.alert('Error', err.message);
