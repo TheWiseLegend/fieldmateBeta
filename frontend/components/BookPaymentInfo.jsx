@@ -1,26 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { getData } from '../storage';
+import { DBContext } from '../db.js';
 import dayjs from 'dayjs';
 
 /**
  * @param {object} props
  */
 export default function BookPaymentInfo({}) {
-  const [stadiumName, setStadiumName] = useState('Stadium Name');
   const [date, setDate] = useState('09 December 2024');
   const [time, setTime] = useState('8:00 pm - 9:00 pm');
+  const db = useContext(DBContext);
+
+  if (!db.view.field) return <Text>No field to view</Text>;
 
   useEffect(() => {
-    // async function
     async function fetchData() {
       try {
-        const field = await getData('field_view');
-        const fieldData = JSON.parse(field);
-        const bookingTime = await getData('booking_time');
-        const bookingDuration = await getData('booking_duration');
-        const startDatetime = dayjs(JSON.parse(bookingTime));
-        const duration = JSON.parse(bookingDuration);
+        const { time, duration } = db.view.booking;
+        const startDatetime = dayjs(time);
 
         // Format date
         const formattedDate = startDatetime.format('DD MMMM YYYY');
@@ -30,20 +27,18 @@ export default function BookPaymentInfo({}) {
         const endDatetime = startDatetime.add(duration, 'minute');
         const formattedTime = `${startDatetime.format('h:mm A')} - ${endDatetime.format('h:mm A')}`;
         setTime(formattedTime);
-
-        setStadiumName(fieldData.field_name);
       } catch (error) {
         console.error('Error fetching field data:', error);
       }
     }
 
     fetchData();
-  }, []); // Dependency array
+  }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.title}>{stadiumName}</Text>
+        <Text style={styles.title}>{db.view.field.field_name}</Text>
 
         <View style={styles.textGrid}>
           <View style={styles.gridItem}>
@@ -89,7 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   gridItem: {
-    width: '38%' // Adjust width to fit two items per row
+    width: '38%'
   },
   centerText: {
     textAlign: 'center'

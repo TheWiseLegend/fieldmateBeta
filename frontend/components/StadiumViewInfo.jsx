@@ -1,5 +1,4 @@
-/** @import { FullField } from '../types.js' */
-// @ts-ignore
+/** @import { FullField, MyNavigationProp } from '../types.js' */
 import React from 'react';
 import { Text, StyleSheet, View, TouchableOpacity, Linking } from 'react-native';
 import { Padding, Color, FontFamily, FontSize, Gap } from '../GlobalStyles.js';
@@ -11,6 +10,7 @@ import { useNavigation } from '@react-navigation/native';
  * @param {FullField} props.field
  */
 export default function StadiumViewInfo({ field }) {
+  /** @type {MyNavigationProp} */
   const navigation = useNavigation();
 
   function handleContactUs() {
@@ -31,6 +31,7 @@ export default function StadiumViewInfo({ field }) {
       <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
         <CircleArrowLeft color="#673AB7" size={24} />
       </TouchableOpacity>
+
       <View style={styles.frame}>
         <View style={styles.frameChild}>
           <Text style={styles.openingTimes}>Opening Times:</Text>
@@ -60,16 +61,16 @@ const styles = StyleSheet.create({
     gap: Gap.gap_lg,
     alignItems: 'center',
     padding: 20,
-    paddingRight: 50,
+    paddingRight: 50
   },
   backButton: {
     position: 'absolute',
-    top: -350, // Adjust the top position as needed
+    top: -350,
     left: 10,
     zIndex: 1,
-    backgroundColor: '#FFFFFF', // White background color for the button
-    borderRadius: 30, // Make the button circular
-    padding: 5 // Add padding to make the button bigger
+    backgroundColor: '#FFFFFF',
+    borderRadius: 30,
+    padding: 5
   },
   frame: {
     width: '100%',
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: '#7777772E',
-    borderRadius: 10,
+    borderRadius: 10
   },
   frameChild: {
     left: '5%',
@@ -102,7 +103,7 @@ const styles = StyleSheet.create({
     bottom: '10%',
     left: '5%',
     height: 'auto',
-    width: '65%',
+    width: '65%'
   },
   openingTimes: {
     alignSelf: 'stretch',

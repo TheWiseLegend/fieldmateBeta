@@ -1,11 +1,9 @@
 /** @import { LFGData } from '../types.js' */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { CalendarMinus2, MapPin, Users } from 'lucide-react-native';
 import { Avatar, AvatarImage } from './ui/avatar';
-import axios from 'axios';
-
-const BASE_URL = 'http://13.229.202.42:5000/api';
+import { DBContext } from '../db.js';
 
 /**
  * @param {object} props
@@ -21,6 +19,7 @@ export default function LFGCard({ data }) {
     player_count: 0,
     start_datetime: new Date()
   });
+  const db = useContext(DBContext);
 
   useEffect(() => {
     fetchData();
@@ -28,15 +27,9 @@ export default function LFGCard({ data }) {
 
   async function fetchData() {
     try {
-      /** @type {object[]} */
-      const bookings = (await axios.get(`${BASE_URL}/bookings`)).data;
-      const booking = bookings.find((b) => b.lfg_id === data.lfg_id);
-
-      /** @type {object} */
-      const field = (await axios.get(`${BASE_URL}/fields/${booking.field_id}`)).data[0];
-
-      /** @type {object} */
-      const user = (await axios.get(`${BASE_URL}/users/${booking.user_id}`)).data[0];
+      const booking = db.bookings.find((b) => b.lfg_id === data.lfg_id);
+      const field = db.fields.find((f) => f.field_id == booking.field_id);
+      const user = db.users.find((u) => u.user_id == booking.user_id);
 
       setLfgData({
         name: user.name,
@@ -103,21 +96,21 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 4,
     marginBottom: 16,
-    position: 'relative' // Ensure the priceText and button can be positioned absolutely
+    position: 'relative'
   },
   priceText: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#007BFF',
-    position: 'absolute', // Position the priceText absolutely
-    top: 16, // Adjust the top position as needed
-    left: 260 // Adjust the right position as needed
+    position: 'absolute',
+    top: 16,
+    left: 260
   },
   contentContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 40 // Adjust to make space for the "30.00 RM"
+    marginTop: 40
   },
   leftSection: {
     flex: 1
@@ -150,9 +143,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 10,
     paddingHorizontal: 20,
-    position: 'absolute', // Position the button absolutely
-    bottom: 16, // Adjust the bottom position as needed
-    right: 16 // Adjust the right position as needed
+    position: 'absolute',
+    bottom: 16,
+    right: 16
   },
   buttonText: {
     color: '#fff',

@@ -1,31 +1,36 @@
+/** @import { FullBooking } from '../types.js' */
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import dayjs from 'dayjs';
 
 /**
  * @param {object} props
- * @param {string} props.stadiumName
- * @param {string} props.date
- * @param {string} props.time
- * @param {string} props.status
+ * @param {FullBooking} props.booking
  */
-export default function ActivityCard({ stadiumName, date, time, status }) {
+export default function ActivityCard({ booking }) {
+  const startDatetime = dayjs(booking.start_datetime);
+  const formattedDate = startDatetime.format('DD MMMM YYYY');
+  const endDatetime = startDatetime.add(booking.duration, 'minute');
+  const formattedTime = `${startDatetime.format('h:mm A')} - ${endDatetime.format('h:mm A')}`;
+
   return (
     <View style={styles.container}>
       <View style={styles.card}>
         <View style={styles.nabil}>
-          <Text style={styles.title}>{stadiumName}</Text>
-          <Text style={styles.title2}>Status: {status}</Text>
+          <Text style={styles.title}>{booking.field.field_name}</Text>
+          <Text style={styles.title2}>Status: {booking.status}</Text>
         </View>
+
         <View style={styles.textGrid}>
-          <View style={styles.gridItem}>
-            <Text style={[styles.centerText, styles.marginBottom, styles.grayText]}>Booking Date</Text>
-            <Text style={[styles.centerText, styles.boldText]}>{date}</Text>
-          </View>
-          <View style={styles.gridItem}>
-            <Text style={[styles.centerText, styles.marginBottom, styles.grayText]}>Booking Time</Text>
-            <Text style={[styles.centerText, styles.boldText]}>{time}</Text>
-          </View>
+          {[
+            ['Booking Date', formattedDate],
+            ['Booking Time', formattedTime]
+          ].map(([label, value]) => (
+            <View style={styles.gridItem} key={label}>
+              <Text style={[styles.centerText, styles.marginBottom, styles.grayText]}>{label}</Text>
+              <Text style={[styles.centerText, styles.boldText]}>{value}</Text>
+            </View>
+          ))}
         </View>
       </View>
     </View>
@@ -36,7 +41,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 40,
+    marginBottom: 40
   },
   nabil: {
     display: 'flex',
@@ -68,7 +73,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'left',
-    marginBottom: 10,
+    marginBottom: 10
   },
   textGrid: {
     flexDirection: 'row',

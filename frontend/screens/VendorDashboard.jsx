@@ -1,55 +1,37 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import VendorConfirmCard from '../components/VendorConfirmCard';
-import Header from '../components/Header';
-import axios from 'axios';
-import { getData } from '../storage';
+import VendorConfirmCard from '../components/VendorConfirmCard.jsx';
+import Header from '../components/Header.jsx';
+import { DBContext } from '../db.js';
 import dayjs from 'dayjs';
-const BASE_URL = 'http://13.229.202.42:5000/api';
 
 export default function VendorDashboard() {
   const [bookings, setBookings] = useState([]);
-  const json = getData('client_user');
-
-  const fetchData = useCallback(async () => {
-    try {
-      const user = JSON.parse(await json);
-
-      const [bRes, fRes] = await Promise.all([axios.get(`${BASE_URL}/bookings`), axios.get(`${BASE_URL}/fields`)]);
-
-      let bData = bRes.data;
-      let fData = fRes.data;
-
-      fData = fData.reduce((acc, f) => {
-        acc[f.field_id] = f;
-        return acc;
-      }, {});
-      bData = bData.filter((b) => {
-        // if (b.vendor_id !== user.user_id) return false;
-
-        b['field'] = fData[b.field_id];
-        b['user'] = user;
-
-        return true;
-      });
-
-      setBookings(bData);
-    } catch (err) {
-      console.error('Error fetching data:', err);
-    }
-  }, [json]);
+  const db = useContext(DBContext);
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    const fArr = db.fields.reduce((acc, f) => {
+      acc[f.field_id] = f;
+      return acc;
+    }, {});
 
-  const handleStatusChange = (bookingId, newStatus) => {
-    setBookings((prevBookings) =>
-      prevBookings.map((booking) =>
-        booking.booking_id === bookingId ? { ...booking, status: newStatus } : booking
-      )
-    );
-  };
+    const bArr = db.bookings.filter((b) => {
+      b['field'] = fArr[b.field_id];
+      b['user'] = db.view.user;
+
+      return true;
+    });
+
+    setBookings(bArr);
+  }, []);
+
+  /**
+   * @param {string} bookingId
+   * @param {string} newStatus
+   */
+  function handleStatusChange(bookingId, newStatus) {
+    setBookings((prev) => prev.map((b) => (b.booking_id === bookingId ? { ...b, status: newStatus } : b)));
+  }
 
   return (
     <View>
@@ -64,13 +46,9 @@ export default function VendorDashboard() {
 
           return (
             <VendorConfirmCard
-              key={b.booking_id}
-              stadiumName={b.field.field_name}
+              booking={b}
               date={formattedDate}
               time={formattedTime}
-              status={b.status}
-              // @ts-ignore
-              bookingId={b.booking_id}
               onStatusChange={handleStatusChange}
             />
           );

@@ -1,68 +1,53 @@
-import React, { useEffect, useState, useCallback } from 'react';
+/** @import { FullBooking, MyNavigationProp } from '../types.js' */
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { Button, ButtonText } from '../components/ui/button';
 import Header from '../components/Header.jsx';
 import ActivityCard from '../components/ActivityCard';
-import axios from 'axios';
-import { getData } from '../storage';
-import dayjs from 'dayjs';
-const BASE_URL = 'http://13.229.202.42:5000/api';
+import { DBContext } from '../db.js';
 
 export default function Activity() {
   const [activeTab, setActiveTab] = useState('upcoming');
   const [activities, setActivities] = useState({ upcoming: [], past: [] });
+  /** @type {MyNavigationProp} */
   const navigation = useNavigation();
+  const db = useContext(DBContext);
 
-  const json = getData('client_user');
-  if (!json) {
+  if (!db.view.user) {
     navigation.navigate('Login');
     return null;
   }
 
-  const fetchData = useCallback(async () => {
-    try {
-      const user = JSON.parse(await json);
+  useEffect(() => {
+    const fields = db.fields.reduce((acc, f) => {
+      acc[f.field_id] = f;
+      return acc;
+    }, {});
 
-      const [bRes, fRes] = await Promise.all([axios.get(`${BASE_URL}/bookings`), axios.get(`${BASE_URL}/fields`)]);
+    /** @type {FullBooking[]} */ // @ts-expect-error
+    const bookings = db.bookings.filter((b) => {
+      if (b.user_id !== db.view.user.user_id) return false;
 
-      let bData = bRes.data;
-      let fData = fRes.data;
+      b['field'] = fields[b.field_id];
+      b['user'] = db.view.user;
 
-      fData = fData.reduce((acc, f) => {
-        acc[f.field_id] = f;
-        return acc;
-      }, {});
-      bData = bData.filter((b) => {
-        if (b.user_id !== user.user_id) return false;
+      return true;
+    });
 
-        b['field'] = fData[b.field_id];
-        b['user'] = user;
+    const now = Date.now();
+    const upcoming = [];
+    const past = [];
+    for (let i = 0; i < bookings.length; i++) {
+      const booking = bookings[i];
 
-        return true;
-      });
-
-      const now = Date.now();
-      const upcoming = [];
-      const past = [];
-      for (let i = 0; i < bData.length; i++) {
-        const booking = bData[i];
-        booking.start_datetime = new Date(booking.start_datetime).getTime();
-        if (booking.start_datetime > now) upcoming.push(booking);
-        else past.push(booking);
-      }
-
-      setActivities({ upcoming, past });
-    } catch (err) {
-      console.error('Error fetching data:', err);
+      const time = new Date(booking.start_datetime).getTime();
+      if (time > now) upcoming.push(booking);
+      else past.push(booking);
     }
-  }, [json]);
 
-  useFocusEffect(
-    useCallback(() => {
-      fetchData();
-    }, [fetchData])
-  );
+    setActivities({ upcoming, past });
+  }, []);
 
   return (
     <View id="activity-screen" className="screen" style={styles.container}>
@@ -93,23 +78,9 @@ export default function Activity() {
         <Text style={styles.contentText}>No activities found</Text>
       ) : (
         <ScrollView>
-          {activities[activeTab].map((b) => {
-            const startDatetime = dayjs(b.start_datetime);
-            const duration = b.duration;
-            const formattedDate = startDatetime.format('DD MMMM YYYY');
-            const endDatetime = startDatetime.add(duration, 'minute');
-            const formattedTime = `${startDatetime.format('h:mm A')} - ${endDatetime.format('h:mm A')}`;
-
-            return (
-              <ActivityCard
-                key={b.booking_id}
-                stadiumName={b.field.field_name}
-                date={formattedDate}
-                time={formattedTime}
-                status={b.status}
-              />
-            );
-          })}
+          {activities[activeTab].map((b) => (
+            <ActivityCard key={b.booking_id} booking={b} />
+          ))}
         </ScrollView>
       )}
     </View>

@@ -1,14 +1,11 @@
-/** @import { Amenity, Field, FieldAmenity, FullField, Review, User } from '../types.js' */
-// @ts-ignore
-import React, { useState, useEffect } from 'react';
+/** @import { FullField } from '../types.js' */
+import React, { useState, useEffect, useContext } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 import StadiumCard from '../components/StadiumCard.jsx';
-import Header from '../components/Header.jsx';
 import Filters from '../components/Filters.jsx';
-import axios from 'axios';
-import { useNavigation, useRoute } from '@react-navigation/native';
-
-const BASE_URL = 'http://13.229.202.42:5000/api';
+import Header from '../components/Header.jsx';
+import { DBContext } from '../db.js';
 
 /** @type {[string, string][]} */
 const extraFilterSorts = [
@@ -23,16 +20,43 @@ export default function Stadiums() {
   const [filteredFields, setFilteredFields] = useState([]);
   /** @type {[[string, string], React.Dispatch<React.SetStateAction<[string, string]>>]} */
   const [filters, setFilters] = useState(['', '']);
-  const navigation = useNavigation();
   const route = useRoute();
+  const db = useContext(DBContext);
 
   useEffect(() => {
-    fetchData();
+    const fields = db.fields.filter((f) => f.status === 'available');
+    const users = db.users.filter((u) => u.user_role === 'vendor');
+
+    const fieldRatings = db.reviews.reduce((acc, r) => {
+      if (!acc[r.field_id]) acc[r.field_id] = [];
+      acc[r.field_id].push(r.rating);
+      return acc;
+    }, {});
+
+    const amenities = db.amenities.reduce((acc, a) => {
+      acc[a.amenity_id] = a.amenity_name;
+      return acc;
+    }, {});
+
+    const fullFields = fields.map((f) => {
+      const rArr = fieldRatings[f.field_id] || [];
+      const avg = rArr.length ? rArr.reduce((a, b) => a + b, 0) / rArr.length : 0;
+      const vendor = users.find((u) => u.user_id === f.vendor_id);
+      const facilities = db.fieldAmenities
+        .filter((fa) => fa.field_id === f.field_id)
+        .map((fa) => amenities[fa.amenity_id]);
+
+      return { ...f, rating: avg, vendor, facilities };
+    });
+
+    setFields(fullFields);
+    setFilteredFields(fullFields);
   }, []);
 
   useEffect(() => {
     const [state, sort] = filters;
-    /** @type {FullField[]} */
+
+    if (fields.length === 0) return;
     let filtered = fields;
 
     if (state) filtered = filtered.filter((f) => f.address.toLowerCase().includes(state));
@@ -44,55 +68,6 @@ export default function Stadiums() {
 
     setFilteredFields(filtered);
   }, [filters]);
-
-  async function fetchData() {
-    try {
-      const [fRes, uRes, rRes, aRes, faRes] = await Promise.all([
-        axios.get(`${BASE_URL}/fields`),
-        axios.get(`${BASE_URL}/users`),
-        axios.get(`${BASE_URL}/reviews`),
-        axios.get(`${BASE_URL}/amenities`),
-        axios.get(`${BASE_URL}/field_amenities`)
-      ]);
-
-      /** @type {Field[]} */
-      let fData = fRes.data.filter((/** @type {Field} */ f) => f.status === 'available');
-      /** @type {User[]} */
-      const uData = uRes.data.filter((/** @type {User} */ u) => u.user_role === 'vendor');
-      /** @type {Review[]} */
-      const rData = rRes.data;
-      /** @type {Amenity[]} */
-      const aData = aRes.data;
-      /** @type {FieldAmenity[]} */
-      const faData = faRes.data;
-
-      // Calculate average rating for each field
-      const fieldRatings = rData.reduce((acc, r) => {
-        if (!acc[r.field_id]) acc[r.field_id] = [];
-        acc[r.field_id].push(r.rating);
-        return acc;
-      }, {});
-
-      const amenities = aData.reduce((acc, a) => {
-        acc[a.amenity_id] = a.amenity_name;
-        return acc;
-      }, {});
-
-      fData = fData.map((f) => {
-        const rArr = fieldRatings[f.field_id] || [];
-        const avg = rArr.length ? rArr.reduce((a, b) => a + b, 0) / rArr.length : 0;
-        const vendor = uData.find((u) => u.user_id === f.vendor_id);
-        const facilities = faData.filter((fa) => fa.field_id === f.field_id).map((fa) => amenities[fa.amenity_id]);
-
-        return { ...f, rating: avg, vendor, facilities };
-      });
-
-      setFields(fData);
-      setFilteredFields(fData);
-    } catch (err) {
-      console.error('Error fetching fields and reviews:', err);
-    }
-  }
 
   /**
    * @param {string} state

@@ -20,7 +20,7 @@ export default function Facilities({ field }) {
             {field.facilities.map((name, i) => (
               <View style={styles.background} key={i}>
                 <Icon
-                  size={30}
+                  size="lg"
                   as={
                     name === 'Cafe'
                       ? Coffee

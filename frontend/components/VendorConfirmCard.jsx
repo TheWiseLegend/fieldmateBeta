@@ -1,63 +1,83 @@
+/** @import { FullBooking } from '../types.js' */
+/** @import { StyleProp, ViewStyle } from 'react-native' */
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import axios from 'axios';
+
 const BASE_URL = 'http://13.229.202.42:5000/api';
 
 /**
  * @param {object} props
- * @param {string} props.stadiumName
+ * @param {FullBooking} props.booking
  * @param {string} props.date
  * @param {string} props.time
- * @param {string} props.status
- * @param {string} props.bookingId
  * @param {function} props.onStatusChange
  */
-export default function VendorConfirmCard({ stadiumName, date, time, status, bookingId, onStatusChange }) {
-  const updateBookingStatus = async (newStatus) => {
-    console.log(bookingId)
+export default function VendorConfirmCard({ booking, date, time, onStatusChange }) {
+  /**
+   * @param {string} newStatus
+   */
+  async function updateBookingStatus(newStatus) {
     try {
-      await axios.put(`${BASE_URL}/bookings/${bookingId}`, { status: newStatus });
-      Alert.alert('Success', `Booking status updated to ${newStatus}`);
-      onStatusChange(bookingId, newStatus);
-    } catch (error) {
-      console.error('Error updating booking status:', error);
-      Alert.alert('Error', 'Failed to update booking status');
+      await axios.put(`${BASE_URL}/bookings/${booking.booking_id}`, { status: newStatus });
+      // Alert.alert('Success', `Booking status updated to ${newStatus}`);
+      onStatusChange(booking.booking_id, newStatus);
+    } catch (err) {
+      // Alert.alert('Error', 'Failed to update booking status');
+      console.error('Error updating booking status:', err);
     }
-  };
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.card}>
         <View style={styles.nabil}>
-          <Text style={styles.title}>{stadiumName}</Text>
-          <Text style={styles.title2}>Status: {status}</Text>
+          <Text style={styles.title}>{booking.field.field_name}</Text>
+          <Text style={styles.title2}>Status: {booking.status}</Text>
         </View>
+
         <View style={styles.textGrid}>
           <View style={styles.gridItem}>
             <Text style={[styles.centerText, styles.marginBottom, styles.grayText]}>Booking Date</Text>
             <Text style={[styles.centerText, styles.boldText]}>{date}</Text>
           </View>
+
           <View style={styles.gridItem}>
             <Text style={[styles.centerText, styles.marginBottom, styles.grayText]}>Booking Time</Text>
             <Text style={[styles.centerText, styles.boldText]}>{time}</Text>
           </View>
         </View>
       </View>
+
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
+        {[
+          ['confirmed', 'Confirm', styles.confirmButton],
+          ['cancelled', 'Decline', styles.declineButton]
+        ].map((val, i) => {
+          /** @type {[string, string, StyleProp<ViewStyle>]} */ // @ts-expect-error
+          const [status, name, styling] = val;
+          return (
+            <TouchableOpacity key={i} style={styling} activeOpacity={0.7} onPress={() => updateBookingStatus(status)}>
+              <Text style={styles.buttonText}>{name}</Text>
+            </TouchableOpacity>
+          );
+        })}
+
+        {/* <TouchableOpacity
           style={styles.confirmButton}
           activeOpacity={0.7}
           onPress={() => updateBookingStatus('confirmed')}
         >
           <Text style={styles.buttonText}>Confirm</Text>
         </TouchableOpacity>
+
         <TouchableOpacity
           style={styles.declineButton}
           activeOpacity={0.7}
           onPress={() => updateBookingStatus('cancelled')}
         >
           <Text style={styles.buttonText}>Decline</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
@@ -104,7 +124,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   gridItem: {
-    width: '38%' // Adjust width to fit two items per row
+    width: '38%'
   },
   centerText: {
     textAlign: 'center'
@@ -120,31 +140,31 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'center', // Center the buttons together
+    justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20, // Add space between the buttons and the card
-    gap: 15 // Add consistent gap between buttons
+    marginTop: 20,
+    gap: 15
   },
   confirmButton: {
-    backgroundColor: 'green', // Set the background color to green
-    width: 140, // Fixed width for a larger button
-    height: 60, // Slightly larger height
-    justifyContent: 'center', // Center content vertically
-    alignItems: 'center', // Center content horizontally
-    borderRadius: 12 // Larger border radius for better appearance
+    backgroundColor: 'green',
+    width: 140,
+    height: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 12
   },
   declineButton: {
-    backgroundColor: 'red', // Set the background color to red
-    width: 140, // Fixed width for a larger button
-    height: 60, // Slightly larger height
-    justifyContent: 'center', // Center content vertically
-    alignItems: 'center', // Center content horizontally
-    borderRadius: 12 // Larger border radius for better appearance
+    backgroundColor: 'red',
+    width: 140,
+    height: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 12
   },
   buttonText: {
-    color: '#fff', // Set the text color to white
-    textAlign: 'center', // Center the text
+    color: '#fff',
+    textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: 18 // Larger font size for better readability
+    fontSize: 18
   }
 });

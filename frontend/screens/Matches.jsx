@@ -1,15 +1,12 @@
-/** @import { Booking, DayKeys, Field, FullMatch, Match } from '../types.js' */
-// @ts-ignore
-import React, { useEffect, useState } from 'react';
+/** @import { DayKeys, FullMatch } from '../types.js' */
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import DayPicker from '../components/DayPicker.jsx';
 import LFGCard from '../components/LFGCard.jsx';
 import Header from '../components/Header.jsx';
 import Filters from '../components/Filters.jsx';
 import { Color, Border } from '../GlobalStyles.js';
-import axios from 'axios';
-
-const BASE_URL = 'http://13.229.202.42:5000/api';
+import { DBContext } from '../db.js';
 
 /** @type {Record<DayKeys, number>} */
 const dayValues = {
@@ -29,14 +26,34 @@ export default function Matches() {
   const [filteredMathces, setFilteredMathces] = useState([]);
   /** @type {[[string, string, string], React.Dispatch<React.SetStateAction<[string, string, string]>>]} */
   const [filters, setFilters] = useState(['', '', '']);
+  const db = useContext(DBContext);
 
   useEffect(() => {
-    fetchData();
+    const fields = db.fields.filter((f) => f.status === 'available');
+
+    /** @type {FullMatch[]} */
+    const fullMatches = [];
+
+    for (let i = 0; i < db.matches.length; i++) {
+      const m = db.matches[i];
+
+      if (m.status === 'open' && m.required_players > 0) {
+        const booking = db.bookings.find((b) => b.lfg_id === m.lfg_id);
+        if (!booking) continue;
+
+        const field = fields.find((f) => f.field_id === booking.field_id);
+        fullMatches.push({ ...m, booking, field });
+      }
+    }
+
+    setMatches(fullMatches);
+    setFilteredMathces(fullMatches);
   }, []);
 
   useEffect(() => {
     const [state, sort, day] = filters;
-    /** @type {FullMatch[]} */
+
+    if (matches.length === 0) return;
     let filtered = matches;
 
     if (state) filtered = filtered.filter((m) => m.field.address.toLowerCase().includes(state));
@@ -50,37 +67,6 @@ export default function Matches() {
     setFilteredMathces(filtered);
   }, [filters]);
 
-  async function fetchData() {
-    try {
-      const [mRes, bRes, fRes] = await Promise.all([
-        axios.get(`${BASE_URL}/lfgs`),
-        axios.get(`${BASE_URL}/bookings`),
-        axios.get(`${BASE_URL}/fields`)
-      ]);
-
-      /** @type {Match[]} */
-      let mData = mRes.data;
-      /** @type {Booking[]} */
-      const bData = bRes.data;
-      /** @type {Field[]} */
-      const fData = fRes.data.filter((f) => f.status === 'available');
-
-      mData = mData.filter((m) => m.status === 'open' && m.required_players > 0);
-      mData = mData.map((m) => {
-        const booking = bData.find((b) => b.lfg_id === m.lfg_id);
-        if (!booking) {
-          return { ...m, booking: null, field: null };
-        }
-        const field = fData.find((f) => f.field_id === booking.field_id);
-        return { ...m, booking, field };
-      });
-
-      setMatches(mData);
-      setFilteredMathces(mData);
-    } catch (err) {
-      console.error('Error fetching fields and reviews:', err);
-    }
-  }
   /**
    * @param {string} state
    */
