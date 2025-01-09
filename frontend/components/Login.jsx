@@ -1,5 +1,6 @@
 /** @import { User, MyNavigationProp } from '../types.js' */
-import React, { useState } from 'react';
+// @ts-ignore
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity, Alert, Text } from 'react-native';
 import { FormControl } from './ui/form-control';
 import { VStack } from './ui/vstack';
@@ -22,6 +23,7 @@ export default function Login({}) {
   const [showPassword, setShowPassword] = useState(false);
   /** @type {MyNavigationProp} */
   const navigation = useNavigation();
+  const [user, setUser] = useState(null);
 
   function handleState() {
     setShowPassword((prev) => !prev);
@@ -32,18 +34,29 @@ export default function Login({}) {
       /** @type {User[]} */
       const users = (await axios.get(`${BASE_URL}/users`)).data;
 
-      const user = users.find((u) => u.email === email && u.password === password);
-      if (!user) {
+      const foundUser = users.find((u) => u.email === email && u.password === password);
+      if (!foundUser) {
         Alert.alert('Error: Invalid email or password');
         return;
       }
 
-      storeData('client_user', JSON.stringify(user));
+      // setUser(foundUser);
+      await storeData('client_user', JSON.stringify(foundUser));
       navigation.navigate('Home');
     } catch (error) {
       Alert.alert('Error', error.message);
     }
   }
+
+  // useEffect(() => {
+  //   const storeUserData = async () => {
+  //     if (user) {
+  //       await storeData('client_user', JSON.stringify(user));
+  //     }
+  //   };
+
+  //   storeUserData();
+  // }, [user]);
 
   return (
     <View style={styles.container}>

@@ -1,4 +1,5 @@
 /** @import { Booking, DayKeys, Field, FullMatch, Match } from '../types.js' */
+// @ts-ignore
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import DayPicker from '../components/DayPicker.jsx';
@@ -67,19 +68,19 @@ export default function Matches() {
       mData = mData.filter((m) => m.status === 'open' && m.required_players > 0);
       mData = mData.map((m) => {
         const booking = bData.find((b) => b.lfg_id === m.lfg_id);
+        if (!booking) {
+          return { ...m, booking: null, field: null };
+        }
         const field = fData.find((f) => f.field_id === booking.field_id);
         return { ...m, booking, field };
       });
 
-      // @ts-expect-error
       setMatches(mData);
-      // @ts-expect-error
       setFilteredMathces(mData);
     } catch (err) {
       console.error('Error fetching fields and reviews:', err);
     }
   }
-
   /**
    * @param {string} state
    */

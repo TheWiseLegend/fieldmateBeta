@@ -1,86 +1,172 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet, View, ScrollView } from 'react-native';
 import { Image } from 'expo-image';
 import DateTimePicker from 'react-native-ui-datepicker';
 import dayjs from 'dayjs';
 import { HStack } from '../components/ui/hstack';
-import { Radio, RadioGroup, RadioIndicator, RadioLabel } from '../components/ui/radio';
+import { VStack } from '../components/ui/vstack';
+import { Radio, RadioGroup, RadioLabel } from '../components/ui/radio';
 import Header from '../components/Header.jsx';
 import { FontSize, Color, FontFamily, Border } from '../GlobalStyles.js';
-import {Switch} from '../components/ui/switch';
+import { Switch } from '../components/ui/switch';
+import FinalButton from '../components/FinalButton.jsx';
+import { getData, storeData } from '../storage';
+import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function BookingSection() {
+  const navigation = useNavigation();
   const [date, setDate] = useState(dayjs());
   const [selectedTime, setSelectedTime] = useState(null);
-  const [selectedDuration, setSelectedDuration] = useState(null);
+  const [selectedDuration, setSelectedDuration] = useState('60 min');
   const [selectedMatch, setSelectedMatch] = useState(false);
-  const timeSlots = [
+  const [timeSlots, setTimeSlots] = useState([
     '12:00 PM', '1:00 PM', '2:00 PM',
     '3:00 PM', '4:00 PM', '5:00 PM',
     '6:00 PM', '7:00 PM', '8:00 PM',
     '9:00 PM', '10:00 PM', '11:00 PM'
-  ];
+  ]);
 
+  useEffect(() => {
+    if (selectedDuration === '120 min') {
+      setTimeSlots([
+        '12:00 PM - 2:00 PM', '2:00 PM - 4:00 PM', '4:00 PM - 6:00 PM',
+        '6:00 PM - 8:00 PM', '8:00 PM - 10:00 PM', '10:00 PM - 12:00 AM'
+      ]);
+    } else {
+      setTimeSlots([
+        '12:00 PM', '1:00 PM', '2:00 PM',
+        '3:00 PM', '4:00 PM', '5:00 PM',
+        '6:00 PM', '7:00 PM', '8:00 PM',
+        '9:00 PM', '10:00 PM', '11:00 PM'
+      ]);
+    }
+  }, [selectedDuration]);
 
+  async function handleSubmit() {
+    if (!selectedTime || !selectedDuration) {
+      alert('Please select a time and duration.');
+      return;
+    }
+
+    let startTime;
+    if (selectedTime.includes(' - ')) {
+      [startTime] = selectedTime.split(' - ');
+    } else {
+      startTime = selectedTime;
+    }
+
+    // Ensure date is a valid dayjs object
+    const parsedDate = dayjs(date);
+    if (!parsedDate.isValid()) {
+      alert('Invalid date.');
+      return;
+    }
+
+    // Manually convert startTime to 24-hour format
+    const [time, modifier] = startTime.split(' ');
+    let [hours, minutes] = time.split(':');
+    if (modifier === 'PM' && hours !== '12') {
+      hours = String(parseInt(hours, 10) + 12);
+    } else if (modifier === 'AM' && hours === '12') {
+      hours = '00';
+    }
+
+    const formattedTime = `${hours}:${minutes}`;
+
+    // Combine date and time
+    const combinedDateTime = parsedDate
+      .hour(parseInt(hours, 10))
+      .minute(parseInt(minutes, 10))
+      .second(0)
+      .millisecond(0)
+      .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
+
+    // Slice the duration to get the integer part
+    const duration = parseInt(selectedDuration.split(' ')[0], 10);
+
+    await storeData('booking_time', JSON.stringify(combinedDateTime));
+    await storeData('booking_duration', JSON.stringify(duration));
+    // @ts-ignore
+    navigation.navigate('Payment');
+    
+  }
 
   return (
     <View id="booking-screen" className="screen">
       <Header />
 
       <ScrollView contentContainerStyle={styles.containerScroll}>
-      <View style={styles.container}>
-        <View style={styles.titleParent}>
-          <Text style={styles.title}>Book A Slot</Text>
-        </View>
-        <View style={styles.bookingDate}>
-          <DateTimePicker
-            mode="single"
-            date={date}
-            onChange={(newDate) => setDate(newDate.date)}
-          />
-        </View>
+        <View style={styles.container}>
+          <View style={styles.titleParent}>
+            <Text style={styles.title}>Book A Slot</Text>
+          </View>
+          <View style={styles.bookingDate}>
+            <DateTimePicker
+              mode="single"
+              date={date}
+              onChange={(newDate) => setDate(newDate.date)}
+            />
+          </View>
 
-        <Text style={styles.subtitle}>Duration</Text>
-        <RadioGroup style={styles.centerGroup} className='mb-6' value={selectedDuration} onChange={setSelectedDuration}>
-          <HStack style={styles.durationTimes}>
-            {['60 min', '120 min'].map((time) => (
-              <Radio
-                key={time}
-                value={time}
-                style={[styles.timeSlot, selectedDuration === time && styles.selectedTimeSlot]}
-              >
-                <RadioLabel style={styles.timeText}>{time}</RadioLabel>
-              </Radio>
-            ))}
-          </HStack>
-        </RadioGroup>
-        <Text style={styles.subtitle}>Booking Time</Text>
-        <RadioGroup style={styles.bookingTimes} value={selectedTime} onChange={setSelectedTime}>
-            {Array.from({ length: 5 }).map((_, rowIndex) => (
-              <HStack key={rowIndex} space="4xl" style={styles.row}>
-                {timeSlots.slice(rowIndex * 3, rowIndex * 3 + 3).map((time) => (
+          <Text style={styles.subtitle}>Duration</Text>
+          <RadioGroup style={styles.centerGroup} className='mb-6' value={selectedDuration} onChange={setSelectedDuration}>
+            <HStack style={styles.durationTimes}>
+              {['60 min', '120 min'].map((time) => (
+                <Radio
+                  key={time}
+                  value={time}
+                  style={[styles.timeSlot, selectedDuration === time && styles.selectedTimeSlot]}
+                >
+                  <RadioLabel style={styles.timeText}>{time}</RadioLabel>
+                </Radio>
+              ))}
+            </HStack>
+          </RadioGroup>
+
+          <Text style={styles.subtitle}>Booking Time</Text>
+          <RadioGroup style={styles.bookingTimes} value={selectedTime} onChange={setSelectedTime}>
+            {selectedDuration === '60 min' ? (
+              Array.from({ length: Math.ceil(timeSlots.length / 3) }).map((_, rowIndex) => (
+                <HStack key={rowIndex} space="lg" style={styles.row}>
+                  {timeSlots.slice(rowIndex * 3, rowIndex * 3 + 3).map((time) => (
+                    <Radio
+                      key={time}
+                      value={time}
+                      style={[styles.timeSlot, selectedTime === time && styles.selectedTimeSlot]}
+                    >
+                      <RadioLabel style={styles.timeText}>{time}</RadioLabel>
+                    </Radio>
+                  ))}
+                </HStack>
+              ))
+            ) : (
+              <VStack space="lg">
+                {timeSlots.map((time, index) => (
                   <Radio
                     key={time}
                     value={time}
-                    style={[styles.timeSlot, selectedTime === time && styles.selectedTimeSlot]}
+                    style={[styles.timeSlot, selectedTime === time && styles.selectedTimeSlot, styles.longTimeSlot]}
                   >
                     <RadioLabel style={styles.timeText}>{time}</RadioLabel>
                   </Radio>
                 ))}
-              </HStack>
-            ))}
+              </VStack>
+            )}
           </RadioGroup>
-      </View>
+        </View>
 
-      <Text style={styles.text}>Do you want to create a match post?</Text>
-      <HStack space='3xl' style={styles.centerMatch}>
-        <Text style={styles.textsm}>Create a Match</Text>
-        
-        <Switch size="md" isDisabled={false} value={selectedMatch} onValueChange={setSelectedMatch}
+        <Text style={styles.text}>Do you want to create a match post?</Text>
+        <HStack space='3xl' style={styles.centerMatch}>
+          <Text style={styles.textsm}>Create a Match</Text>
+          <Switch size="md" isDisabled={false} value={selectedMatch} onValueChange={setSelectedMatch} />
+        </HStack>
+        <FinalButton
+          text="PROCEED TO PAYMENT"
+          onPress={handleSubmit}
+          disabled={!selectedTime || !selectedDuration}
         />
-      
-      </HStack>
       </ScrollView>
     </View>
   );
@@ -92,24 +178,23 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   containerScroll: {
-    paddingBottom: 300,
+    paddingBottom: 150,
   },
-  centerMatch:{
+  centerMatch: {
     alignItems: 'center',
     width: '100%',
   },
-  durationTimes:{
+  durationTimes: {
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '80%',
-
   },
-  bookingTimes:{
+  bookingTimes: {
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
   },
-  centerGroup:{
+  centerGroup: {
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -160,10 +245,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 85,
     height: 45,
-    
-
   },
-  subtitle:{
+  longTimeSlot: {
+    width: 200, // Adjust the width for 120 min slots
+  },
+  subtitle: {
     fontSize: FontSize.size_lg,
     color: Color.colorBlack,
     textAlign: 'left',
@@ -187,7 +273,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     backgroundColor: '#fff',
   },
-  row:{
+  row: {
     marginBottom: 10,
-  }
+  },
 });

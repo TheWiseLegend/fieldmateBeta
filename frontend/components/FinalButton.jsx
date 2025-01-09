@@ -1,35 +1,57 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Color, Border, FontFamily, FontSize, Padding } from '../GlobalStyles.js';
 
 /**
  * @param {object} props
  * @param {string} props.text
+ * @param {function} props.onPress
+ * @param {boolean} props.disabled
  */
-export default function FinalButton({ text }) {
+export default function FinalButton({ text, onPress, disabled }) {
   return (
-    <View style={styles.createMatchButton}>
-      <Text style={styles.createMatch}>{text}</Text>
-    </View>
+    <TouchableOpacity
+      style={[styles.container, disabled && styles.disabledContainer]}
+      onPress={onPress}
+      disabled={disabled}
+    >
+      <View style={[styles.createMatchButton, disabled && styles.disabledButton]}>
+        <Text style={[styles.createMatch, disabled && styles.disabledText]}>{text}</Text>
+      </View>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   createMatch: {
-    lineHeight: 22,
+    lineHeight: 35,
     letterSpacing: 0,
     fontWeight: '700',
     textAlign: 'center',
     color: Color.surface,
     fontSize: FontSize.buttonText_size,
-    fontFamily: FontFamily.openSansBold
+    fontFamily: FontFamily.openSansBold,
+    letterSpacing: 1.5,
+  },
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 0,
+  },
+  disabledContainer: {
+    opacity: 0.5,
   },
   createMatchButton: {
-    left: '50%',
-    width: '50%',
-    height: 45,
+    width: '70%',
+    height: 50,
     padding: Padding.p_8xs,
     borderRadius: Border.br_20xl,
-    backgroundColor: Color.colorMediumslateblue
-  }
+    backgroundColor: Color.colorMediumslateblue,
+  },
+  disabledButton: {
+    backgroundColor: 'transparent',
+  },
+  disabledText: {
+    color: Color.colorMediumslateblue,
+  },
 });

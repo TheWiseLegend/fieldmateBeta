@@ -20,7 +20,7 @@ export default function Facilities({ field }) {
             {field.facilities.map((name, i) => (
               <View style={styles.background} key={i}>
                 <Icon
-                  size="lg"
+                  size={30}
                   as={
                     name === 'Cafe'
                       ? Coffee
@@ -48,7 +48,7 @@ export default function Facilities({ field }) {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: '85%',
     height: 'auto'
   },
   title: {

@@ -1,22 +1,17 @@
-/** @import { ActivityTabs, Booking, Field, MyNavigationProp } from '../types.js' */
-// @ts-ignore
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { Button, ButtonText } from '../components/ui/button';
 import Header from '../components/Header.jsx';
+import ActivityCard from '../components/ActivityCard';
 import axios from 'axios';
 import { getData } from '../storage';
-import ActivityCard from '../components/ActivityCard';
-
+import dayjs from 'dayjs';
 const BASE_URL = 'http://13.229.202.42:5000/api';
 
 export default function Activity() {
-  /** @type {[ActivityTabs, React.Dispatch<React.SetStateAction<ActivityTabs>>]} */
   const [activeTab, setActiveTab] = useState('upcoming');
-  /** @type {[Record<ActivityTabs, Booking[]>, React.Dispatch<React.SetStateAction<Record<ActivityTabs, Booking[]>>>]} */
   const [activities, setActivities] = useState({ upcoming: [], past: [] });
-  /** @type {MyNavigationProp} */
   const navigation = useNavigation();
 
   const json = getData('client_user');
@@ -25,22 +20,15 @@ export default function Activity() {
     return null;
   }
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  async function fetchData() {
+  const fetchData = useCallback(async () => {
     try {
       const user = JSON.parse(await json);
 
       const [bRes, fRes] = await Promise.all([axios.get(`${BASE_URL}/bookings`), axios.get(`${BASE_URL}/fields`)]);
 
-      /** @type {Booking[]} */
       let bData = bRes.data;
-      /** @type {Field[]} */
       let fData = fRes.data;
 
-      // @ts-expect-error
       fData = fData.reduce((acc, f) => {
         acc[f.field_id] = f;
         return acc;
@@ -59,9 +47,7 @@ export default function Activity() {
       const past = [];
       for (let i = 0; i < bData.length; i++) {
         const booking = bData[i];
-        // @ts-expect-error
         booking.start_datetime = new Date(booking.start_datetime).getTime();
-        // @ts-expect-error
         if (booking.start_datetime > now) upcoming.push(booking);
         else past.push(booking);
       }
@@ -70,7 +56,13 @@ export default function Activity() {
     } catch (err) {
       console.error('Error fetching data:', err);
     }
-  }
+  }, [json]);
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchData();
+    }, [fetchData])
+  );
 
   return (
     <View id="activity-screen" className="screen" style={styles.container}>
@@ -87,7 +79,7 @@ export default function Activity() {
           <ButtonText style={styles.buttonText}>Upcoming</ButtonText>
         </Button>
         <Button
-          size="md" // @ts-expect-error
+          size="md"
           variant={activeTab === 'past' ? 'solid' : 'outline'}
           action="primary"
           onPress={() => setActiveTab('past')}
@@ -98,17 +90,26 @@ export default function Activity() {
       </View>
 
       {activities[activeTab].length === 0 ? (
-        <ActivityCard></ActivityCard>
+        <Text style={styles.contentText}>No activities found</Text>
       ) : (
         <ScrollView>
-          {activities[activeTab].map((b) => (
-            <View key={b.booking_id}>
-              {/* @ts-expect-error */}
-              <Text style={styles.contentText}>{b.field.field_name}</Text>
-              <Text style={styles.contentText}>{new Date(b.start_datetime).toString()}</Text>
-              <Text style={styles.contentText}>{b.duration}</Text>
-            </View>
-          ))}
+          {activities[activeTab].map((b) => {
+            const startDatetime = dayjs(b.start_datetime);
+            const duration = b.duration;
+            const formattedDate = startDatetime.format('DD MMMM YYYY');
+            const endDatetime = startDatetime.add(duration, 'minute');
+            const formattedTime = `${startDatetime.format('h:mm A')} - ${endDatetime.format('h:mm A')}`;
+
+            return (
+              <ActivityCard
+                key={b.booking_id}
+                stadiumName={b.field.field_name}
+                date={formattedDate}
+                time={formattedTime}
+                status={b.status}
+              />
+            );
+          })}
         </ScrollView>
       )}
     </View>

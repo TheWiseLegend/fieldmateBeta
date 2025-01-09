@@ -70,7 +70,7 @@ export default function StadiumView({}) {
 const styles = StyleSheet.create({
   stadiumView: {
     flex: 1,
-    width: '100%',
+    width: '110%',
     alignItems: 'center',
     backgroundColor: Color.surface,
   },
@@ -83,17 +83,18 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     paddingTop: 60, // Adjust based on the height of the Header
-    padding: 16,
   },
   StadiumBanner: {
     height: 200,
     width: '100%',
+    margin: 0,
+    padding: 0,
     alignSelf: 'stretch',
   },
   stadiumName: {
     marginTop: 10,
     marginLeft: 16,
-    width: '100%',
+    width: '70%',
     fontSize: 26,
     fontWeight: '700',
     color: Color.colorBlack,

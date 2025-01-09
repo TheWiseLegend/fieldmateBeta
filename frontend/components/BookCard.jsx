@@ -35,11 +35,14 @@ export default function BookCard({ data }) {
 const styles = StyleSheet.create({
   frameWrapper: {
     top: '5%',
-    width: '100%',
+    width: '87%',
     height: 150,
     alignSelf: 'stretch',
     justifyContent: 'center',
-    flexDirection: 'row',
+    flexDirection: 'column',
+    padding: 20,
+    marginBottom: 60,
+    marginLeft: 10,
 
     elevation: 4,
     borderWidth: 1,
@@ -66,9 +69,8 @@ const styles = StyleSheet.create({
   btn: {
     height: '50%',
     width: '45%',
-    top: '20%',
-    bottom: '20%',
-    left: '5%',
+    bottom: '37%',
+    left: '58%',
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -81,6 +83,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     justifyContent: 'center',
     alignItems: 'center',
+    textAlign: 'center',
     display: 'flex',
     color: Color.surface,
     fontSize: FontSize.size_14xl,

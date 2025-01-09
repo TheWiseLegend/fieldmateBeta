@@ -9,7 +9,7 @@ Content-Type: application/json
 }
 
 ### Get a booking
-GET {{baseUrl}}/1
+GET {{baseUrl}}/3
 Content-Type: application/json
 
 {
@@ -25,22 +25,22 @@ Content-Type: application/json
   "field_id": 2,
   "start_datetime": "2025-1-07T6:00:00Z",
   "duration": 60,
-  "lfg_id": 7,
-  "current_players": 4
+  # "lfg_id": 7,
+  "current_players": 0
 }
 
 ### Update a booking
-PUT {{baseUrl}}/1
+PUT {{baseUrl}}/8
 Content-Type: application/json
 
 {
-  "user_id": 101,
-  "field_id": 105,
-  "start_datetime": "2024-11-01T10:00:00Z",
+  "user_id": 17,
+  "status": "cancelled",
+  "field_id": 2,
+  "start_datetime": "2025-1-07T6:00:00Z",
   "duration": 60,
-  "lfg_id": 1,
-  "current_players": 5,
-  "status": "confirmed",
+  "lfg_id": 7,
+  "current_players": 0
 }
 
 ### Delete a booking
