@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
   },
   groupIcon: {
     left: '0%',
-    width: '20',
-    height: '20',
+    width: 20,
+    height: 20,
     right: '93%',
     bottom: '7%',
     maxWidth: '100%',

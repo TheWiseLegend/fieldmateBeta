@@ -1,45 +1,68 @@
-import React, { useState, useEffect } from 'react';
+/** @import { MyNavigationProp } from '../types.js' */
+/** @import { DateType } from 'react-native-ui-datepicker' */
+/** @import { Dayjs } from 'dayjs' */
+import React, { useState, useEffect, useContext } from 'react';
 import { Text, StyleSheet, View, ScrollView } from 'react-native';
-import { Image } from 'expo-image';
+import { useNavigation } from '@react-navigation/native';
 import DateTimePicker from 'react-native-ui-datepicker';
-import dayjs from 'dayjs';
+import { Radio, RadioGroup, RadioLabel } from '../components/ui/radio';
+import { Switch } from '../components/ui/switch';
 import { HStack } from '../components/ui/hstack';
 import { VStack } from '../components/ui/vstack';
-import { Radio, RadioGroup, RadioLabel } from '../components/ui/radio';
-import Header from '../components/Header.jsx';
-import { FontSize, Color, FontFamily, Border } from '../GlobalStyles.js';
-import { Switch } from '../components/ui/switch';
 import FinalButton from '../components/FinalButton.jsx';
-import { getData, storeData } from '../storage';
-import axios from 'axios';
-import { useNavigation } from '@react-navigation/native';
-
+import Header from '../components/Header.jsx';
+import { FontSize, Color, FontFamily } from '../GlobalStyles.js';
+import { DBContext } from '../db.js';
+import dayjs from 'dayjs';
 
 export default function BookingSection() {
+  /** @type {MyNavigationProp} */
   const navigation = useNavigation();
+  /** @type {[Dayjs | DateType, React.Dispatch<React.SetStateAction<Dayjs | DateType>>]} */
   const [date, setDate] = useState(dayjs());
   const [selectedTime, setSelectedTime] = useState(null);
   const [selectedDuration, setSelectedDuration] = useState('60 min');
   const [selectedMatch, setSelectedMatch] = useState(false);
   const [timeSlots, setTimeSlots] = useState([
-    '12:00 PM', '1:00 PM', '2:00 PM',
-    '3:00 PM', '4:00 PM', '5:00 PM',
-    '6:00 PM', '7:00 PM', '8:00 PM',
-    '9:00 PM', '10:00 PM', '11:00 PM'
+    '12:00 PM',
+    '1:00 PM',
+    '2:00 PM',
+    '3:00 PM',
+    '4:00 PM',
+    '5:00 PM',
+    '6:00 PM',
+    '7:00 PM',
+    '8:00 PM',
+    '9:00 PM',
+    '10:00 PM',
+    '11:00 PM'
   ]);
+  const db = useContext(DBContext);
 
   useEffect(() => {
     if (selectedDuration === '120 min') {
       setTimeSlots([
-        '12:00 PM - 2:00 PM', '2:00 PM - 4:00 PM', '4:00 PM - 6:00 PM',
-        '6:00 PM - 8:00 PM', '8:00 PM - 10:00 PM', '10:00 PM - 12:00 AM'
+        '12:00 PM - 2:00 PM',
+        '2:00 PM - 4:00 PM',
+        '4:00 PM - 6:00 PM',
+        '6:00 PM - 8:00 PM',
+        '8:00 PM - 10:00 PM',
+        '10:00 PM - 12:00 AM'
       ]);
     } else {
       setTimeSlots([
-        '12:00 PM', '1:00 PM', '2:00 PM',
-        '3:00 PM', '4:00 PM', '5:00 PM',
-        '6:00 PM', '7:00 PM', '8:00 PM',
-        '9:00 PM', '10:00 PM', '11:00 PM'
+        '12:00 PM',
+        '1:00 PM',
+        '2:00 PM',
+        '3:00 PM',
+        '4:00 PM',
+        '5:00 PM',
+        '6:00 PM',
+        '7:00 PM',
+        '8:00 PM',
+        '9:00 PM',
+        '10:00 PM',
+        '11:00 PM'
       ]);
     }
   }, [selectedDuration]);
@@ -51,11 +74,8 @@ export default function BookingSection() {
     }
 
     let startTime;
-    if (selectedTime.includes(' - ')) {
-      [startTime] = selectedTime.split(' - ');
-    } else {
-      startTime = selectedTime;
-    }
+    if (selectedTime.includes(' - ')) [startTime] = selectedTime.split(' - ');
+    else startTime = selectedTime;
 
     // Ensure date is a valid dayjs object
     const parsedDate = dayjs(date);
@@ -73,7 +93,7 @@ export default function BookingSection() {
       hours = '00';
     }
 
-    const formattedTime = `${hours}:${minutes}`;
+    // const formattedTime = `${hours}:${minutes}`;
 
     // Combine date and time
     const combinedDateTime = parsedDate
@@ -86,11 +106,13 @@ export default function BookingSection() {
     // Slice the duration to get the integer part
     const duration = parseInt(selectedDuration.split(' ')[0], 10);
 
-    await storeData('booking_time', JSON.stringify(combinedDateTime));
-    await storeData('booking_duration', JSON.stringify(duration));
-    // @ts-ignore
+    // const startDatetime = dayjs(b.start_datetime);
+    // const duration = b.duration;
+    // const formattedDate = startDatetime.format('DD MMMM YYYY');
+    // const endDatetime = startDatetime.add(duration, 'minute');
+    // const formattedTime = `${startDatetime.format('h:mm A')} - ${endDatetime.format('h:mm A')}`;
+    db.update('booking', { time: combinedDateTime, duration });
     navigation.navigate('Payment');
-    
   }
 
   return (
@@ -102,16 +124,19 @@ export default function BookingSection() {
           <View style={styles.titleParent}>
             <Text style={styles.title}>Book A Slot</Text>
           </View>
+
           <View style={styles.bookingDate}>
-            <DateTimePicker
-              mode="single"
-              date={date}
-              onChange={(newDate) => setDate(newDate.date)}
-            />
+            <DateTimePicker mode="single" date={date} onChange={(newDate) => setDate(newDate.date)} />
           </View>
 
           <Text style={styles.subtitle}>Duration</Text>
-          <RadioGroup style={styles.centerGroup} className='mb-6' value={selectedDuration} onChange={setSelectedDuration}>
+
+          <RadioGroup
+            style={styles.centerGroup}
+            className="mb-6"
+            value={selectedDuration}
+            onChange={setSelectedDuration}
+          >
             <HStack style={styles.durationTimes}>
               {['60 min', '120 min'].map((time) => (
                 <Radio
@@ -126,6 +151,7 @@ export default function BookingSection() {
           </RadioGroup>
 
           <Text style={styles.subtitle}>Booking Time</Text>
+
           <RadioGroup style={styles.bookingTimes} value={selectedTime} onChange={setSelectedTime}>
             {selectedDuration === '60 min' ? (
               Array.from({ length: Math.ceil(timeSlots.length / 3) }).map((_, rowIndex) => (
@@ -158,15 +184,13 @@ export default function BookingSection() {
         </View>
 
         <Text style={styles.text}>Do you want to create a match post?</Text>
-        <HStack space='3xl' style={styles.centerMatch}>
+
+        <HStack space="3xl" style={styles.centerMatch}>
           <Text style={styles.textsm}>Create a Match</Text>
           <Switch size="md" isDisabled={false} value={selectedMatch} onValueChange={setSelectedMatch} />
         </HStack>
-        <FinalButton
-          text="PROCEED TO PAYMENT"
-          onPress={handleSubmit}
-          disabled={!selectedTime || !selectedDuration}
-        />
+
+        <FinalButton text="PROCEED TO PAYMENT" onPress={handleSubmit} disabled={!selectedTime || !selectedDuration} />
       </ScrollView>
     </View>
   );
@@ -175,28 +199,28 @@ export default function BookingSection() {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    padding: 20,
+    padding: 20
   },
   containerScroll: {
-    paddingBottom: 150,
+    paddingBottom: 150
   },
   centerMatch: {
     alignItems: 'center',
-    width: '100%',
+    width: '100%'
   },
   durationTimes: {
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '80%',
+    width: '80%'
   },
   bookingTimes: {
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '100%',
+    width: '100%'
   },
   centerGroup: {
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   titleParent: {
     left: 100,
@@ -204,7 +228,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     top: 0,
-    position: 'absolute',
+    position: 'absolute'
   },
   title: {
     alignSelf: 'stretch',
@@ -213,7 +237,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: FontFamily.poppinsMedium,
     fontWeight: '500',
-    lineHeight: 35,
+    lineHeight: 35
   },
   text: {
     fontSize: FontSize.size_lg,
@@ -222,7 +246,7 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.poppinsMedium,
     fontWeight: '300',
     lineHeight: 35,
-    marginLeft: 10,
+    marginLeft: 10
   },
   textsm: {
     fontSize: FontSize.size_sm,
@@ -231,10 +255,10 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.poppinsRegular,
     fontWeight: '300',
     lineHeight: 35,
-    marginLeft: 10,
+    marginLeft: 10
   },
   bookingDate: {
-    marginTop: 20,
+    marginTop: 20
   },
   timeSlot: {
     padding: 10,
@@ -244,10 +268,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: 85,
-    height: 45,
+    height: 45
   },
   longTimeSlot: {
-    width: 200, // Adjust the width for 120 min slots
+    width: 200
   },
   subtitle: {
     fontSize: FontSize.size_lg,
@@ -255,25 +279,25 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontFamily: FontFamily.poppinsMedium,
     fontWeight: '500',
-    lineHeight: 35,
+    lineHeight: 35
   },
   timeText: {
     fontSize: FontSize.size_sm,
     textAlign: 'center',
     fontFamily: FontFamily.poppinsMedium,
-    fontWeight: '500',
+    fontWeight: '500'
   },
   selectedTimeSlot: {
-    borderColor: '#007BFF', // Highlight color for selected time slot
+    borderColor: '#007BFF'
   },
   rectangle: {
     width: 80,
     height: 80,
     borderWidth: 1,
     borderColor: '#ccc',
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   row: {
-    marginBottom: 10,
-  },
+    marginBottom: 10
+  }
 });

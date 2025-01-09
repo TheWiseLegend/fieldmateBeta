@@ -1,28 +1,26 @@
 /** @import { Navigations } from '../types.js' */
-// @ts-ignore
-import React, { useEffect, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React, { useContext } from 'react';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons.js';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons.js';
-import HomeComponent from '../screens/Home.jsx';
-import ActivityComponent from '../screens/Activity.jsx';
-import MatchesComponent from '../screens/Matches.jsx';
-import StadiumsComponent from '../screens/Stadiums.jsx';
+import { NavigationContainer } from '@react-navigation/native';
+import VendorDashBoardComponent from '../screens/VendorDashboard.jsx';
 import StadiumViewComponent from '../screens/StadiumView.jsx';
+import ActivityComponent from '../screens/Activity.jsx';
+import StadiumsComponent from '../screens/Stadiums.jsx';
+import MatchesComponent from '../screens/Matches.jsx';
 import BookingComponent from '../screens/Booking.jsx';
 import PaymentComponent from '../screens/Payment.jsx';
+import HomeComponent from '../screens/Home.jsx';
+import RegistrationComponent from './Registration.jsx';
 import ProfileComponent from './Profile.jsx';
 import LoginComponent from './Login.jsx';
-import RegistrationComponent from './Registration.jsx';
-import VendorDashBoard from '../screens/VendorDashboard.jsx';
-import { getData } from '../storage.js';
+import { DBContext } from '../db.js';
 
 /** @type {{[key: string]: Navigations}} */
 const navigations = {
   Matches: 'Matches',
   Activity: 'Activity',
-  // @ts-ignore
   VendorDashBoard: 'VendorDashBoard',
 
   Stadiums: 'Stadiums',
@@ -33,7 +31,7 @@ const navigations = {
   Home: 'Home',
   Profile: 'Profile',
   Login: 'Login',
-  Registration: 'Registration',
+  Registration: 'Registration'
 };
 
 const Tab = createBottomTabNavigator();
@@ -43,20 +41,7 @@ const Stack = createStackNavigator();
  * @param {object} props
  */
 export default function Footer({}) {
-  const [userRole, setUserRole] = useState(null);
-
-  useEffect(() => {
-    async function fetchUserRole() {
-      const user = await getData('client_user');
-      if (user) {
-        const parsedUser = JSON.parse(user);
-        console.log('Parsed user:', parsedUser);
-        setUserRole(parsedUser.user_role);
-      }
-    }
-
-    fetchUserRole();
-  }, []);
+  const db = useContext(DBContext);
 
   return (
     <NavigationContainer>
@@ -83,11 +68,13 @@ export default function Footer({}) {
         <Tab.Screen name={navigations.Home} component={ProfileStack} />
         <Tab.Screen name={navigations.Stadiums} component={StadiumStack} />
         <Tab.Screen name={navigations.Matches} component={MatchesComponent} />
-        <Tab.Screen name={navigations.Activity} component={ActivityComponent} />
 
-        {userRole == 'vendor' && (
-          <Tab.Screen name={navigations.VendorDashBoard} component={VendorDashBoard} />
-        )}
+        {db.view.user &&
+          (db.view.user.user_role === 'vendor' ? (
+            <Tab.Screen name={navigations.VendorDashBoard} component={VendorDashBoardComponent} />
+          ) : (
+            <Tab.Screen name={navigations.Activity} component={ActivityComponent} />
+          ))}
       </Tab.Navigator>
     </NavigationContainer>
   );

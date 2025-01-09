@@ -1,40 +1,52 @@
 /** @import { MyNavigationProp, User } from '../types.js' */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Heading } from './ui/heading';
 import { Button, ButtonText } from './ui/button';
 import { Avatar, AvatarImage } from './ui/avatar';
-import { getData, storeData } from '../storage';
+import { DBContext, setData } from '../db.js';
+import axios from 'axios';
+
+const BASE_URL = 'http://13.229.202.42:5000/api';
 
 /**
  * @param {object} props
  */
-export default function Profile({ }) {
+export default function Profile({}) {
   /** @type {[User, React.Dispatch<React.SetStateAction<User>>]} */ // @ts-expect-error
   const [user, setUser] = useState({});
   /** @type {MyNavigationProp} */
   const navigation = useNavigation();
+  const db = useContext(DBContext);
 
-  const json = getData('client_user');
-  if (json === null) {
+  if (!db.view.user) {
     navigation.navigate('Login');
     return null;
   }
 
-  useEffect(() => {
-    if (json !== null)
-      try {
-        setUser(JSON.parse(json));
-      } catch { }
-  }, []);
-
-  function handleSave() {
-    storeData('client_user', JSON.stringify(user))
+  async function handleSave() {
+    try {
+      await axios.put(
+        `${BASE_URL}/users/${user.user_id}`,
+        {
+          name: user.name,
+          email: user.email,
+          password: user.password,
+          phone: user.phone.replace(/(\+6|-|\s)/g, '')
+        },
+        { headers: { 'Content-Type': 'application/json' } }
+      );
+      await setData('client_user', user);
+      db.update('user', user);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
-  function handleLogout() {
-    localStorage.removeItem('client_user');
+  async function handleLogout() {
+    await setData('client_user', undefined);
+    db.update('user', undefined);
     navigation.navigate('Login');
   }
 
@@ -48,6 +60,7 @@ export default function Profile({ }) {
             }}
           />
         </Avatar>
+
         <Heading size="3xl" style={styles.userName}>
           Edit Account
         </Heading>
@@ -69,6 +82,7 @@ export default function Profile({ }) {
         <Button onPress={handleSave} className="flex-1" style={styles.saveButton}>
           <ButtonText>Save</ButtonText>
         </Button>
+
         <Button onPress={handleLogout} className="flex-1" style={styles.logoutButton}>
           <ButtonText>Log Out</ButtonText>
         </Button>

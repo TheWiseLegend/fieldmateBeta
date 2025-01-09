@@ -1,40 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
-import axios from 'axios';
 import Recommendation from '../components/Recommendation.jsx';
 import LFGCard from '../components/LFGCard.jsx';
 import Header from '../components/Header.jsx';
-// import ProfileDrawer from '../components/Drawer.jsx';
 import { Border, Color, FontSize, FontFamily } from '../GlobalStyles.js';
-
-const BASE_URL = 'http://13.229.202.42:5000/api';
+import { DBContext } from '../db.js';
 
 export default function Home() {
   /** @type {[object[], React.Dispatch<React.SetStateAction<object[]>>]} */
   const [matches, setMatches] = useState([]);
-  // const [showDrawer, setShowDrawer] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const db = useContext(DBContext);
 
   useEffect(() => {
-    fetchMatches();
-  }, []);
-
-  async function fetchMatches() {
-    /** @type {object[]} */
-    let data;
-
-    try {
-      data = (await axios.get(`${BASE_URL}/lfgs`)).data;
-      data = data
-        .filter((m) => m.status === 'open' && m.required_players > 0)
-        .sort((a, b) => a.required_players - b.required_players)
-        .slice(0, 2);
-    } catch (err) {
-      console.error('Error fetching matches:', err);
-    }
-
+    const data = db.matches
+      .filter((m) => m.status === 'open' && m.required_players > 0)
+      .sort((a, b) => a.required_players - b.required_players)
+      .slice(0, 2);
     setMatches(data);
-  }
+  }, []);
 
   return (
     <View id="home-screen" className="screen" style={styles.container}>

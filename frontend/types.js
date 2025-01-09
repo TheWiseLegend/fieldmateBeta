@@ -1,5 +1,9 @@
 export default {};
 
+/** @typedef {'client_user'} StorageKeys */
+
+/** @typedef {'user' | 'field' | 'booking'} CacheKeys */
+
 /** @typedef {'upcoming' | 'past'} ActivityTabs */
 
 /** @typedef {'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun'} DayKeys */
@@ -9,10 +13,11 @@ export default {};
 /**
  * @typedef {object} MyNavigationProp
  * @property {(screen: Navigations) => void} navigate
+ * @property {() => void} goBack
  */
 
 /** @typedef {RootNavigations | StadiumsNavigations | ProfileNavigations} Navigations */
-/** @typedef {'Home' | 'Matches' | 'Stadiums' | 'Activity'} RootNavigations */
+/** @typedef {'Home' | 'Matches' | 'Stadiums' | 'Activity' | 'VendorDashBoard'} RootNavigations */
 /** @typedef {'Stadiums' | 'Stadium View' | 'Booking' | 'Payment'} StadiumsNavigations */
 /** @typedef {'Home' | 'Profile' | 'Login' | 'Registration'} ProfileNavigations */
 
@@ -92,6 +97,10 @@ export default {};
  */
 
 /**
+ * @typedef {Booking & {field: Field, user: User}} FullBooking
+ */
+
+/**
  * @typedef {object} Booking
  * @property {string} booking_id
  * @property {string} user_id
@@ -103,4 +112,24 @@ export default {};
  * @property {'pending' | 'confirmed' | 'cancelled'} status
  * @property {string} created_at
  * @property {string} updated_at
+ */
+
+/**
+ * @typedef {Object} DB
+ * @property {User[]} users
+ * @property {Field[]} fields
+ * @property {Match[]} matches
+ * @property {Review[]} reviews
+ * @property {Booking[]} bookings
+ * @property {Amenity[]} amenities
+ * @property {FieldAmenity[]} fieldAmenities
+ * @property {DBView} view
+ * @property {(key: CacheKeys, value: object) => void} update
+ */
+
+/**
+ * @typedef {Object} DBView
+ * @property {User} [user]
+ * @property {FullField} [field]
+ * @property {{time: number, duration: number}} [booking]
  */

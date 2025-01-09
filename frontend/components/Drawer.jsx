@@ -1,49 +1,27 @@
-/** @import { MyNavigationProp, User } from '../types.js' */
-// @ts-ignore
-import React, {useEffect, useState} from 'react';
+/** @import { MyNavigationProp, Navigations } from '../types.js' */
+import React, { useContext } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Button, ButtonText } from './ui/button';
 import { Heading } from './ui/heading';
-import { Text } from './ui/text';
 import { Avatar, AvatarImage } from './ui/avatar';
 import { Drawer, DrawerBackdrop, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter } from './ui/drawer';
 import { useNavigation } from '@react-navigation/native';
-import { getData, removeData } from '../storage';
-
+import { DBContext, setData } from '../db.js';
 
 /**
  * @param {object} props
  * @param {object} props.isOpen
  * @param {Function} props.onClose
  */
-export default function ProfilDrawer({ isOpen, onClose }) {
+export default function ProfileDrawer({ isOpen, onClose }) {
   /** @type {MyNavigationProp} */
   const navigation = useNavigation();
-  const [user, setUser] = useState(null);
+  const db = useContext(DBContext);
 
-  useEffect(() => {
-    async function fetchUserData() {
-      if(!user){
-
-        const json = await getData('client_user');
-        if (json === null) {
-          navigation.navigate('Login');
-          return;
-        }
-
-        try {
-          const userData = JSON.parse(json);
-          console.log('userData', userData);
-          setUser(userData);
-        } catch {
-          console.log('Error parsing user data');
-        }
-      }
-    }
-
-    fetchUserData();
-  }, [user]);
-
+  if (!db.view.user) {
+    navigation.navigate('Login');
+    return null;
+  }
 
   /**
    * @param {string} section
@@ -56,7 +34,8 @@ export default function ProfilDrawer({ isOpen, onClose }) {
   }
 
   async function handleLogout() {
-    await removeData('client_user');
+    await setData('client_user', undefined);
+    db.update('user', undefined);
     navigation.navigate('Login');
     onClose();
   }
@@ -64,11 +43,12 @@ export default function ProfilDrawer({ isOpen, onClose }) {
   return (
     <Drawer isOpen={isOpen} onClose={onClose} size="md" anchor="left">
       <DrawerBackdrop />
+
       <DrawerContent>
-        {user ? (
+        {db.view.user ? (
           <>
             <DrawerHeader style={styles.header}>
-              <View style={styles.avatarContainer}>
+              <View>
                 <Avatar size="xl" style={styles.avatar}>
                   <AvatarImage
                     source={{
@@ -76,11 +56,13 @@ export default function ProfilDrawer({ isOpen, onClose }) {
                     }}
                   />
                 </Avatar>
+
                 <Heading size="3xl" style={styles.userName}>
-                  {user.name || 'USER NAME'}
+                  {db.view.user.name || 'USER NAME'}
                 </Heading>
               </View>
             </DrawerHeader>
+
             <DrawerBody contentContainerStyle={styles.body}>
               {['Edit Account'].map((section, i) => (
                 <TouchableOpacity key={i} onPress={() => handleItemPress(section)} style={styles.section}>
@@ -90,6 +72,7 @@ export default function ProfilDrawer({ isOpen, onClose }) {
                 </TouchableOpacity>
               ))}
             </DrawerBody>
+
             <DrawerFooter style={styles.footer}>
               <Button onPress={handleLogout} className="flex-1" style={styles.logoutButton}>
                 <ButtonText>Log Out</ButtonText>
@@ -98,24 +81,21 @@ export default function ProfilDrawer({ isOpen, onClose }) {
           </>
         ) : (
           <DrawerBody contentContainerStyle={styles.body}>
-            <Button
-              onPress={() => {
-                navigation.navigate('Login');
-                onClose();
-              }}
-              style={styles.authButton}
-            >
-              <ButtonText>Login</ButtonText>
-            </Button>
-            <Button
-              onPress={() => {
-                navigation.navigate('Registration');
-                onClose();
-              }}
-              style={styles.authButton}
-            >
-              <ButtonText>Sign Up</ButtonText>
-            </Button>
+            {[
+              ['Login', 'Login'],
+              ['Sign Up', 'Registration']
+            ].map((/** @type {[string, Navigations]} */ [text, route], i) => (
+              <Button
+                key={i}
+                onPress={() => {
+                  navigation.navigate(route);
+                  onClose();
+                }}
+                style={styles.authButton}
+              >
+                <ButtonText>{text}</ButtonText>
+              </Button>
+            ))}
           </DrawerBody>
         )}
       </DrawerContent>
@@ -128,10 +108,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 20
-  },
-  avatarContainer: {
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   avatar: {
     marginBottom: 20,

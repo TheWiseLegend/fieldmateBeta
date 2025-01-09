@@ -1,4 +1,4 @@
-/** @import { MyNavigationProp } from '../types.js' */
+/** @import { Field, MyNavigationProp } from '../types.js' */
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -6,9 +6,9 @@ import { Border, Color, FontSize, FontFamily, Padding } from '../GlobalStyles.js
 
 /**
  * @param {object} props
- * @param {object} props.data
+ * @param {Field} props.field
  */
-export default function BookCard({ data }) {
+export default function BookCard({ field }) {
   /** @type {MyNavigationProp} */
   const navigation = useNavigation();
 
@@ -20,11 +20,11 @@ export default function BookCard({ data }) {
     <View style={styles.frameWrapper}>
       <View>
         <Text style={styles.price}>Price</Text>
-        <Text style={styles.rm}>{data.price} RM</Text>
+        <Text style={styles.rm}>{field.price} RM</Text>
       </View>
 
       <View style={styles.btn}>
-        <Text onPress={() => handlePress()} style={styles.book}>
+        <Text onPress={handlePress} style={styles.book}>
           Book
         </Text>
       </View>

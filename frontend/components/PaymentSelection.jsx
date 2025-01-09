@@ -1,48 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Alert, Image } from 'react-native';
 import { Radio, RadioGroup, RadioIcon, RadioIndicator, RadioLabel } from './ui/radio';
 import { CircleIcon, Icon } from './ui/icon';
 import { VStack } from './ui/vstack';
 import { QrCode, Banknote } from 'lucide-react-native';
-import { getData } from '../storage';
+import { DBContext } from '../db.js';
 
 /**
  * @param {object} props
  * @param {function} props.onPaymentMethodChange
  */
 export default function PaymentSelection({ onPaymentMethodChange }) {
-  const [values, setValues] = React.useState('');
-  const [price, setPrice] = React.useState("");
+  const [payMethod, setPayMethod] = useState('');
+  const db = useContext(DBContext);
 
-  const showCancellationPolicy = () => {
+  if (!db.view.field) return <Text>No field to view</Text>;
+
+  useEffect(() => {
+    onPaymentMethodChange(payMethod);
+  }, [payMethod]);
+
+  function showCancellationPolicy() {
     Alert.alert(
       'Cancellation Policy',
       'Payments made for football field bookings are generally non-refundable. However, cancellations made at least 24 hours prior to the booking time may qualify for rescheduling, subject to field availability. Rescheduled bookings must be used within 30 days and cannot be rescheduled again. No-shows or cancellations within 24 hours of the booking time will result in the forfeiture of the payment.'
     );
-  };
-
-  useEffect(() => {
-    onPaymentMethodChange(values);
-  }, [values]);
-
-  useEffect(() => {
-    async function fetchPrice() {
-      try {
-        const price = await getData('field_view');
-        const fieldData = JSON.parse(price).price;
-        setPrice(fieldData);
-      } catch (error) {
-        console.error('Error fetching field data:', error);
-      }
-    }
-    fetchPrice();
-  }, []);
+  }
 
   return (
     <View style={style.container}>
       <Text style={style.title}>Payment Method</Text>
 
-      <RadioGroup value={values} onChange={setValues} style={{ paddingTop: 20 }}>
+      <RadioGroup value={payMethod} onChange={setPayMethod} style={{ paddingTop: 20 }}>
         <VStack space="sm">
           <Radio value="Cash" style={style.card}>
             <View style={[style.flexRow, { width: '100%' }]}>
@@ -50,6 +39,7 @@ export default function PaymentSelection({ onPaymentMethodChange }) {
                 <RadioIndicator>
                   <RadioIcon as={CircleIcon} />
                 </RadioIndicator>
+
                 <RadioLabel>Cash (On Site)</RadioLabel>
               </View>
 
@@ -76,12 +66,10 @@ export default function PaymentSelection({ onPaymentMethodChange }) {
         </VStack>
       </RadioGroup>
 
-      {values === 'QR' && (
+      {payMethod === 'QR' && (
         <View style={style.qrView}>
-          <Image
-            source={require('../assets/qrcode.png')}
-            style={style.qrImage}
-          />
+          {/* @ts-expect-error */}
+          <Image source={require('../assets/qrcode.png')} style={style.qrImage} />
         </View>
       )}
 
@@ -92,7 +80,7 @@ export default function PaymentSelection({ onPaymentMethodChange }) {
 
         <View style={[style.flexRow, { width: '99%' }]}>
           <Text style={style.grayText}>Subtotal</Text>
-          <Text style={style.priceText}>RM {price}</Text>
+          <Text style={style.priceText}>RM {db.view.field.price}</Text>
         </View>
       </View>
 
@@ -175,7 +163,7 @@ const style = StyleSheet.create({
   },
   qrImage: {
     width: 200,
-    height: 200,
-    resizeMode: 'contain'
+    height: 200
+    // resizeMode: 'contain'
   }
 });

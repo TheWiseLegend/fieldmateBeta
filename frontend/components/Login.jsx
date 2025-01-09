@@ -1,6 +1,5 @@
-/** @import { User, MyNavigationProp } from '../types.js' */
-// @ts-ignore
-import React, { useState, useEffect } from 'react';
+/** @import { MyNavigationProp, User } from '../types.js' */
+import React, { useContext, useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Alert, Text } from 'react-native';
 import { FormControl } from './ui/form-control';
 import { VStack } from './ui/vstack';
@@ -9,8 +8,8 @@ import { Button, ButtonText } from './ui/button';
 import { EyeIcon, EyeOffIcon } from './ui/icon';
 import { Input, InputField, InputSlot, InputIcon } from './ui/input';
 import { useNavigation } from '@react-navigation/native';
+import { DBContext, setData } from '../db.js';
 import axios from 'axios';
-import { storeData } from '../storage';
 
 const BASE_URL = 'http://13.229.202.42:5000/api';
 
@@ -23,7 +22,7 @@ export default function Login({}) {
   const [showPassword, setShowPassword] = useState(false);
   /** @type {MyNavigationProp} */
   const navigation = useNavigation();
-  const [user, setUser] = useState(null);
+  const db = useContext(DBContext);
 
   function handleState() {
     setShowPassword((prev) => !prev);
@@ -34,33 +33,22 @@ export default function Login({}) {
       /** @type {User[]} */
       const users = (await axios.get(`${BASE_URL}/users`)).data;
 
-      const foundUser = users.find((u) => u.email === email && u.password === password);
-      if (!foundUser) {
+      const user = users.find((u) => u.email === email && u.password === password);
+      if (!user) {
         Alert.alert('Error: Invalid email or password');
         return;
       }
 
-      // setUser(foundUser);
-      await storeData('client_user', JSON.stringify(foundUser));
+      await setData('client_user', user);
+      db.update('user', user);
       navigation.navigate('Home');
     } catch (error) {
       Alert.alert('Error', error.message);
     }
   }
 
-  // useEffect(() => {
-  //   const storeUserData = async () => {
-  //     if (user) {
-  //       await storeData('client_user', JSON.stringify(user));
-  //     }
-  //   };
-
-  //   storeUserData();
-  // }, [user]);
-
   return (
     <View style={styles.container}>
-      {/* <Image source={require('../assets/icon.png')} style={styles.logo} /> */}
       <FormControl style={styles.formControl}>
         <VStack space="xl">
           <Heading className="text-typography-900">Login</Heading>
@@ -107,9 +95,6 @@ const styles = StyleSheet.create({
   },
   formControl: {
     padding: 16,
-    // borderWidth: 1,
-    // borderRadius: 8,
-    // borderColor: '#ccc',
     backgroundColor: '#fff',
     width: '100%',
     maxWidth: 400
