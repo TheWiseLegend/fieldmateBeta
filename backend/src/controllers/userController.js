@@ -4,8 +4,10 @@
 
 /** @import { Request, Response } from 'express' */
 import db from '../db.js';
+import bcrypt from 'bcrypt';
 
 const TABLE_NAME = 'users';
+const SALT_ROUNDS = 10;
 
 /**
  * @param {Request} req
@@ -43,17 +45,20 @@ export async function GET(req, res) {
 export async function CREATE(req, res) {
   const { name, email, password, phone, user_role } = req.body;
 
-  /** @type {string[] | string} */
-  let pNames = ['name', 'email', 'password', 'user_role'];
-  if (phone !== undefined) pNames.push('phone');
-
-  const values = pNames.map((pName) => req.body[pName]);
-  pNames = pNames.join(', ');
-  const pNums = Array.from({ length: values.length }, (_, i) => `$${i + 1}`).join(', ');
-
-  const query = `INSERT INTO ${TABLE_NAME} (${pNames}) VALUES (${pNums}) RETURNING *`;
-
   try {
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+
+    /** @type {string[] | string} */
+    let pNames = ['name', 'email', 'password', 'user_role'];
+    if (phone !== undefined) pNames.push('phone');
+
+    const values = pNames.map((pName) => (pName === 'password' ? hashedPassword : req.body[pName]));
+    pNames = pNames.join(', ');
+    const pNums = Array.from({ length: values.length }, (_, i) => `$${i + 1}`).join(', ');
+
+    const query = `INSERT INTO ${TABLE_NAME} (${pNames}) VALUES (${pNums}) RETURNING *`;
+
     const { rows } = await db.query(query, values);
     res.status(201).json(rows);
   } catch (err) {
